@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
     public void Init()
     {
-        PETool.LogMsg("LoginSys Inited");
+        PECommon.Log("LoginSys Inited");
     }
 }
 

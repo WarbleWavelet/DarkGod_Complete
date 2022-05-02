@@ -27,7 +27,7 @@ public class LoginSys : SystemRoot
     {
         base.InitSys();
         Instance = this;
-        Debug.Log("Init Login");
+        PECommon.Log("Init Login", LogType.Log);
     }
 
     /// <summary>

@@ -20,7 +20,7 @@ public class NetSvc : MonoBehaviour
     public void InitSvc()
     {
         Instance = this;
-        Debug.Log("Init NetSvc ");
+        PECommon.Log("Init NetSvc ", LogType.Log);
 
         client = new PESocket<ClientSession,GameMsg>();
        

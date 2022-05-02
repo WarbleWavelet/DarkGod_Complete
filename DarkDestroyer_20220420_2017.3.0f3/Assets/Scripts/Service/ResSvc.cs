@@ -43,7 +43,7 @@ public class ResSvc : MonoBehaviour
     {
         Instance = this;
         InitRDNameCfgs();
-        Debug.Log("Init Res");
+        PECommon.Log("Init Res",LogType.Log);
     }
 
 
@@ -159,7 +159,7 @@ public class ResSvc : MonoBehaviour
     {
         if (!xml)
         {
-            Debug.Log("xml file:" + PathDefine.RDNameCfg + "not exist");
+            PECommon.Log("xml file:" + PathDefine.RDNameCfg + "not exist",LogType.Error);
             return null;
         }
         else

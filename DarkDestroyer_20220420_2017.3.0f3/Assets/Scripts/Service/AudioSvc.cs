@@ -18,7 +18,7 @@ public class AudioSvc : MonoBehaviour
 
     public void InitSvc()
     {
-        Debug.Log("AudioSvc");
+        PECommon.Log("Init AudioSvc",LogType.Log);
         Instance = this;
         JustForSee();
 

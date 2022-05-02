@@ -26,7 +26,7 @@ class NetSvc
     {
         PESocket<ServerSession, GameMsg> server = new PESocket<ServerSession, GameMsg>();
         server.StartAsServer(SrvCfg.srvIp, SrvCfg.srvPort);
-        PETool.LogMsg("NetSvc Inited");
+        PECommon.Log("NetSvc Inited");
 
     }
 

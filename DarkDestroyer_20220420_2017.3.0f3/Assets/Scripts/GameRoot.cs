@@ -32,7 +32,7 @@ public class GameRoot : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        Debug.Log("GameStart");
+        PECommon.Log("GameStart",LogType.Log);
         ClearUIRoot();
         Init();
     }

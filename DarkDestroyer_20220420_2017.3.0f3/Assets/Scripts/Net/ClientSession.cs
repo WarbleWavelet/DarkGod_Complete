@@ -14,19 +14,19 @@ public class ClientSession : PESession<GameMsg>
 {
     protected override void OnConnected()
     {
-        PETool.LogMsg("A Client Connected");
+        PECommon.Log("A Client Connected",LogType.Log);
 
     }
 
     protected override void OnReciveMsg(GameMsg msg)
     {
-        PETool.LogMsg("Client Request：" + msg.text);
+        PECommon.Log("Client Request：" + msg.text, LogType.Log);
 
     }
 
     protected override void OnDisConnected()
     {
-        PETool.LogMsg("A Client Disconnected");
+        PECommon.Log("A Client Disconnected", LogType.Log);
 
     }
 }
