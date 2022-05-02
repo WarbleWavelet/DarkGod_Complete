@@ -11,17 +11,26 @@ namespace Server
     {
         protected override void OnConnected()
         {
-            PETool.LogMsg("Client开始连接");
+            PETool.LogMsg("A Client Connected");
+            SendMsg(
+                new NetMsg { text= "Welcome To Connect" }
+            );
         }
 
         protected override void OnReciveMsg(NetMsg msg)
         {
-            PETool.LogMsg("收到Client连接：" + msg.text);
+            PETool.LogMsg("Client Request：" + msg.text);
+            SendMsg(
+    new NetMsg { text = "Server Response: " + msg.text }
+);
         }
 
         protected override void OnDisConnected()
         {
-            PETool.LogMsg("Client断开连接");
+            PETool.LogMsg("A Client Disconnected");
+            SendMsg(
+new NetMsg { text = "Yd Disconnected" }
+);
         }
     }
 }
