@@ -21,16 +21,16 @@ namespace Server
         {
             PETool.LogMsg("Client Request：" + msg.text);
             SendMsg(
-    new NetMsg { text = "Server Response: " + msg.text }
-);
+                new NetMsg { text = "Server Response: " + msg.text }
+            );
         }
 
         protected override void OnDisConnected()
         {
             PETool.LogMsg("A Client Disconnected");
             SendMsg(
-new NetMsg { text = "Yd Disconnected" }
-);
+                new NetMsg { text = "Yd Disconnected" }
+            );
         }
     }
 }

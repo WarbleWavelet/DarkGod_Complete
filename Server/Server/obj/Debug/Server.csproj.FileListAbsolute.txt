@@ -1,0 +1,7 @@
+D:\Data\Projects\Unity\PESocketExample\Server\Server\bin\Debug\Server.exe.config
+D:\Data\Projects\Unity\PESocketExample\Server\Server\bin\Debug\Server.exe
+D:\Data\Projects\Unity\PESocketExample\Server\Server\bin\Debug\Server.pdb
+D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.exe
+D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.pdb
