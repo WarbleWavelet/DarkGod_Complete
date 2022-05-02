@@ -1,6 +1,6 @@
 ﻿
 using PENet;
-using Protocal;
+using Protocol;
 
 namespace Server
 {

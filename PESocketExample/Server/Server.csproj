@@ -32,9 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Server.Server</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PESocket">
-      <HintPath>..\..\..\..\A计划\《暗黑战神》3D网游ARPG实战案例（第一季）（Unity 2017.3）\02 ResDarkGod\第3章\PESocket-1.0\PESocket\obj\Debug\PESocket.dll</HintPath>
+    <Reference Include="PESocket, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\PESocket.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,13 +58,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Protocal\Protocal.csproj">
+    <ProjectReference Include="..\Protocal\Protocol.csproj">
       <Project>{89d1dba0-2cda-494a-ac1f-a8ddfc914a6e}</Project>
-      <Name>Protocal</Name>
+      <Name>Protocol</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

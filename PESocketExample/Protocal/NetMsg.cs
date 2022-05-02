@@ -1,7 +1,7 @@
 ﻿using PENet;
 using System;
 
-namespace Protocal
+namespace Protocol
 {
     [Serializable]
     public class NetMsg:PEMsg
