@@ -26,6 +26,9 @@ public class GameRoot : MonoBehaviour
     public LoadingWnd loadingWnd;
     public DynamicWnd dynamicWnd;
     #endregion
+
+
+    #region 生命
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -34,11 +37,17 @@ public class GameRoot : MonoBehaviour
         Init();
     }
 
+    #endregion
+  
+
     /// <summary>
     /// 控制初始化模块的顺序(乱了就空指针错误)
     /// </summary>
     void Init()
     {
+        NetSvc netSvc = GetComponent<NetSvc>();
+        netSvc.InitSvc();
+        //
         ResSvc res = GetComponent<ResSvc>();
         res.InitSvc();
         AudioSvc audio = GetComponent<AudioSvc>();
@@ -52,7 +61,7 @@ public class GameRoot : MonoBehaviour
 
         login.EnterLogin();
 
-
+        
     }
 
     /// <summary>

@@ -31,7 +31,7 @@
   <Class Name="ResSvc" Collapsed="true">
     <Position X="6.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQEAAIgAAAQAAAAAAAAAAACAAAAAAAQQAAEAAQACAE=</HashCode>
+      <HashCode>AAQAAAIgAAAAAAAAAAAAAAQCAQgAAAAQQAIEAAAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,7 +66,7 @@
   <Class Name="CreateWnd" Collapsed="true">
     <Position X="2.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAACAAAAAAAAAAAAEAAAQAAAEAACAAAgAAACAAIAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\CreateWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -75,6 +75,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetSvc" Collapsed="true">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

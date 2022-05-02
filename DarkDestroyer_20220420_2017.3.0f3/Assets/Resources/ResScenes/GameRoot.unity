@@ -985,6 +985,7 @@ MonoBehaviour:
   audioSvc: {fileID: 1332992445}
   iptName: {fileID: 46696998}
   btnRand: {fileID: 309678130}
+  btnEnter: {fileID: 0}
 --- !u!114 &1263393557 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114144403477703086, guid: 901cbd01575f5ac4081fd4593eb7c9b9,
@@ -1003,6 +1004,7 @@ GameObject:
   - component: {fileID: 1332992443}
   - component: {fileID: 1332992442}
   - component: {fileID: 1332992445}
+  - component: {fileID: 1332992446}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -1082,6 +1084,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgAudio: {fileID: 451817997}
   uiAudio: {fileID: 1153976621}
+--- !u!114 &1332992446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332992440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db69977ae672ead48be577a270a3ce7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1522037357 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114498270664858324, guid: 901cbd01575f5ac4081fd4593eb7c9b9,
