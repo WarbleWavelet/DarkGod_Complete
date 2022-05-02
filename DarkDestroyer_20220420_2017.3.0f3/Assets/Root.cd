@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LoadingWnd" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAAACAAAAAAAAECAAAAAAAAAAAQAAAAAABACAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\LoadingWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginWnd" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAgACAAAAQAAAECAIAAAAEAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\LoginWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowRoot" Collapsed="true">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAIAAQAAAAIEAABAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\WindowRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginSys" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAEQAACAAAAAAgAAEQAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\System\LoginSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResSvc" Collapsed="true">
+    <Position X="6.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAIgAAAQAAAAAAAAAAACAAAAAAAQQAAEAAQACAE=</HashCode>
+      <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constants" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAAAQAAAAAAAQAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\Common\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameRoot" Collapsed="true">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAAAAAAAAACAAAAAAAQAAAQAACAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\GameRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemRoot" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SystemRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicWnd" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQgAAAAEAAAAAAAgAEAgAAAAAAAAAAAAAACAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\DynamicWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreateWnd" Collapsed="true">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\CreateWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PathDefine" Collapsed="true">
+    <Position X="10.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
