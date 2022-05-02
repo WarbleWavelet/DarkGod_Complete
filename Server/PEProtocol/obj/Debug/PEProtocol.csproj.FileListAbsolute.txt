@@ -1,0 +1,8 @@
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\bin\Debug\PEProtocol.dll
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\bin\Debug\PEProtocol.pdb
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\bin\Debug\PESocket.dll
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csprojAssemblyReference.cache
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csproj.CoreCompileInputs.cache
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csproj.CopyComplete
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.dll
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.pdb

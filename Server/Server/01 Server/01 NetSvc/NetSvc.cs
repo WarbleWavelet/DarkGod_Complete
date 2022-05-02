@@ -1,5 +1,6 @@
 ﻿
-
+using PENet;
+using PEProtocol;
 /// <summary>
 /// 网络服务
 /// </summary>
@@ -19,16 +20,14 @@ class NetSvc
             }
             return _instance;
         }
-
-    set
-        {
-            _instance = value;
-        }
     }
 
     public void Init()
     {
-       
+        PESocket<ServerSession, GameMsg> server = new PESocket<ServerSession, GameMsg>();
+        server.StartAsServer(SrvCfg.srvIp, SrvCfg.srvPort);
+        PETool.LogMsg("NetSvc Inited");
+
     }
 
 

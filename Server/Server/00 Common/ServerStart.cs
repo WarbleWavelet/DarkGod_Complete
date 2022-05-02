@@ -10,7 +10,7 @@ class ServerStart
 {
     static void Main(string[] args)
     {
-        NetSvc.Instance.Init();
+        GameRoot.Instance.Init();
 
 
         while (true)

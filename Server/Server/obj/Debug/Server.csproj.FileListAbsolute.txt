@@ -5,3 +5,7 @@ D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.csprojAsse
 D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.exe
 D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.pdb
+D:\Data\Projects\Unity\PESocketExample\Server\Server\bin\Debug\PEProtocol.dll
+D:\Data\Projects\Unity\PESocketExample\Server\Server\bin\Debug\PESocket.dll
+D:\Data\Projects\Unity\PESocketExample\Server\Server\bin\Debug\PEProtocol.pdb
+D:\Data\Projects\Unity\PESocketExample\Server\Server\obj\Debug\Server.csproj.CopyComplete

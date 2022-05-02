@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PENet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,16 +22,11 @@ using System.Threading.Tasks;
             }
             return _instance;
         }
-
-        set
-        {
-            _instance = value;
-        }
     }
 
     public void Init()
     {
-
+        PETool.LogMsg("LoginSys Inited");
     }
 }
 
