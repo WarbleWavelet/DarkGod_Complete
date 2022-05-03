@@ -20,8 +20,8 @@ class Program
             }
         }
         //Add();
-        //Delete();
-        Query();
+        Delete();
+        //Query();
         //Update();
 
         Console.ReadKey();
@@ -41,13 +41,15 @@ class Program
 
     static void Delete()
     {
-        MySqlCommand cmd = new MySqlCommand("", conn);
+        MySqlCommand cmd = new MySqlCommand("delete from userinfo where id=5", conn);
+        cmd.ExecuteNonQuery();
+        Console.WriteLine("已删");
     }
 
 
     static void Query()
     {
-        //MySqlCommand cmd = new MySqlCommand("select * from userinfo", conn);
+        //MySqlCommand cmd = new MySqlCommand("select * from userinfo", conn);//全查
         MySqlCommand cmd = new MySqlCommand("select * from userinfo where name='赵云'", conn);
         MySqlDataReader reader = cmd.ExecuteReader();
         while (reader.Read())
@@ -63,7 +65,13 @@ class Program
 
     static void Update()
     {
-
+        //MySqlCommand cmd = new MySqlCommand("update userinfo set name='高顺',age=21 where id=3", conn);//写死
+        MySqlCommand cmd = new MySqlCommand("update userinfo set name=@name,age=@age where id=@id", conn);
+        cmd.Parameters.AddWithValue("name","姜维");
+        cmd.Parameters.AddWithValue("age", 10);
+        cmd.Parameters.AddWithValue("id",4 );
+        cmd.ExecuteNonQuery();
+        Console.WriteLine("已改");
     }
 
 
