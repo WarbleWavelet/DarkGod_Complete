@@ -18,9 +18,15 @@ namespace PEProtocol
     public class GameMsg : PEMsg
     {
         public ReqLogin reqLogin;
+        public RspLogin rspLogin;
+
+
 
     }
 
+    /// <summary>
+    /// 请求登录
+    /// </summary>
     [Serializable]
     public class ReqLogin
     {
@@ -28,7 +34,16 @@ namespace PEProtocol
         public string pass;
     }
 
-   public class SrvCfg
+    /// <summary>
+    /// 对请求登录的回复
+    /// </summary>
+    [Serializable]
+    public class RspLogin
+    {
+
+    }
+
+    public class SrvCfg
     {
         public const string srvIp = "127.0.0.1";
         public const int srvPort = 17666;
@@ -44,4 +59,6 @@ namespace PEProtocol
         ReqLogin=101,
         RspLogin =102,
     }
+
+
 }

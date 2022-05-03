@@ -14,18 +14,20 @@ public class ClientSession : PESession<GameMsg>
 {
     protected override void OnConnected()
     {
+        GameRoot.AddTips("已连接服务器");
         PECommon.Log("A Client Connected",LogType.Log);
 
     }
 
     protected override void OnReciveMsg(GameMsg msg)
     {
-       // PECommon.Log("Client Request：" + msg.text, LogType.Log);
+        PECommon.Log("RcvPack CMD：" + ((CMD)msg.cmd).ToString());
 
     }
 
     protected override void OnDisConnected()
     {
+        GameRoot.AddTips("已断开服务器");
         PECommon.Log("A Client Disconnected", LogType.Log);
 
     }

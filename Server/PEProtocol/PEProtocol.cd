@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PEProtocol.GameMsg_Text" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>GameMsg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEProtocol.GameMsg" Collapsed="true">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>GameMsg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEProtocol.RspLogin" Collapsed="true">
+    <Position X="1.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameMsg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEProtocol.SrvCfg" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameMsg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PECommon" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PECommoncs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PEProtocol.CMD" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAACAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>GameMsg.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LogType" Collapsed="true">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAgAAAEAAAAAAEAAAAA=</HashCode>
+      <FileName>PECommoncs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

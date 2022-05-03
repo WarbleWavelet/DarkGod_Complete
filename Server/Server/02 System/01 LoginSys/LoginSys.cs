@@ -1,4 +1,5 @@
 ﻿using PENet;
+using PEProtocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,29 @@ using System.Threading.Tasks;
     public void Init()
     {
         PECommon.Log("LoginSys Inited");
+    }
+
+    /// <summary>
+    /// 处理登录
+    /// </summary>
+    /// <param name="msg"></param>
+    public void ReqLogin(MsgPack pack)
+    {
+        //OnLine();
+        //OffLine();
+        //    Login();
+        //    Register();
+        //RspClient();
+
+        GameMsg msg = new GameMsg
+        {
+            cmd = (int)CMD.RspLogin,
+            rspLogin = new RspLogin
+            {
+            }
+        };
+        pack.session.SendMsg(msg);
+
     }
 }
 

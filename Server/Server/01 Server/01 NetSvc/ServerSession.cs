@@ -7,7 +7,7 @@ using PEProtocol;
 using PENet;
 
 
-class ServerSession : PESession<GameMsg>
+public class ServerSession : PESession<GameMsg>
 {
     protected override void OnConnected()
     {
@@ -18,6 +18,8 @@ class ServerSession : PESession<GameMsg>
     protected override void OnReciveMsg(GameMsg msg)
     {
         PECommon.Log("RcvPack CMD：" +((CMD)msg.cmd).ToString()+"accct:"+msg.reqLogin.acct.ToString()+ "pass:"+msg.reqLogin.pass.ToString());
+
+        NetSvc.Instance.AddMsgQue(this,msg);
 
     }
 

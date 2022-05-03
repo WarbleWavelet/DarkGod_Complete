@@ -15,7 +15,7 @@ class ServerStart
 
         while (true)
         {
-
+            GameRoot.Instance.Update();
         }
     }
 }

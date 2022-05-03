@@ -33,6 +33,11 @@ class GameRoot
        
     }
 
+    public void Update()
+    {
+        NetSvc.Instance.Update();
+    }
+
 
 }
 
