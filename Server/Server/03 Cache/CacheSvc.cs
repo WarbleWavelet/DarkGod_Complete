@@ -12,10 +12,14 @@ using System.Threading.Tasks;
 
 class CacheSvc
 {
-    private static CacheSvc _instance;
+
+    #region 属性 字段
     /// <summary>账号在线</summary>
     Dictionary<string, ServerSession> onLineAcctDic = new Dictionary<string, ServerSession>();
+
     Dictionary<ServerSession, PlayerData> onLineSessionDic = new Dictionary<ServerSession, PlayerData>();
+
+    private static CacheSvc _instance;
     public static CacheSvc Instance
     {
         get
@@ -29,9 +33,14 @@ class CacheSvc
 
     }
 
+    DBMgr dBMgr;
+    #endregion
+
+
     public void Init()
     {
         PECommon.Log("Init CacheSvc");
+        dBMgr = DBMgr.Instance;
 
     }
 
@@ -49,6 +58,7 @@ class CacheSvc
     /// <returns></returns>
     public PlayerData GetPlayerData(string acct, string pass)
     {
+        dBMgr.QueryPlayerData(acct,pass);
         return null;
     }
 

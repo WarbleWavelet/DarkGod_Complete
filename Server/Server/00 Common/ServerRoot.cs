@@ -28,6 +28,7 @@ class GameRoot
 
     public void Init()
     {
+        DBMgr.Instance.Init();
         CacheSvc.Instance.Init();
         NetSvc.Instance.Init();
         LoginSys.Instance.Init();
