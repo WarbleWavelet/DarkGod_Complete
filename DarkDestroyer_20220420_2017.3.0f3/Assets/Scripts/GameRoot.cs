@@ -6,29 +6,39 @@
 	功能：游戏启动入口
 *****************************************************/
 
+using PEProtocol;
 using UnityEngine;
 
 public class GameRoot : MonoBehaviour 
 {
 
-    #region 单例
+    #region 属性 字段
 
     public static GameRoot Instance;
+
+
+
+    public LoadingWnd loadingWnd;
+    public DynamicWnd dynamicWnd;
+
+    /// <summary>保存数据信息</summary>
+    PlayerData playerData=null;
+    public PlayerData PlayerData
+    {
+        get
+        {
+            return playerData;
+        }
+    }
+    #endregion
+
+
+    #region 生命
 
     void Awake()
     {
         Instance = this;
     }
-
-    #endregion
-
-    #region 登录
-    public LoadingWnd loadingWnd;
-    public DynamicWnd dynamicWnd;
-    #endregion
-
-
-    #region 生命
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -85,5 +95,14 @@ public class GameRoot : MonoBehaviour
         }
 
         dynamicWnd.SetWndState();
+    }
+
+    /// <summary>
+    /// 保存数据
+    /// </summary>
+    /// <param name="rspLogin"></param>
+    public void SetPlayerData(RspLogin rspLogin)
+    {
+        this.playerData = rspLogin.playerData;
     }
 }

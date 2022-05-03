@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84BB2E08-7803-4630-B97F-EEEA0BDD6F14}</ProjectGuid>
+    <ProjectGuid>{15F46386-A3CE-43BB-B410-B4B9AD287DDC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Server</RootNamespace>
-    <AssemblyName>Server</AssemblyName>
+    <RootNamespace>SqlTest_2017</RootNamespace>
+    <AssemblyName>SqlTest_2017</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PESocket">
-      <HintPath>Libraries\PESocket.dll</HintPath>
+    <Reference Include="MySql.Data">
+      <HintPath>Libraries\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,23 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="00 Common\ServerRoot.cs" />
-    <Compile Include="00 Common\ServerStart.cs" />
-    <Compile Include="01 Server\01 NetSvc\NetSvc.cs" />
-    <Compile Include="01 Server\01 NetSvc\ServerSession.cs" />
-    <Compile Include="02 System\01 LoginSys\LoginSys.cs" />
-    <Compile Include="03 Cache\CacheSvc.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Server.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PEProtocol\PEProtocol.csproj">
-      <Project>{45240b73-8e76-48c6-9c01-3bebd4fa477c}</Project>
-      <Name>PEProtocol</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

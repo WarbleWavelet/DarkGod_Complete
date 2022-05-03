@@ -6,6 +6,7 @@
 	功能：注册系统
 *****************************************************/
 
+using PEProtocol;
 using UnityEngine;
 
 public class LoginSys : SystemRoot
@@ -54,9 +55,21 @@ public class LoginSys : SystemRoot
     /// <summary>
     /// 登陆成功的回调
     /// </summary>
-    public void RspLogin()
-    { 
-        createWnd.SetWndState ();
+    public void RspLogin(GameMsg msg)
+    {
+        GameRoot.AddTips("登录成功");
+        GameRoot.Instance.SetPlayerData(msg.rspLogin);
+
+        if (msg.rspLogin.playerData.name == null)
+        {
+            createWnd.SetWndState();
+        }
+        else
+        { 
+            //TODO 进入主程
+        }
+
+
         loginWnd.SetWndState(false);
     }
 
