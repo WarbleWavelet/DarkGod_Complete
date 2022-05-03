@@ -15,6 +15,7 @@ public class WindowRoot : MonoBehaviour
     /// <summary>需要引用时</summary>
     public ResSvc resSvc;
     public AudioSvc audioSvc;
+    public NetSvc netSvc;
 
     /// <summary>
     /// 打开关闭窗口
@@ -42,6 +43,7 @@ public class WindowRoot : MonoBehaviour
     {
         resSvc = null;
         audioSvc = null;
+        netSvc = null;
     }
 
     /// <summary>
@@ -52,6 +54,7 @@ public class WindowRoot : MonoBehaviour
 
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
+        netSvc = NetSvc.Instance;
     }
 
 

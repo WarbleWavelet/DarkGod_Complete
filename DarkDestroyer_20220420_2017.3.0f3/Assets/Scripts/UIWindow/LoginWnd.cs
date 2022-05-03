@@ -6,6 +6,7 @@
 	功能：
 *****************************************************/
 
+using PEProtocol;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class LoginWnd : WindowRoot
     public Button btnEnter;
 
     public CreateWnd createWnd;
+
 
 
      void Start()
@@ -53,14 +55,25 @@ public class LoginWnd : WindowRoot
     {
         audioSvc.PlayUIAudio(Constants.UILoginBtn);
 
-        string acct=iptAcct.text;
-        string pass=iptPass.text;
+        string _acct=iptAcct.text;
+        string _pass=iptPass.text;
 
-        if (acct != "" && pass != "")
+        if (_acct != "" && _pass != "")
         {
-            PlayerPrefs.SetString("Acct",acct);
-            PlayerPrefs.SetString("Pass",pass);
-       LoginSys.Instance.RspLogin();
+            PlayerPrefs.SetString("Acct",_acct);
+            PlayerPrefs.SetString("Pass",_pass);
+            //
+            GameMsg msg=new GameMsg {
+                cmd=(int)CMD.ReqLogin,
+                reqLogin = new ReqLogin
+                { 
+                    acct = _acct,
+                    pass = _pass
+                }
+            };
+            netSvc.SendMsg(msg);
+
+           // LoginSys.Instance.RspLogin();
 
         }
         else

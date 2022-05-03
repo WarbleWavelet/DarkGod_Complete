@@ -12,10 +12,12 @@ public class SystemRoot : MonoBehaviour
 {
     public ResSvc resSvc = null;
     public AudioSvc audioSvc = null;
+    public NetSvc netSvc = null;
 
     public virtual void InitSys()
     {
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
+        netSvc = NetSvc.Instance;
     }
 }

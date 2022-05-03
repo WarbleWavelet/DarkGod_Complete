@@ -52,12 +52,26 @@ public class NetSvc : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    client.session.SendMsg(new GameMsg
+        //    {
+        //        text = "Hello Server"
+        //    });
+        //}
+    }
+
+
+    public void SendMsg(GameMsg msg)
+    {
+        if (client.session != null)
         {
-            client.session.SendMsg(new GameMsg
-            {
-                text = "Hello Server"
-            });
+            client.session.SendMsg(msg);
+        }
+        else
+        {
+            GameRoot.AddTips("ReConnecting");
+            InitSvc();
         }
     }
 }

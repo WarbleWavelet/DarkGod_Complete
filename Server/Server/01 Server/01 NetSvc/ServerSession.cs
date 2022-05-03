@@ -12,25 +12,19 @@ class ServerSession : PESession<GameMsg>
     protected override void OnConnected()
     {
         PECommon.Log("A Client Connected");
-        SendMsg(
-            new GameMsg { text = "Welcome To Connect" }
-        );
+
     }
 
     protected override void OnReciveMsg(GameMsg msg)
     {
-        PECommon.Log("Client Request：" + msg.text);
-        SendMsg(
-            new GameMsg { text = "Server Response: " + msg.text }
-        );
+        PECommon.Log("RcvPack CMD：" +((CMD)msg.cmd).ToString()+"accct:"+msg.reqLogin.acct.ToString()+ "pass:"+msg.reqLogin.pass.ToString());
+
     }
 
     protected override void OnDisConnected()
     {
         PECommon.Log("A Client Disconnected");
-        SendMsg(
-            new GameMsg { text = "Yd Disconnected" }
-        );
+
     }
 }
 

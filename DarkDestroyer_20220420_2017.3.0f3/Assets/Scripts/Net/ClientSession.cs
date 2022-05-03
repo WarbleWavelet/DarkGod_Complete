@@ -20,7 +20,7 @@ public class ClientSession : PESession<GameMsg>
 
     protected override void OnReciveMsg(GameMsg msg)
     {
-        PECommon.Log("Client Request：" + msg.text, LogType.Log);
+       // PECommon.Log("Client Request：" + msg.text, LogType.Log);
 
     }
 
