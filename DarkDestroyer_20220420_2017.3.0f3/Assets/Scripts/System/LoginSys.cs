@@ -49,7 +49,7 @@ public class LoginSys : SystemRoot
     {
         loginWnd.SetWndState();
         
-        audioSvc.PlayBg (Constants.BGLogin);
+        audioSvc.PlayBgMusic (Constants.BGLogin);
     }
 
     /// <summary>
@@ -68,6 +68,8 @@ public class LoginSys : SystemRoot
         {
             //TODO 
             GameRoot.AddTips("进入主程");
+            MainCitySys.Instance.EnterMainCity();
+
         }
 
 
@@ -79,8 +81,8 @@ public class LoginSys : SystemRoot
         GameRoot.Instance.SetPlayerName(msg.rspRename.name);
 
         // TODO 跳转场景
-       
-  
+        MainCitySys.Instance.EnterMainCity();
+
     }
 
     /// <summary>
