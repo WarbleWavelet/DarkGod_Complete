@@ -49,6 +49,9 @@ namespace PEProtocol
         public const int srvPort = 17666;
     }
 
+
+    [Serializable]
+
     public class PlayerData
     {
         public int id;
