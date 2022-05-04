@@ -27,7 +27,7 @@ class DBMgr
     public void Init()
     {
         PECommon.Log("Init DBMgr");
-        conn = new MySqlConnection("server=localhost;User Id=root;passwrod=;Database=studymysql;Charset=utf8");
+        conn = new MySqlConnection("server=localhost;User Id=root;passwrod=;Database=darkgod;Charset=utf8");
         if (conn.State != ConnectionState.Open)
         {
             try
@@ -39,8 +39,12 @@ class DBMgr
                 Console.WriteLine("连不上" + ex);
             }
         }
+
+        QueryPlayerData("12","12132");
     }
 
+
+    #region 增删查改
 
     /// <summary>
     /// 查账号
@@ -49,10 +53,101 @@ class DBMgr
     /// <param name="pass"></param>
     /// <returns></returns>
 
-    public PlayerData QueryPlayerData(string acct,string pass)
+    public PlayerData QueryPlayerData(string acct, string pass)
     {
+        bool isNew = true;//新账号
         PlayerData playerData = null;
+        MySqlDataReader reader = null;
+
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from account where acct=@acct", conn);
+            cmd.Parameters.AddWithValue("acct", acct);
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string _acct = reader.GetString("acct");
+                if (_acct.Equals(acct))
+                {
+                    isNew = false;
+                    playerData = new PlayerData
+                    {
+                        id = reader.GetInt32("id"),
+                        name = reader.GetString("name"),
+                        lv = reader.GetInt32("lv"),
+                        exp = reader.GetInt32("exp"),
+                        power = reader.GetInt32("power"),
+                        coin = reader.GetInt32("coin"),
+                        diamond = reader.GetInt32("diamond")
+                    };
+                    PECommon.Log("已查到acct:"+acct );
+                }
+
+            }
+
+            reader.Close();
+        }
+        catch (Exception e)
+        {
+            PECommon.Log("Query PlayerData By Acct&Pass Error:" + e,LogType.Error);
+        }
+        finally
+        {
+            //写在这里而不是try，防止catch的内容太多
+            if (isNew)
+            {
+                playerData = new PlayerData
+                {
+                    id = -1,
+                    name = "",
+                    lv = 1,
+                    exp = 0,
+                    power = 150,
+                    coin = 5000,
+                    diamond = 500
+
+                };
+                playerData.id = InsertPlayerData(acct, pass, playerData);
+            }
+
+        }
+
+
         return playerData;
     }
+
+    public int InsertPlayerData(string acct, string pass, PlayerData pd)
+    {
+        int id = -1;
+        try
+        {
+            MySqlCommand cmd = new MySqlCommand("insert into account set acct=@acct,pass=@pass,name=@name,lv=@lv,exp=@exp,power=@power,coin=@coin,diamond=@diamond", conn);
+            cmd.Parameters.AddWithValue("acct", acct);
+            cmd.Parameters.AddWithValue("pass", pass);
+            cmd.Parameters.AddWithValue("name", pd.name);
+            cmd.Parameters.AddWithValue("lv", pd.lv);
+            cmd.Parameters.AddWithValue("exp", pd.exp);
+            cmd.Parameters.AddWithValue("power", pd.power);
+            cmd.Parameters.AddWithValue("coin", pd.coin);
+            cmd.Parameters.AddWithValue("diamond", pd.diamond);
+            cmd.ExecuteNonQuery();
+            id = (int)cmd.LastInsertedId;
+            PECommon.Log("已增id:" + id);
+
+        }
+        catch (Exception e)
+        {
+
+            PECommon.Log("Insert PlayerData失败，原因：" + e, LogType.Error);
+        }
+        finally
+        {
+
+        }
+        return 0;
+    }
+    #endregion
+
 }
 
