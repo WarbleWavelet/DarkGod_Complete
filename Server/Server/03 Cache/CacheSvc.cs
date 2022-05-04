@@ -1,4 +1,5 @@
-﻿using PEProtocol;
+﻿using MySql.Data.MySqlClient;
+using PEProtocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,8 +59,7 @@ class CacheSvc
     /// <returns></returns>
     public PlayerData GetPlayerData(string acct, string pass)
     {
-        dBMgr.QueryPlayerData(acct,pass);
-        return null;
+      return  dBMgr.QueryPlayerData(acct,pass);
     }
 
     /// <summary>
@@ -72,6 +72,38 @@ class CacheSvc
     {
         onLineAcctDic.Add(acct,session);
         onLineSessionDic.Add(session,pd);
+    }
+
+    /// <summary>
+    /// name已存在
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public bool IsNameExist(string name)
+    {
+        return dBMgr.QueryNameData(name);
+    }
+
+    public PlayerData GetPlayerDataBySession(ServerSession session)
+    {
+        if (onLineSessionDic.TryGetValue(session, out PlayerData pd))
+        {
+            return pd;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// 根据Id更新
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="pd"></param>
+    public bool UpdatePlayerData(int id, PlayerData pd)
+    {
+       return dBMgr.UpdatePlayerData(id,pd);
     }
 }
 

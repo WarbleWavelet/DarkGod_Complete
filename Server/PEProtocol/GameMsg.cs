@@ -7,6 +7,8 @@ using PENet;
 
 namespace PEProtocol
 {
+
+    #region 序列化
     [Serializable]
     public class GameMsg_Text:PEMsg
     {
@@ -19,6 +21,8 @@ namespace PEProtocol
     {
         public ReqLogin reqLogin;
         public RspLogin rspLogin;
+        public ReqRename reqRename;
+        public RspRename rspRename;
 
 
 
@@ -43,13 +47,6 @@ namespace PEProtocol
         public PlayerData playerData;
     }
 
-    public class SrvCfg
-    {
-        public const string srvIp = "127.0.0.1";
-        public const int srvPort = 17666;
-    }
-
-
     [Serializable]
 
     public class PlayerData
@@ -65,6 +62,30 @@ namespace PEProtocol
     }
 
 
+    [Serializable]
+    public class ReqRename
+    {
+        public string name;
+    }
+
+    [Serializable]
+    public class RspRename
+    {
+        public string name;
+    }
+    #endregion
+
+
+    public class SrvCfg
+    {
+        public const string srvIp = "127.0.0.1";
+        public const int srvPort = 17666;
+    }
+
+
+   
+
+
     /// <summary>
     /// 命令集
     /// </summary>
@@ -73,6 +94,8 @@ namespace PEProtocol
         None=0,
         ReqLogin=101,
         RspLogin =102,
+        ReqRename=103,
+        RspRename=104
     }
    
     /// <summary>
@@ -87,6 +110,9 @@ namespace PEProtocol
         /// <summary>密码错误</summary>
         WrongPass,
         /// <summary>账号名已经存在</summary>
+        NameIsExist,
+        /// <summary>更新数据出错</summary>
+        UpdateDBError,
         /// <summary>密码精度不足</summary>
     }
 }

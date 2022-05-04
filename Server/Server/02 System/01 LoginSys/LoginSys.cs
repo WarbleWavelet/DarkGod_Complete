@@ -32,6 +32,8 @@ class LoginSys
         PECommon.Log("LoginSys Inited");
     }
 
+
+    #region Req
     /// <summary>
     /// 处理登录
     /// </summary>
@@ -60,7 +62,7 @@ class LoginSys
         }
         else
         {
-           PlayerData _playerData= cacheSvc.GetPlayerData(data.acct, data.pass);
+            PlayerData _playerData = cacheSvc.GetPlayerData(data.acct, data.pass);
             if (_playerData == null)
             {
                 msg.err = (int)ErrorCode.WrongPass;
@@ -69,7 +71,7 @@ class LoginSys
             {
                 msg.rspLogin = new RspLogin { playerData = _playerData };
 
-                cacheSvc.AcctOnline(data.acct,pack.session,_playerData);
+                cacheSvc.AcctOnline(data.acct, pack.session, _playerData);
             }
         }
 
@@ -77,5 +79,48 @@ class LoginSys
         pack.session.SendMsg(msg);
 
     }
+
+
+    /// <summary>
+    /// 重命名<para/>
+    /// 01 mtd1：Update数据库，完成后回Client（所选）<para/>
+    /// 02 mtd2：苛刻点，回Client，用消息队列等机制，一直Update数据库到成功<para/>
+    /// </summary>
+    /// <param name="pack"></param>
+    internal void ReqRename(MsgPack pack)
+    {
+        ReqRename data = pack.msg.reqRename;
+        GameMsg msg = new GameMsg { cmd=(int)CMD.RspRename};
+
+        if (cacheSvc.IsNameExist(data.name))
+        {
+            //错误码
+            msg.err = (int)ErrorCode.NameIsExist;
+        }
+        else
+        {
+            //更新缓存
+            PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session );
+            pd.name = data.name;
+            if (cacheSvc.UpdatePlayerData(pd.id, pd) == false)
+            {
+                msg.err = (int)ErrorCode.UpdateDBError;
+            }
+            else
+            {
+                msg.rspRename = new RspRename
+                {
+                    name = data.name
+                };
+                
+            }
+
+      
+        }
+          pack.session.SendMsg(msg);
+    
+    }
+    #endregion
+
 }
 

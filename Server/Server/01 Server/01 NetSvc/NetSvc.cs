@@ -67,6 +67,11 @@ class NetSvc
                     LoginSys.Instance.ReqLogin(pack);
                 }
                 break;
+            case CMD.ReqRename:
+                {
+                    LoginSys.Instance.ReqRename(pack);
+                }
+                break;
             default: break;
         }
 

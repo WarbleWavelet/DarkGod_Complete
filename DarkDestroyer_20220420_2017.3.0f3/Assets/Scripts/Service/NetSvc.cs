@@ -65,7 +65,7 @@ public class NetSvc : MonoBehaviour
 
     private void ProgressMsg(GameMsg msg)
     {
-        if (msg.err != (int)ErrorCode.None)
+        if ( msg.err != (int)ErrorCode.None)
         {
             ProgressError(msg);
             return;
@@ -84,7 +84,11 @@ public class NetSvc : MonoBehaviour
                 {
                     LoginSys.Instance.RspLogin(msg);
                 }break;
-        
+            case CMD.RspRename:
+                {
+                    LoginSys.Instance.RspRename(msg);
+                }
+                break;
         }
     }
 
@@ -132,7 +136,7 @@ public class NetSvc : MonoBehaviour
                 break;
             default:
                 {
-
+                    GameRoot.AddTips("未知错误");
                 }
                 break;
         }

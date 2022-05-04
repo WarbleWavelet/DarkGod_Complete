@@ -7,6 +7,7 @@
 *****************************************************/
 
 using PEProtocol;
+using System;
 using UnityEngine;
 
 public class GameRoot : MonoBehaviour 
@@ -83,6 +84,8 @@ public class GameRoot : MonoBehaviour
        Instance.dynamicWnd.AddTips(tips);
     }
 
+
+
     /// <summary>
     /// 从注册到登录
     /// </summary>
@@ -104,5 +107,10 @@ public class GameRoot : MonoBehaviour
     public void SetPlayerData(RspLogin rspLogin)
     {
         this.playerData = rspLogin.playerData;
+    }
+
+    internal void SetPlayerName(string name)
+    {
+        playerData.name = name;
     }
 }

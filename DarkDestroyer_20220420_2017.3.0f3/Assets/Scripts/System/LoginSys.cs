@@ -60,17 +60,27 @@ public class LoginSys : SystemRoot
         GameRoot.AddTips("登录成功");
         GameRoot.Instance.SetPlayerData(msg.rspLogin);
 
-        if (msg.rspLogin.playerData.name == null)
+        if (msg.rspLogin.playerData.name == null ||msg.rspLogin.playerData.name == "" )
         {
-            createWnd.SetWndState();
+            createWnd.SetWndState(true);
         }
         else
-        { 
-            //TODO 进入主程
+        {
+            //TODO 
+            GameRoot.AddTips("进入主程");
         }
 
 
         loginWnd.SetWndState(false);
+    }
+
+    public void RspRename(GameMsg msg)
+    {
+        GameRoot.Instance.SetPlayerName(msg.rspRename.name);
+
+        // TODO 跳转场景
+       
+  
     }
 
     /// <summary>

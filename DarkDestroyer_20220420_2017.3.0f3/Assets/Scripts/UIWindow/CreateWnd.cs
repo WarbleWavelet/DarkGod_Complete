@@ -6,6 +6,7 @@
 	功能：
 *****************************************************/
 
+using PEProtocol;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,7 +47,16 @@ public class CreateWnd : WindowRoot
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         if (iptName.text != "")
         {
+            GameMsg msg = new GameMsg
+            {
+                cmd=(int)CMD.ReqRename,
+                reqRename=new ReqRename
+                { 
+                    name=iptName.text
+                }
+            };
 
+            netSvc.SendMsg(msg);
         }
         else
         {

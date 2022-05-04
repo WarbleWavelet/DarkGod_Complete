@@ -983,9 +983,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
+  netSvc: {fileID: 1332992446}
   iptName: {fileID: 46696998}
   btnRand: {fileID: 309678130}
-  btnEnter: {fileID: 0}
+  btnEnter: {fileID: 1762824894}
 --- !u!114 &1263393557 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114144403477703086, guid: 901cbd01575f5ac4081fd4593eb7c9b9,
@@ -1056,6 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
+  netSvc: {fileID: 1332992446}
   loginWnd: {fileID: 1545980948}
   createWnd: {fileID: 1248399362}
 --- !u!114 &1332992444
@@ -1130,6 +1132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
+  netSvc: {fileID: 0}
   iptAcct: {fileID: 1027960469}
   iptPass: {fileID: 451579405}
   btnNotice: {fileID: 2088108331}
@@ -1153,6 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
+  netSvc: {fileID: 1332992446}
   tipsAni: {fileID: 871511010}
   txtTips: {fileID: 871511011}
   isTipsShow: 0
@@ -1271,10 +1275,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
+  netSvc: {fileID: 1332992446}
   textTips: {fileID: 1263393557}
   textPrg: {fileID: 1522037357}
   imageFG: {fileID: 1190705858}
   imagePoint: {fileID: 1217806074}
+--- !u!114 &1762824894 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114577095588642260, guid: 0833f21d00de93641a89c1b637379f71,
+    type: 2}
+  m_PrefabInternal: {fileID: 1191069269}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!224 &1842509711 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224260288584090732, guid: bc1fbf77f4b6d2545b191027a079df07,

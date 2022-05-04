@@ -17,7 +17,7 @@ public class ServerSession : PESession<GameMsg>
 
     protected override void OnReciveMsg(GameMsg msg)
     {
-        PECommon.Log("RcvPack CMD：" +((CMD)msg.cmd).ToString()+"accct:"+msg.reqLogin.acct.ToString()+ "pass:"+msg.reqLogin.pass.ToString());
+        PECommon.Log("RcvPack CMD：" +((CMD)msg.cmd).ToString());
 
         NetSvc.Instance.AddMsgQue(this,msg);
 
