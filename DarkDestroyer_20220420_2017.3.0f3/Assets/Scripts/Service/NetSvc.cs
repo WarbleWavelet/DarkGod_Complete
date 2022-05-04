@@ -134,6 +134,14 @@ public class NetSvc : MonoBehaviour
                     GameRoot.AddTips("密码错误");
                 }
                 break;
+            case ErrorCode.UpdateDBError:
+                {
+                    //一个非技术性的问题
+                    //GameRoot.AddTips("数据库更新异常");
+                    PECommon.Log("数据库更新异常",LogType.Error);
+                    GameRoot.AddTips("网络不稳定");
+                }
+                break;
             default:
                 {
                     GameRoot.AddTips("未知错误");
