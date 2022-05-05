@@ -20,6 +20,7 @@ public class MainCityWnd : WindowRoot
     public Text txtPower;
     public Text txtLevel;
     public Text txtName;
+    public Transform expPrgTrans;
 
     protected override void InitWnd()
     {
@@ -37,5 +38,22 @@ public class MainCityWnd : WindowRoot
         imgPowerPrg.fillAmount = (pd.power * 1.0f) / PECommon.GetPowerLimit(pd.lv);
         SetText(txtName, pd.name);
         SetText(txtLevel, pd.lv);
+
+        AdaptExpPrg();
+    }
+
+    void AdaptExpPrg()
+    {
+        GridLayoutGroup grid= expPrgTrans.GetComponent<GridLayoutGroup>();
+        float rate =1f* Constants.ScreenStandardHeight / Screen.height;
+        float width = rate * Screen.width;
+        float itemWidth = (width - 78 - 5.83f - 6.5f - 9 * 3.8f) / 10;
+        grid.cellSize = new Vector2(itemWidth, 8.9f) ;
+
+    }
+
+    void Update()
+    {
+        RefreshUI();
     }
 }
