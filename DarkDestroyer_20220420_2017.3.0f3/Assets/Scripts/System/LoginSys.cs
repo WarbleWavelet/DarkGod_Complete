@@ -79,7 +79,7 @@ public class LoginSys : SystemRoot
     public void RspRename(GameMsg msg)
     {
         GameRoot.Instance.SetPlayerName(msg.rspRename.name);
-
+        
         // TODO 跳转场景
         MainCitySys.Instance.EnterMainCity();
 

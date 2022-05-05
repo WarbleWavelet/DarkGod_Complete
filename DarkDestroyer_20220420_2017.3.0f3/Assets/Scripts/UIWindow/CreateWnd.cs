@@ -55,7 +55,7 @@ public class CreateWnd : WindowRoot
                     name=iptName.text
                 }
             };
-
+            PECommon.Log("发"+msg.reqRename.name);
             netSvc.SendMsg(msg);
         }
         else

@@ -79,7 +79,16 @@ class DBMgr
                         exp = reader.GetInt32("exp"),
                         power = reader.GetInt32("power"),
                         coin = reader.GetInt32("coin"),
-                        diamond = reader.GetInt32("diamond")
+                        diamond = reader.GetInt32("diamond"),
+                        hp = reader.GetInt32("hp"),
+                        ad = reader.GetInt32("ad"),
+                        ap = reader.GetInt32("ap"),
+                        addef = reader.GetInt32("addef"),
+                        apdef = reader.GetInt32("apdef"),
+                        critical = reader.GetInt32("critical"),
+                        pierce = reader.GetInt32("pierce"),
+                        dodge = reader.GetInt32("dodge")
+
                     };
                     PECommon.Log("已查到acct:"+acct );
                 }
@@ -105,7 +114,15 @@ class DBMgr
                     exp = 0,
                     power = 150,
                     coin = 5000,
-                    diamond = 500
+                    diamond = 500,
+                    hp = 2000,
+                    ad = 275,
+                    ap = 265,
+                    addef =67,
+                    apdef =43,
+                    critical=2,
+                    pierce =5,
+                    dodge =7
 
                 };
                 playerData.id = InsertPlayerData(acct, pass, playerData);
@@ -124,7 +141,11 @@ class DBMgr
         int id = -1;
         try
         {
-            MySqlCommand cmd = new MySqlCommand("insert into account set acct=@acct,pass=@pass,name=@name,lv=@lv,exp=@exp,power=@power,coin=@coin,diamond=@diamond", conn);
+            string sql = "insert into account set " +
+            "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power,coin = @coin,diamond = @diamond," +
+            "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
             cmd.Parameters.AddWithValue("acct", acct);
             cmd.Parameters.AddWithValue("pass", pass);
             cmd.Parameters.AddWithValue("name", pd.name);
@@ -133,6 +154,15 @@ class DBMgr
             cmd.Parameters.AddWithValue("power", pd.power);
             cmd.Parameters.AddWithValue("coin", pd.coin);
             cmd.Parameters.AddWithValue("diamond", pd.diamond);
+            cmd.Parameters.AddWithValue("hp", pd.hp);
+            cmd.Parameters.AddWithValue("ad", pd.ad);
+            cmd.Parameters.AddWithValue("ap", pd.ap);
+            cmd.Parameters.AddWithValue("addef", pd.addef);
+            cmd.Parameters.AddWithValue("apdef", pd.apdef);
+            cmd.Parameters.AddWithValue("dodge", pd.dodge);
+            cmd.Parameters.AddWithValue("critical", pd.critical);
+            cmd.Parameters.AddWithValue("pierce", pd.pierce);
+
             cmd.ExecuteNonQuery();
             id = (int)cmd.LastInsertedId;
             PECommon.Log("已增id:" + id);
@@ -147,7 +177,7 @@ class DBMgr
         {
 
         }
-        return 0;
+        return id;
     }
 
     public bool QueryNameData(string name)
@@ -180,25 +210,33 @@ class DBMgr
         return exist;
     }
 
-    public bool UpdatePlayerData(int id, PlayerData playerData)
+    public bool UpdatePlayerData(int id, PlayerData pd)
     {
-        MySqlDataReader reader = null;
         try
         {
-            MySqlCommand cmd = new MySqlCommand("update account set name=@name,lv=@lv,exp=@exp,power=@power,coin=@coin,diamond=@diamond where id=@id", conn);
-            cmd.Parameters.AddWithValue("name", playerData.name);
-            cmd.Parameters.AddWithValue("lv", playerData.lv);
-            cmd.Parameters.AddWithValue("exp", playerData.exp);
-            cmd.Parameters.AddWithValue("power", playerData.power);
-            cmd.Parameters.AddWithValue("coin", playerData.coin);
-            cmd.Parameters.AddWithValue("diamond", playerData.diamond);
+            string sql = "update account set " +
+                " name = @name,lv = @lv,exp = @exp,power = @power,coin = @coin,diamond = @diamond," +
+                " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce" +
+                " where id=@id";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("name", pd.name);
+            cmd.Parameters.AddWithValue("lv", pd.lv);
+            cmd.Parameters.AddWithValue("exp", pd.exp);
+            cmd.Parameters.AddWithValue("power", pd.power);
+            cmd.Parameters.AddWithValue("coin", pd.coin);
+            cmd.Parameters.AddWithValue("diamond", pd.diamond);
+            cmd.Parameters.AddWithValue("hp", pd.hp);
+            cmd.Parameters.AddWithValue("ad", pd.ad);
+            cmd.Parameters.AddWithValue("ap", pd.ap);
+            cmd.Parameters.AddWithValue("addef", pd.addef);
+            cmd.Parameters.AddWithValue("apdef", pd.apdef);
+            cmd.Parameters.AddWithValue("critical", pd.critical);
+            cmd.Parameters.AddWithValue("dodge", pd.dodge);
+            cmd.Parameters.AddWithValue("pierce", pd.pierce);
             cmd.Parameters.AddWithValue("id", id);
 
-            reader = cmd.ExecuteReader();
-            if (reader != null)
-            {
-                reader.Close();
-            }
+
+            cmd.ExecuteNonQuery();
         }
         catch (Exception e)
         {

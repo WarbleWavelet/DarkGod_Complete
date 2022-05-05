@@ -25,13 +25,14 @@ public class MainCitySys : SystemRoot
 
     public void EnterMainCity()
     {
+        
         resSvc.AsyncLoadScene(Constants.sceneMainCity, LoadMainCity);
     }
 
     void LoadMainCity()
     {
         PECommon.Log ("进入主城");
-
+        GameRoot.Instance.ClearUIRoot();
         maincityWnd.SetWndState();
         audioSvc.PlayBgMusic(Constants.BGMainCity);
     }

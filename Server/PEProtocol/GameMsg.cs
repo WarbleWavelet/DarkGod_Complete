@@ -51,6 +51,7 @@ namespace PEProtocol
 
     public class PlayerData
     {
+        //含义看数据库
         public int id;
         public string name;
         public int exp;
@@ -58,6 +59,14 @@ namespace PEProtocol
         public int power;
         public int coin;
         public int diamond;
+        public int hp;
+        public int ad ;
+        public int ap;
+        public int addef;
+        public int apdef;
+        public int dodge;
+        public int critical;
+        public int pierce;
 
     }
 
