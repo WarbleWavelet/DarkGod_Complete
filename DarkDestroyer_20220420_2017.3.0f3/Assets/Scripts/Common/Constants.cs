@@ -16,6 +16,7 @@ public class Constants
     public const string BGMainCity = "bgMainCity";
     public const string UILoginBtn = "uiLoginBtn";
     public const string UIClickBtn = "uiClickBtn";
+    public const string UIExtenBtn = "uiExtenBtn";
 
     public const int ScreenStandardWidth = 1334;
     public const int ScreenStandardHeight = 750;

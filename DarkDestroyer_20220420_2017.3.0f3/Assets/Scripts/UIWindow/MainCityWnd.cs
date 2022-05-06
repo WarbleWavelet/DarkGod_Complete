@@ -21,13 +21,22 @@ public class MainCityWnd : WindowRoot
     public Text txtLevel;
     public Text txtName;
     public Transform expPrgTrans;
+    public Button btnMenu;
+    public Animation aniMenu;
+    public bool menuState=false;
 
     protected override void InitWnd()
     {
         base.InitWnd();
+        btnMenu.onClick.AddListener(BtnMenuClick);
 
         RefreshUI();
        
+    }
+
+    void Update()
+    {
+        RefreshUI();
     }
 
     private void RefreshUI()
@@ -84,8 +93,24 @@ public class MainCityWnd : WindowRoot
 
     }
 
-    void Update()
+
+
+    public void BtnMenuClick()
     {
-        RefreshUI();
+
+        audioSvc.PlayUIAudio(Constants.UIExtenBtn);
+        menuState = !menuState;
+
+        AnimationClip clip = null;
+        if (menuState)
+        {
+            clip = aniMenu.GetClip("OpenMCMenu");
+        }
+        else
+        {
+            clip = aniMenu.GetClip("CloseMCMenu");
+        }
+
+        aniMenu.Play(clip.name);
     }
 }
