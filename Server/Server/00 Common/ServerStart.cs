@@ -10,12 +10,12 @@ class ServerStart
 {
     static void Main(string[] args)
     {
-        GameRoot.Instance.Init();
+        ServerRoot.Instance.Init();
 
 
         while (true)
         {
-            GameRoot.Instance.Update();
+            ServerRoot.Instance.Update();
         }
     }
 }

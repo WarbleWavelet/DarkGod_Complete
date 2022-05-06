@@ -81,6 +81,8 @@ class LoginSys
     }
 
 
+
+
     /// <summary>
     /// 重命名<para/>
     /// 01 mtd1：Update数据库，完成后回Client（所选）<para/>
@@ -121,6 +123,12 @@ class LoginSys
     
     }
     #endregion
+
+
+    public void ClearOfflineData(ServerSession session)
+    {
+        cacheSvc.AcctOffline(session);
+    }
 
 }
 

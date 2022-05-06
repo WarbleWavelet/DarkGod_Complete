@@ -9,10 +9,15 @@ using PENet;
 
 public class ServerSession : PESession<GameMsg>
 {
+    /// <summary>
+    /// 让玩家下线，结束session
+    /// </summary>
+    public int sessionID = 0;
     protected override void OnConnected()
     {
         PECommon.Log("A Client Connected");
-
+        sessionID = ServerRoot.Instance.GetSessionID();
+        PECommon.Log("SessionID:"+sessionID +" client connected");
     }
 
     protected override void OnReciveMsg(GameMsg msg)
@@ -26,6 +31,8 @@ public class ServerSession : PESession<GameMsg>
     protected override void OnDisConnected()
     {
         PECommon.Log("A Client Disconnected");
+        PECommon.Log("SessionID:" + sessionID + " client disconnected");
+        LoginSys.Instance.ClearOfflineData(this);
 
     }
 }

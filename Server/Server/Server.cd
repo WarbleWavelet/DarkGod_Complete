@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="GameRoot" Collapsed="true">
+  <Class Name="ServerRoot" Collapsed="true">
     <Position X="3.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACAAAAAAA=</HashCode>
+      <HashCode>AAQEAAAAAAAAAAAIAAAAAAAIAAAAAAAAQAACAAAAAAA=</HashCode>
       <FileName>00 Common\ServerRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,28 +24,28 @@
   <Class Name="ServerSession" Collapsed="true">
     <Position X="1.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAAAAAAAAgAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
       <FileName>01 Server\01 NetSvc\ServerSession.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LoginSys" Collapsed="true">
     <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAIAAAAAAAAAAAAAAAABAQAACAAAAAAA=</HashCode>
+      <HashCode>gBAEAAAAAAAAAIAAAAAAAAAAAAAAAABAQAACAAAAAAA=</HashCode>
       <FileName>02 System\01 LoginSys\LoginSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DBMgr" Collapsed="true">
     <Position X="6.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAQAAQAAAAAQAACAEAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAACAQAAQAAAAAQAQCAEAAAAA=</HashCode>
       <FileName>04 DB\DBMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CacheSvc" Collapsed="true">
     <Position X="2.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAGAAIAAAAAAAAAAAAAAAAAAAAABAQAQAACAIAAAAA=</HashCode>
+      <HashCode>BIAGAAIAAAAAAAAAAAAAAAAAAAAABAQAQAQCAIAABAA=</HashCode>
       <FileName>03 Cache\CacheSvc.cs</FileName>
     </TypeIdentifier>
   </Class>

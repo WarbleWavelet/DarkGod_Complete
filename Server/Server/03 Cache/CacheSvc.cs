@@ -15,8 +15,9 @@ class CacheSvc
 {
 
     #region 属性 字段
-    /// <summary>账号在线</summary>
+    /// <summary>acct与session账号在线</summary>
     Dictionary<string, ServerSession> onLineAcctDic = new Dictionary<string, ServerSession>();
+    /// <summary>session与pd</summary>
 
     Dictionary<ServerSession, PlayerData> onLineSessionDic = new Dictionary<ServerSession, PlayerData>();
 
@@ -103,7 +104,29 @@ class CacheSvc
     /// <param name="pd"></param>
     public bool UpdatePlayerData(int id, PlayerData pd)
     {
-       return dBMgr.UpdatePlayerData(id,pd);
+        return dBMgr.UpdatePlayerData(id, pd);
+    }
+
+
+    /// <summary>
+    /// 下线对两个字典的处理
+    /// </summary>
+    /// <param name="session"></param>
+    public void AcctOffline(ServerSession session)
+    {
+        foreach (var item in onLineAcctDic)
+        {
+            if (session == onLineAcctDic[item.Key])
+            {
+                onLineAcctDic.Remove(item.Key);
+                break;
+            }
+        }
+
+        bool suc = onLineSessionDic.Remove(session);
+
+        PECommon.Log("SessionID Offline："+session.sessionID);
+         
     }
 }
 

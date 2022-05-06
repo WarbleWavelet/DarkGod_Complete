@@ -3,19 +3,19 @@
 /// <summary>
 /// 服务器初始化
 /// </summary>
-class GameRoot
+class ServerRoot
 {
 
+    public int SessionID = 0;
+    private static ServerRoot _instance;      
 
-    private static GameRoot _instance;      
-
-    public static GameRoot Instance
+    public static ServerRoot Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = new GameRoot();
+                _instance = new ServerRoot();
             }
             return _instance;
         }
@@ -41,5 +41,17 @@ class GameRoot
     }
 
 
+    /// <summary>
+    /// 生成sessionID
+    /// </summary>
+    /// <returns></returns>
+    public int GetSessionID()
+    {
+        if (SessionID == int.MaxValue)
+        {
+            SessionID = 0;
+        }
+        return ++SessionID;
+    }
 }
 
