@@ -50,5 +50,16 @@ public class PECommon
     {
         return ((lv - 1) / 10) * 150 + 150;
     }
+
+    /// <summary>
+    /// 升级所需经验
+    /// </summary>
+    /// <param name="lv"></param>
+    /// <returns></returns>
+
+   public static int GetExpUpValByLV(int lv)
+    {
+        return lv *lv*100;
+    }
 }
 

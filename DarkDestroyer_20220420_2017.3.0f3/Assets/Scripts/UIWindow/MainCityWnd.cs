@@ -39,16 +39,48 @@ public class MainCityWnd : WindowRoot
         SetText(txtName, pd.name);
         SetText(txtLevel, pd.lv);
 
-        AdaptExpPrg();
+
+
+        AdaptExpPrg(pd);
+
+
     }
 
-    void AdaptExpPrg()
+    /// <summary>
+    /// 适配经验条
+    /// </summary>
+
+    void AdaptExpPrg(PlayerData pd)
     {
         GridLayoutGroup grid= expPrgTrans.GetComponent<GridLayoutGroup>();
         float rate =1f* Constants.ScreenStandardHeight / Screen.height;
         float width = rate * Screen.width;
         float itemWidth = (width - 78 - 5.83f - 6.5f - 9 * 3.8f) / 10;
         grid.cellSize = new Vector2(itemWidth, 8.9f) ;
+        //
+        int expValPrg = (int)(1f * pd.exp /  PECommon.GetExpUpValByLV(pd.lv)*100);
+        SetText(txtExpPrg, expValPrg+"%");
+        int index = expValPrg / 10;
+
+        for (int i = 0; i < expPrgTrans.childCount; i++)
+        {
+            Image expItem= expPrgTrans.GetChild(i).GetComponent<Image>();
+            if (i < index)
+            {
+                expItem.fillAmount = 1;
+            }
+            else
+            {
+                if (i == index)
+                {
+                    expItem.fillAmount = (expValPrg % 10 * 1f) / 10;
+                }
+                else
+                    expItem.fillAmount = 0;
+                { 
+                }
+            }
+        }
 
     }
 
