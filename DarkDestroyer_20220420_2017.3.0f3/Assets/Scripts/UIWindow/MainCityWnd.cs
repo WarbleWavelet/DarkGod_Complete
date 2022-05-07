@@ -9,12 +9,12 @@
 using PEProtocol;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MainCityWnd : WindowRoot
 {
     public Image imgPowerPrg;
-   // public Image imgExpPrg;
     public Text txtFight;
     public Text txtExpPrg;
     public Text txtPower;
@@ -24,15 +24,32 @@ public class MainCityWnd : WindowRoot
     public Button btnMenu;
     public Animation aniMenu;
     public bool menuState=false;
+    //
+    public Image imgTouch;
+    public Image imgDirBg;
+    public Image imgDirPoint;
+    /// <summary>BG位置确定后Point的位置</summary>
+    public Vector2 startPos=Vector2.zero;
+    /// <summary>BG默认的位置</summary>
+    public Vector2 defaultPos=Vector2.zero;
+
 
     protected override void InitWnd()
     {
         base.InitWnd();
+        //
         btnMenu.onClick.AddListener(BtnMenuClick);
-
+        //
+        SetActive(imgDirPoint,false);
+        RegisterTouchEvets();
+        defaultPos = imgDirBg.transform.position;
+        //
         RefreshUI();
        
     }
+
+
+    #region 说明
 
     void Update()
     {
@@ -112,5 +129,41 @@ public class MainCityWnd : WindowRoot
         }
 
         aniMenu.Play(clip.name);
+    }
+    #endregion
+
+
+    public void RegisterTouchEvets()
+    {
+
+        OnClickDown(imgTouch.gameObject, (PointerEventData evt) => {
+            startPos = evt.position;
+            SetActive(imgDirPoint);
+            imgDirBg.transform.position = evt.position;
+        });
+
+        OnClickUp(imgTouch.gameObject, (PointerEventData evt) => {
+            imgDirBg.transform.position = defaultPos;
+            imgDirPoint.transform.localPosition = Vector2.zero;
+            SetActive(imgDirPoint,false);
+        });
+
+        OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
+            SetActive(imgDirPoint);
+            //
+            Vector2 dir = evt.position- startPos;
+            float len = dir.magnitude;
+            if (len > Constants.ScreenOPDis)
+            {
+                Vector2 clampDir = Vector2.ClampMagnitude(dir,Constants.ScreenOPDis);
+                imgDirPoint.transform.position = clampDir+startPos;
+            }
+            else
+            { 
+                imgDirPoint.transform.position = evt.position;
+            }
+            
+            
+        });
     }
 }
