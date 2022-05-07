@@ -32,6 +32,8 @@ public class MainCityWnd : WindowRoot
     public Vector2 startPos=Vector2.zero;
     /// <summary>BG默认的位置</summary>
     public Vector2 defaultPos=Vector2.zero;
+    /// <summary>摇杆点的运动半径</summary>
+    float pointDis;
 
 
     protected override void InitWnd()
@@ -40,9 +42,11 @@ public class MainCityWnd : WindowRoot
         //
         btnMenu.onClick.AddListener(BtnMenuClick);
         //
+        defaultPos = imgDirBg.transform.position;
+        pointDis = AdaptDirPoint();//放这里，运行时改变无效
         SetActive(imgDirPoint,false);
         RegisterTouchEvets();
-        defaultPos = imgDirBg.transform.position;
+        
         //
         RefreshUI();
        
@@ -53,6 +57,7 @@ public class MainCityWnd : WindowRoot
 
     void Update()
     {
+        //pointDis = AdaptDirPoint();
         RefreshUI();
     }
 
@@ -75,7 +80,6 @@ public class MainCityWnd : WindowRoot
     /// <summary>
     /// 适配经验条
     /// </summary>
-
     void AdaptExpPrg(PlayerData pd)
     {
         GridLayoutGroup grid= expPrgTrans.GetComponent<GridLayoutGroup>();
@@ -109,7 +113,16 @@ public class MainCityWnd : WindowRoot
         }
 
     }
-
+    
+    
+    /// <summary>
+    /// 适配摇杆点的半径
+    /// </summary>
+    /// <returns></returns>
+    float AdaptDirPoint()
+    {
+        return 1.0f *Screen.height/ Constants.ScreenStandardHeight * Constants.ScreenOPDis ;
+    }
 
 
     public void BtnMenuClick()
@@ -153,9 +166,9 @@ public class MainCityWnd : WindowRoot
             //
             Vector2 dir = evt.position- startPos;
             float len = dir.magnitude;
-            if (len > Constants.ScreenOPDis)
+            if (len > pointDis)
             {
-                Vector2 clampDir = Vector2.ClampMagnitude(dir,Constants.ScreenOPDis);
+                Vector2 clampDir = Vector2.ClampMagnitude(dir,pointDis);
                 imgDirPoint.transform.position = clampDir+startPos;
             }
             else
