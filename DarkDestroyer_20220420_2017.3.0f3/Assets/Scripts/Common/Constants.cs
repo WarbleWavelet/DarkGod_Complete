@@ -24,4 +24,14 @@ public class Constants
     public const int ScreenStandardHeight = 750;
     /// <summary>摇杆点标准距离</summary>
     public const int ScreenOPDis = 90;
+
+    public const int PlayerMoveSpeed = 8;
+    public const int MonsterMoveSpeed = 4;
+
+    /// <summary>加速度，过渡动画</summary>
+    public const float AccelerSpeed = 5f;
+    public const int BlendIdle = 0;
+    public const int BlendWalk = 1;
+
+
 }
