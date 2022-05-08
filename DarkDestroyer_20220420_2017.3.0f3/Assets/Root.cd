@@ -17,42 +17,42 @@
   <Class Name="WindowRoot" Collapsed="true">
     <Position X="3.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAIAAQAAAAIEAABAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAIABUAAAAIFAABAAAAAAAAAEAAAAAIAAAEA=</HashCode>
       <FileName>Assets\Scripts\WindowRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LoginSys" Collapsed="true">
     <Position X="8.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAEQAACAAAAAAgAAEQAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAAAAAACBAAAAAAEQAACAAAAAAgAAEQAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\System\LoginSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ResSvc" Collapsed="true">
     <Position X="6.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAIgAAAAAAAAAAAAAAQCAQgAAAAQQAIEAAAACAA=</HashCode>
+      <HashCode>AAQAAQIgAAAAAAEAAABAACQCAQgAAAAQQAIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Constants" Collapsed="true">
     <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIAAAAAAQAAAAAAAQAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAEJAAAAAQQEAAAIAAYQAgECAAAAAAAAIA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameRoot" Collapsed="true">
     <Position X="11.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAACAAAAAAAAAACAAAAAAAQAAAQAACAAAAAEA=</HashCode>
+      <HashCode>AAAgAAAAACAABAAAEAAACAAAAEAARAAAQAACAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\GameRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SystemRoot" Collapsed="true">
     <Position X="8.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAACAAQAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\SystemRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,15 +73,29 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="10.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NetSvc" Collapsed="true">
     <Position X="6.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAgAAAAIAAAAAAAAAAAAAAAACAAQAAABYAEAAg=</HashCode>
       <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="3" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQABAAAACAAAgEiAgACIAQAAAAIAAAABAACAAIAIAA=</HashCode>
+      <FileName>Assets\Scripts\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainCityWnd" Collapsed="true">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQABAQAgCAQAACAAAEAIAIhAAEAAAQAQAEAACAAERY=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

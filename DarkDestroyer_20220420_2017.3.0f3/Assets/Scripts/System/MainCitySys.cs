@@ -13,6 +13,7 @@ public class MainCitySys : SystemRoot
 {
     public static MainCitySys Instance;
     public MainCityWnd maincityWnd;
+    public PlayerController ctrl;
 
     public override void InitSys()
     {
@@ -51,5 +52,27 @@ public class MainCitySys : SystemRoot
         player.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         Camera.main.transform.position = mapData.mainCamPos;
         Camera.main.transform.localEulerAngles = mapData.mainCamRote;
+        //
+        ctrl = player.GetComponent<PlayerController>();
+        ctrl.Init();
+    }
+
+
+    /// <summary>
+    /// 通过摇杆控制移动方向
+    /// </summary>
+    /// <param name="dir"></param>
+   public void SetMoveDir(Vector2 dir)
+    {
+        if (dir == Vector2.zero)
+        {
+            ctrl.SetBlend(Constants.BlendIdle);
+        }
+        else
+        {
+            ctrl.SetBlend(Constants.BlendWalk);
+        }
+        ctrl.Dir = dir;
+
     }
 }

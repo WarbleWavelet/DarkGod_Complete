@@ -159,6 +159,7 @@ public class MainCityWnd : WindowRoot
             imgDirBg.transform.position = defaultPos;
             imgDirPoint.transform.localPosition = Vector2.zero;
             SetActive(imgDirPoint,false);
+            MainCitySys.Instance.SetMoveDir(Vector2.zero);
         });
 
         OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
@@ -175,8 +176,8 @@ public class MainCityWnd : WindowRoot
             { 
                 imgDirPoint.transform.position = evt.position;
             }
-            
-            
+            MainCitySys.Instance.SetMoveDir(dir.normalized);
+
         });
     }
 }

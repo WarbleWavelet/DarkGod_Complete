@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
 
     #region 生命
-    void Start()
+    public void Init()
     {
         cam = Camera.main;
         camTrans = cam.transform;
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        Input();
+       // InputByWSAD();
         if (currentBlend != targetBlend)
         {
             UpdateMixBlend();
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetDir()
     {
-        float angle = Vector2.SignedAngle(Dir, new Vector2(1,0));
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0,1))+camTrans.eulerAngles.y;
         Vector3 eulerAngles = new Vector3(0f, angle,0f);
         transform.localEulerAngles = eulerAngles;
     }
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(transform.forward*Time.deltaTime*Constants.PlayerMoveSpeed);
     }
 
-    private void Input()
+    private void InputByWSAD()
     {
         float h = UnityEngine.Input.GetAxisRaw("Horizontal");
         float v = UnityEngine.Input.GetAxisRaw("Vertical");
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetBlend(float blend)
+   public void SetBlend(float blend)
     {
        
         targetBlend = blend;
