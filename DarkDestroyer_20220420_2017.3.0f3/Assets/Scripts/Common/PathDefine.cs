@@ -11,4 +11,5 @@ using UnityEngine;
 public class PathDefine
 {
     public const string RDNameCfg = "ResCfgs/rdname";
+    public const string MapCfg = "ResCfgs/map";
 }

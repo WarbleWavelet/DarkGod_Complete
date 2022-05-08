@@ -16,25 +16,6 @@ using UnityEngine.SceneManagement;
 public class ResSvc : MonoBehaviour 
 {
     public static ResSvc Instance;
-    /// <summary>不停查询进度</summary>
-    Action prgCB;
-
-    Dictionary<string, AudioClip> adDict = new Dictionary<string, AudioClip>();
-
-
-    public List<string> surnameLst= new List<string>();
-    public List<string> manLst= new List<string>();
-    public List<string> womanLst= new List<string>();
-    void Update()
-    {
-        if (prgCB != null)
-        {
-
-            prgCB();
-        }
-
-    }
-
 
     /// <summary>
     /// 初始化服务
@@ -42,12 +23,26 @@ public class ResSvc : MonoBehaviour
     public void InitSvc()
     {
         Instance = this;
-        InitRDNameCfgs();
+        InitRDNameCfg(PathDefine.RDNameCfg);
+        InitMapCfg(PathDefine.MapCfg);
         PECommon.Log("Init Res",LogType.Log);
+    }
+
+    void Update()
+    {
+        if (prgCB != null)
+        {
+            prgCB();
+        }
     }
 
 
 
+
+
+    #region Scene
+    /// <summary>不停查询进度</summary>
+    Action prgCB;
 
     /// <summary>
     /// 加载场景
@@ -79,7 +74,11 @@ public class ResSvc : MonoBehaviour
 
         };        
     }
+    #endregion
 
+
+    #region Audio
+ Dictionary<string, AudioClip> adDict = new Dictionary<string, AudioClip>();
     /// <summary>
     /// 加载声音
     /// </summary>
@@ -103,14 +102,21 @@ public class ResSvc : MonoBehaviour
       
         return au;
     }
+    #endregion
 
+
+
+    #region 随机名字
+    public List<string> surnameLst = new List<string>();
+    public List<string> manLst = new List<string>();
+    public List<string> womanLst = new List<string>();
     /// <summary>
     /// 初始化随机名字的配置文件
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    private void InitRDNameCfgs()
+    private void InitRDNameCfg(string path)
     {
-        TextAsset xml = Resources.Load<TextAsset>(PathDefine.RDNameCfg);
+        TextAsset xml = Resources.Load<TextAsset>(path);
         XmlNodeList nodLst = GetListFromTextAsset(xml);
         if (nodLst != null)
         {
@@ -147,11 +153,121 @@ public class ResSvc : MonoBehaviour
                             break;
                     }
                 }
-
-
             }
         }
     }
+    public string GetRDName(bool man = true)
+    {
+        string rdName = surnameLst[PETools.RDInt(0, surnameLst.Count - 1)];
+        if (man)
+        {
+            rdName += manLst[PETools.RDInt(0, manLst.Count - 1)];
+        }
+        else
+        {
+            rdName += womanLst[PETools.RDInt(0, womanLst.Count - 1)];
+        }
+
+        return rdName;
+    }
+    #endregion
+
+
+    #region map
+    public List<string> mapLst = new List<string>();
+    Dictionary<int, MapCfg> mapCfgDataDic=new Dictionary<int, MapCfg> ();
+    /// <summary>
+    /// 初始化随机名字的配置文件
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    private void InitMapCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null) 
+                    continue;
+                //
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                MapCfg mc=new MapCfg 
+                { 
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "mapName":
+                            {
+                                mc.mapName= e.InnerText;
+                            }
+                            break;
+                        case "sceneName":
+                            {
+                                mc.sceneName = e.InnerText;
+                            }
+                            break;
+                        case "mainCamPos":
+                            {
+                                mc.mainCamPos = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        case "mainCamRote":
+                            {
+                                mc.mainCamRote = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        case "playerBornPos":
+                            {
+                                mc.playerBornPos = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        case "playerBornRote":
+                            {
+                                mc.playerBornRote = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        default:
+                            {
+
+                            }
+                            break;
+                    }
+                    
+                }
+                //
+mapCfgDataDic.Add(ID, mc);
+
+            }
+        }
+        //
+
+    }
+    Vector3 ParseVector3ByXmlElement(XmlElement e)
+    {
+        string[] valArr = e.InnerText.Split(',');
+        return   new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
+    }
+
+    public string GetMap(bool man = true)
+    {
+        string rdName = surnameLst[PETools.RDInt(0, surnameLst.Count - 1)];
+        if (man)
+        {
+            rdName += manLst[PETools.RDInt(0, manLst.Count - 1)];
+        }
+        else
+        {
+            rdName += womanLst[PETools.RDInt(0, womanLst.Count - 1)];
+        }
+
+        return rdName;
+    }
+    #endregion
 
 
 
@@ -176,18 +292,5 @@ public class ResSvc : MonoBehaviour
     }
 
 
-    public string GetRDName(bool man=true)
-    {
-        string rdName = surnameLst[PETools.RDInt(0, surnameLst.Count - 1)];
-        if (man)
-        {
-            rdName += manLst[PETools.RDInt(0, manLst.Count - 1)];
-        }
-        else
-        {
-            rdName += womanLst[PETools.RDInt(0, womanLst.Count - 1)];
-        }
 
-        return rdName;
-    }
 }
