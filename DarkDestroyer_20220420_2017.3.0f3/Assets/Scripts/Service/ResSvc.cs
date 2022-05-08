@@ -240,37 +240,39 @@ public class ResSvc : MonoBehaviour
                     
                 }
                 //
-mapCfgDataDic.Add(ID, mc);
+                mapCfgDataDic.Add(ID, mc);
 
             }
         }
         //
 
     }
-    Vector3 ParseVector3ByXmlElement(XmlElement e)
-    {
-        string[] valArr = e.InnerText.Split(',');
-        return   new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
-    }
 
-    public string GetMap(bool man = true)
+
+    public MapCfg GetMapDataCfg(int ID)
     {
-        string rdName = surnameLst[PETools.RDInt(0, surnameLst.Count - 1)];
-        if (man)
+        MapCfg mc = null;
+        if (mapCfgDataDic.TryGetValue(ID, out mc))
         {
-            rdName += manLst[PETools.RDInt(0, manLst.Count - 1)];
+            return mc;
         }
         else
         {
-            rdName += womanLst[PETools.RDInt(0, womanLst.Count - 1)];
+            return null;
         }
 
-        return rdName;
+
+      
     }
     #endregion
 
 
-
+    #region Common
+    Vector3 ParseVector3ByXmlElement(XmlElement e)
+    {
+        string[] valArr = e.InnerText.Split(',');
+        return new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
+    }
     XmlNodeList GetListFromTextAsset(TextAsset xml)
     {
         if (!xml)
@@ -290,7 +292,33 @@ mapCfgDataDic.Add(ID, mc);
           
         }
     }
+    #endregion
 
+
+    #region 预制体
+    Dictionary<string,GameObject> goDic=new Dictionary<string,GameObject>();
+    public GameObject LoadPrefab(string path, bool cache = false)
+    { 
+    GameObject prefab=null;
+        if (!goDic.TryGetValue(path, out prefab))
+        {
+            prefab = Resources.Load<GameObject>(path);
+            if (cache)
+            {
+                goDic.Add(path,prefab);
+            }
+        }
+        //
+        GameObject go = null;
+        if (prefab != null)
+        {
+            go = Instantiate(prefab);
+            return go;
+        }
+        return null;
+    }
+
+    #endregion
 
 
 }

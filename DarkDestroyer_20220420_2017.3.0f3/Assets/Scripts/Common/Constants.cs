@@ -11,7 +11,9 @@ using UnityEngine;
 public class Constants
 {
     public const string sceneLogin = "SceneLogin";
-    public const string sceneMainCity = "SceneMainCity";
+   // public const string sceneMainCity = "SceneMainCity";
+    public const int MainCityMapID = 10000;//map.xml
+    //
     public const string BGLogin = "bgLogin";
     /// <summary>进入主城的Bgm</summary>
     public const string BGMainCity = "bgMainCity";

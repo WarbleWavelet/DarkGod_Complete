@@ -25,15 +25,31 @@ public class MainCitySys : SystemRoot
 
     public void EnterMainCity()
     {
-        
-        resSvc.AsyncLoadScene(Constants.sceneMainCity, LoadMainCity);
+        MapCfg cfg = ResSvc.Instance.GetMapDataCfg(Constants.MainCityMapID);
+        resSvc.AsyncLoadScene(cfg.sceneName, () => {
+            PECommon.Log("进入主城");
+            //
+            LoadPlayer(cfg);
+            GameRoot.Instance.ClearUIRoot();
+            maincityWnd.SetWndState();
+            audioSvc.PlayBgMusic(Constants.BGMainCity);
+        });
     }
 
-    void LoadMainCity()
+
+
+    /// <summary>
+    /// 加载游戏主角
+    /// </summary>
+    /// <param name="mapData"></param>
+    void LoadPlayer(MapCfg mapData)
     {
-        PECommon.Log ("进入主城");
-        GameRoot.Instance.ClearUIRoot();
-        maincityWnd.SetWndState();
-        audioSvc.PlayBgMusic(Constants.BGMainCity);
+        GameObject player = resSvc.LoadPrefab(PathDefine.AssassinCityPlayerPrefab, true);
+        //
+        player.transform.position = mapData.playerBornPos;
+        player.transform.localEulerAngles = mapData.playerBornRote;
+        player.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        Camera.main.transform.position = mapData.mainCamPos;
+        Camera.main.transform.localEulerAngles = mapData.mainCamRote;
     }
 }
