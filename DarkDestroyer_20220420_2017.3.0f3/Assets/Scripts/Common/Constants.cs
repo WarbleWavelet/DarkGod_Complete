@@ -19,6 +19,7 @@ public class Constants
     public const string BGMainCity = "bgMainCity";
     public const string UILoginBtn = "uiLoginBtn";
     public const string UIClickBtn = "uiClickBtn";
+    public const string UIOpenPage = "uiOpenPage"; 
     /// <summary>点击侧边栏的Bgm</summary>
     public const string UIExtenBtn = "uiExtenBtn";
 

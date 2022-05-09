@@ -40,7 +40,7 @@ public class MainCityWnd : WindowRoot
     {
         base.InitWnd();
         //
-        btnMenu.onClick.AddListener(BtnMenuClick);
+        btnMenu.onClick.AddListener(ClickBtnMenu);
         //
         defaultPos = imgDirBg.transform.position;
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
@@ -125,7 +125,7 @@ public class MainCityWnd : WindowRoot
     }
 
 
-    public void BtnMenuClick()
+    public void ClickBtnMenu()
     {
 
         audioSvc.PlayUIAudio(Constants.UIExtenBtn);
@@ -142,6 +142,14 @@ public class MainCityWnd : WindowRoot
         }
 
         aniMenu.Play(clip.name);
+    }
+
+
+    public void ClickHeadBtn()
+    {
+
+        audioSvc.PlayUIAudio(Constants.UIOpenPage);
+        MainCitySys.Instance.OpenInfoWnd();
     }
     #endregion
 

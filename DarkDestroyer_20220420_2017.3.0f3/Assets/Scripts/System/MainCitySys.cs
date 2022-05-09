@@ -14,6 +14,8 @@ public class MainCitySys : SystemRoot
     public static MainCitySys Instance;
     public MainCityWnd maincityWnd;
     public PlayerController ctrl;
+    public InfoWnd infoWnd;
+    public Transform charCamTrans;
 
     public override void InitSys()
     {
@@ -34,10 +36,32 @@ public class MainCitySys : SystemRoot
             GameRoot.Instance.ClearUIRoot();
             maincityWnd.SetWndState();
             audioSvc.PlayBgMusic(Constants.BGMainCity);
+            //
+            SetCharShowCamState(false);
         });
     }
 
 
+    /// <summary>
+    /// 角色信息面板的展示
+    /// </summary>
+    /// <param name="state"></param>
+    void SetCharShowCamState(bool state = true)
+    {
+
+        if (charCamTrans != null)
+        {
+            if (state)
+            {
+                Transform player = ctrl.transform;
+                charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//任务前上方
+                charCamTrans.localEulerAngles = new Vector3(0f, 180 + player.position.y, 0f);//相机对着人物
+                charCamTrans.localScale = Vector3.one;
+            }
+            charCamTrans.gameObject.SetActive(state);
+        }
+
+    }
 
     /// <summary>
     /// 加载游戏主角
@@ -73,6 +97,18 @@ public class MainCitySys : SystemRoot
             ctrl.SetBlend(Constants.BlendWalk);
         }
         ctrl.Dir = dir;
+
+    }
+
+    public void OpenInfoWnd()
+    {
+        if (charCamTrans == null)
+        {
+            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
+            SetCharShowCamState();
+        }
+        infoWnd.SetWndState();
+
 
     }
 }
