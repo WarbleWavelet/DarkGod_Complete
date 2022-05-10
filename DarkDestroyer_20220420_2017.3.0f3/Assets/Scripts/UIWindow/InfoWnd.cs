@@ -33,12 +33,25 @@ public class InfoWnd : WindowRoot
     //
     public Vector3 startPos;
     public Vector3 dragPos;
+    //
+    public Transform detailWndTrans;
+    public Button btnDetailClose;
+    public Text dtxthp;
+    public Text dtxtad;
+    public Text dtxtap;
+    public Text dtxtaddef;
+    public Text dtxtapdef;
+    public Text dtxtdodge;
+    public Text dtxtpierce;
+    public Text dtxtcritical;
 
     protected override void InitWnd()
     {
         base.InitWnd();
         RegTouchEvts();
         btnClose.onClick.AddListener(ClickBtnClose);
+        btnDetailClose.onClick.AddListener(ClickBtnDetailClose);
+        btnDetil.onClick.AddListener(ClickBtnDetail);
         RefreshUI();
     }
 
@@ -53,21 +66,51 @@ public class InfoWnd : WindowRoot
         SetText( txthp,pd.hp);
         SetText( txthurt,pd.ad+pd.ap);
         SetText( txtdef,pd.addef+pd.apdef);
+
         //
        imgExpprg.fillAmount=1.0f*pd.exp/PECommon.GetExpUpValByLV(pd.lv);
        imgPowerprg.fillAmount=1.0f*pd.power/PECommon.GetPowerLimit(pd.lv);
+        //
+
+        RefreshDetailUI(pd);
 
 
-}
+    }
 
+    /// <summary>
+    /// 详细属性
+    /// </summary>
+    /// <param name="pd"></param>
 
-    public void ClickBtnClose()
+    private void RefreshDetailUI(PlayerData pd)
+    {
+        SetActive(detailWndTrans, false);
+        SetText(dtxthp, pd.hp);
+        SetText(dtxtad, pd.ad);
+        SetText(dtxtap, pd.ap);
+        SetText(dtxtaddef, pd.addef);
+        SetText(dtxtapdef, pd.apdef);
+        SetText(dtxtdodge, pd.dodge.ToString("0.0")+"%");
+        SetText(dtxtpierce,  pd.pierce .ToString("0.0") + "%");
+        SetText(dtxtcritical,  pd.critical.ToString("0.0") + "%");
+    }
+
+        public void ClickBtnClose()
     {
         if (audioSvc != null)//不这样报空指针，虽然不影响运行
         { 
           audioSvc.PlayUIAudio(Constants.UIClickBtn);
         }
         MainCitySys.Instance.CloseInfoWnd();
+    }
+
+    public void ClickBtnDetail()
+    { 
+    detailWndTrans.gameObject.SetActive(true);
+    }
+    public void ClickBtnDetailClose()
+    {
+        detailWndTrans.gameObject.SetActive(false);
     }
 
     void RegTouchEvts()
