@@ -16,6 +16,9 @@ public class MainCitySys : SystemRoot
     public PlayerController ctrl;
     public InfoWnd infoWnd;
     public Transform charCamTrans;
+    //
+    public float imgPlayerRotate;
+    public float playerStartRotate;
 
     public override void InitSys()
     {
@@ -54,14 +57,13 @@ public class MainCitySys : SystemRoot
             charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
         }
 
-        //if (state)
-        //{
-        //    Transform player = ctrl.transform;
 
-        //    charCamTrans.localPosition = player.position + player.forward*3.8f + new Vector3(0f, 1.95f, 0f);//任务前上方
-        //    charCamTrans.localEulerAngles = new Vector3(0f, 180 + player.position.y, 0f);//相机对着人物
-        //    charCamTrans.localScale = Vector3.one;
-        //}
+        Transform player = ctrl.transform;
+
+        charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//人物前上方
+        charCamTrans.localEulerAngles = new Vector3(0f, 180f + player.localEulerAngles.y, 0f);//相机对着人物
+        charCamTrans.localScale = Vector3.one;
+
 
         charCamTrans.gameObject.SetActive(state);
 
@@ -119,5 +121,15 @@ public class MainCitySys : SystemRoot
 
         SetCharShowCamState(false);
         infoWnd.SetWndState(false);
+    }
+
+    public void InitPlayerRotate()
+    {
+       playerStartRotate= ctrl.transform.localEulerAngles.y;
+    }
+
+    public void SetPlayerRotate(float rotate)
+    {
+        ctrl.transform.localEulerAngles = new Vector3(0f, playerStartRotate + rotate, 0f);
     }
 }

@@ -9,13 +9,14 @@
 using PEProtocol;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InfoWnd : WindowRoot 
 {
 
     public Text txtinfo;
-    public RawImage charshow;
+    public RawImage imgChar;
     //
     public Image imgExpprg;
     public Image imgPowerprg;
@@ -29,10 +30,14 @@ public class InfoWnd : WindowRoot
     public Text txtdef;
     public Button btnDetil;
     public Button btnClose;
+    //
+    public Vector3 startPos;
+    public Vector3 dragPos;
 
     protected override void InitWnd()
     {
         base.InitWnd();
+        RegTouchEvts();
         btnClose.onClick.AddListener(ClickBtnClose);
         RefreshUI();
     }
@@ -63,5 +68,22 @@ public class InfoWnd : WindowRoot
           audioSvc.PlayUIAudio(Constants.UIClickBtn);
         }
         MainCitySys.Instance.CloseInfoWnd();
+    }
+
+    void RegTouchEvts()
+    {
+        OnClickDown(imgChar.gameObject, (PointerEventData evt) =>
+        {
+            startPos = evt.position;
+            MainCitySys.Instance.InitPlayerRotate();
+        });
+
+
+        OnDrag(imgChar.gameObject, (PointerEventData evt) =>
+        {
+            float speed = 0.5f;
+            float rotate = -(evt.position.x - startPos.x)*speed;
+            MainCitySys.Instance.SetPlayerRotate( rotate);
+        });
     }
 }

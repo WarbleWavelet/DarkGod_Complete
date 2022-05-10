@@ -1664,7 +1664,7 @@ MonoBehaviour:
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
   txtinfo: {fileID: 1866842750}
-  charshow: {fileID: 41220664}
+  imgChar: {fileID: 41220664}
   imgExpprg: {fileID: 77302969}
   imgPowerprg: {fileID: 717016009}
   txtExpprg: {fileID: 777006825}
@@ -1676,6 +1676,8 @@ MonoBehaviour:
   txtdef: {fileID: 1930211557}
   btnDetil: {fileID: 1269379587}
   btnClose: {fileID: 246269045}
+  startPos: {x: 0, y: 0, z: 0}
+  dragPos: {x: 0, y: 0, z: 0}
 --- !u!1 &389846673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,7 +2040,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.45
+  m_Volume: 0.12
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5039,7 +5041,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.22
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6441,6 +6443,8 @@ MonoBehaviour:
   ctrl: {fileID: 0}
   infoWnd: {fileID: 383066085}
   charCamTrans: {fileID: 0}
+  imgPlayerRotate: 0
+  playerStartRotate: 0
 --- !u!81 &1332992448
 AudioListener:
   m_ObjectHideFlags: 0

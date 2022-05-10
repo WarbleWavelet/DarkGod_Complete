@@ -10,7 +10,7 @@
   <Class Name="LoginWnd" Collapsed="true">
     <Position X="4.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAgACAAAAQAAAECAIAAAAEAAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAACAgAAAAAAQAAAECAIAAABEAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\LoginWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAEJAAAAAQQEAAAIAAYQAgECAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAEJAAAAAQQEAAAIAAYQAgECAAAAAgAAIA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,15 +87,22 @@
   <Class Name="PlayerController" Collapsed="true">
     <Position X="3" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAQABAAAACAAAgEiAgACIAQAAAAIAAAABAACAAIAIAA=</HashCode>
+      <HashCode>BAQABAAAACAAAgEiAgAAIAQAAAAIAAAQBAACAAIAIAA=</HashCode>
       <FileName>Assets\Scripts\PlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainCityWnd" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQABAQAgCAQAACAAAEAIAIhAAEAAAQAQAEAACAAERY=</HashCode>
+      <HashCode>AQQAAAQAgCAQAACAAAEAIAIhAAEEAAQAQAkAACAAERY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InfoWnd" Collapsed="true">
+    <Position X="4.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACiAAAAAAAAIAACBAAEAYAAEMACAAAAEAIAAACgAAAI=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\InfoWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />
