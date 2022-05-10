@@ -37,7 +37,7 @@ public class MainCitySys : SystemRoot
             maincityWnd.SetWndState();
             audioSvc.PlayBgMusic(Constants.BGMainCity);
             //
-            SetCharShowCamState(false);
+            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
         });
     }
 
@@ -46,20 +46,25 @@ public class MainCitySys : SystemRoot
     /// 角色信息面板的展示
     /// </summary>
     /// <param name="state"></param>
-    void SetCharShowCamState(bool state = true)
+    public void SetCharShowCamState(bool state = true)
     {
 
-        if (charCamTrans != null)
+        if (charCamTrans == null)
         {
-            if (state)
-            {
-                Transform player = ctrl.transform;
-                charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//任务前上方
-                charCamTrans.localEulerAngles = new Vector3(0f, 180 + player.position.y, 0f);//相机对着人物
-                charCamTrans.localScale = Vector3.one;
-            }
-            charCamTrans.gameObject.SetActive(state);
+            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
         }
+
+        //if (state)
+        //{
+        //    Transform player = ctrl.transform;
+
+        //    charCamTrans.localPosition = player.position + player.forward*3.8f + new Vector3(0f, 1.95f, 0f);//任务前上方
+        //    charCamTrans.localEulerAngles = new Vector3(0f, 180 + player.position.y, 0f);//相机对着人物
+        //    charCamTrans.localScale = Vector3.one;
+        //}
+
+        charCamTrans.gameObject.SetActive(state);
+
 
     }
 
@@ -102,13 +107,17 @@ public class MainCitySys : SystemRoot
 
     public void OpenInfoWnd()
     {
-        if (charCamTrans == null)
-        {
-            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
-            SetCharShowCamState();
-        }
+
+        SetCharShowCamState(true);
         infoWnd.SetWndState();
 
+        
+    }
 
+    public void CloseInfoWnd()
+    {
+
+        SetCharShowCamState(false);
+        infoWnd.SetWndState(false);
     }
 }

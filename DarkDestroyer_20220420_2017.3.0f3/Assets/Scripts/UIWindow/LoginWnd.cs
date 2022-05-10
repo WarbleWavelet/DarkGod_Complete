@@ -22,7 +22,7 @@ public class LoginWnd : WindowRoot
 
 
 
-     void Start()
+     void JustForNte()
     {
         btnNotice=transform.Find("btnNotice").GetComponent<Button>();
         iptAcct = transform.Find("rightPin/iptbg1/iptAcct").GetComponent<InputField>();
@@ -36,6 +36,7 @@ public class LoginWnd : WindowRoot
     protected override void InitWnd()
     {
         base.InitWnd();
+       
         if (PlayerPrefs.HasKey("Acct") && PlayerPrefs.HasKey("Pass"))
         {
             iptAcct.text=PlayerPrefs.GetString("Acct");
@@ -46,34 +47,39 @@ public class LoginWnd : WindowRoot
             iptAcct.text = "";
             iptPass.text = "";
         }
+        JustForNte();
     }
 
+
+
+    #region Click
     /// <summary>
     /// 点击进入游戏
     /// </summary>
-    void ClickEnterBtn()
+    public void ClickEnterBtn()
     {
         audioSvc.PlayUIAudio(Constants.UILoginBtn);
 
-        string _acct=iptAcct.text;
-        string _pass=iptPass.text;
+        string _acct = iptAcct.text;
+        string _pass = iptPass.text;
 
         if (_acct != "" && _pass != "")
         {
-            PlayerPrefs.SetString("Acct",_acct);
-            PlayerPrefs.SetString("Pass",_pass);
+            PlayerPrefs.SetString("Acct", _acct);
+            PlayerPrefs.SetString("Pass", _pass);
             //
-            GameMsg msg=new GameMsg {
-                cmd=(int)CMD.ReqLogin,
+            GameMsg msg = new GameMsg
+            {
+                cmd = (int)CMD.ReqLogin,
                 reqLogin = new ReqLogin
-                { 
+                {
                     acct = _acct,
                     pass = _pass
                 }
             };
             netSvc.SendMsg(msg);
 
-           // LoginSys.Instance.RspLogin();
+            // LoginSys.Instance.RspLogin();
 
         }
         else
@@ -83,7 +89,7 @@ public class LoginWnd : WindowRoot
         //新客户
 
         //老客户
- 
+
     }
     /// <summary>
     /// 点击公告
@@ -93,4 +99,6 @@ public class LoginWnd : WindowRoot
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         GameRoot.AddTips("公告功能还在开发中");
     }
+    #endregion
+
 }

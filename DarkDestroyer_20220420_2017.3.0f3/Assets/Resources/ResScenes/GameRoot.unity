@@ -406,6 +406,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1734545389}
     m_Modifications:
+    - target: {fileID: 114901105240272860, guid: bc1fbf77f4b6d2545b191027a079df07,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224260288584090732, guid: bc1fbf77f4b6d2545b191027a079df07,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -499,6 +504,31 @@ Prefab:
     - target: {fileID: 1665191769302598, guid: bc1fbf77f4b6d2545b191027a079df07, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114901105240272860, guid: bc1fbf77f4b6d2545b191027a079df07,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114901105240272860, guid: bc1fbf77f4b6d2545b191027a079df07,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114901105240272860, guid: bc1fbf77f4b6d2545b191027a079df07,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1545980948}
+    - target: {fileID: 114901105240272860, guid: bc1fbf77f4b6d2545b191027a079df07,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClickEnterBtn
+      objectReference: {fileID: 0}
+    - target: {fileID: 114901105240272860, guid: bc1fbf77f4b6d2545b191027a079df07,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bc1fbf77f4b6d2545b191027a079df07, type: 2}
@@ -6410,6 +6440,7 @@ MonoBehaviour:
   maincityWnd: {fileID: 1440543259}
   ctrl: {fileID: 0}
   infoWnd: {fileID: 383066085}
+  charCamTrans: {fileID: 0}
 --- !u!81 &1332992448
 AudioListener:
   m_ObjectHideFlags: 0
@@ -7011,7 +7042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 0}
+  netSvc: {fileID: 1332992446}
   iptAcct: {fileID: 1027960469}
   iptPass: {fileID: 451579405}
   btnNotice: {fileID: 2088108331}

@@ -62,7 +62,6 @@ public class InfoWnd : WindowRoot
         { 
           audioSvc.PlayUIAudio(Constants.UIClickBtn);
         }
-      
-        this.SetWndState(false);
+        MainCitySys.Instance.CloseInfoWnd();
     }
 }

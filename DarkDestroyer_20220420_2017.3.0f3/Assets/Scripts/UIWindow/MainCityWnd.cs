@@ -147,7 +147,6 @@ public class MainCityWnd : WindowRoot
 
     public void ClickHeadBtn()
     {
-
         audioSvc.PlayUIAudio(Constants.UIOpenPage);
         MainCitySys.Instance.OpenInfoWnd();
     }

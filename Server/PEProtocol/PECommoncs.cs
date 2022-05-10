@@ -26,8 +26,17 @@ public class PECommon
     public static void Log(string msg = "", LogType tp = LogType.Log)
     {
         LogLevel lv = (LogLevel)tp;
-        PETool.LogMsg(msg,lv);
+        PETool.LogMsg(msg, lv);
     }
+
+
+
+
+
+
+
+
+
 
     /// <summary>
     /// 战力 
