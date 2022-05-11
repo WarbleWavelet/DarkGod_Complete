@@ -15,9 +15,13 @@ using UnityEngine.UI;
 public class InfoWnd : WindowRoot 
 {
 
+    [Header("左")]
     public Text txtinfo;
     public RawImage imgChar;
-    //
+    public Vector3 startPos;
+    public Vector3 dragPos;
+
+    [Header("右")]
     public Image imgExpprg;
     public Image imgPowerprg;
     public Text txtExpprg;
@@ -31,9 +35,9 @@ public class InfoWnd : WindowRoot
     public Button btnDetil;
     public Button btnClose;
     //
-    public Vector3 startPos;
-    public Vector3 dragPos;
-    //
+
+
+    [Header("详细信息")]
     public Transform detailWndTrans;
     public Button btnDetailClose;
     public Text dtxthp;

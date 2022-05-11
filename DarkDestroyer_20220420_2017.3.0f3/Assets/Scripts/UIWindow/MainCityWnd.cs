@@ -14,17 +14,33 @@ using UnityEngine.UI;
 
 public class MainCityWnd : WindowRoot
 {
+
+    #region 属性字段
+
+
+    #endregion
+    [Header("左上")]
     public Image imgPowerPrg;
     public Text txtFight;
-    public Text txtExpPrg;
+
     public Text txtPower;
     public Text txtLevel;
     public Text txtName;
-    public Transform expPrgTrans;
+
+
+
+    [Header("右上")]
+    public Button btnGuide;
+    public Button btnCharge;
+    public Button btnVip;
+
+
+    [Header("右下")]
     public Button btnMenu;
     public Animation aniMenu;
     public bool menuState=false;
-    //
+
+    [Header("左下")]
     public Image imgTouch;
     public Image imgDirBg;
     public Image imgDirPoint;
@@ -35,12 +51,17 @@ public class MainCityWnd : WindowRoot
     /// <summary>摇杆点的运动半径</summary>
     float pointDis;
 
-
+    [Header("下")]
+    public Text txtExpPrg;
+    public Transform expPrgTrans;
+    #region 生命
     protected override void InitWnd()
     {
         base.InitWnd();
         //
+        
         btnMenu.onClick.AddListener(ClickBtnMenu);
+        btnGuide.onClick.AddListener(ClickBtnGuide);
         //
         defaultPos = imgDirBg.transform.position;
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
@@ -51,13 +72,9 @@ public class MainCityWnd : WindowRoot
         RefreshUI();
        
     }
-
-
-    #region 说明
-
     void Update()
     {
-        //pointDis = AdaptDirPoint();
+        //pointDis = AdaptDirPoint();//放这里，运行时改变有效
         RefreshUI();
     }
 
@@ -69,87 +86,13 @@ public class MainCityWnd : WindowRoot
         imgPowerPrg.fillAmount = (pd.power * 1.0f) / PECommon.GetPowerLimit(pd.lv);
         SetText(txtName, pd.name);
         SetText(txtLevel, pd.lv);
-
-
-
-        AdaptExpPrg(pd);
-
-
-    }
-
-    /// <summary>
-    /// 适配经验条
-    /// </summary>
-    void AdaptExpPrg(PlayerData pd)
-    {
-        GridLayoutGroup grid= expPrgTrans.GetComponent<GridLayoutGroup>();
-        float rate =1f* Constants.ScreenStandardHeight / Screen.height;
-        float width = rate * Screen.width;
-        float itemWidth = (width - 78 - 5.83f - 6.5f - 9 * 3.8f) / 10;
-        grid.cellSize = new Vector2(itemWidth, 8.9f) ;
         //
-        int expValPrg = (int)(1f * pd.exp /  PECommon.GetExpUpValByLV(pd.lv)*100);
-        SetText(txtExpPrg, expValPrg+"%");
-        int index = expValPrg / 10;
-
-        for (int i = 0; i < expPrgTrans.childCount; i++)
-        {
-            Image expItem= expPrgTrans.GetChild(i).GetComponent<Image>();
-            if (i < index)
-            {
-                expItem.fillAmount = 1;
-            }
-            else
-            {
-                if (i == index)
-                {
-                    expItem.fillAmount = (expValPrg % 10 * 1f) / 10;
-                }
-                else
-                    expItem.fillAmount = 0;
-                { 
-                }
-            }
-        }
-
-    }
-    
-    
-    /// <summary>
-    /// 适配摇杆点的半径
-    /// </summary>
-    /// <returns></returns>
-    float AdaptDirPoint()
-    {
-        return 1.0f *Screen.height/ Constants.ScreenStandardHeight * Constants.ScreenOPDis ;
+        AdaptExpPrg(pd);
     }
 
 
-    public void ClickBtnMenu()
-    {
-
-        audioSvc.PlayUIAudio(Constants.UIExtenBtn);
-        menuState = !menuState;
-
-        AnimationClip clip = null;
-        if (menuState)
-        {
-            clip = aniMenu.GetClip("OpenMCMenu");
-        }
-        else
-        {
-            clip = aniMenu.GetClip("CloseMCMenu");
-        }
-
-        aniMenu.Play(clip.name);
-    }
 
 
-    public void ClickHeadBtn()
-    {
-        audioSvc.PlayUIAudio(Constants.UIOpenPage);
-        MainCitySys.Instance.OpenInfoWnd();
-    }
     #endregion
 
 
@@ -187,4 +130,84 @@ public class MainCityWnd : WindowRoot
 
         });
     }
+    #region Click
+    public void ClickBtnMenu()
+    {
+
+        audioSvc.PlayUIAudio(Constants.UIExtenBtn);
+        menuState = !menuState;
+
+        AnimationClip clip = null;
+        if (menuState)
+        {
+            clip = aniMenu.GetClip("OpenMCMenu");
+        }
+        else
+        {
+            clip = aniMenu.GetClip("CloseMCMenu");
+        }
+
+        aniMenu.Play(clip.name);
+    }
+
+
+    public void ClickHeadBtn()
+    {
+        audioSvc.PlayUIAudio(Constants.UIOpenPage);
+        MainCitySys.Instance.OpenInfoWnd();
+    }
+    private void ClickBtnGuide()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        GameRoot.AddTips("Guide Id：" + GameRoot.Instance.PlayerData.guideid);
+    }
+    #endregion
+
+    #region 辅助
+    /// <summary>
+    /// 适配摇杆点的半径
+    /// </summary>
+    /// <returns></returns>
+    float AdaptDirPoint()
+    {
+        return 1.0f * Screen.height / Constants.ScreenStandardHeight * Constants.ScreenOPDis;
+    }
+
+    /// <summary>
+    /// 适配经验条
+    /// </summary>
+    void AdaptExpPrg(PlayerData pd)
+    {
+        GridLayoutGroup grid = expPrgTrans.GetComponent<GridLayoutGroup>();
+        float rate = 1f * Constants.ScreenStandardHeight / Screen.height;
+        float width = rate * Screen.width;
+        float itemWidth = (width - 78 - 5.83f - 6.5f - 9 * 3.8f) / 10;
+        grid.cellSize = new Vector2(itemWidth, 8.9f);
+        //
+        int expValPrg = (int)(1f * pd.exp / PECommon.GetExpUpValByLV(pd.lv) * 100);
+        SetText(txtExpPrg, expValPrg + "%");
+        int index = expValPrg / 10;
+
+        for (int i = 0; i < expPrgTrans.childCount; i++)
+        {
+            Image expItem = expPrgTrans.GetChild(i).GetComponent<Image>();
+            if (i < index)
+            {
+                expItem.fillAmount = 1;
+            }
+            else
+            {
+                if (i == index)
+                {
+                    expItem.fillAmount = (expValPrg % 10 * 1f) / 10;
+                }
+                else
+                    expItem.fillAmount = 0;
+                {
+                }
+            }
+        }
+
+    }
+    #endregion
 }

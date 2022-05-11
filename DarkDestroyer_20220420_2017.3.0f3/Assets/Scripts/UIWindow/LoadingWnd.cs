@@ -11,6 +11,8 @@ using UnityEngine.UI;
 
 public class LoadingWnd : WindowRoot
 {
+
+    [Header("进度条")]
     public Text textTips;
     public Text textPrg;
     public Image imageFG;

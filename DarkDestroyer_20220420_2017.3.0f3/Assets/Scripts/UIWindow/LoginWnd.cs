@@ -12,10 +12,15 @@ using UnityEngine.UI;
 
 public class LoginWnd : WindowRoot
 {
-    public InputField iptAcct;
-    public InputField iptPass;
+
+    [Header("左")]
     /// <summary>公告</summary>
     public Button btnNotice;
+
+    [Header("右")]
+    public InputField iptAcct;
+    public InputField iptPass;
+
     public Button btnEnter;
 
     public CreateWnd createWnd;

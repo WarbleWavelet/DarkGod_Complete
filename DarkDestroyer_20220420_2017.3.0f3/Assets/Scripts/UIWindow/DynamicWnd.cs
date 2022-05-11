@@ -14,6 +14,8 @@ using UnityEngine.UI;
 
 public class DynamicWnd : WindowRoot
 {
+
+    [Header("提示信息")]
     public Animation tipsAni;
     public Text txtTips;
     /// <summary>每个人都有份，慢慢演；不初始化报空指针</summary>

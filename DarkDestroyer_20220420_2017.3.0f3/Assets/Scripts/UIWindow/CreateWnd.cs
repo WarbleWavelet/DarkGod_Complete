@@ -14,6 +14,7 @@ using UnityEngine.UI;
 public class CreateWnd : WindowRoot
 {
 
+    [Header("随机名字")]
     public InputField iptName;
     public Button btnRand;
     public Button btnEnter;
