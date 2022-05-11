@@ -9086,8 +9086,8 @@ MonoBehaviour:
   txtLevel: {fileID: 1983613022}
   txtName: {fileID: 958223505}
   btnGuide: {fileID: 344749381}
-  btnCharge: {fileID: 0}
-  btnVip: {fileID: 0}
+  btnCharge: {fileID: 510756807}
+  btnVip: {fileID: 1240243045}
   btnMenu: {fileID: 528730133}
   aniMenu: {fileID: 1621423009}
   menuState: 0

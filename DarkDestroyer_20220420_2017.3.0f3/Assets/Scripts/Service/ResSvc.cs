@@ -79,7 +79,7 @@ public class ResSvc : MonoBehaviour
 
 
     #region Audio
- Dictionary<string, AudioClip> adDict = new Dictionary<string, AudioClip>();
+    Dictionary<string, AudioClip> adDict = new Dictionary<string, AudioClip>();
     /// <summary>
     /// 加载声音
     /// </summary>
@@ -95,17 +95,41 @@ public class ResSvc : MonoBehaviour
             au = Resources.Load<AudioClip>(path);
             if (cache)
             {
-                adDict.Add(path,au);
+                adDict.Add(path, au);
             }
         }
 
-  
-      
+
+
         return au;
     }
     #endregion
 
 
+    #region Sprite
+    Dictionary<string, Sprite> spDict = new Dictionary<string, Sprite>();
+    /// <summary>
+    /// 加载图片
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="cache">缓存不？</param>
+    /// <returns></returns>
+
+    public Sprite LoadSprite(string path, bool cache = false)
+    {
+        Sprite sp = null;
+        if (spDict.TryGetValue(path, out sp) == false)
+        {
+           sp = Resources.Load<Sprite>(path);
+            if (cache)
+            {
+                spDict.Add(path, sp);
+            }
+        }
+
+        return sp;
+    }
+    #endregion
 
     #region 随机名字
     public List<string> surnameLst = new List<string>();

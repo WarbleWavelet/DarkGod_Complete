@@ -16,10 +16,7 @@ public class MainCityWnd : WindowRoot
 {
 
     #region 属性字段
-
-
-    #endregion
-    [Header("左上")]
+   [Header("左上")]
     public Image imgPowerPrg;
     public Text txtFight;
 
@@ -54,6 +51,12 @@ public class MainCityWnd : WindowRoot
     [Header("下")]
     public Text txtExpPrg;
     public Transform expPrgTrans;
+
+
+    [Header("NPC")]
+    public AutoGuideCfg curTaskData;
+    #endregion
+ 
     #region 生命
     protected override void InitWnd()
     {
@@ -75,7 +78,7 @@ public class MainCityWnd : WindowRoot
     void Update()
     {
         //pointDis = AdaptDirPoint();//放这里，运行时改变有效
-        RefreshUI();
+       // RefreshUI();
     }
 
     private void RefreshUI()
@@ -88,11 +91,59 @@ public class MainCityWnd : WindowRoot
         SetText(txtLevel, pd.lv);
         //
         AdaptExpPrg(pd);
+        //
+        curTaskData = resSvc.GetGuideCfg(pd.guideid);
+        if (curTaskData != null)
+        {
+            SetGuideBtnCoin(curTaskData.npcID);
+        }
     }
 
+    /// <summary>
+    /// 设置btnGuide的图片
+    /// </summary>
+    /// <param name="npcID"></param>
+    private void SetGuideBtnCoin(int npcID)
+    {
 
+        string spPath = "";//spritePath
 
+        switch ( npcID )
+        {
+            case Constants.NPCArtisan:
+                {
+                    spPath = PathDefine.ArtisanHead;
+                }
+                break;
+            case Constants.NPCGeneral:
+                {
+                    spPath = PathDefine.GeneralHead;
+                }
+                break;
+            case Constants.NPCTask:
+                {
+                    spPath = PathDefine.TaskHead;
+                }
+                break;
+            case Constants.NPCTrader:
+                {
+                    spPath = PathDefine.TraderHead;
+                }
+                break;
+            case Constants.NPCWiseMan:
+                {
+                    spPath = PathDefine.WiseManHead;
+                }
+                break;
+            default:
+                {
 
+                }
+                break;
+        }
+        SetSprite(btnGuide.GetComponent<Image>(),spPath);
+
+    }
     #endregion
 
 
@@ -163,7 +214,7 @@ public class MainCityWnd : WindowRoot
     }
     #endregion
 
-    #region 辅助
+    #region 适配
     /// <summary>
     /// 适配摇杆点的半径
     /// </summary>

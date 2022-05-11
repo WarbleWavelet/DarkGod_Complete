@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAEJAAAAAQQEAAAIAAYQAgECAAAAAgAAIA=</HashCode>
+      <HashCode>AAAAAAABEAAEJAIAAAQQECAAIAAYQAgECAAAAAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAgAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAABAAgAAAAAAAAAAAQAAAAACKAAAAAAAQAAAEIAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +94,7 @@
   <Class Name="MainCityWnd" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAAAQAgCAQAACAAAEAIAIhAAEEAAQAQAkAACAAERY=</HashCode>
+      <HashCode>AQQAAAQAgCAQABCAAAEAIAIhAAEEAAQAQAsABCACERY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
     </TypeIdentifier>
   </Class>

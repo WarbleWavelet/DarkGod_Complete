@@ -13,12 +13,17 @@ using UnityEngine.UI;
 
 public class WindowRoot : MonoBehaviour 
 {
+
+    [Header("WindowRoot")]
     /// <summary>需要引用时</summary>
     public ResSvc resSvc;
     public AudioSvc audioSvc;
     public NetSvc netSvc;
 
-    /// <summary>
+
+
+    #region Wnd
+ /// <summary>
     /// 打开关闭窗口
     /// </summary>
     /// <param name="isActive"></param>
@@ -57,7 +62,18 @@ public class WindowRoot : MonoBehaviour
         audioSvc = AudioSvc.Instance;
         netSvc = NetSvc.Instance;
     }
+    #endregion
+   
+    protected T GetOrAddComponent<T>(GameObject go) where T:Component
+    {
+        T t = go.GetComponent<T>();
+        if (t == null)
+        {
+            t = go.AddComponent<T>();
+        }
 
+        return t;
+    }
 
     #region SetText
     protected void SetText(Text text,string content="")
@@ -83,6 +99,14 @@ public class WindowRoot : MonoBehaviour
     #endregion
 
 
+    #region SetSprite
+    protected void SetSprite(Image image, string path)
+    {
+        image.sprite = resSvc.LoadSprite(path);
+
+    }
+    #endregion
+
     #region SetActive
     protected void SetActive(GameObject go,bool isActive=true)
     { 
@@ -106,17 +130,11 @@ public class WindowRoot : MonoBehaviour
     }
     #endregion
 
-    protected T GetOrAddComponent<T>(GameObject go) where T:Component
-    {
-        T t = go.GetComponent<T>();
-        if (t == null)
-        {
-            t = go.AddComponent<T>();
-        }
 
-        return t;
-    }
 
+
+
+    #region OnClickDown OnClickUp OnDrag
     protected void OnClickDown(GameObject go,Action<PointerEventData> cb)
     {
         PEListener listener = GetOrAddComponent<PEListener>(go);
@@ -132,5 +150,7 @@ public class WindowRoot : MonoBehaviour
         PEListener listener = GetOrAddComponent<PEListener>(go);
         listener.onDrag = cb;
     }
+    #endregion
+
 
 }
