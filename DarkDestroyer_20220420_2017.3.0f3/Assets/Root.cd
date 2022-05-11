@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="LoadingWnd" Collapsed="true">
-    <Position X="1.25" Y="2.75" Width="1.5" />
+    <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAgAAAACAAAAAAAAECAAAAAAAAAAAQAAAAAABACAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\LoadingWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LoginWnd" Collapsed="true">
-    <Position X="4.75" Y="2.5" Width="1.5" />
+    <Position X="4.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAgAAAAAAQAAAECAIAAABEAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\LoginWnd.cs</FileName>
@@ -29,9 +29,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ResSvc" Collapsed="true">
-    <Position X="6.5" Y="3.25" Width="1.5" />
+    <Position X="7" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAQIgAAAAAAEAAABAACQCAQgAAAAQQAIFAQAACAA=</HashCode>
+      <HashCode>AAQAAQIgAAQAAAEEAABAACQCAQgAAAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -57,28 +57,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DynamicWnd" Collapsed="true">
-    <Position X="3.5" Y="3.25" Width="1.5" />
+    <Position X="2.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAQgAAAAEAAAAAAAgAEAgAAAAAAAAAAAAAACAEAAAAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\DynamicWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CreateWnd" Collapsed="true">
-    <Position X="2.5" Y="4" Width="1.5" />
+    <Position X="0.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAEAAAQAAAEAACAAAgAAACAAIAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\CreateWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PathDefine" Collapsed="true">
-    <Position X="10.75" Y="4.25" Width="1.5" />
+    <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAABAAgAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NetSvc" Collapsed="true">
-    <Position X="6.5" Y="4.25" Width="1.5" />
+    <Position X="10" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAgAAAAIAAAAAAAAAAAAAAAACAAQAAABYAEAAg=</HashCode>
       <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
@@ -99,10 +99,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="InfoWnd" Collapsed="true">
-    <Position X="4.5" Y="4" Width="1.5" />
+    <Position X="3.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACiAAAAAAAAIAACBAAEAYAAEMACAAAAEAIAAACgAAAI=</HashCode>
+      <HashCode>QGigAAAAAAAKACCBIAFQYAQEMAiAAAAEAIAAACgAAEI=</HashCode>
       <FileName>Assets\Scripts\UIWindow\InfoWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseData&lt;T&gt;" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoGuideCfg" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAgAQAAIAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

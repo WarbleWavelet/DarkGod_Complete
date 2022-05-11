@@ -8,7 +8,7 @@ using PENet;
 namespace PEProtocol
 {
 
-    #region 序列化
+    #region Serializable
     [Serializable]
     public class GameMsg_Text:PEMsg
     {
@@ -27,7 +27,7 @@ namespace PEProtocol
 
 
     }
-
+    #region Login
     /// <summary>
     /// 请求登录
     /// </summary>
@@ -46,31 +46,11 @@ namespace PEProtocol
     {
         public PlayerData playerData;
     }
-
-    [Serializable]
-
-    public class PlayerData
-    {
-        //含义看数据库
-        public int id;
-        public string name;
-        public int exp;
-        public int lv;
-        public int power;
-        public int coin;
-        public int diamond;
-        public int hp;
-        public int ad ;
-        public int ap;
-        public int addef;
-        public int apdef;
-        public int dodge;
-        public int critical;
-        public int pierce;
-
-    }
+    #endregion
 
 
+
+    #region Rename
     [Serializable]
     public class ReqRename
     {
@@ -84,16 +64,40 @@ namespace PEProtocol
     }
     #endregion
 
+    #region PlayerData 来自数据库的表
+    [Serializable]
+
+    public class PlayerData
+    {
+        //含义看数据库
+        public int id;
+        public string name;
+        public int exp;
+        public int lv;
+        public int power;
+        public int coin;
+        public int diamond;
+        public int hp;
+        public int ad;
+        public int ap;
+        public int addef;
+        public int apdef;
+        public int dodge;
+        public int critical;
+        public int pierce;
+        public int guideid;
+
+    }
+    #endregion
+
+    #endregion
+
 
     public class SrvCfg
     {
         public const string srvIp = "127.0.0.1";
         public const int srvPort = 17666;
     }
-
-
-   
-
 
     /// <summary>
     /// 命令集

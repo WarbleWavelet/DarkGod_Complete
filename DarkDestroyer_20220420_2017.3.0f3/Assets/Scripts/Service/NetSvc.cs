@@ -76,21 +76,7 @@ public class NetSvc : MonoBehaviour
         }
     }
 
-    private void ProgressCMD(GameMsg msg)
-    {
-        switch ((CMD)msg.cmd)
-        { 
-            case CMD.RspLogin:
-                {
-                    LoginSys.Instance.RspLogin(msg);
-                }break;
-            case CMD.RspRename:
-                {
-                    LoginSys.Instance.RspRename(msg);
-                }
-                break;
-        }
-    }
+
 
     public void SendMsg(GameMsg msg)
     {
@@ -145,6 +131,23 @@ public class NetSvc : MonoBehaviour
             default:
                 {
                     GameRoot.AddTips("未知错误");
+                }
+                break;
+        }
+    }
+
+    private void ProgressCMD(GameMsg msg)
+    {
+        switch ((CMD)msg.cmd)
+        {
+            case CMD.RspLogin:
+                {
+                    LoginSys.Instance.RspLogin(msg);
+                }
+                break;
+            case CMD.RspRename:
+                {
+                    LoginSys.Instance.RspRename(msg);
                 }
                 break;
         }

@@ -38,7 +38,6 @@ class CacheSvc
     DBMgr dBMgr;
     #endregion
 
-
     public void Init()
     {
         PECommon.Log("Init CacheSvc");
@@ -46,34 +45,12 @@ class CacheSvc
 
     }
 
+    #region Login的情况
     public bool IsAcctOnLine(string acct)
     {
         return onLineAcctDic.ContainsKey(acct);
     }
 
-
-    /// <summary>
-    /// 没拿到就到DB取
-    /// </summary>
-    /// <param name="acct"></param>
-    /// <param name="pass"></param>
-    /// <returns></returns>
-    public PlayerData GetPlayerData(string acct, string pass)
-    {
-      return  dBMgr.QueryPlayerData(acct,pass);
-    }
-
-    /// <summary>
-    /// 缓存起来
-    /// </summary>
-    /// <param name="acct"></param>
-    /// <param name="session"></param>
-    /// <param name="pd"></param>
-    public void AcctOnline(string  acct,ServerSession session, PlayerData pd)
-    {
-        onLineAcctDic.Add(acct,session);
-        onLineSessionDic.Add(session,pd);
-    }
 
     /// <summary>
     /// name已存在
@@ -84,7 +61,9 @@ class CacheSvc
     {
         return dBMgr.QueryNameData(name);
     }
+    #endregion
 
+    #region PlayerData
     public PlayerData GetPlayerDataBySession(ServerSession session)
     {
         if (onLineSessionDic.TryGetValue(session, out PlayerData pd))
@@ -97,6 +76,18 @@ class CacheSvc
         }
     }
 
+
+ /// <summary>
+    /// 没拿到就到DB取
+    /// </summary>
+    /// <param name="acct"></param>
+    /// <param name="pass"></param>
+    /// <returns></returns>
+    public PlayerData GetPlayerData(string acct, string pass)
+    {
+        return dBMgr.QueryPlayerData(acct, pass);
+    }
+
     /// <summary>
     /// 根据Id更新
     /// </summary>
@@ -106,7 +97,20 @@ class CacheSvc
     {
         return dBMgr.UpdatePlayerData(id, pd);
     }
+    #endregion
 
+    #region Acct
+    /// <summary>
+    /// 缓存起来
+    /// </summary>
+    /// <param name="acct"></param>
+    /// <param name="session"></param>
+    /// <param name="pd"></param>
+    public void AcctOnline(string acct, ServerSession session, PlayerData pd)
+    {
+        onLineAcctDic.Add(acct, session);
+        onLineSessionDic.Add(session, pd);
+    }
 
     /// <summary>
     /// 下线对两个字典的处理
@@ -128,5 +132,8 @@ class CacheSvc
         PECommon.Log("SessionID Offline："+session.sessionID);
          
     }
+    #endregion
+
+
 }
 

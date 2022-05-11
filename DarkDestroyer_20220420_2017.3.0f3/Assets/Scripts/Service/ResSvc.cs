@@ -25,7 +25,8 @@ public class ResSvc : MonoBehaviour
         Instance = this;
         InitRDNameCfg(PathDefine.RDNameCfg);
         InitMapCfg(PathDefine.MapCfg);
-        PECommon.Log("Init Res",LogType.Log);
+        InitGuideCfg(PathDefine.GuideCfg);
+        PECommon.Log("Init ResSvc",LogType.Log);
     }
 
     void Update()
@@ -173,100 +174,6 @@ public class ResSvc : MonoBehaviour
     #endregion
 
 
-    #region map
-    public List<string> mapLst = new List<string>();
-    Dictionary<int, MapCfg> mapCfgDataDic=new Dictionary<int, MapCfg> ();
-    /// <summary>
-    /// 初始化随机名字的配置文件
-    /// </summary>
-    /// <exception cref="NotImplementedException"></exception>
-    private void InitMapCfg(string path)
-    {
-        TextAsset xml = Resources.Load<TextAsset>(path);
-        XmlNodeList nodLst = GetListFromTextAsset(xml);
-        if (nodLst != null)
-        {
-            for (int i = 0; i < nodLst.Count; i++)
-            {
-                XmlElement ele = nodLst[i] as XmlElement;
-                if (ele.GetAttributeNode("ID") == null) 
-                    continue;
-                //
-                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
-                MapCfg mc=new MapCfg 
-                { 
-                    ID = ID
-                };
-                foreach (XmlElement e in nodLst[i].ChildNodes)
-                {
-                    switch (e.Name)
-                    {
-                        case "mapName":
-                            {
-                                mc.mapName= e.InnerText;
-                            }
-                            break;
-                        case "sceneName":
-                            {
-                                mc.sceneName = e.InnerText;
-                            }
-                            break;
-                        case "mainCamPos":
-                            {
-                                mc.mainCamPos = ParseVector3ByXmlElement(e);
-                            }
-                            break;
-                        case "mainCamRote":
-                            {
-                                mc.mainCamRote = ParseVector3ByXmlElement(e);
-                            }
-                            break;
-                        case "playerBornPos":
-                            {
-                                mc.playerBornPos = ParseVector3ByXmlElement(e);
-                            }
-                            break;
-                        case "playerBornRote":
-                            {
-                                mc.playerBornRote = ParseVector3ByXmlElement(e);
-                            }
-                            break;
-                        default:
-                            {
-
-                            }
-                            break;
-                    }
-                    
-                }
-                //
-                mapCfgDataDic.Add(ID, mc);
-
-            }
-        }
-        //
-
-    }
-
-
-    public MapCfg GetMapDataCfg(int ID)
-    {
-        MapCfg mc = null;
-        if (mapCfgDataDic.TryGetValue(ID, out mc))
-        {
-            return mc;
-        }
-        else
-        {
-            return null;
-        }
-
-
-      
-    }
-    #endregion
-
-
     #region Common
     Vector3 ParseVector3ByXmlElement(XmlElement e)
     {
@@ -319,6 +226,179 @@ public class ResSvc : MonoBehaviour
     }
 
     #endregion
+
+    #region map
+    public List<string> mapLst = new List<string>();
+    Dictionary<int, MapCfg> mapCfgDataDic=new Dictionary<int, MapCfg> ();
+    /// <summary>
+    /// 初始化随机名字的配置文件
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    private void InitMapCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null) 
+                    continue;
+                //
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                MapCfg c=new MapCfg 
+                { 
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "mapName":
+                            {
+                                c.mapName= e.InnerText;
+                            }
+                            break;
+                        case "sceneName":
+                            {
+                                c.sceneName = e.InnerText;
+                            }
+                            break;
+                        case "mainCamPos":
+                            {
+                                c.mainCamPos = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        case "mainCamRote":
+                            {
+                                c.mainCamRote = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        case "playerBornPos":
+                            {
+                                c.playerBornPos = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        case "playerBornRote":
+                            {
+                                c.playerBornRote = ParseVector3ByXmlElement(e);
+                            }
+                            break;
+                        default:
+                            {
+
+                            }
+                            break;
+                    }
+                    
+                }
+                //
+                mapCfgDataDic.Add(ID, c);
+
+            }
+        }
+        //
+
+    }
+
+    public MapCfg GetMapDataCfg(int ID)
+    {
+        MapCfg c = null;
+        if (mapCfgDataDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    #endregion
+
+    #region 任务引导
+    public List<string> guideLst = new List<string>();
+    Dictionary<int, AutoGuideCfg> guideTaskDic = new Dictionary<int, AutoGuideCfg>();
+
+    private void InitGuideCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                    continue;
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                //nodLst，ID
+                AutoGuideCfg c = new AutoGuideCfg
+                {
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "npcID":
+                            {
+                                c.npcID = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "dilogArr":
+                            {
+                                c.dilogArr = e.InnerText;
+                            }
+                            break;
+                        case "actID":
+                            {
+                                c.actID = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "coin":
+                            {
+                                c.coin = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "exp":
+                            {
+                                c.exp = int.Parse(e.InnerText);
+                            }
+                            break;
+
+                        default:
+                            {
+
+                            }
+                            break;
+                    }
+
+                }
+                //
+                guideTaskDic.Add(ID, c);
+
+            }
+        }
+    }
+    public AutoGuideCfg GetGuideCfg(int ID)
+    {
+        AutoGuideCfg c = null;
+        if (guideTaskDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    #endregion
+
+
+
+
+
 
 
 }

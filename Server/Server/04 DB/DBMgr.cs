@@ -39,8 +39,6 @@ class DBMgr
                 Console.WriteLine("连不上" + ex);
             }
         }
-
-        QueryPlayerData("12","12132");
     }
 
 
@@ -87,7 +85,8 @@ class DBMgr
                         apdef = reader.GetInt32("apdef"),
                         critical = reader.GetInt32("critical"),
                         pierce = reader.GetInt32("pierce"),
-                        dodge = reader.GetInt32("dodge")
+                        dodge = reader.GetInt32("dodge"),
+                        guideid=reader.GetInt32("guideid")
 
                     };
                     PECommon.Log("已查到acct:"+acct );
@@ -122,7 +121,9 @@ class DBMgr
                     apdef =43,
                     critical=2,
                     pierce =5,
-                    dodge =7
+                    dodge =7,
+                    guideid=1001
+
 
                 };
                 playerData.id = InsertPlayerData(acct, pass, playerData);
@@ -143,7 +144,8 @@ class DBMgr
         {
             string sql = "insert into account set " +
             "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power,coin = @coin,diamond = @diamond," +
-            "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce";
+            "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
+            "guideid=@guideid";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
             cmd.Parameters.AddWithValue("acct", acct);
@@ -162,6 +164,7 @@ class DBMgr
             cmd.Parameters.AddWithValue("dodge", pd.dodge);
             cmd.Parameters.AddWithValue("critical", pd.critical);
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
+            cmd.Parameters.AddWithValue("guideid", pd.guideid);
 
             cmd.ExecuteNonQuery();
             id = (int)cmd.LastInsertedId;
@@ -216,7 +219,8 @@ class DBMgr
         {
             string sql = "update account set " +
                 " name = @name,lv = @lv,exp = @exp,power = @power,coin = @coin,diamond = @diamond," +
-                " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce" +
+                " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
+                " guideid=@guideid" +
                 " where id=@id";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("name", pd.name);
@@ -233,6 +237,7 @@ class DBMgr
             cmd.Parameters.AddWithValue("critical", pd.critical);
             cmd.Parameters.AddWithValue("dodge", pd.dodge);
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
+            cmd.Parameters.AddWithValue("guideid", pd.guideid);
             cmd.Parameters.AddWithValue("id", id);
 
 
