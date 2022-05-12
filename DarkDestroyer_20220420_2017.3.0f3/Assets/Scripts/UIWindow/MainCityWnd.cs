@@ -54,7 +54,9 @@ public class MainCityWnd : WindowRoot
 
 
     [Header("NPC")]
+    public GuideWnd guideWnd;
     public AutoGuideCfg curTaskData;
+
     #endregion
  
     #region 生命
@@ -282,5 +284,8 @@ public class MainCityWnd : WindowRoot
         SetSprite(btnGuide.GetComponent<Image>(), spPath);
 
     }
+
+
+
     #endregion
 }

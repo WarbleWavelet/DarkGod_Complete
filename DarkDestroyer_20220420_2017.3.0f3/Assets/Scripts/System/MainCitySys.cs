@@ -19,6 +19,8 @@ public class MainCitySys : SystemRoot
     [Header("人物信息")]
     public InfoWnd infoWnd;
     public Transform charCamTrans;
+
+
     //
     public float imgPlayerRotate;
     public float playerStartRotate;
@@ -33,7 +35,7 @@ public class MainCitySys : SystemRoot
     public Transform navTarget;
     public bool isNavGuide = false;
     public float navStoppedDis = 0.5f;
-
+    public GuideWnd guideWnd;
 
     void Update()
     {
@@ -224,7 +226,7 @@ public class MainCitySys : SystemRoot
     {
         if (isNavGuide)
         {
-            this.agc = null;
+
             navTarget = null;
             nav.enabled = false;
             //
@@ -239,11 +241,15 @@ public class MainCitySys : SystemRoot
         npcPosTrans= map.GetComponent<MainCityMap>().NpcPosTrans;
     }
 
-    private void OpenGuideWnd()
+    public void OpenGuideWnd()
     {
+        guideWnd.SetWndState();
+ 
+    }
 
-        GameRoot.AddTips("OpenGuideWnd");
-
+    public void CloseGuideWnd()
+    {
+        guideWnd.SetWndState(false);
     }
 
 
@@ -253,6 +259,12 @@ public class MainCitySys : SystemRoot
 
         //if (nav.remainingDistance  < 0.5f)
     }
+
+    internal AutoGuideCfg GetCurTaskData()
+    {
+        return this.agc;
+    }
+
     #endregion
 
 

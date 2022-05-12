@@ -58,6 +58,7 @@ public class Constants
     public const int NPCArtisan = 3;
     public const int NPCTrader = 4;
 
+
     #endregion
 
 

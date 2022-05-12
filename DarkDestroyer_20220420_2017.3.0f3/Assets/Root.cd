@@ -29,28 +29,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ResSvc" Collapsed="true">
-    <Position X="7" Y="0.75" Width="1.5" />
+    <Position X="12" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAQIgAAQAAAEEAABAACQGAQgAIAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Constants" Collapsed="true">
-    <Position X="10.75" Y="3.5" Width="1.5" />
+    <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABEAAEJAIAAAQQECAAIAAYQAgECAAAAAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameRoot" Collapsed="true">
-    <Position X="11.25" Y="2" Width="1.5" />
+    <Position X="12.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAACAABAAAEAAACAAAAEAARAAAQAACAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\GameRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SystemRoot" Collapsed="true">
-    <Position X="8.5" Y="3.25" Width="1.5" />
+    <Position X="8.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAACAAQAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\SystemRoot.cs</FileName>
@@ -71,21 +71,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PathDefine" Collapsed="true">
-    <Position X="11" Y="4.5" Width="1.5" />
+    <Position X="8.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAgAAAAAAAAAAAQAAAAACKAAAAAAAQAAAEIAAA=</HashCode>
+      <HashCode>AAAABAAgAACAAAAAAAAQAAAAACKAAABAAAQAAAEIAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NetSvc" Collapsed="true">
-    <Position X="10" Y="1" Width="1.5" />
+    <Position X="10.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAgAAAAIAAAAAAAAAAAAAAAACAAQAAABYAEAAg=</HashCode>
       <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PlayerController" Collapsed="true">
-    <Position X="3" Y="5.25" Width="1.5" />
+    <Position X="11.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAQABAAAACAAAgEiAgAAIAQAAAAIAAAQBAACAAIAIAA=</HashCode>
       <FileName>Assets\Scripts\PlayerController.cs</FileName>
@@ -94,29 +94,36 @@
   <Class Name="MainCityWnd" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAAAQAgCAQABCAAAEAIAIhAAEEAAQAQAsABCKCERY=</HashCode>
+      <HashCode>AQQAAAQAgCAQABCAAAEAIAIhACEEAAQAQAsABCKCERY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="InfoWnd" Collapsed="true">
-    <Position X="3.75" Y="3.75" Width="1.5" />
+    <Position X="2.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QGigAAAAAAAKACCBIAFQYAQEMAiAAAAEAIAAACgAAEI=</HashCode>
       <FileName>Assets\Scripts\UIWindow\InfoWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseData&lt;T&gt;" Collapsed="true">
-    <Position X="12.75" Y="3.25" Width="1.5" />
+    <Position X="10" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AutoGuideCfg" Collapsed="true">
-    <Position X="12.75" Y="4.5" Width="1.5" />
+    <Position X="10" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAgAQAAIAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuideWnd" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAEAAgIAAAAAAABASAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\GuideWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />
