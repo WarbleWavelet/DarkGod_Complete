@@ -8,17 +8,49 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MainCitySys : SystemRoot
 {
     public static MainCitySys Instance;
     public MainCityWnd maincityWnd;
-    public PlayerController ctrl;
+    public PlayerController playerCtrl;
+
+    [Header("人物信息")]
     public InfoWnd infoWnd;
     public Transform charCamTrans;
     //
     public float imgPlayerRotate;
     public float playerStartRotate;
+    //
+
+
+
+    [Header("自动任务")]
+    public Transform[] npcPosTrans = new Transform[4];
+    public AutoGuideCfg agc;
+    public NavMeshAgent nav;
+    public Transform navTarget;
+    public bool isNavGuide = false;
+    public float navStoppedDis = 0.5f;
+
+
+    void Update()
+    {
+        if (isNavGuide)
+        {
+            playerCtrl.SetMainCamera();
+
+            if (IsNavArrived())
+            { 
+            StopNavTask();
+                OpenGuideWnd();
+            }
+
+
+        }
+
+    }
 
     public override void InitSys()
     {
@@ -29,6 +61,11 @@ public class MainCitySys : SystemRoot
         PECommon.Log("Init MainCitySys");
     }
 
+
+
+
+
+    #region Scene
     public void EnterMainCity()
     {
         MapCfg cfg = ResSvc.Instance.GetMapDataCfg(Constants.MainCityMapID);
@@ -41,35 +78,18 @@ public class MainCitySys : SystemRoot
             audioSvc.PlayBgMusic(Constants.BGMainCity);
             //
             charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
+            //
+            GetNpcPosTrans();
+            nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
+
         });
     }
 
 
-    /// <summary>
-    /// 角色信息面板的展示
-    /// </summary>
-    /// <param name="state"></param>
-    public void SetCharShowCamState(bool state = true)
-    {
-
-        if (charCamTrans == null)
-        {
-            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
-        }
+    #endregion
 
 
-        Transform player = ctrl.transform;
-
-        charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//人物前上方
-        charCamTrans.localEulerAngles = new Vector3(0f, 180f + player.localEulerAngles.y, 0f);//相机对着人物
-        charCamTrans.localScale = Vector3.one;
-
-
-        charCamTrans.gameObject.SetActive(state);
-
-
-    }
-
+    #region Player
     /// <summary>
     /// 加载游戏主角
     /// </summary>
@@ -84,8 +104,8 @@ public class MainCitySys : SystemRoot
         Camera.main.transform.position = mapData.mainCamPos;
         Camera.main.transform.localEulerAngles = mapData.mainCamRote;
         //
-        ctrl = player.GetComponent<PlayerController>();
-        ctrl.Init();
+        playerCtrl = player.GetComponent<PlayerController>();
+        playerCtrl.Init();
     }
 
 
@@ -93,27 +113,67 @@ public class MainCitySys : SystemRoot
     /// 通过摇杆控制移动方向
     /// </summary>
     /// <param name="dir"></param>
-   public void SetMoveDir(Vector2 dir)
+    public void SetMoveDir(Vector2 dir)
     {
+        StopNavTask();
+        //
         if (dir == Vector2.zero)
         {
-            ctrl.SetBlend(Constants.BlendIdle);
+            playerCtrl.SetBlend(Constants.BlendIdle);
         }
         else
         {
-            ctrl.SetBlend(Constants.BlendWalk);
+            playerCtrl.SetBlend(Constants.BlendWalk);
         }
-        ctrl.Dir = dir;
+        playerCtrl.Dir = dir;
 
     }
 
-    public void OpenInfoWnd()
+
+
+    public void InitPlayerRotate()
+    {
+        playerStartRotate = playerCtrl.transform.localEulerAngles.y;
+    }
+
+    public void SetPlayerRotate(float rotate)
+    {
+        playerCtrl.transform.localEulerAngles = new Vector3(0f, playerStartRotate + rotate, 0f);
+    }
+    #endregion
+
+
+    #region 人物信息页
+    /// <summary>
+    /// 角色信息面板的展示
+    /// </summary>
+    /// <param name="state"></param>
+    public void SetCharShowCamState(bool state = true)
     {
 
+        if (charCamTrans == null)
+        {
+            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
+        }
+
+
+        Transform player = playerCtrl.transform;
+
+        charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//人物前上方
+        charCamTrans.localEulerAngles = new Vector3(0f, 180f + player.localEulerAngles.y, 0f);//相机对着人物
+        charCamTrans.localScale = Vector3.one;
+
+
+        charCamTrans.gameObject.SetActive(state);
+
+
+    } public void OpenInfoWnd()
+    {
+        StopNavTask();
         SetCharShowCamState(true);
         infoWnd.SetWndState();
 
-        
+
     }
 
     public void CloseInfoWnd()
@@ -122,14 +182,82 @@ public class MainCitySys : SystemRoot
         SetCharShowCamState(false);
         infoWnd.SetWndState(false);
     }
+    #endregion
 
-    public void InitPlayerRotate()
+
+    #region AutoTask
+    internal void RunNavTask(AutoGuideCfg agc)
     {
-       playerStartRotate= ctrl.transform.localEulerAngles.y;
+        if (agc != null)
+        {
+            this.agc = agc;
+        }
+
+        if (this.agc.npcID != -1)
+        {
+            isNavGuide = true;
+            GetNpcPosTrans();
+            navTarget = npcPosTrans[this.agc.npcID];
+            RunNavTask();
+        }
+    }
+   bool IsNavArrived()
+    {
+        return Vector3.Distance(playerCtrl.transform.position, navTarget.position) < navStoppedDis;
+    }
+    void RunNavTask()
+    {
+        if (isNavGuide)
+        { 
+            nav.enabled = true;
+        //
+            nav.speed = Constants.PlayerMoveSpeed;
+            nav.SetDestination(navTarget.position);
+            playerCtrl.SetBlend(Constants.BlendWalk);
+
+
+        }
+
     }
 
-    public void SetPlayerRotate(float rotate)
+  public void StopNavTask()
     {
-        ctrl.transform.localEulerAngles = new Vector3(0f, playerStartRotate + rotate, 0f);
+        if (isNavGuide)
+        {
+            this.agc = null;
+            navTarget = null;
+            nav.enabled = false;
+            //
+            playerCtrl.SetBlend(Constants.BlendIdle);
+            isNavGuide = false;
+        }
+
     }
+    private void GetNpcPosTrans()
+    {
+        Transform map = GameObject.FindGameObjectWithTag(Tags.MapRoot).transform;
+        npcPosTrans= map.GetComponent<MainCityMap>().NpcPosTrans;
+    }
+
+    private void OpenGuideWnd()
+    {
+
+        GameRoot.AddTips("OpenGuideWnd");
+
+    }
+
+
+    void ErrorNavCode()
+    {
+        //float dis= (ctrl.transform.position - navTarget.position).magnitude;
+
+        //if (nav.remainingDistance  < 0.5f)
+    }
+    #endregion
+
+
+
+
+
+
 }

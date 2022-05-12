@@ -57,7 +57,7 @@ public class LoginSys : SystemRoot
     /// </summary>
     public void RspLogin(GameMsg msg)
     {
-        GameRoot.AddTips("登录成功");
+        //GameRoot.AddTips("登录成功");
         GameRoot.Instance.SetPlayerData(msg.rspLogin);
 
         if (msg.rspLogin.playerData.name == null ||msg.rspLogin.playerData.name == "" )
@@ -66,8 +66,8 @@ public class LoginSys : SystemRoot
         }
         else
         {
-            //TODO 
-            GameRoot.AddTips("进入主程");
+            //TODO  
+            //GameRoot.AddTips("进入主程");
             MainCitySys.Instance.EnterMainCity();
 
         }

@@ -33,6 +33,7 @@ public class DynamicWnd : WindowRoot
     {
         if (tipsQuene.Count > 0 && isTipsShow == false)
         {
+    
             lock (tipsQuene )
             {
                 isTipsShow = true;
@@ -58,10 +59,13 @@ public class DynamicWnd : WindowRoot
        
         AnimationClip clip = tipsAni.GetClip("TipsShowAni");
         tipsAni.Play();
-        StartCoroutine(AniPlayDone(clip.length, () =>{ 
-            SetActive(txtTips,false); 
-            isTipsShow = false; 
+        StartCoroutine(AniPlayDone(clip.length, () =>
+        {
+            isTipsShow = false;
+             SetActive(txtTips, false);
+
         }));
+
         
     }
 
@@ -69,11 +73,14 @@ public class DynamicWnd : WindowRoot
   
     IEnumerator AniPlayDone(float sec,Action cb)
     {
-        yield return new WaitForSeconds(sec);
+
+        yield return   new WaitForSecondsRealtime(sec);
+       // yield return new WaitForSeconds(sec);
         if (cb != null)
         {
             cb();
         }
+
     }
 
     public void AddTips(string tips)

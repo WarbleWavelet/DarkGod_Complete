@@ -31,7 +31,7 @@
   <Class Name="ResSvc" Collapsed="true">
     <Position X="7" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAQIgAAQAAAEEAABAACQCAQgAAAARQEIFAQAACAA=</HashCode>
+      <HashCode>AAQAAQIgAAQAAAEEAABAACQGAQgAIAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +94,7 @@
   <Class Name="MainCityWnd" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAAAQAgCAQABCAAAEAIAIhAAEEAAQAQAsABCACERY=</HashCode>
+      <HashCode>AQQAAAQAgCAQABCAAAEAIAIhAAEEAAQAQAsABCKCERY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
     </TypeIdentifier>
   </Class>

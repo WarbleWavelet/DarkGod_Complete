@@ -10,4 +10,5 @@ public class Tags
 {
     public const string Player = "Player";
     public const string CharShowCam = "CharShowCam";
+    public const string MapRoot = "MapRoot";
 }

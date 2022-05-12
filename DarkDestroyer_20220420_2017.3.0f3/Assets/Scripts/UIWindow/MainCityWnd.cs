@@ -99,88 +99,9 @@ public class MainCityWnd : WindowRoot
         }
     }
 
-    /// <summary>
-    /// 设置btnGuide的图片
-    /// </summary>
-    /// <param name="npcID"></param>
-    private void SetGuideBtnCoin(int npcID)
-    {
 
-        string spPath = "";//spritePath
-
-        switch ( npcID )
-        {
-            case Constants.NPCArtisan:
-                {
-                    spPath = PathDefine.ArtisanHead;
-                }
-                break;
-            case Constants.NPCGeneral:
-                {
-                    spPath = PathDefine.GeneralHead;
-                }
-                break;
-            case Constants.NPCTask:
-                {
-                    spPath = PathDefine.TaskHead;
-                }
-                break;
-            case Constants.NPCTrader:
-                {
-                    spPath = PathDefine.TraderHead;
-                }
-                break;
-            case Constants.NPCWiseMan:
-                {
-                    spPath = PathDefine.WiseManHead;
-                }
-                break;
-            default:
-                {
-
-                }
-                break;
-        }
-        SetSprite(btnGuide.GetComponent<Image>(),spPath);
-
-    }
     #endregion
 
-
-    public void RegisterTouchEvets()
-    {
-
-        OnClickDown(imgTouch.gameObject, (PointerEventData evt) => {
-            startPos = evt.position;
-            SetActive(imgDirPoint);
-            imgDirBg.transform.position = evt.position;
-        });
-
-        OnClickUp(imgTouch.gameObject, (PointerEventData evt) => {
-            imgDirBg.transform.position = defaultPos;
-            imgDirPoint.transform.localPosition = Vector2.zero;
-            SetActive(imgDirPoint,false);
-            MainCitySys.Instance.SetMoveDir(Vector2.zero);
-        });
-
-        OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
-            SetActive(imgDirPoint);
-            //
-            Vector2 dir = evt.position- startPos;
-            float len = dir.magnitude;
-            if (len > pointDis)
-            {
-                Vector2 clampDir = Vector2.ClampMagnitude(dir,pointDis);
-                imgDirPoint.transform.position = clampDir+startPos;
-            }
-            else
-            { 
-                imgDirPoint.transform.position = evt.position;
-            }
-            MainCitySys.Instance.SetMoveDir(dir.normalized);
-
-        });
-    }
     #region Click
     public void ClickBtnMenu()
     {
@@ -207,14 +128,10 @@ public class MainCityWnd : WindowRoot
         audioSvc.PlayUIAudio(Constants.UIOpenPage);
         MainCitySys.Instance.OpenInfoWnd();
     }
-    private void ClickBtnGuide()
-    {
-        audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        GameRoot.AddTips("Guide Id：" + GameRoot.Instance.PlayerData.guideid);
-    }
+
     #endregion
 
-    #region 适配
+    #region 摇杆
     /// <summary>
     /// 适配摇杆点的半径
     /// </summary>
@@ -223,6 +140,47 @@ public class MainCityWnd : WindowRoot
     {
         return 1.0f * Screen.height / Constants.ScreenStandardHeight * Constants.ScreenOPDis;
     }
+    public void RegisterTouchEvets()
+    {
+
+        OnClickDown(imgTouch.gameObject, (PointerEventData evt) => {
+            startPos = evt.position;
+            SetActive(imgDirPoint);
+          
+            imgDirBg.transform.position = evt.position;
+            //
+            MainCitySys.Instance.StopNavTask();
+        });
+
+        OnClickUp(imgTouch.gameObject, (PointerEventData evt) => {
+            imgDirBg.transform.position = defaultPos;
+            imgDirPoint.transform.localPosition = Vector2.zero;
+            SetActive(imgDirPoint, false);
+            MainCitySys.Instance.SetMoveDir(Vector2.zero);
+        });
+
+        OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
+            SetActive(imgDirPoint);
+            //
+            Vector2 dir = evt.position - startPos;
+            float len = dir.magnitude;
+            if (len > pointDis)
+            {
+                Vector2 clampDir = Vector2.ClampMagnitude(dir, pointDis);
+                imgDirPoint.transform.position = clampDir + startPos;
+            }
+            else
+            {
+                imgDirPoint.transform.position = evt.position;
+            }
+            MainCitySys.Instance.SetMoveDir(dir.normalized);
+
+        });
+    }
+    #endregion
+
+    #region 经验条
+
 
     /// <summary>
     /// 适配经验条
@@ -258,6 +216,70 @@ public class MainCityWnd : WindowRoot
                 }
             }
         }
+
+    }
+    #endregion
+
+
+
+    #region 任务引导
+    private void ClickBtnGuide()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        if (curTaskData != null)
+        {
+            MainCitySys.Instance.RunNavTask( curTaskData);
+        }
+        else
+        {
+            GameRoot.AddTips("开发中：");
+        }
+
+    }
+
+    /// <summary>
+    /// 设置btnGuide的图片
+    /// </summary>
+    /// <param name="npcID"></param>
+    private void SetGuideBtnCoin(int npcID)
+    {
+
+        string spPath = "";//spritePath
+
+        switch (npcID)
+        {
+            case Constants.NPCArtisan:
+                {
+                    spPath = PathDefine.ArtisanHead;
+                }
+                break;
+            case Constants.NPCGeneral:
+                {
+                    spPath = PathDefine.GeneralHead;
+                }
+                break;
+            case Constants.NPCTask:
+                {
+                    spPath = PathDefine.TaskHead;
+                }
+                break;
+            case Constants.NPCTrader:
+                {
+                    spPath = PathDefine.TraderHead;
+                }
+                break;
+            case Constants.NPCWiseMan:
+                {
+                    spPath = PathDefine.WiseManHead;
+                }
+                break;
+            default:
+                {
+
+                }
+                break;
+        }
+        SetSprite(btnGuide.GetComponent<Image>(), spPath);
 
     }
     #endregion

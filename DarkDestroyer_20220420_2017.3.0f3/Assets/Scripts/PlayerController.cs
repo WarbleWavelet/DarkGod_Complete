@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         transform.localEulerAngles = eulerAngles;
     }
 
-    private void SetMainCamera()
+    public void SetMainCamera()
     {
         if (cam != null)
         { 

@@ -10,6 +10,8 @@ using UnityEngine;
 
 public class SystemRoot : MonoBehaviour 
 {
+
+    [Header("SystemRoot")]
     public ResSvc resSvc = null;
     public AudioSvc audioSvc = null;
     public NetSvc netSvc = null;
