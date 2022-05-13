@@ -9,11 +9,12 @@ class NetSvc
 {
 
 
-    private static NetSvc _instance;
+
     Queue<MsgPack> msgPackQue = new Queue<MsgPack>();
     /// <summary>消息队列异步多线程，锁一下</summary>
     public static readonly string obj = "lock";
-
+    #region 单例
+    private static NetSvc _instance;
     public static NetSvc Instance
     {
         get
@@ -25,6 +26,8 @@ class NetSvc
             return _instance;
         }
     }
+    #endregion
+
 
     public void Init()
     {
@@ -72,6 +75,12 @@ class NetSvc
                     LoginSys.Instance.ReqRename(pack);
                 }
                 break;
+            case CMD.ReqGuide:
+                {
+                    GuideSys.Instance.ReqGuide(pack);
+                }
+                break;
+
             default: break;
         }
 

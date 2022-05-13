@@ -6,6 +6,7 @@
 	功能：主城业务系统
 *****************************************************/
 
+using PEProtocol;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -265,6 +266,58 @@ public class MainCitySys : SystemRoot
         return this.agc;
     }
 
+
+    public void RspGuide(GameMsg msg)
+    {
+      
+        RspGuide data = msg.rspGuide;
+        GameRoot.AddTips("获得奖励！");
+        GameRoot.AddTips("获得经验:"+agc.exp);
+        GameRoot.AddTips("获得金币:"+agc.coin);
+
+        switch ( agc.actID )
+        {
+            case  0:
+                {
+                    // 智者
+                }
+                break;
+            case 1:
+                {
+                    //副本
+                }
+                break;
+            case 2:
+                {
+                    //强化
+                }
+                break;
+            case 3:
+                {
+                    //体力
+                }
+                break;
+            case 4:
+                {
+                    //金币
+                }
+                break;
+            case 5:
+                {
+                    //聊天
+                }
+                break;
+            default:
+                {
+
+                }
+                break;
+        }
+
+        GameRoot.Instance.SetPlayerDataByGuide(data);
+        maincityWnd.RefreshUI();
+
+    }
     #endregion
 
 

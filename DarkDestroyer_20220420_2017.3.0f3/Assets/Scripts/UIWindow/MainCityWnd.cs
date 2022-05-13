@@ -83,7 +83,7 @@ public class MainCityWnd : WindowRoot
        // RefreshUI();
     }
 
-    private void RefreshUI()
+    public void RefreshUI()
     {
         PlayerData pd = GameRoot.Instance.PlayerData;
         SetText(txtFight, PECommon.GetFightByProps(pd));

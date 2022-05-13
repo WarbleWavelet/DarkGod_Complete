@@ -52,11 +52,11 @@ public class Constants
 
 
     #region AutoGuide
-    public const int NPCTask = 0;
-    public const int NPCWiseMan = 1;
-    public const int NPCGeneral = 2;
-    public const int NPCArtisan = 3;
-    public const int NPCTrader = 4;
+    public const int NPCTask = -1;
+    public const int NPCWiseMan = 0;
+    public const int NPCGeneral = 1;
+    public const int NPCArtisan = 2;
+    public const int NPCTrader = 3;
 
 
     #endregion

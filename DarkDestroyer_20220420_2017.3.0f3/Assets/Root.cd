@@ -45,7 +45,7 @@
   <Class Name="GameRoot" Collapsed="true">
     <Position X="12.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAACAABAAAEAAACAAAAEAARAAAQAACAAAAAEA=</HashCode>
+      <HashCode>AAAgCAAAACAABAAAEAAACAAAAEAARAAAQAACAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\GameRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="8.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAgAACAAAAAAAAQAAAAACKAAABAAAQAAAEIAAA=</HashCode>
+      <HashCode>AAAIBAAgAACAAAAAAAAQAAAQACKAAABCIAQAAAEIAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -122,8 +122,15 @@
   <Class Name="GuideWnd" Collapsed="true">
     <Position X="4.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAEAAgIAAAAAAABASAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAgAAAAAAAQAAAAAEAAwIAAAAAAABASAAAAAAAAAQ=</HashCode>
       <FileName>Assets\Scripts\UIWindow\GuideWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientSession" Collapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Net\ClientSession.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

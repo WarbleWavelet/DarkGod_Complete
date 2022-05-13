@@ -613,7 +613,7 @@ Prefab:
     - target: {fileID: 224669486220065036, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 60.589844
+      value: 60.589954
       objectReference: {fileID: 0}
     - target: {fileID: 224669486220065036, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
@@ -703,7 +703,7 @@ Prefab:
     - target: {fileID: 224415726423921284, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 434.69043
+      value: 434.68997
       objectReference: {fileID: 0}
     - target: {fileID: 224415726423921284, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
@@ -902,7 +902,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1142136885769874, guid: bd55612b253521d45af953ba53b72934, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114696372075279934, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
@@ -1139,6 +1139,11 @@ Prefab:
       propertyPath: netSvc
       value: 
       objectReference: {fileID: 1332992446}
+    - target: {fileID: 114446967190460856, guid: 6b276cc47ba37ad4787bf8a3289c212f,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b276cc47ba37ad4787bf8a3289c212f, type: 2}
   m_IsPrefabParent: 0
@@ -2077,13 +2082,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1332992441}
+  - component: {fileID: 1332992448}
   - component: {fileID: 1332992444}
-  - component: {fileID: 1332992443}
   - component: {fileID: 1332992442}
   - component: {fileID: 1332992445}
   - component: {fileID: 1332992446}
+  - component: {fileID: 1332992443}
   - component: {fileID: 1332992447}
-  - component: {fileID: 1332992448}
+  - component: {fileID: 1332992449}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -2153,6 +2159,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingWnd: {fileID: 1741441387}
   dynamicWnd: {fileID: 1732039156}
+  playerData:
+    id: 0
+    name: 
+    exp: 0
+    lv: 0
+    power: 0
+    coin: 0
+    diamond: 0
+    hp: 0
+    ad: 0
+    ap: 0
+    addef: 0
+    apdef: 0
+    dodge: 0
+    critical: 0
+    pierce: 0
+    guideid: 0
 --- !u!114 &1332992445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2214,6 +2237,20 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1332992440}
   m_Enabled: 1
+--- !u!114 &1332992449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332992440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa0c382399e0f64da1e160acd013e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resSvc: {fileID: 1332992442}
+  audioSvc: {fileID: 1332992445}
+  netSvc: {fileID: 1332992446}
 --- !u!1 &1404843526
 GameObject:
   m_ObjectHideFlags: 0

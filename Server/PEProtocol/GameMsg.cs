@@ -9,6 +9,9 @@ namespace PEProtocol
 {
 
     #region Serializable
+    #region Root
+
+    #endregion
     [Serializable]
     public class GameMsg_Text:PEMsg
     {
@@ -23,9 +26,27 @@ namespace PEProtocol
         public RspLogin rspLogin;
         public ReqRename reqRename;
         public RspRename rspRename;
+        //主城
+        public ReqGuide reqGuide;
+        public RspGuide rspGuide;
 
 
 
+    }
+
+    /// <summary>
+    /// 命令集
+    /// </summary>
+    public enum CMD
+    {
+        None = 0,
+        ReqLogin = 101,
+        RspLogin = 102,
+        ReqRename = 103,
+        RspRename = 104,
+        //主城
+        ReqGuide = 200,
+        RspGuide = 201
     }
     #region Login
     /// <summary>
@@ -64,6 +85,23 @@ namespace PEProtocol
     }
     #endregion
 
+    #region 任务引导
+    [Serializable]
+    public class ReqGuide
+    {
+        public int guideid;
+    }
+
+    [Serializable]
+    public class RspGuide
+    {
+        public int guideid;
+        public int exp;
+        public int coin;
+        public int lv;
+    }
+    #endregion
+
     #region PlayerData 来自数据库的表
     [Serializable]
 
@@ -99,17 +137,7 @@ namespace PEProtocol
         public const int srvPort = 17666;
     }
 
-    /// <summary>
-    /// 命令集
-    /// </summary>
-    public enum CMD
-    {
-        None=0,
-        ReqLogin=101,
-        RspLogin =102,
-        ReqRename=103,
-        RspRename=104
-    }
+
    
     /// <summary>
     /// 错误码
@@ -118,14 +146,25 @@ namespace PEProtocol
     {
          /// <summary>没错误</summary>
         None=0,
+
         /// <summary>账号已被登录</summary>
         AcctIsOnLine,
+
         /// <summary>密码错误</summary>
         WrongPass,
+
         /// <summary>账号名已经存在</summary>
         NameIsExist,
+
         /// <summary>更新数据出错</summary>
         UpdateDBError,
+      
+        /// <summary>服务器数据异常</summary>
+        ServerDataError,
+
+
+
+
         /// <summary>密码精度不足</summary>
     }
 }

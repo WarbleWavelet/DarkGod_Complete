@@ -3,7 +3,7 @@
 	作者：lenovo
     邮箱: 
     日期：2022/5/12 23:9:36
-	功能：引导对话
+	功能：引导对话UI
 *****************************************************/
 
 using PEProtocol;
@@ -21,7 +21,7 @@ public class GuideWnd : WindowRoot
 
     public AutoGuideCfg agc;
     public string[] dialogArr;
-   public int dialogIdx=1;
+    public int dialogIdx = 1;
     public PlayerData pd;
     public Button btnNext;
     protected override void InitWnd()
@@ -44,7 +44,19 @@ public class GuideWnd : WindowRoot
             dialogIdx = 1;
             dialogArr = null;
             btnNext.onClick.RemoveAllListeners();
-            SetWndState(false);
+           
+            //
+            GameMsg msg = new GameMsg
+            {
+                cmd=(int)CMD.ReqGuide,
+                reqGuide = new ReqGuide
+                {
+                    guideid = agc.ID
+                }
+            };
+            netSvc.SendMsg(msg);
+            SetWndState(false);//会影响netSvc
+            //
             return;
         }
         ParseDialog();  

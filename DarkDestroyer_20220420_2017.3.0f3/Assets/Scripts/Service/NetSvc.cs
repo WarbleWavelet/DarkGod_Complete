@@ -15,7 +15,7 @@ using System;
 public class NetSvc : MonoBehaviour
 {
 
-    PENet.PESocket<ClientSession, GameMsg> client = null;
+    PESocket<ClientSession, GameMsg> client = null;
     public static NetSvc Instance = null;
     public Queue<GameMsg> msgQue = new Queue<GameMsg>();
     public static readonly string obj = "lock";
@@ -128,6 +128,12 @@ public class NetSvc : MonoBehaviour
                     GameRoot.AddTips("网络不稳定");
                 }
                 break;
+            case ErrorCode.ServerDataError:
+                {
+                    PECommon.Log("服务器数据异常", LogType.Error);
+                    GameRoot.AddTips("客户端数据异常");
+                }
+                break;
             default:
                 {
                     GameRoot.AddTips("未知错误");
@@ -148,6 +154,11 @@ public class NetSvc : MonoBehaviour
             case CMD.RspRename:
                 {
                     LoginSys.Instance.RspRename(msg);
+                }
+                break;
+            case CMD.RspGuide:
+                {
+                    MainCitySys.Instance.RspGuide(msg);
                 }
                 break;
         }

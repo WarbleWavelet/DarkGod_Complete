@@ -23,7 +23,7 @@ public class GameRoot : MonoBehaviour
     public DynamicWnd dynamicWnd;
 
     /// <summary>保存数据信息</summary>
-    PlayerData playerData=null;
+   public PlayerData playerData=null;
     public PlayerData PlayerData
     {
         get
@@ -113,5 +113,13 @@ public class GameRoot : MonoBehaviour
     internal void SetPlayerName(string name)
     {
         playerData.name = name;
+    }
+
+    public void SetPlayerDataByGuide(RspGuide data)
+    {
+        playerData.guideid = data.guideid;
+        playerData.coin=    data.coin;
+        playerData.exp= data.exp;
+        playerData.lv= data.lv;
     }
 }

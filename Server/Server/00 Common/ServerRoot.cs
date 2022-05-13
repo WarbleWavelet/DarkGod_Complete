@@ -32,6 +32,8 @@ class ServerRoot
         CacheSvc.Instance.Init();
         NetSvc.Instance.Init();
         LoginSys.Instance.Init();
+        GuideSys.Instance.Init();
+        CfgSvc.Instance.Init();
        
     }
 

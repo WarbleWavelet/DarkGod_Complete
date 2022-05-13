@@ -20,7 +20,8 @@ class CacheSvc
     /// <summary>session与pd</summary>
 
     Dictionary<ServerSession, PlayerData> onLineSessionDic = new Dictionary<ServerSession, PlayerData>();
-
+    DBMgr dBMgr;
+    #region 单例
     private static CacheSvc _instance;
     public static CacheSvc Instance
     {
@@ -34,8 +35,10 @@ class CacheSvc
         }
 
     }
+    #endregion
 
-    DBMgr dBMgr;
+
+
     #endregion
 
     public void Init()

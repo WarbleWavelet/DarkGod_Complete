@@ -102,7 +102,7 @@ public class WindowRoot : MonoBehaviour
     #region SetSprite
     protected void SetSprite(Image image, string path)
     {
-        image.sprite = resSvc.LoadSprite(path);
+        image.sprite = resSvc.LoadSprite(path,true);
 
     }
     #endregion

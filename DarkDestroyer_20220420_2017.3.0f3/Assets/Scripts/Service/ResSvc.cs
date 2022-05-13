@@ -380,16 +380,17 @@ public class ResSvc : MonoBehaviour
                                 c.actID = int.Parse(e.InnerText);
                             }
                             break;
-                        case "coin":
-                            {
-                                c.coin = int.Parse(e.InnerText);
-                            }
-                            break;
-                        case "exp":
-                            {
-                                c.exp = int.Parse(e.InnerText);
-                            }
-                            break;
+                           //没用到
+                        //case "coin":
+                        //    {
+                        //        c.coin = int.Parse(e.InnerText);
+                        //    }
+                        //    break;
+                        //case "exp":
+                        //    {
+                        //        c.exp = int.Parse(e.InnerText);
+                        //    }
+                        //    break;
 
                         default:
                             {
