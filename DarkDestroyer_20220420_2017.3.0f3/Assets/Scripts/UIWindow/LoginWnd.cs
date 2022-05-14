@@ -83,18 +83,11 @@ public class LoginWnd : WindowRoot
                 }
             };
             netSvc.SendMsg(msg);
-
-            // LoginSys.Instance.RspLogin();
-
         }
         else
         {
             GameRoot.AddTips("账号或密码为空");
         }
-        //新客户
-
-        //老客户
-
     }
     /// <summary>
     /// 点击公告
@@ -105,5 +98,6 @@ public class LoginWnd : WindowRoot
         GameRoot.AddTips("公告功能还在开发中");
     }
     #endregion
+
 
 }

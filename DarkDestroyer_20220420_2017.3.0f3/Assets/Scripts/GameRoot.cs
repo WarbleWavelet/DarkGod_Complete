@@ -90,7 +90,7 @@ public class GameRoot : MonoBehaviour
     /// <summary>
     /// 从注册到登录
     /// </summary>
-  public  void ClearUIRoot()
+    public  void ClearUIRoot()
     {
         Transform canvas = transform.Find("Canvas");
         for (int i = 0; i < canvas.childCount; i++)

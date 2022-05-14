@@ -1932,7 +1932,7 @@ Prefab:
       objectReference: {fileID: 7400000, guid: 74e000526ec986548a6574b7889c3e45, type: 2}
     - target: {fileID: 1449879822023318, guid: ecda34605916c65489252857a94c21ae, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1787008294642014, guid: ecda34605916c65489252857a94c21ae, type: 2}
       propertyPath: m_IsActive
@@ -2143,7 +2143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  netSvc: {fileID: 0}
   loginWnd: {fileID: 1545980948}
   createWnd: {fileID: 1248399362}
 --- !u!114 &1332992444

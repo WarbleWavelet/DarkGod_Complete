@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABEAAEJAIAAAQQECAAIAAYQAgECAAAAAgAAoA=</HashCode>
+      <HashCode>QEAAAAABEAAEJAIAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -64,7 +64,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CreateWnd" Collapsed="true">
-    <Position X="0.75" Y="3.75" Width="1.5" />
+    <Position X="0.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAEAAAQAAAEAACAAAgAAACAAIAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\CreateWnd.cs</FileName>
@@ -99,14 +99,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="InfoWnd" Collapsed="true">
-    <Position X="2.5" Y="3.75" Width="1.5" />
+    <Position X="2.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QGigAAAAAAAKACCBIAFQYAQEMAiAAAAEAIAAACgAAEI=</HashCode>
       <FileName>Assets\Scripts\UIWindow\InfoWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseData&lt;T&gt;" Collapsed="true">
-    <Position X="10" Y="4" Width="1.5" />
+    <Position X="10" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
@@ -120,7 +120,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GuideWnd" Collapsed="true">
-    <Position X="4.5" Y="3.75" Width="1.5" />
+    <Position X="4.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAQAAAAAEAAwIAAAAAAABASAAAAAAAAAQ=</HashCode>
       <FileName>Assets\Scripts\UIWindow\GuideWnd.cs</FileName>
@@ -131,6 +131,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
       <FileName>Assets\Scripts\Net\ClientSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuideSys" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\System\GuideSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainCitySys" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AERAiBIhACAkQEAAAAAAAAEAACAIARQQSCEIDgCBABA=</HashCode>
+      <FileName>Assets\Scripts\System\MainCitySys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

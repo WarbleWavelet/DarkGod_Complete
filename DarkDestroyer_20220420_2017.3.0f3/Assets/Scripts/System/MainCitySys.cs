@@ -271,9 +271,9 @@ public class MainCitySys : SystemRoot
     {
       
         RspGuide data = msg.rspGuide;
-        GameRoot.AddTips("获得奖励！");
-        GameRoot.AddTips("获得经验:"+agc.exp);
-        GameRoot.AddTips("获得金币:"+agc.coin);
+        GameRoot.AddTips(Constants.Color( "获得奖励！",TxtColor.Blue));
+        GameRoot.AddTips(Constants.Color("获得经验:" +agc.exp, TxtColor.Blue));
+        GameRoot.AddTips(Constants.Color("获得金币:" +agc.coin, TxtColor.Blue));
 
         switch ( agc.actID )
         {

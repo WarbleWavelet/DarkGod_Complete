@@ -260,11 +260,6 @@ public class MainCityWnd : WindowRoot
                     spPath = PathDefine.GeneralHead;
                 }
                 break;
-            case Constants.NPCTask:
-                {
-                    spPath = PathDefine.TaskHead;
-                }
-                break;
             case Constants.NPCTrader:
                 {
                     spPath = PathDefine.TraderHead;
@@ -277,7 +272,7 @@ public class MainCityWnd : WindowRoot
                 break;
             default:
                 {
-
+                    spPath = PathDefine.TaskHead;
                 }
                 break;
         }
