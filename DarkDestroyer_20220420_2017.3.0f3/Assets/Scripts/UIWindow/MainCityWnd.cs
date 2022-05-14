@@ -36,6 +36,7 @@ public class MainCityWnd : WindowRoot
     public Button btnMenu;
     public Animation aniMenu;
     public bool menuState=false;
+    public Button btnEnchance;
 
     [Header("左下")]
     public Image imgTouch;
@@ -67,6 +68,7 @@ public class MainCityWnd : WindowRoot
         
         btnMenu.onClick.AddListener(ClickBtnMenu);
         btnGuide.onClick.AddListener(ClickBtnGuide);
+        btnEnchance.onClick.AddListener(ClickBtnEnchance);
         //
         defaultPos = imgDirBg.transform.position;
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
@@ -77,6 +79,9 @@ public class MainCityWnd : WindowRoot
         RefreshUI();
        
     }
+
+
+
     void Update()
     {
         //pointDis = AdaptDirPoint();//放这里，运行时改变有效
@@ -131,6 +136,11 @@ public class MainCityWnd : WindowRoot
         MainCitySys.Instance.OpenInfoWnd();
     }
 
+
+    private void ClickBtnEnchance()
+    {
+        MainCitySys.Instance.OpenEnchanceWnd();
+    }
     #endregion
 
     #region 摇杆

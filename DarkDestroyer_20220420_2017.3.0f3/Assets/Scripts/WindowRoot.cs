@@ -134,11 +134,17 @@ public class WindowRoot : MonoBehaviour
 
 
 
-    #region OnClickDown OnClickUp OnDrag
+    #region OnClickDown OnClick OnClickUp OnDrag
     protected void OnClickDown(GameObject go,Action<PointerEventData> cb)
     {
         PEListener listener = GetOrAddComponent<PEListener>(go);
         listener.onClickDown = cb;
+    }
+
+    protected void OnClick(GameObject go, Action<PointerEventData> cb)
+    {
+        PEListener listener = GetOrAddComponent<PEListener>(go);
+        listener.onClick = cb;
     }
     protected void OnClickUp(GameObject go, Action<PointerEventData> cb)
     {

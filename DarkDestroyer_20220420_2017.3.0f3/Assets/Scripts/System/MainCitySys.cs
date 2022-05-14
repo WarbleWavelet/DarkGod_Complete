@@ -38,6 +38,10 @@ public class MainCitySys : SystemRoot
     public float navStoppedDis = 0.5f;
     public GuideWnd guideWnd;
 
+
+    [Header("强化")]
+    public EnchanceWnd enchanceWnd;
+
     void Update()
     {
         if (isNavGuide)
@@ -322,6 +326,19 @@ public class MainCitySys : SystemRoot
 
 
 
+    #region 强化
+    public void OpenEnchanceWnd()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        enchanceWnd.SetWndState();
+    }
+
+    public void CloseEnchanceWnd()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        enchanceWnd.SetWndState(false);
+    }
+    #endregion
 
 
 

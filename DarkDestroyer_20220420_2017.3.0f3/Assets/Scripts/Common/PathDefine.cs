@@ -34,4 +34,11 @@ public class PathDefine
 
     public const string AssassinCityPlayerPrefab = "PrefabPlayer/AssassinCity";
 
+
+
+    #region 强化页
+    public const string PosItemSelected = "ResImages/btnstrong";
+    public const string PosItemNormal = "ResImages/charbg3";
+    #endregion
+
 }

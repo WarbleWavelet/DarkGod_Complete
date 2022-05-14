@@ -20,6 +20,7 @@ public class PEListener : MonoBehaviour,
 {
 
     public Action<PointerEventData> onClickDown;
+    public Action<PointerEventData> onClick;
     public Action<PointerEventData> onClickUp;
     public Action<PointerEventData> onDrag;
 
@@ -27,20 +28,23 @@ public class PEListener : MonoBehaviour,
     {
         if (onDrag != null)
         { 
-        onDrag(eventData);
+            onDrag(eventData);
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-      
+        if (onClickDown != null)
+        {
+            onClickDown(eventData);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (onClickDown != null)
+        if (onClick != null)
         { 
-            onClickDown( eventData);
+            onClick( eventData);
         }
     }
 
@@ -57,44 +61,3 @@ public class PEListener : MonoBehaviour,
         }
     }
 }
-
-
-public class NewBehaviourScript204 : MonoBehaviour,
-
-    IInitializePotentialDragHandler,
-    IBeginDragHandler,
-    IDragHandler,
-    IEndDragHandler,
-    IDropHandler
-{
-    /// <summary>初始一次</summary>
-    public void OnInitializePotentialDrag(PointerEventData eventData)
-    {
-        print("Init");
-    }
-    /// <summary>依赖于Drag</summary>
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        print("Begin");
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        print("Drag");
-        RectTransform rect = GetComponent<RectTransform>();
-        Vector3 pos = new Vector3();
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, eventData.position, eventData.enterEventCamera, out pos);
-        rect.position = pos;
-
-    }
-    /// <summary>依赖于Drag</summary>
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        print("End");
-    }
-    public void OnDrop(PointerEventData eventData)
-    {
-        print("Drop");
-    }
-}
-

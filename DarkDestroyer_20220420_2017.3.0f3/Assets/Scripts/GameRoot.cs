@@ -74,6 +74,8 @@ public class GameRoot : MonoBehaviour
         
         MainCitySys  maincitySys=GetComponent<MainCitySys>();
         maincitySys.InitSys();
+
+
     }
 
     /// <summary>
