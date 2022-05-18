@@ -55,7 +55,8 @@
     <Compile Include="01 Server\01 NetSvc\ServerSession.cs" />
     <Compile Include="01 Server\02 CfgSvc\CfgSvc.cs" />
     <Compile Include="02 System\01 LoginSys\LoginSys.cs" />
-    <Compile Include="02 System\GuideSys.cs" />
+    <Compile Include="02 System\02 GuideSys\GuideSys.cs" />
+    <Compile Include="02 System\03 Strong\StrongSys.cs" />
     <Compile Include="03 Cache\CacheSvc.cs" />
     <Compile Include="04 DB\DBMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +71,6 @@
       <Name>PEProtocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="02 System\02 GuideSys\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -80,6 +80,11 @@ class NetSvc
                     GuideSys.Instance.ReqGuide(pack);
                 }
                 break;
+            case CMD.ReqStrong:
+                {
+                    StrongSys.Instance.ReqStrong(pack);
+                }
+                break;
 
             default: break;
         }

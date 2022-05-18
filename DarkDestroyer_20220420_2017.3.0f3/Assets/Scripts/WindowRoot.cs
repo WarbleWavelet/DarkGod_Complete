@@ -141,11 +141,14 @@ public class WindowRoot : MonoBehaviour
         listener.onClickDown = cb;
     }
 
-    protected void OnClick(GameObject go, Action<PointerEventData> cb)
+    protected void OnClick(GameObject go, Action<object> cb,object args)
     {
         PEListener listener = GetOrAddComponent<PEListener>(go);
         listener.onClick = cb;
+        listener.args = args;
     }
+
+
     protected void OnClickUp(GameObject go, Action<PointerEventData> cb)
     {
         PEListener listener = GetOrAddComponent<PEListener>(go);

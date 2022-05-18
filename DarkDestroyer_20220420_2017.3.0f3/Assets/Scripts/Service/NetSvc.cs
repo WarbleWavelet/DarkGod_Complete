@@ -134,6 +134,29 @@ public class NetSvc : MonoBehaviour
                     GameRoot.AddTips("客户端数据异常");
                 }
                 break;
+            case ErrorCode.LackCoin:
+              
+                {  PECommon.Log("金币不足", LogType.Error);
+                }
+                break;
+            case ErrorCode.LackDiamond:
+
+                {
+                    PECommon.Log("钻石不足", LogType.Error);
+                }
+                break;
+            case ErrorCode.LackCrystal:
+
+                {
+                    PECommon.Log("水晶不足", LogType.Error);
+                }
+                break;
+            case ErrorCode.LackLv:
+
+                {
+                    PECommon.Log("等级不足", LogType.Error);
+                }
+                break;
             default:
                 {
                     GameRoot.AddTips("未知错误");
@@ -159,6 +182,11 @@ public class NetSvc : MonoBehaviour
             case CMD.RspGuide:
                 {
                     MainCitySys.Instance.RspGuide(msg);
+                }
+                break;
+            case CMD.RspStrong:
+                {
+                    MainCitySys.Instance.RspStrong(msg);
                 }
                 break;
         }

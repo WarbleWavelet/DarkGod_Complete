@@ -65,6 +65,8 @@ public class Constants
     public const string UIOpenPage = "uiOpenPage"; 
     /// <summary>点击侧边栏的Bgm</summary>
     public const string UIExtenBtn = "uiExtenBtn";
+    /// <summary>强化</summary>
+    public const string FBItemEnter = "fbitem";
     #endregion
 
 
@@ -85,7 +87,7 @@ public class Constants
     public const float AccelerSpeed = 5f;
     public const int BlendIdle = 0;
     public const int BlendWalk = 1;
-    #endregion
+    #endregion 
 
 
     #region AutoGuide
@@ -96,7 +98,10 @@ public class Constants
     public const int NPCTrader = 3;
 
 
+
     #endregion
+    /// <summary>最高星级</summary>
+    public const int MaxStarLv = 10;
 
 
 }

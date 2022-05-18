@@ -29,6 +29,8 @@ namespace PEProtocol
         //主城
         public ReqGuide reqGuide;
         public RspGuide rspGuide;
+        public ReqStrong reqStrong;
+        public RspStrong rspStrong;
 
 
 
@@ -46,8 +48,12 @@ namespace PEProtocol
         RspRename = 104,
         //主城
         ReqGuide = 200,
-        RspGuide = 201
+        RspGuide = 201,
+        ReqStrong = 202,
+        RspStrong = 203
     }
+
+    #region     GameMsg里的表
     #region Login
     /// <summary>
     /// 请求登录
@@ -68,8 +74,6 @@ namespace PEProtocol
         public PlayerData playerData;
     }
     #endregion
-
-
 
     #region Rename
     [Serializable]
@@ -102,6 +106,34 @@ namespace PEProtocol
     }
     #endregion
 
+    #region 强化
+
+    [Serializable]
+    public class ReqStrong
+    {
+        public int pos;
+    }
+
+    [Serializable]
+    public class RspStrong
+    {
+        public int coin;
+        public int crystal;
+        public int hp;
+        public int ad;
+        public int ap;
+        public int addef;
+        public int apdef;
+        /// <summary>强化后变化</summary>
+        public int[] strongArr;
+    }
+    #endregion
+
+    #endregion
+
+
+
+
     #region PlayerData 来自数据库的表
     [Serializable]
 
@@ -115,6 +147,7 @@ namespace PEProtocol
         public int power;
         public int coin;
         public int diamond;
+        public int crystal;
         public int hp;
         public int ad;
         public int ap;
@@ -124,6 +157,7 @@ namespace PEProtocol
         public int critical;
         public int pierce;
         public int guideid;
+        public int[] strongArr;
 
     }
     #endregion
@@ -161,6 +195,18 @@ namespace PEProtocol
       
         /// <summary>服务器数据异常</summary>
         ServerDataError,
+        #region Lack 不足，缺少
+        /// <summary>等级不足</summary>
+        LackLv,
+        /// <summary>金币不足</summary>
+        LackCoin,
+        /// <summary>钻石不足</summary>
+        LackDiamond,
+        /// <summary>水晶不足</summary>
+        LackCrystal,
+        #endregion 
+    
+
 
 
 

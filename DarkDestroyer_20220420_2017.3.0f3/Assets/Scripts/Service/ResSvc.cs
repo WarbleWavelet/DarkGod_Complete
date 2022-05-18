@@ -26,6 +26,7 @@ public class ResSvc : MonoBehaviour
         InitRDNameCfg(PathDefine.RDNameCfg);
         InitMapCfg(PathDefine.MapCfg);
         InitGuideCfg(PathDefine.GuideCfg);
+        InitStrongCfg(PathDefine.StrongCfg);
         PECommon.Log("Init ResSvc",LogType.Log);
     }
 
@@ -380,17 +381,6 @@ public class ResSvc : MonoBehaviour
                                 c.actID = int.Parse(e.InnerText);
                             }
                             break;
-                           //没用到
-                        //case "coin":
-                        //    {
-                        //        c.coin = int.Parse(e.InnerText);
-                        //    }
-                        //    break;
-                        //case "exp":
-                        //    {
-                        //        c.exp = int.Parse(e.InnerText);
-                        //    }
-                        //    break;
 
                         default:
                             {
@@ -422,8 +412,161 @@ public class ResSvc : MonoBehaviour
 
 
 
+    #region 玩家突破
+    /// <summary>pos+starLv</summary>
+    Dictionary<int, Dictionary<int, StrongCfg>> strongDic = new Dictionary<int, Dictionary<int, StrongCfg>>();
+
+    private void InitStrongCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        //
+        for (int i = 0; i < nodLst.Count; i++)
+        {
+            XmlElement ele = nodLst[i] as XmlElement;
+            if (ele.GetAttributeNode("ID") == null)
+                continue;
+            int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+            //
+            StrongCfg sd = new StrongCfg
+            {
+                ID = ID
+            };
+            foreach (XmlElement e in nodLst[i].ChildNodes)
+            {
+                int val = int.Parse(e.InnerText);
+                switch (e.Name)
+                {
+                    case "pos":
+                        {
+                            sd.pos = val;
+                        }
+                        break;
+                    case "starlv":
+                        {
+                            sd.starlv = val;
+                        }
+                        break;
+                    case "addhp":
+                        {
+                            sd.addhp = val;
+                        }
+                        break;
+                    case "addhurt":
+                        {
+                            sd.addhurt = val;
+                        }
+                        break;
+                    case "minlv":
+                        {
+                            sd.minlv = val;
+                        }
+                        break;
+                    case "coin":
+                        {
+                            sd.coin = val;
+                        }
+                        break;
+                    case "crystal":
+                        {
+                            sd.crystal = val;
+                        }
+                        break;
+
+                    default:
+                        {
+
+                        }
+                        break;
+                }
+            }
+            //
+
+            Dictionary<int, StrongCfg> dic = null;
+            if (strongDic.TryGetValue(sd.pos, out dic))
+            {
+                dic.Add(sd.starlv, sd);
+            }
+            else
+            {
+                dic = new Dictionary<int, StrongCfg>();
+                dic.Add(sd.starlv, sd);
+                strongDic.Add(sd.pos, dic);
+            }
+        }
+    }
+
+
+    public StrongCfg GetStrongCfg(int pos,int starLv)
+    {
+        StrongCfg c = null;
+        Dictionary<int, StrongCfg> dic = null;
+        if (strongDic.TryGetValue(pos, out dic))
+        {
+            if (dic.ContainsKey(starLv))
+            {
+                c = dic[starLv];
+            }
+        }
+        return c;
+    }
+
+    public int GetPropAddPreLv(PosType posType, int starLv, PropType propType)
+    {
+
+        int pos = (int)posType;
+        int prop = (int)propType;
+        Dictionary<int, StrongCfg> cfgDic=null;
+        int propSum = 0;
+        if (strongDic.TryGetValue(pos, out cfgDic))
+
+        {
+            for (int i = 0; i < starLv; i++)
+            {
+                if (i < starLv)
+                {
+                    StrongCfg cfg = null;
+                    if (cfgDic.TryGetValue(i, out cfg))
+                    {
+                        switch (propType)
+                        {
+                            case PropType.Hp: propSum += cfg.addhp; break;
+                            case PropType.Hurt: propSum += cfg.addhurt; break;
+                            case PropType.Def: propSum += cfg.adddef; break;
+                            default: break;
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+        return propSum;
+    }
 
 
 
+    #endregion
 
+
+
+}
+
+
+public enum PosType
+{
+    Head,
+    Body,
+    Waist,
+    Hands,
+    Leg,
+    Feet
+}
+
+public enum PropType
+{
+    Hurt,
+    Hp,
+    Def,
 }

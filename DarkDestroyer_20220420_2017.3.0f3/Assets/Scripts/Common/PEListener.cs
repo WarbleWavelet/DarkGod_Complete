@@ -20,38 +20,35 @@ public class PEListener : MonoBehaviour,
 {
 
     public Action<PointerEventData> onClickDown;
-    public Action<PointerEventData> onClick;
+    /// <summary>点击不需要太复杂的参数</summary>
+    public Action<object> onClick;
     public Action<PointerEventData> onClickUp;
     public Action<PointerEventData> onDrag;
+
+    public object args;
+
+
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (onClickDown != null)
+        {
+            onClickDown( eventData);
+        }
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (onDrag != null)
-        { 
+        {
             onDrag(eventData);
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (onClickDown != null)
-        {
-            onClickDown(eventData);
-        }
-    }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (onClick != null)
-        { 
-            onClick( eventData);
-        }
-    }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-       
-    }
+
+
 
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -59,5 +56,18 @@ public class PEListener : MonoBehaviour,
         {
             onClickUp(eventData);
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (onClick != null)
+        {
+            onClick(args);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
     }
 }

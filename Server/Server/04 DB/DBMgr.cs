@@ -44,6 +44,60 @@ class DBMgr
 
     #region 增删查改
 
+
+
+
+
+    public int InsertPlayerData(string acct, string pass, PlayerData pd)
+    {
+        int id = -1;
+        try
+        {
+            string sql = "insert into account set " +
+            "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power," +
+            "coin = @coin,diamond = @diamond,crystal=@crystal," +
+            "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
+            "guideid=@guideid,strong=@strong";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd.Parameters.AddWithValue("acct", acct);
+            cmd.Parameters.AddWithValue("pass", pass);
+            cmd.Parameters.AddWithValue("name", pd.name);
+            cmd.Parameters.AddWithValue("lv", pd.lv);
+            cmd.Parameters.AddWithValue("exp", pd.exp);
+            cmd.Parameters.AddWithValue("power", pd.power);
+            cmd.Parameters.AddWithValue("coin", pd.coin);
+            cmd.Parameters.AddWithValue("diamond", pd.diamond);
+            cmd.Parameters.AddWithValue("crystal", pd.crystal);
+            cmd.Parameters.AddWithValue("hp", pd.hp);
+            cmd.Parameters.AddWithValue("ad", pd.ad);
+            cmd.Parameters.AddWithValue("ap", pd.ap);
+            cmd.Parameters.AddWithValue("addef", pd.addef);
+            cmd.Parameters.AddWithValue("apdef", pd.apdef);
+            cmd.Parameters.AddWithValue("dodge", pd.dodge);
+            cmd.Parameters.AddWithValue("critical", pd.critical);
+            cmd.Parameters.AddWithValue("pierce", pd.pierce);
+            cmd.Parameters.AddWithValue("guideid", pd.guideid);
+            cmd.Parameters.AddWithValue("strong", StrongArrToStrong(pd.strongArr));
+
+            cmd.ExecuteNonQuery();
+            id = (int)cmd.LastInsertedId;
+            PECommon.Log("已增id:" + id);
+
+        }
+        catch (Exception e)
+        {
+
+            PECommon.Log("Insert PlayerData失败，原因：" + e, LogType.Error);
+        }
+        finally
+        {
+
+        }
+        return id;
+    }
+
+
     /// <summary>
     /// 查账号
     /// </summary>
@@ -66,9 +120,11 @@ class DBMgr
             while (reader.Read())
             {
                 string _acct = reader.GetString("acct");
+                
                 if (_acct.Equals(acct))
                 {
                     isNew = false;
+
                     playerData = new PlayerData
                     {
                         id = reader.GetInt32("id"),
@@ -78,6 +134,7 @@ class DBMgr
                         power = reader.GetInt32("power"),
                         coin = reader.GetInt32("coin"),
                         diamond = reader.GetInt32("diamond"),
+                        crystal=reader.GetInt32("crystal"),
                         hp = reader.GetInt32("hp"),
                         ad = reader.GetInt32("ad"),
                         ap = reader.GetInt32("ap"),
@@ -86,10 +143,12 @@ class DBMgr
                         critical = reader.GetInt32("critical"),
                         pierce = reader.GetInt32("pierce"),
                         dodge = reader.GetInt32("dodge"),
-                        guideid=reader.GetInt32("guideid")
+                        guideid = reader.GetInt32("guideid"),
+                        strongArr=StrongToStrongArr( reader.GetString("strong") )
+
 
                     };
-                    PECommon.Log("已查到acct:"+acct );
+                    PECommon.Log("已查到acct:" + acct);
                 }
 
             }
@@ -98,7 +157,7 @@ class DBMgr
         }
         catch (Exception e)
         {
-            PECommon.Log("Query PlayerData By Acct&Pass Error:" + e,LogType.Error);
+            PECommon.Log("Query PlayerData By Acct&Pass Error:" + e, LogType.Error);
         }
         finally
         {
@@ -114,16 +173,17 @@ class DBMgr
                     power = 150,
                     coin = 5000,
                     diamond = 500,
+                    crystal = 100,
                     hp = 2000,
                     ad = 275,
                     ap = 265,
-                    addef =67,
-                    apdef =43,
-                    critical=2,
-                    pierce =5,
-                    dodge =7,
-                    guideid=1001
-
+                    addef = 67,
+                    apdef = 43,
+                    critical = 2,
+                    pierce = 5,
+                    dodge = 7,
+                    guideid = 1001,
+                    strongArr = new int[] {0, 0, 0, 0, 0, 0 }
 
                 };
                 playerData.id = InsertPlayerData(acct, pass, playerData);
@@ -133,54 +193,6 @@ class DBMgr
 
 
         return playerData;
-    }
-
-
-
-    public int InsertPlayerData(string acct, string pass, PlayerData pd)
-    {
-        int id = -1;
-        try
-        {
-            string sql = "insert into account set " +
-            "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power,coin = @coin,diamond = @diamond," +
-            "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-            "guideid=@guideid";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-
-            cmd.Parameters.AddWithValue("acct", acct);
-            cmd.Parameters.AddWithValue("pass", pass);
-            cmd.Parameters.AddWithValue("name", pd.name);
-            cmd.Parameters.AddWithValue("lv", pd.lv);
-            cmd.Parameters.AddWithValue("exp", pd.exp);
-            cmd.Parameters.AddWithValue("power", pd.power);
-            cmd.Parameters.AddWithValue("coin", pd.coin);
-            cmd.Parameters.AddWithValue("diamond", pd.diamond);
-            cmd.Parameters.AddWithValue("hp", pd.hp);
-            cmd.Parameters.AddWithValue("ad", pd.ad);
-            cmd.Parameters.AddWithValue("ap", pd.ap);
-            cmd.Parameters.AddWithValue("addef", pd.addef);
-            cmd.Parameters.AddWithValue("apdef", pd.apdef);
-            cmd.Parameters.AddWithValue("dodge", pd.dodge);
-            cmd.Parameters.AddWithValue("critical", pd.critical);
-            cmd.Parameters.AddWithValue("pierce", pd.pierce);
-            cmd.Parameters.AddWithValue("guideid", pd.guideid);
-
-            cmd.ExecuteNonQuery();
-            id = (int)cmd.LastInsertedId;
-            PECommon.Log("已增id:" + id);
-
-        }
-        catch (Exception e)
-        {
-
-            PECommon.Log("Insert PlayerData失败，原因：" + e, LogType.Error);
-        }
-        finally
-        {
-
-        }
-        return id;
     }
 
     public bool QueryNameData(string name)
@@ -218,9 +230,10 @@ class DBMgr
         try
         {
             string sql = "update account set " +
-                " name = @name,lv = @lv,exp = @exp,power = @power,coin = @coin,diamond = @diamond," +
+                " name = @name,lv = @lv,exp = @exp,power = @power," +
+                "coin = @coin,diamond = @diamond,crystal=@crystal," +
                 " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-                " guideid=@guideid" +
+                " guideid=@guideid,strong=@strong" +
                 " where id=@id";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("name", pd.name);
@@ -229,6 +242,7 @@ class DBMgr
             cmd.Parameters.AddWithValue("power", pd.power);
             cmd.Parameters.AddWithValue("coin", pd.coin);
             cmd.Parameters.AddWithValue("diamond", pd.diamond);
+            cmd.Parameters.AddWithValue("crystal", pd.crystal);
             cmd.Parameters.AddWithValue("hp", pd.hp);
             cmd.Parameters.AddWithValue("ad", pd.ad);
             cmd.Parameters.AddWithValue("ap", pd.ap);
@@ -238,9 +252,8 @@ class DBMgr
             cmd.Parameters.AddWithValue("dodge", pd.dodge);
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
             cmd.Parameters.AddWithValue("guideid", pd.guideid);
+            cmd.Parameters.AddWithValue("strong", StrongArrToStrong(pd.strongArr));
             cmd.Parameters.AddWithValue("id", id);
-
-
             cmd.ExecuteNonQuery();
         }
         catch (Exception e)
@@ -253,6 +266,36 @@ class DBMgr
 
         }
         return true;
+    }
+
+    string StrongArrToStrong(int[] strongArr)
+    {
+     
+        string strong = "";
+   if (strongArr == null) return strong;
+        for (int i = 0; i < strongArr.Length; i++)
+        {
+            strong += "#"+strongArr[i].ToString();
+        }
+
+        return strong;
+    }
+
+    int[] StrongToStrongArr(string strong)
+    {
+
+        string[] _strongArr;        
+        if (strong == null)
+            return null;
+
+        _strongArr =strong.Split('#');//解析后第一个是""
+        int[] strongArr = new int[_strongArr.Length-1];
+        for (int i = 1; i < _strongArr.Length; i++)
+        {
+            strongArr[i-1] = int.Parse(_strongArr[i]) ;
+        }
+
+        return strongArr;
     }
     #endregion
 

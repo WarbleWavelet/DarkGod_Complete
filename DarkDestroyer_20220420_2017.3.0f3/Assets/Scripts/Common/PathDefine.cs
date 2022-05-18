@@ -15,6 +15,7 @@ public class PathDefine
     public const string RDNameCfg = "ResCfgs/rdname";
     public const string MapCfg = "ResCfgs/map";
     public const string GuideCfg = "ResCfgs/guide";
+    public const string StrongCfg = "ResCfgs/strong";
     #endregion
 
     #region AutoGuide
@@ -37,8 +38,17 @@ public class PathDefine
 
 
     #region 强化页
-    public const string PosItemSelected = "ResImages/btnstrong";
-    public const string PosItemNormal = "ResImages/charbg3";
+    /// <summary>强化部位被点击时</summary>
+    public const string ItemArrorBG = "ResImages/btnstrong";
+    public const string ItemPlatBG = "ResImages/charbg3";
+    public const string ItemHead = "ResImages/toukui";
+    public const string ItemBody = "ResImages/body";
+    public const string ItemWaist = "ResImages/yaobu";
+    public const string ItemHands = "ResImages/hand";
+    public const string ItemLeg = "ResImages/leg";
+    public const string ItemFeet = "ResImages/foot";
+    public const string SpStarFull = "ResImages/star1";
+    public const string SpStarNull = "ResImages/star2";
     #endregion
 
 }

@@ -38,7 +38,7 @@
   <Class Name="DBMgr" Collapsed="true">
     <Position X="1.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAACAQAAQAAAAAQAQCAEAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>04 DB\DBMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -53,14 +53,21 @@
     <Position X="2.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEEAAAAAAAAAAAAAAAAEAAAAAEAABAQAACAAAAAAA=</HashCode>
-      <FileName>02 System\GuideSys.cs</FileName>
+      <FileName>02 System\02 GuideSys\GuideSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CfgSvc" Collapsed="true">
     <Position X="4.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAQAAAAEAAAAAAAAAAAAAAABQEACAAAAAAA=</HashCode>
+      <HashCode>AEgEAAAAAAQAAAAEAAIAAAAAAAAAAAABQEACAACAAAA=</HashCode>
       <FileName>01 Server\02 CfgSvc\CfgSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StrongSys" Collapsed="true">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAQAACAAAgAAA=</HashCode>
+      <FileName>02 System\03 Strong\StrongSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

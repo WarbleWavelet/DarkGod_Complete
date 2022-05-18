@@ -29,12 +29,15 @@ class ServerRoot
     public void Init()
     {
         DBMgr.Instance.Init();
+
         CacheSvc.Instance.Init();
         NetSvc.Instance.Init();
+        CfgSvc.Instance.Init();
+
         LoginSys.Instance.Init();
         GuideSys.Instance.Init();
-        CfgSvc.Instance.Init();
-       
+        StrongSys.Instance.Init();
+
     }
 
     public void Update()

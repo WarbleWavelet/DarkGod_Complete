@@ -31,14 +31,14 @@
   <Class Name="ResSvc" Collapsed="true">
     <Position X="12" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAQIgAAQAAAEEAABAACQGAQgAIAARQEIFAQAACAA=</HashCode>
+      <HashCode>AEwAAQIgAAQAAAEEAAJEACQGAQgAIAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Constants" Collapsed="true">
     <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QEAAAAABEAAEJAIAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
+      <HashCode>QEAAAAABEAAEJCIAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="8.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIBAAgAACAAAAAAAAQAAAQACKAAABCIAQAAAEIAAA=</HashCode>
+      <HashCode>AAAIBAAiAACAAAAAAAAQAAAQiyqAAABCIAYCAAEKAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -150,10 +150,17 @@
   <Class Name="PEListener" Collapsed="true">
     <Position X="5.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAEAAgAIAEAAAABAAAAAAAAAAgAAAAAAQQAAAAA=</HashCode>
+      <HashCode>AASAAAEAAgAIAEAAAABAAAAAAAAAAgAAAAAAQQAAAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PEListener.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StrongWnd" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAAAAqAAgEAEEAAAEAAkEBCBAAAEAgAYAABT8gAAQ=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\StrongWnd.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />
 </ClassDiagram>

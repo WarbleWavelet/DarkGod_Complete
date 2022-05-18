@@ -53,3 +53,32 @@ public class AutoGuideCfg : BaseData<AutoGuideCfg>
     public int exp;
 
 }
+
+#region  玩家突破
+/**
+	<item ID = "1" >
+
+        < pos > 0 </ pos >
+        < starlv > 1 </ starlv >
+        < addhp > 20 </ addhp >
+        < addhurt > 25 </ addhurt >
+        < adddef > 18 </ adddef >
+        < minlv > 1 </ minlv >
+        < coin > 150 </ coin >
+        < crystal > 5 </ crystal >
+    </ item >
+    **/
+public class StrongCfg : BaseData<StrongCfg>
+{
+    public int pos;
+    public int starlv;
+    public int addhp;
+    public int addhurt;
+    public int adddef;
+    public int minlv;
+    public int coin;
+    public int crystal;
+}
+
+
+#endregion

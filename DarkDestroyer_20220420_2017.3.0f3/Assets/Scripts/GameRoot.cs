@@ -103,13 +103,18 @@ public class GameRoot : MonoBehaviour
         dynamicWnd.SetWndState();
     }
 
-    /// <summary>
+
+
+    #region SetPlayerData
+ /// <summary>
     /// 保存数据
     /// </summary>
     /// <param name="rspLogin"></param>
     public void SetPlayerData(RspLogin rspLogin)
     {
         this.playerData = rspLogin.playerData;
+
+     
     }
 
     internal void SetPlayerName(string name)
@@ -119,9 +124,25 @@ public class GameRoot : MonoBehaviour
 
     public void SetPlayerDataByGuide(RspGuide data)
     {
-        playerData.guideid = data.guideid;
-        playerData.coin=    data.coin;
-        playerData.exp= data.exp;
-        playerData.lv= data.lv;
+        PlayerData.guideid = data.guideid;
+        PlayerData.coin = data.coin;
+        PlayerData.exp = data.exp;
+        PlayerData.lv = data.lv;
     }
+
+    internal void SetPlayerDataByStrong(GameMsg msg)
+    {
+        RspStrong data = msg.rspStrong;
+        PlayerData.coin = data.coin;
+        PlayerData.crystal = data.crystal;
+        PlayerData.hp = data.hp;
+        PlayerData.ad = data.ad;
+        PlayerData.ap = data.ap;
+        PlayerData.addef = data.addef;
+        PlayerData.apdef = data.apdef;
+        PlayerData.strongArr = data.strongArr;
+
+    }
+    #endregion
+   
 }

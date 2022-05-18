@@ -40,7 +40,7 @@ public class MainCitySys : SystemRoot
 
 
     [Header("强化")]
-    public EnchanceWnd enchanceWnd;
+    public StrongWnd strongWnd;
 
     void Update()
     {
@@ -88,6 +88,7 @@ public class MainCitySys : SystemRoot
             //
             GetNpcPosTrans();
             nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
+            strongWnd.RefreshItem(0);
 
         });
     }
@@ -174,7 +175,11 @@ public class MainCitySys : SystemRoot
         charCamTrans.gameObject.SetActive(state);
 
 
-    } public void OpenInfoWnd()
+    }
+
+
+
+    public void OpenInfoWnd()
     {
         StopNavTask();
         SetCharShowCamState(true);
@@ -271,6 +276,7 @@ public class MainCitySys : SystemRoot
     }
 
 
+    #region Rsp
     public void RspGuide(GameMsg msg)
     {
       
@@ -322,6 +328,14 @@ public class MainCitySys : SystemRoot
         maincityWnd.RefreshUI();
 
     }
+
+    internal void RspStrong(GameMsg msg)
+    {
+        GameRoot.Instance.SetPlayerDataByStrong (msg);
+        strongWnd.UpdateUI();
+    }
+    #endregion
+
     #endregion
 
 
@@ -330,13 +344,13 @@ public class MainCitySys : SystemRoot
     public void OpenEnchanceWnd()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        enchanceWnd.SetWndState();
+        strongWnd.SetWndState();
     }
 
     public void CloseEnchanceWnd()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        enchanceWnd.SetWndState(false);
+        strongWnd.SetWndState(false);
     }
     #endregion
 
