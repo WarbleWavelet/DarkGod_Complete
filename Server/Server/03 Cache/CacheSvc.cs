@@ -54,6 +54,23 @@ class CacheSvc
         return onLineAcctDic.ContainsKey(acct);
     }
 
+    /// <summary>
+    /// 在线用户
+    /// </summary>
+    /// <returns></returns>
+
+    public List<ServerSession> GetOnlineServerSession()
+    {
+        List<ServerSession> lst = new List<ServerSession>();
+
+        foreach (var item in onLineSessionDic)
+        {
+            lst.Add(item.Key);
+        }
+
+        return lst;
+    }
+
 
     /// <summary>
     /// name已存在
@@ -135,6 +152,8 @@ class CacheSvc
         PECommon.Log("SessionID Offline："+session.sessionID);
          
     }
+
+   
     #endregion
 
 

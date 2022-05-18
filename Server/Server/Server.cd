@@ -38,14 +38,14 @@
   <Class Name="DBMgr" Collapsed="true">
     <Position X="1.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAASASAAQAAAAAQAQCAEAAAAA=</HashCode>
       <FileName>04 DB\DBMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CacheSvc" Collapsed="true">
     <Position X="1.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BIAGAAIAAAAAAAAAAAAAAAAAAAEABAQAQAQCAIAABAA=</HashCode>
+      <HashCode>BIAGAAIAAAAAAAAAAAAAAAAAAAEABAQAQAQCAIAIBAA=</HashCode>
       <FileName>03 Cache\CacheSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,8 +66,15 @@
   <Class Name="StrongSys" Collapsed="true">
     <Position X="4.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAQAACAAAgAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEAABAQAACAAAgAAA=</HashCode>
       <FileName>02 System\03 Strong\StrongSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatSys" Collapsed="true">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>02 System\04 Chat\ChatSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

@@ -42,6 +42,11 @@ public class MainCitySys : SystemRoot
     [Header("强化")]
     public StrongWnd strongWnd;
 
+
+    [Header("聊天")]
+    public ChatWnd chatWnd;
+
+
     void Update()
     {
         if (isNavGuide)
@@ -213,7 +218,10 @@ public class MainCitySys : SystemRoot
             RunNavTask();
         }
     }
-   bool IsNavArrived()
+
+
+
+    bool IsNavArrived()
     {
         return Vector3.Distance(playerCtrl.transform.position, navTarget.position) < navStoppedDis;
     }
@@ -354,6 +362,16 @@ public class MainCitySys : SystemRoot
     }
     #endregion
 
+
+
+    #region 聊天
+    public void PshChat(GameMsg msg)
+    {
+        PshChat data = msg.pshChat;
+        chatWnd.AddChatMsg(data.name,data.chat);
+
+    }
+    #endregion
 
 
 }

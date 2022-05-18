@@ -23,6 +23,13 @@ public class WindowRoot : MonoBehaviour
 
 
     #region Wnd
+    protected bool GetWndState()
+    {
+
+         return gameObject.activeSelf;
+        
+       
+    }
  /// <summary>
     /// 打开关闭窗口
     /// </summary>
@@ -47,9 +54,9 @@ public class WindowRoot : MonoBehaviour
     /// </summary>
     protected virtual void ClearWnd()
     {
-        resSvc = null;
-        audioSvc = null;
-        netSvc = null;
+        //resSvc = null;
+        //audioSvc = null;
+        //netSvc = null;
     }
 
     /// <summary>

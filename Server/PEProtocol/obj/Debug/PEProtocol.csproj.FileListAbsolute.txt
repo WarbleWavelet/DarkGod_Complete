@@ -3,8 +3,8 @@ D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\bin\Debug\PEProtocol.pd
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\bin\Debug\PESocket.dll
 D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Scripts\Net\PEProtocol.dll
 D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Scripts\Net\PEProtocol.pdb
-D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csprojAssemblyReference.cache
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csproj.CoreCompileInputs.cache
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csproj.CopyComplete
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.dll
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.pdb
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csprojAssemblyReference.cache

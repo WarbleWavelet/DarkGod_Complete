@@ -51,4 +51,10 @@ public class PathDefine
     public const string SpStarNull = "ResImages/star2";
     #endregion
 
+
+    #region MainCity
+    public const string BtnTypeSelect = "ResImages/btntype1";  
+    public const string BtnTypeUnselect = "ResImages/btntype2";  
+    #endregion
+
 }

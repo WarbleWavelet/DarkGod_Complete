@@ -102,6 +102,10 @@ public class Constants
     #endregion
     /// <summary>最高星级</summary>
     public const int MaxStarLv = 10;
+    /// <summary>每句字数</summary>
+    public const int MaxChatLenth = 12;
+    /// <summary>同时多少句</summary>
+    public const int MaxChatCount= 12;
 
 
 }

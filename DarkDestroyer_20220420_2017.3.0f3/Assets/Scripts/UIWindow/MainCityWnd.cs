@@ -52,7 +52,8 @@ public class MainCityWnd : WindowRoot
     [Header("下")]
     public Text txtExpPrg;
     public Transform expPrgTrans;
-
+    public Button btnChat;
+    public ChatWnd chatWnd;
 
     [Header("NPC")]
     public GuideWnd guideWnd;
@@ -69,6 +70,7 @@ public class MainCityWnd : WindowRoot
         btnMenu.onClick.AddListener(ClickBtnMenu);
         btnGuide.onClick.AddListener(ClickBtnGuide);
         btnEnchance.onClick.AddListener(ClickBtnEnchance);
+        btnChat.onClick.AddListener(ClickBtnChat);
         //
         defaultPos = imgDirBg.transform.position;
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
@@ -140,6 +142,13 @@ public class MainCityWnd : WindowRoot
     private void ClickBtnEnchance()
     {
         MainCitySys.Instance.OpenEnchanceWnd();
+    }
+
+
+    private void ClickBtnChat()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        chatWnd.OpenChatWnd();
     }
     #endregion
 

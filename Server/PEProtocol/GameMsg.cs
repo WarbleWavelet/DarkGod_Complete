@@ -31,6 +31,8 @@ namespace PEProtocol
         public RspGuide rspGuide;
         public ReqStrong reqStrong;
         public RspStrong rspStrong;
+        public SndChat sndChat;
+        public PshChat pshChat;
 
 
 
@@ -50,7 +52,9 @@ namespace PEProtocol
         ReqGuide = 200,
         RspGuide = 201,
         ReqStrong = 202,
-        RspStrong = 203
+        RspStrong = 203,
+        SndChat=204,
+        PshChat=205
     }
 
     #region     GameMsg里的表
@@ -162,6 +166,23 @@ namespace PEProtocol
     }
     #endregion
 
+    #region 聊天
+
+    [Serializable]
+    public class SndChat
+    {
+        public string chat;
+    }
+
+
+    [Serializable]
+    public class PshChat
+    {
+        public string name;
+        public string chat;
+    }
+    #endregion
+
     #endregion
 
 
@@ -205,11 +226,6 @@ namespace PEProtocol
         /// <summary>水晶不足</summary>
         LackCrystal,
         #endregion 
-    
-
-
-
-
 
         /// <summary>密码精度不足</summary>
     }
