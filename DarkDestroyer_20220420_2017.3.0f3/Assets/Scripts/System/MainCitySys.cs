@@ -39,8 +39,9 @@ public class MainCitySys : SystemRoot
     public GuideWnd guideWnd;
 
 
-    [Header("强化")]
+    [Header("强化铸造")]
     public StrongWnd strongWnd;
+    public BuyWnd buyWnd;
 
 
     [Header("聊天")]
@@ -55,7 +56,7 @@ public class MainCitySys : SystemRoot
 
             if (IsNavArrived())
             { 
-            StopNavTask();
+                StopNavTask();
                 OpenGuideWnd();
             }
 
@@ -97,6 +98,8 @@ public class MainCitySys : SystemRoot
 
         });
     }
+
+
 
 
     #endregion
@@ -152,6 +155,19 @@ public class MainCitySys : SystemRoot
     public void SetPlayerRotate(float rotate)
     {
         playerCtrl.transform.localEulerAngles = new Vector3(0f, playerStartRotate + rotate, 0f);
+    }
+
+    internal void OpenMKCoinWnd()
+    {
+        buyWnd.SetWndState();
+        buyWnd.RefreshUI(10,BuyType.DIAMOND,1000,GoodType.COIN);
+    }
+
+    internal void OpenAddPowerWnd()
+    {
+       
+        buyWnd.SetWndState();
+        buyWnd.RefreshUI(10, BuyType.DIAMOND, 100, GoodType.POWER);
     }
     #endregion
 
@@ -219,7 +235,13 @@ public class MainCitySys : SystemRoot
         }
     }
 
-
+    internal void RspBuy(GameMsg msg)
+    {
+        GameRoot.Instance.SetPlayerDataByBuy(msg);
+         maincityWnd.RefreshUI();
+        GameRoot.AddTips("购买成功！");
+        buyWnd.btnSure.interactable = true;
+    }
 
     bool IsNavArrived()
     {
@@ -349,13 +371,12 @@ public class MainCitySys : SystemRoot
 
 
     #region 强化
-    public void OpenEnchanceWnd()
+    public void OpenStrongWnd()
     {
-        audioSvc.PlayUIAudio(Constants.UIClickBtn);
         strongWnd.SetWndState();
     }
 
-    public void CloseEnchanceWnd()
+    public void CloseStrongWnd()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         strongWnd.SetWndState(false);

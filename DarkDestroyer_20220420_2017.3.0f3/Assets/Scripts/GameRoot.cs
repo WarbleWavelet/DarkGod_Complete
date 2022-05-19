@@ -143,6 +143,56 @@ public class GameRoot : MonoBehaviour
         PlayerData.strongArr = data.strongArr;
 
     }
+
+    internal void SetPlayerDataByBuy(GameMsg msg)
+    {
+        RspBuy   data = msg.rspBuy;
+
+        //cost
+        switch ( data.buyType )
+        {
+            case  BuyType.COIN:
+                {
+                    PlayerData.coin -= data.buyCnt;
+                }
+                break;
+            case BuyType.DIAMOND:
+                {
+                    PlayerData.diamond -= data.buyCnt;
+                }
+                break;
+            case BuyType.CRYSTAL:
+                {
+                    PlayerData.crystal -= data.buyCnt;
+                }
+                break;
+            default:
+                {
+
+                }
+                break;
+        }
+        //get
+
+        switch (  data.goodType)
+        {
+            case GoodType.POWER :
+                {
+                    PlayerData.power += data.goodCnt;
+                }
+                break;
+            case GoodType.COIN:
+                {
+                    PlayerData.coin += data.goodCnt;
+                }
+                break;
+            default:
+                {
+
+                }
+                break;
+        }
+    }
     #endregion
-   
+
 }

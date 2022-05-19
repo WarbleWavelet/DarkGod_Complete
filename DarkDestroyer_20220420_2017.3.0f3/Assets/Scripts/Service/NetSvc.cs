@@ -194,6 +194,11 @@ public class NetSvc : MonoBehaviour
                     MainCitySys.Instance.PshChat(msg);
                 }
                 break;
+            case CMD.RspBuy:
+                {
+                    MainCitySys.Instance.RspBuy(msg);
+                }
+                break;
         }
     }
     #endregion

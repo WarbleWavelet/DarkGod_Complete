@@ -75,7 +75,7 @@ public class StrongWnd : WindowRoot
         pd = GameRoot.Instance.PlayerData;
         bgArr = new Image[posBtnTrans.childCount];
         RegClickEvts();
-
+        RefreshItem(0);
     }
 
 
@@ -153,7 +153,6 @@ public class StrongWnd : WindowRoot
         StrongCfg cfg = resSvc.GetStrongCfg((int)posIdx, curStarLv);
         StrongCfg nextCfg = resSvc.GetStrongCfg((int)posIdx, nextStarLv);
         string str2=nextCfg != null?"有":"无"  ;
-         print( "位置" + posIdx + "等级" + nextStarLv + str2);
         if (nextCfg != null)
         {
             SetActiveByStartLv(true);
@@ -310,7 +309,7 @@ public class StrongWnd : WindowRoot
     /// </summary>
     public void CloseEnchanceWnd()
     {
-        MainCitySys.Instance.CloseEnchanceWnd();
+        MainCitySys.Instance.CloseStrongWnd();
 
     }
 

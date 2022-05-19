@@ -17,7 +17,7 @@
   <Class Name="WindowRoot" Collapsed="true">
     <Position X="3.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAIABUAAAAIFAABACAAAAAAAEAAAAAIAAAEA=</HashCode>
+      <HashCode>AAAAAIAAAIABUAAAAIFAABACAAAAAAgEAAAAAIAAAEA=</HashCode>
       <FileName>Assets\Scripts\WindowRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,14 +38,14 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QEAAAAABEAAEJCIAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
+      <HashCode>QEAAAAABEAAEJCoAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameRoot" Collapsed="true">
-    <Position X="12.25" Y="4.5" Width="1.5" />
+    <Position X="7.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgCAAAACAABAAAEAAACAAAAEAARAAAQAACAAAAAEA=</HashCode>
+      <HashCode>AAAgCAAgQCAABAAAEAAACAAAAEAARAAAQAACAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\GameRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="8.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIBAAiAACAAAAAAAAQAAAQiyqAAABCIAYCAAEKAAA=</HashCode>
+      <HashCode>AAAIBIAiAACAAAAAAAAQAAAQiyqAAABCIAYCEAEKAAA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +94,7 @@
   <Class Name="MainCityWnd" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAAAUAgCAQABGAAAEAIAIhACEEAAQAQAsABCKCERY=</HashCode>
+      <HashCode>AQQAAAQAgCFQABCIAAEAIAIhCCEEAAQRQAsABSKCERY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -143,7 +143,7 @@
   <Class Name="MainCitySys" Collapsed="true">
     <Position X="11.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gERAiBIjACA0QEAAAAAAAAEAACAIARQQSCEIDgCBABA=</HashCode>
+      <HashCode>CERAiBIhACEkQEAAgAAgAAEAACAIARQQSCEIHkCBIBA=</HashCode>
       <FileName>Assets\Scripts\System\MainCitySys.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -158,8 +158,15 @@
   <Class Name="StrongWnd" Collapsed="true">
     <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>MAAAAAAqAAgEAEEAAAEAAkEBCBAAAEAgAYAABT8gAAQ=</HashCode>
+      <HashCode>IoAQAQAqAQgEIEEAAAEAAkABSBAAAEQAAYAABV8gAIQ=</HashCode>
       <FileName>Assets\Scripts\UIWindow\StrongWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuyWnd" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAAAAAAEAAEAIAAAAAAAAAAAAIAAZAIAAAI=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\BuyWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

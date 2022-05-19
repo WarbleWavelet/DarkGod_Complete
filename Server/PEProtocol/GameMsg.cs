@@ -1,6 +1,9 @@
 ﻿
 using System;
+using System.ComponentModel;
+using System.Linq;
 using PENet;
+using System.Collections.Generic;
 /// <summary>
 /// 网络通信协议（CS共用）
 /// </summary>
@@ -13,7 +16,7 @@ namespace PEProtocol
 
     #endregion
     [Serializable]
-    public class GameMsg_Text:PEMsg
+    public class GameMsg_Text : PEMsg
     {
         public string text;
 
@@ -33,6 +36,8 @@ namespace PEProtocol
         public RspStrong rspStrong;
         public SndChat sndChat;
         public PshChat pshChat;
+        public ReqBuy reqBuy;
+        public RspBuy rspBuy;
 
 
 
@@ -53,8 +58,10 @@ namespace PEProtocol
         RspGuide = 201,
         ReqStrong = 202,
         RspStrong = 203,
-        SndChat=204,
-        PshChat=205
+        SndChat = 204,
+        PshChat = 205,
+        ReqBuy = 206,
+        RspBuy = 207,
     }
 
     #region     GameMsg里的表
@@ -183,6 +190,33 @@ namespace PEProtocol
     }
     #endregion
 
+
+    #region 交易
+
+    [Serializable]
+    public class ReqBuy
+    {
+        public BuyType buyType;
+        public int buyCnt;
+        public GoodType goodType;
+        public int goodCnt;
+    }
+
+    [Serializable]
+    public class RspBuy
+    {
+        public BuyType buyType;
+        public int buyCnt;
+        public GoodType goodType;
+        public int goodCnt;
+    }
+
+    [Serializable]
+    public class RspBuyLst
+    {
+        public List<RspBuy> list;
+    }
+    #endregion
     #endregion
 
 
@@ -193,14 +227,14 @@ namespace PEProtocol
     }
 
 
-   
+
     /// <summary>
     /// 错误码
     /// </summary>
     public enum ErrorCode
     {
-         /// <summary>没错误</summary>
-        None=0,
+        /// <summary>没错误</summary>
+        None = 0,
 
         /// <summary>账号已被登录</summary>
         AcctIsOnLine,
@@ -213,7 +247,7 @@ namespace PEProtocol
 
         /// <summary>更新数据出错</summary>
         UpdateDBError,
-      
+
         /// <summary>服务器数据异常</summary>
         ServerDataError,
         #region Lack 不足，缺少
@@ -229,4 +263,65 @@ namespace PEProtocol
 
         /// <summary>密码精度不足</summary>
     }
+
+
+    public enum BuyType
+    {
+        [Description("钻石")]
+        DIAMOND,
+        [Description("金币")]
+        COIN,
+        [Description("水晶")]
+        CRYSTAL
+    }
+
+    public enum GoodType
+    {
+        [Description("体力")]
+        POWER,
+        [Description("金币")]
+        COIN
+    }
 }
+
+
+
+
+/****************************************************
+    文件：EnumExtension.cs
+	作者：lenovo
+    邮箱: 
+    日期：2022/5/19 12:42:6
+	功能：给枚举以描述(https://blog.csdn.net/sd7o95o/article/details/87707384)
+*****************************************************/
+
+
+public static class EnumExtension
+{
+    public static string ToDes(this Enum val)
+    {
+        var type = val.GetType();
+        var memberInfo = type.GetMember(val.ToString());
+        var attr = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+        if (attr == null || attr.Length != 1)
+        {
+            return val.ToString();
+        }
+
+        return (attr.Single() as DescriptionAttribute).Description;
+    }
+}
+
+/* 用法
+
+public enum BuyType
+{
+    [Description("钻石")]
+    DIAMOND,
+    [Description("金币")]
+    COIN
+}
+
+EnumExtension.ToDes(BuyType.DIAMOND)
+*/

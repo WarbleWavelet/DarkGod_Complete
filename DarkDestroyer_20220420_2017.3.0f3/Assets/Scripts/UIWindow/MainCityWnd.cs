@@ -23,7 +23,7 @@ public class MainCityWnd : WindowRoot
     public Text txtPower;
     public Text txtLevel;
     public Text txtName;
-
+    public Button btnAddPower;
 
 
     [Header("右上")]
@@ -36,7 +36,9 @@ public class MainCityWnd : WindowRoot
     public Button btnMenu;
     public Animation aniMenu;
     public bool menuState=false;
-    public Button btnEnchance;
+    public Button btnStrong;
+    public Button btnMKCoin;
+
 
     [Header("左下")]
     public Image imgTouch;
@@ -66,10 +68,12 @@ public class MainCityWnd : WindowRoot
     {
         base.InitWnd();
         //
-        
+
+        btnAddPower.onClick.AddListener(ClickBtnAddPower);
         btnMenu.onClick.AddListener(ClickBtnMenu);
         btnGuide.onClick.AddListener(ClickBtnGuide);
-        btnEnchance.onClick.AddListener(ClickBtnEnchance);
+        btnStrong.onClick.AddListener(ClickBtnStrong);
+        btnMKCoin.onClick.AddListener(ClickBtnMKCoin);
         btnChat.onClick.AddListener(ClickBtnChat);
         //
         defaultPos = imgDirBg.transform.position;
@@ -95,7 +99,8 @@ public class MainCityWnd : WindowRoot
         PlayerData pd = GameRoot.Instance.PlayerData;
         SetText(txtFight, PECommon.GetFightByProps(pd));
         SetText(txtPower,"体力:"+pd.power+"/"+PECommon.GetPowerLimit(pd.lv));
-        imgPowerPrg.fillAmount = (pd.power * 1.0f) / PECommon.GetPowerLimit(pd.lv);
+        imgPowerPrg.fillAmount = (pd.power * 1.0f) / (1.0f*PECommon.GetPowerLimit(pd.lv));
+
         SetText(txtName, pd.name);
         SetText(txtLevel, pd.lv);
         //
@@ -139,16 +144,30 @@ public class MainCityWnd : WindowRoot
     }
 
 
-    private void ClickBtnEnchance()
-    {
-        MainCitySys.Instance.OpenEnchanceWnd();
-    }
+
 
 
     private void ClickBtnChat()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         chatWnd.OpenChatWnd();
+    }
+
+    public void ClickBtnMKCoin()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+
+        MainCitySys.Instance.OpenMKCoinWnd();
+    }
+    private void ClickBtnAddPower()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        MainCitySys.Instance.OpenAddPowerWnd();
+    }
+    private void ClickBtnStrong()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        MainCitySys.Instance.OpenStrongWnd();
     }
     #endregion
 

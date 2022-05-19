@@ -21,7 +21,6 @@ public class WindowRoot : MonoBehaviour
     public NetSvc netSvc;
 
 
-
     #region Wnd
     protected bool GetWndState()
     {
@@ -60,11 +59,11 @@ public class WindowRoot : MonoBehaviour
     }
 
     /// <summary>
-    /// 初始化窗口
+    /// 初始化窗口(每次打开窗口都执行，注意按钮事件多次添加等)
     /// </summary>
     protected virtual void InitWnd()
     {
-
+       
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
         netSvc = NetSvc.Instance;
