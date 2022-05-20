@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ServerRoot" Collapsed="true">
-    <Position X="0.75" Y="4.5" Width="1.5" />
+    <Position X="0.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQEAAAAAAAAAAAIAAAAAAAIAAAAAAAAQAACAAAAAAA=</HashCode>
+      <HashCode>AAQEAAAAAAAAAAAIAAAAAAAIAAAEAAAAQAACAAAAAAA=</HashCode>
       <FileName>00 Common\ServerRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ServerStart" Collapsed="true">
-    <Position X="2.75" Y="4.5" Width="1.5" />
+    <Position X="2.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>00 Common\ServerStart.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NetSvc" Collapsed="true">
-    <Position X="0.75" Y="3.5" Width="1.5" />
+    <Position X="0.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>YAQEAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAACAAAQAAA=</HashCode>
       <FileName>01 Server\01 NetSvc\NetSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ServerSession" Collapsed="true">
-    <Position X="2.75" Y="3.5" Width="1.5" />
+    <Position X="2.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAgAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
       <FileName>01 Server\01 NetSvc\ServerSession.cs</FileName>
@@ -43,7 +43,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CacheSvc" Collapsed="true">
-    <Position X="1.75" Y="2.5" Width="1.5" />
+    <Position X="1.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BIAGAAIAAAAAAAAAAAAAAAAAAAEABAQAQAQCAIAIBAA=</HashCode>
       <FileName>03 Cache\CacheSvc.cs</FileName>
@@ -57,7 +57,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CfgSvc" Collapsed="true">
-    <Position X="4.5" Y="3.5" Width="1.5" />
+    <Position X="4.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEgEAAAAAAQAAAAEAAIAAAAAAAAAAAABQEACAACAAAA=</HashCode>
       <FileName>01 Server\02 CfgSvc\CfgSvc.cs</FileName>
@@ -71,10 +71,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ChatSys" Collapsed="true">
-    <Position X="4.5" Y="2.5" Width="1.5" />
+    <Position X="4.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAEAAAAAAAAAAAAEAABEQAACAAAAAAA=</HashCode>
       <FileName>02 System\04 Chat\ChatSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSys" Collapsed="true">
+    <Position X="2.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAABAUAACAAAAAAA=</HashCode>
+      <FileName>02 System\06 PowerSys\PowerSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

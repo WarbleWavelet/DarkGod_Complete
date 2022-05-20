@@ -235,6 +235,13 @@ public class MainCitySys : SystemRoot
         }
     }
 
+    internal void RspPower(GameMsg msg)
+    {
+        GameRoot.Instance.SetPlayerDataByPower(msg);
+        maincityWnd.RefreshUI();
+
+    }
+
     internal void RspBuy(GameMsg msg)
     {
         GameRoot.Instance.SetPlayerDataByBuy(msg);

@@ -199,6 +199,11 @@ public class NetSvc : MonoBehaviour
                     MainCitySys.Instance.RspBuy(msg);
                 }
                 break;
+            case CMD.PshPower:
+                {
+                    MainCitySys.Instance.RspPower(msg);
+                }
+                break;
         }
     }
     #endregion

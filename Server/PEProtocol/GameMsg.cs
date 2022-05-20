@@ -38,6 +38,7 @@ namespace PEProtocol
         public PshChat pshChat;
         public ReqBuy reqBuy;
         public RspBuy rspBuy;
+        public PshPower pshPower;
 
 
 
@@ -54,14 +55,15 @@ namespace PEProtocol
         ReqRename = 103,
         RspRename = 104,
         //主城
-        ReqGuide = 200,
-        RspGuide = 201,
-        ReqStrong = 202,
-        RspStrong = 203,
-        SndChat = 204,
-        PshChat = 205,
-        ReqBuy = 206,
-        RspBuy = 207,
+        ReqGuide = 201,
+        RspGuide = 202,
+        ReqStrong = 203,
+        RspStrong = 204,
+        SndChat = 205,
+        PshChat = 206,
+        ReqBuy = 207,
+        RspBuy = 208,
+        PshPower=209
     }
 
     #region     GameMsg里的表
@@ -215,6 +217,12 @@ namespace PEProtocol
     public class RspBuyLst
     {
         public List<RspBuy> list;
+    }
+
+    [Serializable]
+    public class PshPower
+    {
+        public int power;
     }
     #endregion
     #endregion

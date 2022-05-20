@@ -81,13 +81,14 @@ class TimerSvc
 
     }
 
-     public void Update()
+
+    public void Update()
     {
         //if (tpQue.Count > 0)//一帧拿一个
         while (tpQue.Count > 0)//一帧拿多个
         {
             TaskPack tp = null;
-           lock (tpQueLock)
+            lock (tpQueLock)
             {
                 tp = tpQue.Dequeue();
             }
@@ -98,6 +99,9 @@ class TimerSvc
             }
         }
     }
+
+
+
     /// <summary>
     /// 
     /// </summary>

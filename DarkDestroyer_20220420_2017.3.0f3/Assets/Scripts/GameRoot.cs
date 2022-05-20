@@ -197,6 +197,15 @@ public class GameRoot : MonoBehaviour
                 break;
         }
     }
+
+
+
+    internal void SetPlayerDataByPower(GameMsg msg)
+    {
+        PshPower data = msg.pshPower;
+        PlayerData.power = data.power;
+        PECommon.Log("玩家体力："+data.power);
+    }
     #endregion
 
 
@@ -210,6 +219,8 @@ public class GameRoot : MonoBehaviour
             }, 5000
         );
     }
+
+
     #endregion
 
 }
