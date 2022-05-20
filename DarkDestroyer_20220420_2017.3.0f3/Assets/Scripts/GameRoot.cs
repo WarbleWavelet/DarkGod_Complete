@@ -49,7 +49,7 @@ public class GameRoot : MonoBehaviour
     }
 
     #endregion
-  
+
 
     /// <summary>
     /// 控制初始化模块的顺序(乱了就空指针错误)
@@ -64,19 +64,23 @@ public class GameRoot : MonoBehaviour
         AudioSvc audio = GetComponent<AudioSvc>();
         audio.InitSvc();
 
-        LoginSys login=GetComponent<LoginSys>();
+        LoginSys login = GetComponent<LoginSys>();
         login.InitSys();
-        
+
         dynamicWnd.Init();
 
 
         login.EnterLogin();
-        
-        MainCitySys  maincitySys=GetComponent<MainCitySys>();
+
+        MainCitySys maincitySys = GetComponent<MainCitySys>();
         maincitySys.InitSys();
 
+        TimerSvc timerSvc = GetComponent<TimerSvc>();
+        timerSvc.InitSys();
+       // TestTimerSvc(); 
 
     }
+
 
     /// <summary>
     /// 桌面消息
@@ -192,6 +196,19 @@ public class GameRoot : MonoBehaviour
                 }
                 break;
         }
+    }
+    #endregion
+
+
+    #region 测试代码
+    void TestTimerSvc()
+    {
+        TimerSvc timerSvc = GetComponent<TimerSvc>();
+        timerSvc.AddTimerTask(
+            (int tid) => {
+                PECommon.Log("胜多负少");
+            }, 5000
+        );
     }
     #endregion
 

@@ -8,6 +8,7 @@
 
 using PEProtocol;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +45,7 @@ public class ChatWnd : WindowRoot
 
     public Dictionary<ChatType, List<String>> chatDic = new Dictionary<ChatType, List<string>>();
     public Text txtChat;
+    public bool canSend = true;
 
     protected override void InitWnd()
     {
@@ -82,6 +84,12 @@ public class ChatWnd : WindowRoot
 
     void ClickBtnSend()
     {
+        if (!canSend)
+        {
+            GameRoot.AddTips("还需要5s才能再次发言");
+        }
+      
+        //
         if (iptChat.text != null && iptChat.text != "" && iptChat.text != " ")
         {
             string str = iptChat.text;
@@ -100,7 +108,8 @@ public class ChatWnd : WindowRoot
             };
 
             iptChat.text = "";
-            netSvc.SendMsg(msg);
+            netSvc.SendMsg(msg); 
+            StartCoroutine(MsgTimer());
         }
         else
         {
@@ -132,6 +141,15 @@ public class ChatWnd : WindowRoot
         RefreshUI();
     }
     #endregion
+
+
+
+ 
+    IEnumerator MsgTimer()
+    {
+        yield return new WaitForSeconds(5.0f);
+        canSend = true;
+    }
   
     public void RefreshUI()
     {
