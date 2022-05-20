@@ -84,9 +84,11 @@ public class ChatWnd : WindowRoot
 
     void ClickBtnSend()
     {
+
         if (!canSend)
         {
             GameRoot.AddTips("还需要5s才能再次发言");
+            return;
         }
       
         //
@@ -106,10 +108,13 @@ public class ChatWnd : WindowRoot
                     chat = str,
                 }
             };
-
+            canSend = false;
             iptChat.text = "";
-            netSvc.SendMsg(msg); 
-            StartCoroutine(MsgTimer());
+            netSvc.SendMsg(msg);
+            //
+            timerSvc.AddTimerTask((int tid) => {
+                canSend = true;
+            }, 5,PETimeUnit.Second);
         }
         else
         {
@@ -145,11 +150,7 @@ public class ChatWnd : WindowRoot
 
 
  
-    IEnumerator MsgTimer()
-    {
-        yield return new WaitForSeconds(5.0f);
-        canSend = true;
-    }
+
   
     public void RefreshUI()
     {

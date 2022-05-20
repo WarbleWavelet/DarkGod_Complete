@@ -38,12 +38,16 @@ class ServerRoot
         GuideSys.Instance.Init();
         StrongSys.Instance.Init();
         BuySys.Instance.Init();
-
+        ChatSys.Instance.Init();
+        TimerSvc.Instance.Init();
+        TestTimerSvc();
     }
 
     public void Update()
     {
         NetSvc.Instance.Update();
+        TimerSvc.Instance.Update();
+        
     }
 
 
@@ -58,6 +62,15 @@ class ServerRoot
             SessionID = 0;
         }
         return ++SessionID;
+    }
+
+    void TestTimerSvc()
+    {
+        int ms = 1000;
+        TimerSvc.Instance.AddTimerTask((int tid)=> {
+            PECommon.Log("1秒");
+
+       },ms,PETimeUnit.Millisecond,0);
     }
 }
 

@@ -54,6 +54,8 @@
     <Compile Include="01 Server\01 NetSvc\NetSvc.cs" />
     <Compile Include="01 Server\01 NetSvc\ServerSession.cs" />
     <Compile Include="01 Server\02 CfgSvc\CfgSvc.cs" />
+    <Compile Include="01 Server\03 TimerSvc\PETimer.cs" />
+    <Compile Include="01 Server\03 TimerSvc\TimerSvc.cs" />
     <Compile Include="02 System\01 LoginSys\LoginSys.cs" />
     <Compile Include="02 System\02 GuideSys\GuideSys.cs" />
     <Compile Include="02 System\03 Strong\StrongSys.cs" />

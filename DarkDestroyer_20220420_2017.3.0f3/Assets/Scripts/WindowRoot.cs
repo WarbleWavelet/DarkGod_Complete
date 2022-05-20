@@ -19,6 +19,7 @@ public class WindowRoot : MonoBehaviour
     public ResSvc resSvc;
     public AudioSvc audioSvc;
     public NetSvc netSvc;
+    public TimerSvc timerSvc;
 
 
     #region Wnd
@@ -56,6 +57,7 @@ public class WindowRoot : MonoBehaviour
         //resSvc = null;
         //audioSvc = null;
         //netSvc = null;
+        //timerSvc = null;
     }
 
     /// <summary>
@@ -67,6 +69,8 @@ public class WindowRoot : MonoBehaviour
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
         netSvc = NetSvc.Instance;
+        timerSvc = TimerSvc.Instance;
+        timerSvc = TimerSvc.Instance;
     }
     #endregion
    

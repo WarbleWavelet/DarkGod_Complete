@@ -34,7 +34,8 @@ public class TimerSvc : SystemRoot
     {
         base.InitSys();
         _instance = this;
-        pt=new PETimer();
+       pt=new PETimer();
+     
         pt.SetLog((string info) =>
         {
             PECommon.Log(info);

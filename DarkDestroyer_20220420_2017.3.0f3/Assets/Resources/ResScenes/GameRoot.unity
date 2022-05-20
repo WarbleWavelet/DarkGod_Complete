@@ -5785,6 +5785,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   imgWorld: {fileID: 1584590212}
   imgGuild: {fileID: 797260104}
   imgFriend: {fileID: 2024417752}
@@ -7270,7 +7271,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1787008294642014, guid: ecda34605916c65489252857a94c21ae, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114963320971360596, guid: ecda34605916c65489252857a94c21ae,
         type: 2}
@@ -7326,6 +7327,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   iptName: {fileID: 46696998}
   btnRand: {fileID: 309678130}
   btnEnter: {fileID: 1762824894}
@@ -8939,6 +8941,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   txtName: {fileID: 417575328}
   txtTalk: {fileID: 186513130}
   imgIcon: {fileID: 797553602}
@@ -9468,6 +9471,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   btnNotice: {fileID: 2088108331}
   iptAcct: {fileID: 1027960469}
   iptPass: {fileID: 451579405}
@@ -10370,6 +10374,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   btnClose: {fileID: 511217829}
   btnSure: {fileID: 1376874107}
   txtShow: {fileID: 782973027}
@@ -10392,6 +10397,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   tipsAni: {fileID: 871511010}
   txtTips: {fileID: 871511011}
   isTipsShow: 0
@@ -10591,6 +10597,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   textTips: {fileID: 1263393557}
   textPrg: {fileID: 1522037357}
   imageFG: {fileID: 1190705858}
@@ -11464,6 +11471,7 @@ MonoBehaviour:
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
   netSvc: {fileID: 1332992446}
+  timerSvc: {fileID: 0}
   posBtnTrans: {fileID: 1541200832}
   imgEquip: {fileID: 1043827987}
   btnClose: {fileID: 1955877751}

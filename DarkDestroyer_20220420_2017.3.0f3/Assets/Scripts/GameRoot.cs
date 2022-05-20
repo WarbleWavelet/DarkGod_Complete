@@ -77,7 +77,7 @@ public class GameRoot : MonoBehaviour
 
         TimerSvc timerSvc = GetComponent<TimerSvc>();
         timerSvc.InitSys();
-       // TestTimerSvc(); 
+        TestTimerSvc(); 
 
     }
 
@@ -206,7 +206,7 @@ public class GameRoot : MonoBehaviour
         TimerSvc timerSvc = GetComponent<TimerSvc>();
         timerSvc.AddTimerTask(
             (int tid) => {
-                PECommon.Log("胜多负少");
+                PECommon.Log("5秒后");
             }, 5000
         );
     }
