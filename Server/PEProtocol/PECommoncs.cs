@@ -63,7 +63,7 @@ public class PECommon
         return lv *lv*100;
     }
 
-    /// <summary>每5分钟加一次</summary> 
+    /// <summary>每5单位（看是分钟还是其它）加一次</summary> 
     public const int PowerAddSpace=5;
     /// <summary>每次加2点体力</summary> 
     public const int PowerAddCount = 2;

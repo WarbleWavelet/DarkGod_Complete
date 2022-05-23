@@ -15,7 +15,7 @@ using System;
 public class NetSvc : MonoBehaviour
 {
 
-    PESocket<ClientSession, GameMsg> client = null;
+  public  PESocket<ClientSession, GameMsg> client = null;
     public static NetSvc Instance = null;
     public Queue<GameMsg> msgQue = new Queue<GameMsg>();
     public static readonly string obj = "lock";
@@ -27,9 +27,10 @@ public class NetSvc : MonoBehaviour
         PECommon.Log("Init NetSvc ", LogType.Log);
 
         client = new PESocket<ClientSession,GameMsg>();
-       
 
-        client.SetLog(true, (string msg, int lv) => {
+
+        #region SetLog
+     client.SetLog(true, (string msg, int lv) => {
             switch (lv)
             {
                 case 0:
@@ -50,6 +51,8 @@ public class NetSvc : MonoBehaviour
                     break;
             }
         });
+        #endregion
+   
 
         client.StartAsClient(SrvCfg.srvIp, SrvCfg.srvPort);
     }

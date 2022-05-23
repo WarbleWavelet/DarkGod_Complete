@@ -60,7 +60,7 @@ public class LoginSys : SystemRoot
         //GameRoot.AddTips("登录成功");
         GameRoot.Instance.SetPlayerData(msg.rspLogin);
 
-        if (msg.rspLogin.playerData.name == null ||msg.rspLogin.playerData.name == "" )
+        if (msg.rspLogin.pd.name == null ||msg.rspLogin.pd.name == "" )
         {
             createWnd.SetWndState(true);
         }

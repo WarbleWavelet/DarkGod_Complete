@@ -15,7 +15,7 @@ public class ClientSession : PESession<GameMsg>
     protected override void OnConnected()
     {
         GameRoot.AddTips("已连接服务器");
-        PECommon.Log("A Client Connected",LogType.Log);
+        PECommon.Log("Connected To Sevrer");
 
     }
 
@@ -28,7 +28,7 @@ public class ClientSession : PESession<GameMsg>
     protected override void OnDisConnected()
     {
         GameRoot.AddTips("已断开服务器");
-        PECommon.Log("A Client Disconnected", LogType.Log);
+        PECommon.Log("Disconnected To Sevrer");
 
     }
 

@@ -261,6 +261,8 @@ public class StrongWnd : WindowRoot
     /// <param name="posIdx"></param>
     private void SetItemImgByPosIdx(int posIdx)
     {
+        if (resSvc == null)
+            resSvc = ResSvc.Instance;
         SetSprite(imgEquip, PathDefine.ItemHead);
 
         switch (posIdx)
@@ -295,11 +297,7 @@ public class StrongWnd : WindowRoot
                     SetSprite(imgEquip, PathDefine.ItemFeet);
                 }
                 break;
-            default:
-                {
-
-                }
-                break;
+            default:break;
         }
     }
 

@@ -48,6 +48,14 @@ public class GameRoot : MonoBehaviour
         Init();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        { 
+            NetSvc.Instance.client.ShutDown();
+        }
+    }
+
     #endregion
 
 
@@ -58,26 +66,22 @@ public class GameRoot : MonoBehaviour
     {
         NetSvc netSvc = GetComponent<NetSvc>();
         netSvc.InitSvc();
-        //
         ResSvc res = GetComponent<ResSvc>();
         res.InitSvc();
         AudioSvc audio = GetComponent<AudioSvc>();
         audio.InitSvc();
-
         LoginSys login = GetComponent<LoginSys>();
         login.InitSys();
-
-        dynamicWnd.Init();
-
-
-        login.EnterLogin();
-
+        //
         MainCitySys maincitySys = GetComponent<MainCitySys>();
         maincitySys.InitSys();
-
         TimerSvc timerSvc = GetComponent<TimerSvc>();
         timerSvc.InitSys();
-        TestTimerSvc(); 
+        //TestTimerSvc(); 
+        //
+        dynamicWnd.Init();
+        login.EnterLogin();     
+
 
     }
 
@@ -116,7 +120,7 @@ public class GameRoot : MonoBehaviour
     /// <param name="rspLogin"></param>
     public void SetPlayerData(RspLogin rspLogin)
     {
-        this.playerData = rspLogin.playerData;
+        this.playerData = rspLogin.pd;
 
      
     }
@@ -200,9 +204,8 @@ public class GameRoot : MonoBehaviour
 
 
 
-    internal void SetPlayerDataByPower(GameMsg msg)
+    internal void SetPlayerDataByPower(PshPower data)
     {
-        PshPower data = msg.pshPower;
         PlayerData.power = data.power;
         PECommon.Log("玩家体力："+data.power);
     }

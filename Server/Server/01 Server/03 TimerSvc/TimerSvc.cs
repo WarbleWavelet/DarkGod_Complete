@@ -55,9 +55,6 @@ class TimerSvc
 
     public void Init()
     {
-
-
-
         //pt = new PETimer();
         pt = new PETimer(1000);//每隔1000ms执行一次
         //
@@ -77,7 +74,7 @@ class TimerSvc
         {
             PECommon.Log(info);
         });
-        PECommon.Log("Init TimerSvc");
+        PECommon.Log("TimerSvc Inited");
 
     }
 
@@ -114,6 +111,15 @@ class TimerSvc
     public int AddTimerTask(Action<int> cb, double delay, PETimeUnit timeUnit = PETimeUnit.Millisecond,int count=1)
     {
         return pt.AddTimeTask(cb, delay, timeUnit,count);
+    }
+
+    /// <summary>
+    /// 当前时间
+    /// </summary>
+    /// <returns></returns>
+    public long GetNowTime()
+    {
+        return (long)pt.GetMillisecondsTime();
     }
 }
 

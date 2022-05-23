@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 /// </summary>
 class LoginSys
 {
+    #region 单例
     private static LoginSys _instance;
-    CacheSvc cacheSvc = null;
+
 
     public static LoginSys Instance
     {
@@ -25,10 +26,14 @@ class LoginSys
             return _instance;
         }
     }
+    #endregion
 
+    CacheSvc cacheSvc = null;
+    TimerSvc timerSvc = null;
     public void Init()
     {
         cacheSvc = CacheSvc.Instance;
+        timerSvc = TimerSvc.Instance;
         PECommon.Log("LoginSys Inited");
     }
 
@@ -49,10 +54,6 @@ class LoginSys
         GameMsg msg = new GameMsg
         {
             cmd = (int)CMD.RspLogin,
-            rspLogin = new RspLogin
-            {
-
-            }
         };
 
         ReqLogin data = pack.msg.reqLogin;
@@ -62,16 +63,20 @@ class LoginSys
         }
         else
         {
-            PlayerData _playerData = cacheSvc.GetPlayerData(data.acct, data.pass);
-            if (_playerData == null)
+            PlayerData _pd = cacheSvc.GetPlayerData(data.acct, data.pass);
+            if (_pd == null)
             {
                 msg.err = (int)ErrorCode.WrongPass;
             }
             else
             {
-                msg.rspLogin = new RspLogin { playerData = _playerData };
-
-                cacheSvc.AcctOnline(data.acct, pack.session, _playerData);
+                UpdatePlayerDataByOfflineAddPower(_pd);
+                //
+                msg.rspLogin = new RspLogin
+                {
+                    pd = _pd
+                };
+                cacheSvc.AcctOnline(data.acct, pack.session, _pd);
             }
         }
 
@@ -79,7 +84,6 @@ class LoginSys
         pack.session.SendMsg(msg);
 
     }
-
 
 
 
@@ -127,8 +131,62 @@ class LoginSys
 
     public void ClearOfflineData(ServerSession session)
     {
-        cacheSvc.AcctOffline(session);
+        PlayerData pd = cacheSvc.GetPlayerDataBySession(session);
+        if (pd != null)
+        {
+            pd.time = timerSvc.GetNowTime();
+            if (cacheSvc.UpdatePlayerData(pd.id, pd)==false)
+            {
+                PECommon.Log("更新下线时间失败", LogType.Error);
+            }
+            else
+            {
+                PECommon.Log("更新下线时间成功");
+            }
+            cacheSvc.AcctOffline(session);
+        }
+        
     }
+
+
+
+    #region 辅助
+    /// <summary>
+    /// 上次离线到现在要增加的体力
+    /// </summary>
+    /// <param name="preTime">上次登录的时间</param>
+    /// <returns></returns>
+     void UpdatePlayerDataByOfflineAddPower(PlayerData pd)
+    {
+        int nowPower = pd.power;
+        long millSec = (timerSvc.GetNowTime() - pd.time);
+        int addPower =  (int)(millSec / (PECommon.PowerAddSpace*1000)) * PECommon.PowerAddCount;
+       int maxPower = PECommon.GetPowerLimit(pd.lv);
+        if (addPower > 0)
+        {
+            
+            if (nowPower<maxPower)
+            {
+                nowPower += addPower;
+                if (nowPower > maxPower)
+                {
+                    nowPower = maxPower;
+                }
+               
+            }
+        }
+        if (pd.power != nowPower)
+        {
+   PECommon.Log("离线增加了" + (nowPower - pd.power) + "体力");
+            pd.power = nowPower;
+            pd.time = TimerSvc.Instance.GetNowTime();
+            cacheSvc.UpdatePlayerData(pd.id, pd);
+            //
+         
+        }
+
+    }
+    #endregion
 
 }
 

@@ -43,7 +43,7 @@ class CacheSvc
 
     public void Init()
     {
-        PECommon.Log("Init CacheSvc");
+        PECommon.Log("CacheSvc Inited");
         dBMgr = DBMgr.Instance;
 
     }
@@ -138,18 +138,20 @@ class CacheSvc
     /// <param name="session"></param>
     public void AcctOffline(ServerSession session)
     {
+        string acct = "";
         foreach (var item in onLineAcctDic)
         {
             if (session == onLineAcctDic[item.Key])
             {
+                 acct = item.Key;
                 onLineAcctDic.Remove(item.Key);
                 break;
             }
         }
-
+       // PECommon.Log("onLineAcctDic" + onLineAcctDic.Count.ToString());
         bool suc = onLineSessionDic.Remove(session);
-
-        PECommon.Log("SessionID Offline："+session.sessionID);
+       // PECommon.Log("onLineSessionDic" + onLineSessionDic.Count.ToString());
+        PECommon.Log("SessionID_"+session.sessionID+" acct_+"+acct+"下线_"+ suc);
          
     }
 

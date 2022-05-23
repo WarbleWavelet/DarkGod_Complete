@@ -85,7 +85,14 @@ public class MainCitySys : SystemRoot
         resSvc.AsyncLoadScene(cfg.sceneName, () => {
             PECommon.Log("进入主城");
             //
-            LoadPlayer(cfg);
+            if (resSvc != null)
+            {
+                LoadPlayer(cfg);
+            }
+            else
+            {
+                throw new System.Exception("异常");
+            }
             GameRoot.Instance.ClearUIRoot();
             maincityWnd.SetWndState();
             audioSvc.PlayBgMusic(Constants.BGMainCity);
@@ -237,8 +244,13 @@ public class MainCitySys : SystemRoot
 
     internal void RspPower(GameMsg msg)
     {
-        GameRoot.Instance.SetPlayerDataByPower(msg);
-        maincityWnd.RefreshUI();
+        PshPower data = msg.pshPower;
+        GameRoot.Instance.SetPlayerDataByPower(data);
+        if (maincityWnd.gameObject.activeSelf)
+        { 
+           maincityWnd.RefreshUI();
+        }
+     
 
     }
 

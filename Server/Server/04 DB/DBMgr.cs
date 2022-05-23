@@ -44,10 +44,6 @@ class DBMgr
 
     #region 增删查改
 
-
-
-
-
     public int InsertPlayerData(string acct, string pass, PlayerData pd)
     {
         int id = -1;
@@ -57,7 +53,7 @@ class DBMgr
             "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power," +
             "coin = @coin,diamond = @diamond,crystal=@crystal," +
             "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-            "guideid=@guideid,strong=@strong";
+            "guideid=@guideid,strong=@strong,time=@time";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
             cmd.Parameters.AddWithValue("acct", acct);
@@ -79,6 +75,7 @@ class DBMgr
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
             cmd.Parameters.AddWithValue("guideid", pd.guideid);
             cmd.Parameters.AddWithValue("strong", StrongArrToStrong(pd.strongArr));
+            cmd.Parameters.AddWithValue("time", pd.time);
 
             cmd.ExecuteNonQuery();
             id = (int)cmd.LastInsertedId;
@@ -144,7 +141,8 @@ class DBMgr
                         pierce = reader.GetInt32("pierce"),
                         dodge = reader.GetInt32("dodge"),
                         guideid = reader.GetInt32("guideid"),
-                        strongArr=StrongToStrongArr( reader.GetString("strong") )
+                        strongArr=StrongToStrongArr( reader.GetString("strong") ),
+                        time= reader.GetInt64("time"),
 
 
                     };
@@ -170,7 +168,7 @@ class DBMgr
                     name = "",
                     lv = 1,
                     exp = 0,
-                    power = 150,
+                    power = 50,
                     coin = 5000,
                     diamond = 500,
                     crystal = 100,
@@ -183,7 +181,8 @@ class DBMgr
                     pierce = 5,
                     dodge = 7,
                     guideid = 1001,
-                    strongArr = new int[] {0, 0, 0, 0, 0, 0 }
+                    strongArr = new int[] { 0, 0, 0, 0, 0, 0 },
+                    time = TimerSvc.Instance.GetNowTime()
 
                 };
                 playerData.id = InsertPlayerData(acct, pass, playerData);
@@ -233,7 +232,7 @@ class DBMgr
                 " name = @name,lv = @lv,exp = @exp,power = @power," +
                 "coin = @coin,diamond = @diamond,crystal=@crystal," +
                 " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-                " guideid=@guideid,strong=@strong" +
+                " guideid=@guideid,strong=@strong,time=@time" +
                 " where id=@id";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("name", pd.name);
@@ -253,6 +252,7 @@ class DBMgr
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
             cmd.Parameters.AddWithValue("guideid", pd.guideid);
             cmd.Parameters.AddWithValue("strong", StrongArrToStrong(pd.strongArr));
+            cmd.Parameters.AddWithValue("time", pd.time);
             cmd.Parameters.AddWithValue("id", id);
             cmd.ExecuteNonQuery();
         }
@@ -268,14 +268,16 @@ class DBMgr
         return true;
     }
 
+    #region   StrongArr
+
     string StrongArrToStrong(int[] strongArr)
     {
-     
+
         string strong = "";
-   if (strongArr == null) return strong;
+        if (strongArr == null) return strong;
         for (int i = 0; i < strongArr.Length; i++)
         {
-            strong += "#"+strongArr[i].ToString();
+            strong += "#" + strongArr[i].ToString();
         }
 
         return strong;
@@ -297,6 +299,9 @@ class DBMgr
 
         return strongArr;
     }
+
+#endregion
+
     #endregion
 
 }

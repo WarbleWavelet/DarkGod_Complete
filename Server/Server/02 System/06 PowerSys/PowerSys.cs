@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PEProtocol;
 
 
 class PowerSys
@@ -35,37 +34,44 @@ class PowerSys
     #endregion
 
     public CacheSvc cacheSvc;
+    private TimerSvc timerSvc;
+
     public void Init()
     {
         cacheSvc = CacheSvc.Instance;
+        timerSvc = TimerSvc.Instance;
         //
         TimerSvc.Instance.AddTimerTask(CalcPowerAdd,PECommon.PowerAddSpace,PETimeUnit.Second,0);
         PECommon.Log("PowerSys Inited");
     }
 
+
+    /// <summary>
+    /// 在线时体力增加
+    /// </summary>
+    /// <param name="tid"></param>
     private void CalcPowerAdd(int tid)
     {
-        PECommon.Log("Add Power");
+      
         GameMsg msg = new GameMsg()
         {
             cmd = (int)CMD.PshPower,
         };
 
         Dictionary<ServerSession,PlayerData> onlineDic = cacheSvc.onLineSessionDic;
-
-       
-
+        //PECommon.Log("onlineDic.Count"+ onlineDic.Count.ToString());
         foreach (var item in onlineDic)
         {
             PlayerData pd = item.Value;
             int maxPower = PECommon.GetPowerLimit(pd.lv);
             ServerSession session = item.Key;
-            if (pd.power > maxPower)
+            if (pd.power >= maxPower)
             {
                 continue;
             }
             else 
             {
+                pd.time = timerSvc.GetNowTime();
                 pd.power += PECommon.PowerAddCount;
                 if (pd.power >= maxPower)
                 {

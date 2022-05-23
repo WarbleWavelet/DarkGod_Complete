@@ -8,6 +8,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -16,10 +17,11 @@ public class WindowRoot : MonoBehaviour
 
     [Header("WindowRoot")]
     /// <summary>需要引用时</summary>
-    public ResSvc resSvc;
-    public AudioSvc audioSvc;
-    public NetSvc netSvc;
-    public TimerSvc timerSvc;
+
+    [ReadOnly]public ResSvc resSvc;
+    [ReadOnly]public AudioSvc audioSvc;
+    [ReadOnly]public NetSvc netSvc;
+    [ReadOnly]public TimerSvc timerSvc;
 
 
     #region Wnd

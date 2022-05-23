@@ -30,7 +30,7 @@ public class ServerSession : PESession<GameMsg>
 
     protected override void OnDisConnected()
     {
-        PECommon.Log("A Client Disconnected");
+        //PECommon.Log("A Client Disconnected");
         PECommon.Log("SessionID:" + sessionID + " client disconnected");
         LoginSys.Instance.ClearOfflineData(this);
 

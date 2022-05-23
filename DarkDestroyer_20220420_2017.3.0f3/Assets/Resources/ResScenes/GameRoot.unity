@@ -3037,6 +3037,11 @@ Prefab:
       propertyPath: btnAddPower
       value: 
       objectReference: {fileID: 1356210198}
+    - target: {fileID: 114696372075279934, guid: bd55612b253521d45af953ba53b72934,
+        type: 2}
+      propertyPath: timerSvc
+      value: 
+      objectReference: {fileID: 1332992450}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd55612b253521d45af953ba53b72934, type: 2}
   m_IsPrefabParent: 0
@@ -5782,9 +5787,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb0a6fd5f3f59b4d8bb8c80cfe338d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   imgWorld: {fileID: 1584590212}
   imgGuild: {fileID: 797260104}
@@ -7324,9 +7329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaa542d7796f444cbc2db9cdaaed175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   iptName: {fileID: 46696998}
   btnRand: {fileID: 309678130}
@@ -8037,7 +8042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resSvc: {fileID: 1332992442}
   audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 0}
+  netSvc: {fileID: 1332992446}
   loginWnd: {fileID: 1545980948}
   createWnd: {fileID: 1248399362}
 --- !u!114 &1332992444
@@ -8072,6 +8077,7 @@ MonoBehaviour:
     pierce: 0
     guideid: 0
     strongArr: 
+    time: 0
 --- !u!114 &1332992445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8938,9 +8944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46060327af0c3e349901a8a41b9d234d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   txtName: {fileID: 417575328}
   txtTalk: {fileID: 186513130}
@@ -8966,6 +8972,7 @@ MonoBehaviour:
     pierce: 0
     guideid: 0
     strongArr: 
+    time: 0
   btnNext: {fileID: 2030955063}
 --- !u!1 &1481150772
 GameObject:
@@ -9468,9 +9475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586f936290b8af644b4a010b8c60ac71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   btnNotice: {fileID: 2088108331}
   iptAcct: {fileID: 1027960469}
@@ -10371,9 +10378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7038ea6a2ba24e449a849da5b1bd1ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   btnClose: {fileID: 511217829}
   btnSure: {fileID: 1376874107}
@@ -10394,9 +10401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ded5a33b6c9424bac57c87e021fad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   tipsAni: {fileID: 871511010}
   txtTips: {fileID: 871511011}
@@ -10594,9 +10601,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75b7c76c8cc1fa449048037d87c2f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   textTips: {fileID: 1263393557}
   textPrg: {fileID: 1522037357}
@@ -11468,9 +11475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0380d1e0e21f43b409ec8a289cea3842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resSvc: {fileID: 1332992442}
-  audioSvc: {fileID: 1332992445}
-  netSvc: {fileID: 1332992446}
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
   timerSvc: {fileID: 0}
   posBtnTrans: {fileID: 1541200832}
   imgEquip: {fileID: 1043827987}

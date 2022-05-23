@@ -34,14 +34,16 @@ public class LoginWnd : WindowRoot
         iptPass = transform.Find("rightPin/iptbg2/iptPass").GetComponent<InputField>();
         btnEnter = transform.Find("rightPin/btnEnter").GetComponent<Button>();
 
-        btnEnter.onClick.AddListener(ClickEnterBtn);
+       
+      if(btnEnter.onClick.GetPersistentEventCount()==0) 
+            btnEnter.onClick.AddListener(ClickEnterBtn); 
         btnNotice.onClick.AddListener(ClickNoticeBtn);
 
     }
     protected override void InitWnd()
     {
         base.InitWnd();
-       
+        JustForNte();
         if (PlayerPrefs.HasKey("Acct") && PlayerPrefs.HasKey("Pass"))
         {
             iptAcct.text=PlayerPrefs.GetString("Acct");
@@ -52,7 +54,7 @@ public class LoginWnd : WindowRoot
             iptAcct.text = "";
             iptPass.text = "";
         }
-        JustForNte();
+        
     }
 
 
@@ -64,12 +66,13 @@ public class LoginWnd : WindowRoot
     public void ClickEnterBtn()
     {
         audioSvc.PlayUIAudio(Constants.UILoginBtn);
-
+        Debug.Log("进入");
         string _acct = iptAcct.text;
         string _pass = iptPass.text;
 
         if (_acct != "" && _pass != "")
         {
+            Debug.Log(this.GetType()+"1");
             PlayerPrefs.SetString("Acct", _acct);
             PlayerPrefs.SetString("Pass", _pass);
             //
@@ -86,8 +89,11 @@ public class LoginWnd : WindowRoot
         }
         else
         {
+            Debug.Log(this.GetType() + "2");
             GameRoot.AddTips("账号或密码为空");
         }
+
+        Debug.Log(this.GetType() + "3");
     }
     /// <summary>
     /// 点击公告

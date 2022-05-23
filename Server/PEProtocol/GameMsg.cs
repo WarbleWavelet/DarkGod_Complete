@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using PENet;
@@ -11,10 +10,45 @@ using System.Collections.Generic;
 namespace PEProtocol
 {
 
-    #region Serializable
-    #region Root
-
+    #region IP
+    public class SrvCfg
+    {
+        public const string srvIp = "127.0.0.1";
+        public const int srvPort = 17666;
+    }
     #endregion
+
+    #region PlayerData 来自数据库的表
+    [Serializable]
+
+    public class PlayerData
+    {
+        //含义看数据库
+        public int id;
+        public string name;
+        public int exp;
+        public int lv;
+        public int power;
+        public int coin;
+        public int diamond;
+        public int crystal;
+        public int hp;
+        public int ad;
+        public int ap;
+        public int addef;
+        public int apdef;
+        public int dodge;
+        public int critical;
+        public int pierce;
+        public int guideid;
+        public int[] strongArr;
+        public long time;
+    }
+    #endregion
+
+    #region Serializable
+
+    #region GameMsg族
     [Serializable]
     public class GameMsg_Text : PEMsg
     {
@@ -66,7 +100,45 @@ namespace PEProtocol
         PshPower=209
     }
 
-    #region     GameMsg里的表
+    /// <summary>
+    /// 错误码
+    /// </summary>
+    public enum ErrorCode
+    {
+        /// <summary>没错误</summary>
+        None = 0,
+
+        /// <summary>账号已被登录</summary>
+        AcctIsOnLine,
+
+        /// <summary>密码错误</summary>
+        WrongPass,
+
+        /// <summary>账号名已经存在</summary>
+        NameIsExist,
+
+        /// <summary>更新数据出错</summary>
+        UpdateDBError,
+
+        /// <summary>服务器数据异常</summary>
+        ServerDataError,
+        #region Lack 不足，缺少
+        /// <summary>等级不足</summary>
+        LackLv,
+        /// <summary>金币不足</summary>
+        LackCoin,
+        /// <summary>钻石不足</summary>
+        LackDiamond,
+        /// <summary>水晶不足</summary>
+        LackCrystal,
+        #endregion 
+
+        /// <summary>密码精度不足</summary>
+    }
+    #endregion
+
+
+    #region GameMsg内部包括的类
     #region Login
     /// <summary>
     /// 请求登录
@@ -84,7 +156,7 @@ namespace PEProtocol
     [Serializable]
     public class RspLogin
     {
-        public PlayerData playerData;
+        public PlayerData pd;
     }
     #endregion
 
@@ -142,39 +214,6 @@ namespace PEProtocol
     }
     #endregion
 
-    #endregion
-
-
-
-
-    #region PlayerData 来自数据库的表
-    [Serializable]
-
-    public class PlayerData
-    {
-        //含义看数据库
-        public int id;
-        public string name;
-        public int exp;
-        public int lv;
-        public int power;
-        public int coin;
-        public int diamond;
-        public int crystal;
-        public int hp;
-        public int ad;
-        public int ap;
-        public int addef;
-        public int apdef;
-        public int dodge;
-        public int critical;
-        public int pierce;
-        public int guideid;
-        public int[] strongArr;
-
-    }
-    #endregion
-
     #region 聊天
 
     [Serializable]
@@ -191,7 +230,7 @@ namespace PEProtocol
         public string chat;
     }
     #endregion
-
+    #endregion
 
     #region 交易
 
@@ -219,60 +258,6 @@ namespace PEProtocol
         public List<RspBuy> list;
     }
 
-    [Serializable]
-    public class PshPower
-    {
-        public int power;
-    }
-    #endregion
-    #endregion
-
-
-    public class SrvCfg
-    {
-        public const string srvIp = "127.0.0.1";
-        public const int srvPort = 17666;
-    }
-
-
-
-    /// <summary>
-    /// 错误码
-    /// </summary>
-    public enum ErrorCode
-    {
-        /// <summary>没错误</summary>
-        None = 0,
-
-        /// <summary>账号已被登录</summary>
-        AcctIsOnLine,
-
-        /// <summary>密码错误</summary>
-        WrongPass,
-
-        /// <summary>账号名已经存在</summary>
-        NameIsExist,
-
-        /// <summary>更新数据出错</summary>
-        UpdateDBError,
-
-        /// <summary>服务器数据异常</summary>
-        ServerDataError,
-        #region Lack 不足，缺少
-        /// <summary>等级不足</summary>
-        LackLv,
-        /// <summary>金币不足</summary>
-        LackCoin,
-        /// <summary>钻石不足</summary>
-        LackDiamond,
-        /// <summary>水晶不足</summary>
-        LackCrystal,
-        #endregion 
-
-        /// <summary>密码精度不足</summary>
-    }
-
-
     public enum BuyType
     {
         [Description("钻石")]
@@ -290,11 +275,21 @@ namespace PEProtocol
         [Description("金币")]
         COIN
     }
+
+    #endregion
+
+    #region     体力恢复
+    [Serializable]
+    public class PshPower
+    {
+        public int power;
+    }
+    #endregion
+
+    #endregion
 }
 
-
-
-
+#region      EnumExtension
 /****************************************************
     文件：EnumExtension.cs
 	作者：lenovo
@@ -333,3 +328,7 @@ public enum BuyType
 
 EnumExtension.ToDes(BuyType.DIAMOND)
 */
+#endregion
+
+
+

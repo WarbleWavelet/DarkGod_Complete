@@ -40,7 +40,7 @@ public class TimerSvc : SystemRoot
         {
             PECommon.Log(info);
         });
-        PECommon.Log("TImerSvc Inited");
+        PECommon.Log("TimerSvc Inited");
     }
 
     void Update()
