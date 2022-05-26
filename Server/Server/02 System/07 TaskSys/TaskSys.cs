@@ -46,6 +46,11 @@ class TaskSys
         PECommon.Log("TaskSys Init");
     }
 
+
+    /// <summary>
+    /// 根据任务状态处理
+    /// </summary>
+    /// <param name="pack"></param>
     internal void ReqTakeTaskReward(MsgPack pack)
     {
         PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);
@@ -63,7 +68,7 @@ class TaskSys
         {
             case TaskState.Accept:
                 {
-                    TaskSys.Instance.CalcTaskPrgs(pd, (TaskID)reqData.id);
+                    CalcTaskPrgs(pd, (TaskID)reqData.id);
 
                 }break;
             case TaskState.Done:
@@ -78,6 +83,7 @@ class TaskSys
                 break;
             default: break;
         }
+        //
         if (!cacheSvc.UpdatePlayerData(pd.id, pd))
         {
             msg.err = (int)ErrorCode.UpdateDBError;
@@ -101,17 +107,14 @@ class TaskSys
     }
 
     /// <summary>
-    /// 完成一次任务次数
+    /// 完成一次任务次数(返回PshTaskPrgs一起加到使用的msg，优化网络)
     /// </summary>
     /// <param name="pd"></param>
     /// <param name="taskid"></param>
-    internal void CalcTaskPrgs(PlayerData pd, TaskID taskid)
+    internal PshTaskPrgs CalcTaskPrgs(PlayerData pd, TaskID taskid)
     {
       TaskRewardCfg cfg=  cfgSvc.GetTaskRewardCfg((int)taskid);
         TaskRewardData data = CalcTaskRewardData_ToClass(pd, (int)taskid);
-
-
-
 
         if (data.prgs < cfg.count)
         {
@@ -122,23 +125,26 @@ class TaskSys
                 data.state = TaskState.Done;
             }
             CalcTaskRewardData_ToString(pd, data);
-        }
-
-
-        GameMsg msg = new GameMsg
-        {
-            cmd = (int)CMD.PshTaskPrgs,
-            pshTaskPrgs = new PshTaskPrgs
+            return new PshTaskPrgs
             {
                 taskArr = pd.taskRewardArr
-            }
-        };
+            };
 
-        ServerSession session = cacheSvc.GetOnlineServerSession(pd.id);
-        session.SendMsg(msg);
-
+        }
+        else
+        {
+            return null;
+        }
+           
     }
 
+
+    /// <summary>
+    /// 返回TaskRewardData的类形式（根据taskId到pd.taskRewardArr里面找）
+    /// </summary>
+    /// <param name="pd"></param>
+    /// <param name="taskId"></param>
+    /// <returns></returns>
     TaskRewardData CalcTaskRewardData_ToClass(PlayerData pd, int taskId)
     {
         TaskRewardData data=null;
@@ -162,6 +168,12 @@ class TaskSys
         return data;
     }
 
+
+    /// <summary>
+    /// 返回TaskRewardData的字符串形式（根据taskId到pd.taskRewardArr里面找）
+    /// </summary>
+    /// <param name="pd"></param>
+    /// <param name="data"></param>
     void CalcTaskRewardData_ToString(PlayerData pd, TaskRewardData data)
     {
 
@@ -177,7 +189,6 @@ class TaskSys
                 break;
             }
         }
-
 
         pd.taskRewardArr[idx] = str;
     }

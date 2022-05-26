@@ -41,6 +41,7 @@ class BuySys
         PECommon.Log("BuySys Init");
     }
 
+
     internal void ReqBuy(MsgPack pack)
     {
         PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);
@@ -88,11 +89,10 @@ class BuySys
                     }
                 }
                 break;
-            default:
-                {
-                   
-                } break;
+            default: break;
         }
+
+        //get
         switch (data.goodType)
         {
             case GoodType.POWER:
@@ -107,7 +107,7 @@ class BuySys
                 break;
             default: break;
         }
-        //get
+        //sendMsg
         if ( !cacheSvc.UpdatePlayerData(pd.id, pd) )
         {
             msg.err = (int)ErrorCode.UpdateDBError;
@@ -118,7 +118,7 @@ class BuySys
             {
                 case GoodType.POWER:
                     {
-                        TaskSys.Instance.CalcTaskPrgs(pd, TaskID.BuyPower);
+                        msg.pshTaskPrgs= TaskSys.Instance.CalcTaskPrgs(pd, TaskID.BuyPower);
                         msg.rspBuy = new RspBuy
                         {
                             goodType = GoodType.POWER,
@@ -128,7 +128,7 @@ class BuySys
                     break;
                 case GoodType.COIN:
                     {
-                        TaskSys.Instance.CalcTaskPrgs(pd, TaskID.MKCoin);
+                        msg.pshTaskPrgs = TaskSys.Instance.CalcTaskPrgs(pd, TaskID.MKCoin);
                         msg.rspBuy = new RspBuy
                         {
                             goodType = GoodType.COIN,

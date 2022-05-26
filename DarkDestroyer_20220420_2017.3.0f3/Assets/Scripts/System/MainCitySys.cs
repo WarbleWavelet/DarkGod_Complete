@@ -246,26 +246,6 @@ public class MainCitySys : SystemRoot
 
 
 
-    internal void RspPower(GameMsg msg)
-    {
-        PshPower data = msg.pshPower;
-        GameRoot.Instance.SetPlayerDataByPower(data);
-        if (maincityWnd.gameObject.activeSelf)
-        { 
-           maincityWnd.RefreshUI();
-        }
-     
-
-    }
-
-    internal void RspBuy(GameMsg msg)
-    {
-        GameRoot.Instance.SetPlayerDataByBuy(msg);
-         maincityWnd.RefreshUI();
-        GameRoot.AddTips("购买成功！");
-        buyWnd.btnSure.interactable = true;
-    }
-
     bool IsNavArrived()
     {
         return Vector3.Distance(playerCtrl.transform.position, navTarget.position) < navStoppedDis;
@@ -380,12 +360,22 @@ public class MainCitySys : SystemRoot
         GameRoot.Instance.SetPlayerDataByGuide(data);
         maincityWnd.RefreshUI();
 
+        if (msg.pshTaskPrgs != null)
+        {
+            PshTaskPrgs(msg);
+        }
+
     }
 
     internal void RspStrong(GameMsg msg)
     {
         GameRoot.Instance.SetPlayerDataByStrong (msg);
         strongWnd.UpdateUI();
+
+        if (msg.pshTaskPrgs != null)
+        {
+            MainCitySys.Instance.PshTaskPrgs (msg);
+        }
     }
     #endregion
 
@@ -414,6 +404,11 @@ public class MainCitySys : SystemRoot
         PshChat data = msg.pshChat;
         chatWnd.AddChatMsg(data.name,data.chat);
 
+        if (msg.pshTaskPrgs != null)
+        {
+            MainCitySys.Instance.PshTaskPrgs(msg);
+        }
+
     }
     #endregion
 
@@ -432,7 +427,10 @@ public class MainCitySys : SystemRoot
         GameRoot.Instance.SetPlayerDataByTaskPrgs(data);
         
         maincityWnd.RefreshUI();
-        taskWnd.RefreshUI();
+        if (taskWnd.GetWndState())
+        { 
+            taskWnd.RefreshUI();
+        }      
     }
 
     internal void RspTakeTaskReward(GameMsg msg)
@@ -446,4 +444,33 @@ public class MainCitySys : SystemRoot
 
 
     #endregion
+
+
+
+    internal void RspPower(GameMsg msg)
+    {
+        PshPower data = msg.pshPower;
+        GameRoot.Instance.SetPlayerDataByPower(data);
+        if (maincityWnd.gameObject.activeSelf)
+        {
+            maincityWnd.RefreshUI();
+        }
+
+
+    }
+
+    internal void RspBuy(GameMsg msg)
+    {
+        PshTaskPrgs(msg);
+        GameRoot.Instance.SetPlayerDataByBuy(msg);
+        maincityWnd.RefreshUI();
+        GameRoot.AddTips("购买成功！");
+        buyWnd.btnSure.interactable = true;
+        //
+        if (msg.pshTaskPrgs != null)
+        {
+            PshTaskPrgs(msg);
+
+        }
+    }
 }

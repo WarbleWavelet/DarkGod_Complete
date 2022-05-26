@@ -25,13 +25,11 @@ public class WindowRoot : MonoBehaviour
 
 
     #region Wnd
-    protected bool GetWndState()
+    public bool GetWndState()
     {
-
          return gameObject.activeSelf;
-        
-       
     }
+
  /// <summary>
     /// 打开关闭窗口
     /// </summary>

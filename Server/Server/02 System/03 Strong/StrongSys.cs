@@ -79,7 +79,7 @@ class StrongSys
         }
         else
         {
-            TaskSys.Instance.CalcTaskPrgs(pd, TaskID.Strong);
+           msg.pshTaskPrgs= TaskSys.Instance.CalcTaskPrgs(pd, TaskID.Strong);
             //
             pd.coin -= nextCfg.coin;
             pd.crystal -= nextCfg.crystal;
@@ -107,12 +107,8 @@ class StrongSys
                     strongArr=pd.strongArr
 
                 };
-
             }
-
         }
-
-
         pack.session.SendMsg(msg);
     }
 }

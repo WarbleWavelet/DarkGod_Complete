@@ -220,7 +220,7 @@ public class NetSvc : MonoBehaviour
                 break;
             case CMD.PshTaskPrgs:
                 {
-                    MainCitySys.Instance.PshTaskPrgs(msg);
+                   //MainCitySys.Instance.PshTaskPrgs(msg);
                 }
                 break;
         

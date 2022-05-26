@@ -44,7 +44,7 @@ class ChatSys
     public void SndChat(MsgPack pack)
     {
         PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);
-        TaskSys.Instance.CalcTaskPrgs(pd,TaskID.Speak);
+       
 
         SndChat data = pack.msg.sndChat;
         GameMsg msg = new GameMsg
@@ -53,11 +53,12 @@ class ChatSys
             pshChat = new PshChat
             {
                 name = pd.name,
-                chat=data.chat
+                chat = data.chat
 
             }
+           
         };
-        
+        msg.pshTaskPrgs = TaskSys.Instance.CalcTaskPrgs(pd, TaskID.Speak);
         List<ServerSession> lst = cacheSvc.GetOnlineServerSession();
 
         byte[] bytes= PENet.PETool.PackNetMsg(msg);//不用多次序列化
@@ -65,5 +66,7 @@ class ChatSys
         {
             lst[i].SendMsg(bytes);
         }
+        //
+
      }
 }
