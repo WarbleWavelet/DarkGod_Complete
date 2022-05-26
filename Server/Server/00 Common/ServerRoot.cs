@@ -42,6 +42,7 @@ class ServerRoot
         TimerSvc.Instance.Init();
         //TestTimerSvc();
         PowerSys.Instance.Init();
+        TaskSys.Instance.Init();
     }
 
     public void Update()

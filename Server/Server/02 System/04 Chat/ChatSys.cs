@@ -43,13 +43,16 @@ class ChatSys
 
     public void SndChat(MsgPack pack)
     {
+        PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);
+        TaskSys.Instance.CalcTaskPrgs(pd,TaskID.Speak);
+
         SndChat data = pack.msg.sndChat;
         GameMsg msg = new GameMsg
         {
             cmd = (int)CMD.PshChat,
             pshChat = new PshChat
             {
-                name = cacheSvc.GetPlayerDataBySession(pack.session).name,
+                name = pd.name,
                 chat=data.chat
 
             }

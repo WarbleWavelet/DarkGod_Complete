@@ -56,6 +56,7 @@ public class BuyWnd : WindowRoot
 
         netSvc.SendMsg(msg);
         btnSure.interactable = false;
+        SetWndState(false);
     }
 
     private void ClickBtnClose()

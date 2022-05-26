@@ -7,6 +7,7 @@
 *****************************************************/
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml;
 using PENet;
 using PEProtocol;
@@ -33,8 +34,9 @@ class CfgSvc
     {
         InitGuideCfg();
         InitStrongCfg();
+        InitTaskRewardCfg();
 
-        PECommon.Log("CfgSvc Inited");
+        PECommon.Log("CfgSvc Init");
 
 
     }
@@ -50,7 +52,7 @@ class CfgSvc
         doc.Load(@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\guide.xml");
         XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
         //
-        for (int i=0;i<nodLst.Count;i++)
+        for (int i = 0; i < nodLst.Count; i++)
         {
             XmlElement ele = nodLst[i] as XmlElement;
             if (ele.GetAttributeNode("ID") == null)
@@ -67,7 +69,7 @@ class CfgSvc
                 {
                     case "coin":
                         {
-                            c.coin= int.Parse(e.InnerText);
+                            c.coin = int.Parse(e.InnerText);
                         }
                         break;
                     case "exp":
@@ -86,7 +88,7 @@ class CfgSvc
             //
             guideTaskDic.Add(ID, c);
         }
-    
+
 
     }
     public GuideCfg GetGuideCfg(int ID)
@@ -210,7 +212,84 @@ class CfgSvc
 
     #endregion
 
+    #region 任务奖励
+
+    public List<string> taskRewardLst = new List<string>();
+    Dictionary<int, TaskRewardCfg> taskRewardDic = new Dictionary<int, TaskRewardCfg>();
+
+    private void InitTaskRewardCfg()
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\taskreward.xml");
+        XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
+        //
+        for (int i = 0; i < nodLst.Count; i++)
+        {
+            XmlElement ele = nodLst[i] as XmlElement;
+            if (ele.GetAttributeNode("ID") == null)
+                continue;
+            int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+            //nodLst，ID
+            TaskRewardCfg c = new TaskRewardCfg
+            {
+                ID = ID
+            };
+            foreach (XmlElement e in nodLst[i].ChildNodes)
+            {
+                switch (e.Name)
+                {
+                    case "count":
+                        {
+                            c.count = int.Parse(e.InnerText);
+                        }
+                        break;
+                    case "coin":
+                        {
+                            c.coin = int.Parse(e.InnerText);
+                        }
+                        break;
+                    case "exp":
+                        {
+                            c.exp = int.Parse(e.InnerText);
+                        }
+                        break;
+
+                    default: break;
+                }
+
+            }
+            //
+            taskRewardDic.Add(ID, c);
+        }
+
+
+    }
+    public TaskRewardCfg GetTaskRewardCfg(int ID)
+    {
+        TaskRewardCfg c = null;
+        if (taskRewardDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    #endregion
 }
+
+#region 数据配置类
+/// <summary>
+/// 配置类
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public class BaseData<T>
+{
+    public int ID;
+}
+
 #region 引导
 public class GuideCfg : BaseData<GuideCfg>
 {
@@ -251,10 +330,39 @@ public class StrongCfg : BaseData<StrongCfg>
 #endregion
 
 
-public class BaseData<T>
+#region 任务奖励
+/**
+	<item ID="1">
+		<taskName>智者点拨</taskName>
+		<count>1</count>
+		<exp>1130</exp>
+		<coin>1280</coin>
+	</item>
+ * **/
+public class TaskRewardCfg : BaseData<TaskRewardCfg>
 {
-    public int ID;
+    /// <summary>任务名</summary>
+    //public string taskName;//不需要
+    /// <summary>金币</summary>
+    public int coin;
+    /// <summary>经验</summary>
+    public int exp;
+    /// <summary>需要完成的次数</summary>
+    public int count;
+
+
 }
 
+public class TaskRewardData : BaseData<TaskRewardData>
+{
+    /// <summary>是否已经完成</summary>
+    public TaskState state;
+    /// <summary>已经完成的次数</summary>
+    public int prgs;
+}
+
+
+#endregion
+#endregion
 
 

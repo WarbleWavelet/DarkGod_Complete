@@ -8,6 +8,7 @@
 
 using PEProtocol;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -48,6 +49,9 @@ public class MainCitySys : SystemRoot
     public ChatWnd chatWnd;
 
 
+    [Header("任务")]
+    public TaskWnd taskWnd;
+    List<TaskRewardData> taskDataLst = new List<TaskRewardData>();
     void Update()
     {
         if (isNavGuide)
@@ -69,8 +73,6 @@ public class MainCitySys : SystemRoot
     {
         base.InitSys();
         Instance = this;
-
-        //maincityWnd = transform.Find("MainCityWnd").GetComponent<MainCityWnd>();
         PECommon.Log("Init MainCitySys");
     }
 
@@ -242,6 +244,8 @@ public class MainCitySys : SystemRoot
         }
     }
 
+
+
     internal void RspPower(GameMsg msg)
     {
         PshPower data = msg.pshPower;
@@ -325,7 +329,7 @@ public class MainCitySys : SystemRoot
     }
 
 
-    #region Rsp
+    #region 引导
     public void RspGuide(GameMsg msg)
     {
       
@@ -414,4 +418,32 @@ public class MainCitySys : SystemRoot
     #endregion
 
 
+    #region 任务
+    public void OpenTaskRewardWnd()
+    {
+       
+        taskWnd.SetWndState();
+        taskWnd.RefreshUI();
+    }
+
+    internal void PshTaskPrgs(GameMsg msg)
+    {
+        PshTaskPrgs data = msg.pshTaskPrgs;
+        GameRoot.Instance.SetPlayerDataByTaskPrgs(data);
+        
+        maincityWnd.RefreshUI();
+        taskWnd.RefreshUI();
+    }
+
+    internal void RspTakeTaskReward(GameMsg msg)
+    {
+        RspTakeTaskReward data = msg.rspTakeTaskReward;
+        GameRoot.Instance.SetPlayerDataByTask(data);
+
+        maincityWnd.RefreshUI();
+        taskWnd.RefreshUI();
+    }
+
+
+    #endregion
 }

@@ -1,6 +1,7 @@
 ﻿using PEProtocol;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,7 @@ using System.Threading.Tasks;
         ReqGuide data = pack.msg.reqGuide;
         GuideCfg cfg = cfgSvc.GetGuideCfg(data.guideid);
         PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);
+
         //
         if (pd.guideid!=data.guideid)
         {
@@ -56,9 +58,11 @@ using System.Threading.Tasks;
         }
         else
         {
+            TaskSys.Instance.CalcTaskPrgs(pd, TaskID.WiseMan);
+            //
             pd.guideid += 1;
             pd.coin += cfg.coin;
-            CalcExp(pd, cfg.exp);
+            PECommon.CalcExp(pd, cfg.exp);
 
             if (!DBMgr.Instance.UpdatePlayerData(pd.id, pd))
             {
@@ -83,15 +87,40 @@ using System.Threading.Tasks;
 
 
 
-    void CalcExp(PlayerData pd,int exp)
-    {
-        int remainExp= pd.exp + exp;
-        while (remainExp >= PECommon.GetExpUpValByLV(pd.lv))
-        {
-            remainExp -= PECommon.GetExpUpValByLV(pd.lv);
-            pd.lv += 1;
-        }
-        pd.exp = remainExp;
-    }
 }
+
+#region 方便阅读，希望以后学到自动生成代码
+public enum GuideID
+{
+    [Description("智者点拨")]
+    WiseMan = 1001,
+    [Description("副本战斗")]
+    InstanceZones = 1002,
+    [Description("强化升级")]
+    Strong = 1003,
+    [Description("购买体力")]
+    Power = 1004,
+    [Description("铸造金币")]
+    MKCoin = 1005,
+    [Description("能言善辩")]
+    Speak = 1006
+}
+
+
+public enum TaskID
+{
+    [Description("智者点拨")]
+    WiseMan = 1,
+    [Description("副本战斗")]
+    InstanceZones = 2,
+    [Description("强化升级")]
+    Strong = 3,
+    [Description("购买体力")]
+    BuyPower = 4,
+    [Description("铸造金币")]
+    MKCoin = 5,
+    [Description("能言善辩")]
+    Speak = 6
+}
+#endregion
 

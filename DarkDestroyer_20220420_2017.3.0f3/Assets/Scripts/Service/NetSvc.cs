@@ -160,6 +160,12 @@ public class NetSvc : MonoBehaviour
                     PECommon.Log("等级不足", LogType.Error);
                 }
                 break;
+            case ErrorCode.ClientDataError:
+
+                {
+                    PECommon.Log("客户端数据异常", LogType.Error);
+                }
+                break;
             default:
                 {
                     GameRoot.AddTips("未知错误");
@@ -207,6 +213,17 @@ public class NetSvc : MonoBehaviour
                     MainCitySys.Instance.RspPower(msg);
                 }
                 break;
+            case CMD.RspTakeTaskReward:
+                {
+                    MainCitySys.Instance.RspTakeTaskReward(msg);
+                }
+                break;
+            case CMD.PshTaskPrgs:
+                {
+                    MainCitySys.Instance.PshTaskPrgs(msg);
+                }
+                break;
+        
         }
     }
     #endregion

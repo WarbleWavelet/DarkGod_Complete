@@ -33,7 +33,7 @@ class NetSvc
     {
         PESocket<ServerSession, GameMsg> server = new PESocket<ServerSession, GameMsg>();
         server.StartAsServer(SrvCfg.srvIp, SrvCfg.srvPort);
-        PECommon.Log("NetSvc Inited");
+        PECommon.Log("NetSvc Init");
 
     }
 
@@ -95,7 +95,11 @@ class NetSvc
                     BuySys.Instance.ReqBuy(pack);
                 }
                 break;
-
+            case CMD.ReqTakeTaskReward:
+                {
+                    TaskSys.Instance.ReqTakeTaskReward(pack);
+                }
+                break;
             default: break;
         }
 

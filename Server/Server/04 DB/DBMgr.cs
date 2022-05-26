@@ -53,7 +53,7 @@ class DBMgr
             "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power," +
             "coin = @coin,diamond = @diamond,crystal=@crystal," +
             "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-            "guideid=@guideid,strong=@strong,time=@time";
+            "guideid=@guideid,strong=@strong,time=@time,taskreward=@taskreward";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
             cmd.Parameters.AddWithValue("acct", acct);
@@ -74,8 +74,9 @@ class DBMgr
             cmd.Parameters.AddWithValue("critical", pd.critical);
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
             cmd.Parameters.AddWithValue("guideid", pd.guideid);
-            cmd.Parameters.AddWithValue("strong", StrongArrToStrong(pd.strongArr));
+            cmd.Parameters.AddWithValue("strong", Strong_ArrToString(pd.strongArr));
             cmd.Parameters.AddWithValue("time", pd.time);
+            cmd.Parameters.AddWithValue("taskreward", TaskReward_ArrToString(pd.taskRewardArr)  );
 
             cmd.ExecuteNonQuery();
             id = (int)cmd.LastInsertedId;
@@ -141,9 +142,9 @@ class DBMgr
                         pierce = reader.GetInt32("pierce"),
                         dodge = reader.GetInt32("dodge"),
                         guideid = reader.GetInt32("guideid"),
-                        strongArr=StrongToStrongArr( reader.GetString("strong") ),
+                        strongArr=Strong_StringToArr( reader.GetString("strong") ),
                         time= reader.GetInt64("time"),
-
+                        taskRewardArr = TaskReward_StringToArr(reader.GetString("taskreward")),
 
                     };
                     PECommon.Log("已查到acct:" + acct);
@@ -182,8 +183,15 @@ class DBMgr
                     dodge = 7,
                     guideid = 1001,
                     strongArr = new int[] { 0, 0, 0, 0, 0, 0 },
-                    time = TimerSvc.Instance.GetNowTime()
-
+                    time = TimerSvc.Instance.GetNowTime(),
+                    taskRewardArr = new string[] {
+                        "1|0|2",
+                        "2|0|2",
+                        "3|0|2",
+                        "4|0|2",
+                        "5|0|2",
+                        "6|0|2"
+                    },
                 };
                 playerData.id = InsertPlayerData(acct, pass, playerData);
             }
@@ -232,7 +240,7 @@ class DBMgr
                 " name = @name,lv = @lv,exp = @exp,power = @power," +
                 "coin = @coin,diamond = @diamond,crystal=@crystal," +
                 " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-                " guideid=@guideid,strong=@strong,time=@time" +
+                " guideid=@guideid,strong=@strong,time=@time,taskreward=@taskreward" +
                 " where id=@id";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("name", pd.name);
@@ -251,8 +259,9 @@ class DBMgr
             cmd.Parameters.AddWithValue("dodge", pd.dodge);
             cmd.Parameters.AddWithValue("pierce", pd.pierce);
             cmd.Parameters.AddWithValue("guideid", pd.guideid);
-            cmd.Parameters.AddWithValue("strong", StrongArrToStrong(pd.strongArr));
+            cmd.Parameters.AddWithValue("strong", Strong_ArrToString(pd.strongArr));
             cmd.Parameters.AddWithValue("time", pd.time);
+            cmd.Parameters.AddWithValue("taskreward", TaskReward_ArrToString(pd.taskRewardArr));
             cmd.Parameters.AddWithValue("id", id);
             cmd.ExecuteNonQuery();
         }
@@ -270,7 +279,7 @@ class DBMgr
 
     #region   StrongArr
 
-    string StrongArrToStrong(int[] strongArr)
+    string Strong_ArrToString(int[] strongArr)
     {
 
         string strong = "";
@@ -283,24 +292,90 @@ class DBMgr
         return strong;
     }
 
-    int[] StrongToStrongArr(string strong)
+    int[] Strong_StringToArr(string strong)
     {
 
-        string[] _strongArr;        
         if (strong == null)
             return null;
 
-        _strongArr =strong.Split('#');//解析后第一个是""
-        int[] strongArr = new int[_strongArr.Length-1];
-        for (int i = 1; i < _strongArr.Length; i++)
+
+        string[]  _strongArr =strong.Split('#');//解析后第一个是""
+        int len = _strongArr.Length;
+        for (int i = 0; i < _strongArr.Length; i++)
         {
-            strongArr[i-1] = int.Parse(_strongArr[i]) ;
+            if (_strongArr[i] == "")
+            {
+                len--;
+            }
+        }
+        //
+        int[] strongArr =new int[len];
+        int j = 0;
+        for (int i = 0; i < _strongArr.Length; i++)
+        {
+            if (_strongArr[i] == "")
+            {
+                j--;
+                continue;
+            }
+            j++;
+            strongArr[j] = int.Parse(_strongArr[i]) ;
         }
 
         return strongArr;
     }
 
-#endregion
+    #endregion
+
+    #region 任务奖励
+    string TaskReward_ArrToString(string[] taskRewardArr)
+    {
+
+        string taskReward = "";
+        if (taskRewardArr == null)
+            return "";
+
+        for (int i = 0; i < taskRewardArr.Length; i++)
+        {
+            taskReward += "#" + taskRewardArr[i];
+        }
+
+        return taskReward;
+    }
+
+    string[] TaskReward_StringToArr(string taskReward)
+    {
+
+        if (taskReward == null)
+            return null;
+
+
+        string[] _taskRewardArr = taskReward.Split('#');//解析后第一个是""
+        int len = _taskRewardArr.Length;
+        for (int i = 0; i < _taskRewardArr.Length; i++)
+        {
+            if (_taskRewardArr[i] == "")
+            {
+                len--;
+            }
+        }
+        //
+        string[] taskRewardArr = new string[len];
+        int j = 0;
+        for (int i = 0; i < _taskRewardArr.Length; i++)
+        {
+            if (_taskRewardArr[i] == "")
+            {
+                j--;
+                continue;
+            }
+            j++;
+            taskRewardArr[j] = _taskRewardArr[i];
+        }
+
+        return taskRewardArr;
+    }
+    #endregion
 
     #endregion
 

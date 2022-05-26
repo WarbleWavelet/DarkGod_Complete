@@ -45,7 +45,11 @@ public class TimerSvc : SystemRoot
 
     void Update()
     {
-        pt.Update();
+        if (pt != null)
+        { 
+            pt.Update();
+        }
+       
     }
 
     public int AddTimerTask(Action<int> cb, double delay,PETimeUnit timeUnit=PETimeUnit.Millisecond)

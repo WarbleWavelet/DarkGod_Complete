@@ -38,6 +38,7 @@ public class MainCityWnd : WindowRoot
     public bool menuState=false;
     public Button btnStrong;
     public Button btnMKCoin;
+    public Button btnTask;
 
 
     [Header("左下")]
@@ -75,6 +76,7 @@ public class MainCityWnd : WindowRoot
         btnStrong.onClick.AddListener(ClickBtnStrong);
         btnMKCoin.onClick.AddListener(ClickBtnMKCoin);
         btnChat.onClick.AddListener(ClickBtnChat);
+        btnTask.onClick.AddListener(ClickBtnTask);
         //
         defaultPos = imgDirBg.transform.position;
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
@@ -168,6 +170,12 @@ public class MainCityWnd : WindowRoot
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         MainCitySys.Instance.OpenStrongWnd();
+    }
+
+    private void ClickBtnTask()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        MainCitySys.Instance.OpenTaskRewardWnd();
     }
     #endregion
 

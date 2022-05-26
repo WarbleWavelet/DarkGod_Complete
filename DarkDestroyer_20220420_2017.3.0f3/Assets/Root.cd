@@ -17,7 +17,7 @@
   <Class Name="WindowRoot" Collapsed="true">
     <Position X="3.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAIABUAAAAIFAABACAAAAIAgEAAAAAIAAAEA=</HashCode>
+      <HashCode>AAAAAIAAAKABUAAAAIFAABACAAAAIAgEAAAAAIAAAEA=</HashCode>
       <FileName>Assets\Scripts\WindowRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -29,9 +29,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ResSvc" Collapsed="true">
-    <Position X="10.5" Y="3.25" Width="1.5" />
+    <Position X="6" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEwAAQIgAAQAAAEEAAJEACQGAQgAIAARQEIFAQAACAA=</HashCode>
+      <HashCode>AEwAAQIgAEQAAAEUAAJEACQGgQgAIAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,7 +45,7 @@
   <Class Name="GameRoot" Collapsed="true">
     <Position X="7.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgCAAgQCAABAAAEAAASAAAAEAERAAAQAACAAAAAEA=</HashCode>
+      <HashCode>AAQgCAAgQDAABAAAEAAASAAAQEAERAAAQAACAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\GameRoot.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,14 +73,14 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="8.25" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIBIAiAACAAAAAAAAQAAAQiyqAAABCIAYCEAEKAAA=</HashCode>
+      <HashCode>AAAIBIAiAAiAAAAAAAAQAAAQiyqAAABCIAYCEAGKBCA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NetSvc" Collapsed="true">
     <Position X="10.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAgAAAAIAAAAAAAAAAAAAAAACAAQAAABYAEAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +94,7 @@
   <Class Name="MainCityWnd" Collapsed="true">
     <Position X="4.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAAAQAgCFQABCIAAEAIAIhCCEEAAQRQAsABSKCERY=</HashCode>
+      <HashCode>AQUAAAQAgCFQABCIAAEAIAIhCCEEAAQRQAsABSKCERY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -106,14 +106,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BaseData&lt;T&gt;" Collapsed="true">
-    <Position X="10" Y="4.5" Width="1.5" />
+    <Position X="7.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AutoGuideCfg" Collapsed="true">
-    <Position X="10" Y="5.25" Width="1.5" />
+    <Position X="10.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAgAQAAIAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
@@ -127,7 +127,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ClientSession" Collapsed="true">
-    <Position X="6.5" Y="6.5" Width="1.5" />
+    <Position X="2" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
       <FileName>Assets\Scripts\Net\ClientSession.cs</FileName>
@@ -143,7 +143,7 @@
   <Class Name="MainCitySys" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CERAiBIhACEkQEAAgAAgAAEAACAIARQQyCEIHkCBIBA=</HashCode>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAACAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\MainCitySys.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -156,7 +156,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="StrongWnd" Collapsed="true">
-    <Position X="0.5" Y="5" Width="1.5" />
+    <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IoAQAQAqAQgEIEEAAAEAAkABSBAAAEQAAYAABV8gAIQ=</HashCode>
       <FileName>Assets\Scripts\UIWindow\StrongWnd.cs</FileName>
@@ -183,8 +183,15 @@
       <FileName>Assets\Scripts\System\TimerSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TaskWnd" Collapsed="true">
+    <Position X="4.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIGAAAgAQAAAAAAAAEAIAYAAAAAAAAAQIAAAEAAAIY=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\TaskWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Enum Name="ChatType" Collapsed="true">
-    <Position X="2" Y="6.5" Width="1.5" />
+    <Position X="4.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAAABAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\ChatWnd.cs</FileName>

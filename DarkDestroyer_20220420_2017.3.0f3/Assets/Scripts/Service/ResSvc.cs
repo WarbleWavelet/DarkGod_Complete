@@ -27,6 +27,7 @@ public class ResSvc : MonoBehaviour
         InitMapCfg(PathDefine.MapCfg);
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrongCfg(PathDefine.StrongCfg);
+        InitTaskRewardCfg(PathDefine.TaskRewardCfg);
         PECommon.Log("Init ResSvc",LogType.Log);
     }
 
@@ -200,6 +201,11 @@ public class ResSvc : MonoBehaviour
 
 
     #region Common
+    /// <summary>
+    /// 字符串数组转Vector3
+    /// </summary>
+    /// <param name="e"></param>
+    /// <returns></returns>
     Vector3 ParseVector3ByXmlElement(XmlElement e)
     {
         string[] valArr = e.InnerText.Split(',');
@@ -231,7 +237,7 @@ public class ResSvc : MonoBehaviour
     Dictionary<string,GameObject> goDic=new Dictionary<string,GameObject>();
     public GameObject LoadPrefab(string path, bool cache = false)
     { 
-    GameObject prefab=null;
+        GameObject prefab=null;
         if (!goDic.TryGetValue(path, out prefab))
         {
             prefab = Resources.Load<GameObject>(path);
@@ -549,11 +555,86 @@ public class ResSvc : MonoBehaviour
 
     #endregion
 
+    #region taskReward
 
+
+    public List<TaskRewardData> taskRewardLst = new List<TaskRewardData>();
+    Dictionary<int, TaskRewardCfg> taskRewardDic = new Dictionary<int, TaskRewardCfg>();
+    
+    private void InitTaskRewardCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            // <taskName>智者点拨</taskName>
+            // < count > 1 </ count >
+            // < exp > 1130 </ exp >
+            // < coin > 1280 </ coin >
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                    continue;
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                //nodLst，ID
+                TaskRewardCfg c = new TaskRewardCfg
+                {
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "taskName":
+                            {
+                                c.taskName =e.InnerText;
+                            }
+                            break;
+                        case "count":
+                            {
+                                c.count = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "coin":
+                            {
+                                c.coin =  int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "exp":
+                            {
+                                c.exp = int.Parse(e.InnerText);
+                            }
+                            break;
+
+                        default:break;
+                    }
+
+                }
+                //
+                taskRewardDic.Add(ID, c);
+
+            }
+        }
+    }
+    public TaskRewardCfg GetTaskRewardCfg(int ID)
+    {
+        TaskRewardCfg c = null;
+        if (taskRewardDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    #endregion
 
 }
 
 
+#region 强化
 public enum PosType
 {
     Head,
@@ -570,3 +651,4 @@ public enum PropType
     Hp,
     Def,
 }
+#endregion

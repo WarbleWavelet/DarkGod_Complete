@@ -43,6 +43,7 @@ namespace PEProtocol
         public int guideid;
         public int[] strongArr;
         public long time;
+        public string[] taskRewardArr;   // ID | 已经完成次数 | 是否已经领取奖励
     }
     #endregion
 
@@ -73,6 +74,9 @@ namespace PEProtocol
         public ReqBuy reqBuy;
         public RspBuy rspBuy;
         public PshPower pshPower;
+        public ReqTakeTaskReward reqTakeTaskReward;
+        public RspTakeTaskReward rspTakeTaskReward;
+        public PshTaskPrgs pshTaskPrgs;
 
 
 
@@ -97,7 +101,12 @@ namespace PEProtocol
         PshChat = 206,
         ReqBuy = 207,
         RspBuy = 208,
-        PshPower=209
+        [Description("体力计时增加")]
+        PshPower =209,
+        ReqTakeTaskReward = 210,
+        RspTakeTaskReward = 211,
+        [Description("任务进度")]
+        PshTaskPrgs = 212
     }
 
     /// <summary>
@@ -134,6 +143,8 @@ namespace PEProtocol
         #endregion 
 
         /// <summary>密码精度不足</summary>
+        /// 
+        ClientDataError
     }
     #endregion
 
@@ -212,6 +223,26 @@ namespace PEProtocol
         /// <summary>强化后变化</summary>
         public int[] strongArr;
     }
+    [Serializable]
+    public class ReqTakeTaskReward
+    {
+        public int id;
+    }
+    [Serializable]
+    public class RspTakeTaskReward
+    {
+        public int id;
+        public int lv;
+        public int exp;
+        public int coin;
+        public string[] taskArr;
+    }
+
+    [Serializable]
+    public class PshTaskPrgs
+    {
+        public string[] taskArr;
+    }
     #endregion
 
     #region 聊天
@@ -287,6 +318,21 @@ namespace PEProtocol
     #endregion
 
     #endregion
+
+
+    public enum TaskState
+    {
+        [Description("未定义")]
+        None,
+        [Description("未接受")]
+        UnAccept,
+        [Description("接受")]
+        Accept,
+        [Description("完成")]
+        Done,
+        [Description("完成领完奖励")]
+        Got
+    }
 }
 
 #region      EnumExtension

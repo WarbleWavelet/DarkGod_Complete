@@ -72,7 +72,6 @@ public class LoginWnd : WindowRoot
 
         if (_acct != "" && _pass != "")
         {
-            Debug.Log(this.GetType()+"1");
             PlayerPrefs.SetString("Acct", _acct);
             PlayerPrefs.SetString("Pass", _pass);
             //
@@ -89,11 +88,9 @@ public class LoginWnd : WindowRoot
         }
         else
         {
-            Debug.Log(this.GetType() + "2");
             GameRoot.AddTips("账号或密码为空");
         }
 
-        Debug.Log(this.GetType() + "3");
     }
     /// <summary>
     /// 点击公告

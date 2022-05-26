@@ -87,6 +87,19 @@ public class WindowRoot : MonoBehaviour
         return t;
     }
 
+
+    protected Transform GetTrans(Transform t,string path)
+    {
+        if (t != null)
+        {
+           return t.Find(path);
+        }
+        else
+        {
+            return transform.Find(path);
+        }
+    }
+
     #region SetText
     protected void SetText(Text text,string content="")
     {
@@ -115,6 +128,17 @@ public class WindowRoot : MonoBehaviour
     protected void SetSprite(Image image, string path)
     {
         image.sprite = resSvc.LoadSprite(path,true);
+
+    }
+
+    protected void SetSprite(Transform t, string path)
+    {
+        Image image = t.GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = resSvc.LoadSprite(path, true);
+        }
+
 
     }
     #endregion

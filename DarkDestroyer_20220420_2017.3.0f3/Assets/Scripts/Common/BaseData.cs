@@ -6,6 +6,7 @@
 	功能：数据配置类
 *****************************************************/
 
+using System.ComponentModel;
 using UnityEngine;
 
 public class BaseData <T>
@@ -23,6 +24,9 @@ public class MapCfg : BaseData<MapCfg>
     public Vector3 playerBornRote;
 }
 
+
+
+#region 引导
 /**
 <item ID="1001">
     <npcID>0</npcID>
@@ -53,6 +57,8 @@ public class AutoGuideCfg : BaseData<AutoGuideCfg>
     public int exp;
 
 }
+#endregion
+
 
 #region  玩家突破
 /**
@@ -81,4 +87,50 @@ public class StrongCfg : BaseData<StrongCfg>
 }
 
 
+#endregion
+
+#region 任务奖励
+/**
+	<item ID="1">
+		<taskName>智者点拨</taskName>
+		<count>1</count>
+		<exp>1130</exp>
+		<coin>1280</coin>
+	</item>
+ * **/
+public class TaskRewardCfg : BaseData<TaskRewardCfg>
+{
+    /// <summary>任务名</summary>
+    public string taskName;
+    /// <summary>金币</summary>
+    public int coin;
+    /// <summary>经验</summary>
+    public int exp;
+    /// <summary>需要完成的次数</summary>
+    public int count;
+
+
+}
+
+public class TaskRewardData : BaseData<TaskRewardData>
+{
+    /// <summary>是否已经完成</summary>
+    public TaskState state;
+    /// <summary>已经完成的次数</summary>
+    public int prgs;
+}
+
+public enum TaskState
+{
+    [Description("未定义")]
+    None,
+    [Description("未接受")]
+    UnAccept,
+    [Description("接受")]
+    Accept,
+    [Description("完成")]
+    Done,
+    [Description("完成领完奖励")]
+    Got
+}
 #endregion

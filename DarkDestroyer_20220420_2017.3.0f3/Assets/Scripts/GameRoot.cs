@@ -207,8 +207,22 @@ public class GameRoot : MonoBehaviour
     internal void SetPlayerDataByPower(PshPower data)
     {
         PlayerData.power = data.power;
-        PECommon.Log("玩家体力："+data.power);
+        //PECommon.Log("玩家体力："+data.power);
     }
+
+    internal void SetPlayerDataByTask(RspTakeTaskReward data)
+    {
+        PlayerData.coin = data.coin;
+        PlayerData.lv = data.lv;
+        PlayerData.exp = data.exp;
+        PlayerData.taskRewardArr = data.taskArr;
+    }
+
+    internal void SetPlayerDataByTaskPrgs(PshTaskPrgs data)
+    {
+        PlayerData.taskRewardArr = data.taskArr;
+    }
+
     #endregion
 
 
@@ -222,6 +236,8 @@ public class GameRoot : MonoBehaviour
             }, 5000
         );
     }
+
+
 
 
     #endregion

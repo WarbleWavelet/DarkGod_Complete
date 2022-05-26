@@ -16,6 +16,7 @@ public class PathDefine
     public const string MapCfg = "ResCfgs/map";
     public const string GuideCfg = "ResCfgs/guide";
     public const string StrongCfg = "ResCfgs/strong";
+    public const string TaskRewardCfg = "ResCfgs/taskreward";
     #endregion
 
     #region AutoGuide
@@ -54,7 +55,17 @@ public class PathDefine
 
     #region MainCity
     public const string BtnTypeSelect = "ResImages/btntype1";  
-    public const string BtnTypeUnselect = "ResImages/btntype2";  
+    public const string BtnTypeUnselect = "ResImages/btntype2";
     #endregion
 
+
+
+    #region 任务
+    public const string TaskDailySprite = "ResImages/dailytask";
+    public const string TaskAutoSprite = "ResImages/autotask";
+    public const string TaskSprite = "ResImages/task";
+    public const string TaskItemPrefab = "PrefabUI/ItemTaskPrefab";
+    public const string TaskPrizeImg = "ResImages/box2";
+    public const string TaskPrizeGrayImg = "ResImages/box1";
+    #endregion
 }

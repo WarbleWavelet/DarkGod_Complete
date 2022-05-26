@@ -42,7 +42,7 @@ class PowerSys
         timerSvc = TimerSvc.Instance;
         //
         TimerSvc.Instance.AddTimerTask(CalcPowerAdd,PECommon.PowerAddSpace,PETimeUnit.Second,0);
-        PECommon.Log("PowerSys Inited");
+        PECommon.Log("PowerSys Init");
     }
 
 

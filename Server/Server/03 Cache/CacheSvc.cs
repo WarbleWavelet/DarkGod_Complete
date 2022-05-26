@@ -155,9 +155,26 @@ class CacheSvc
          
     }
 
-   
+
     #endregion
 
 
+    #region 任务
+    public ServerSession GetOnlineServerSession(int playerID)
+    {
+        ServerSession session = null;
+        foreach (var item in onLineSessionDic)
+        {
+            if (playerID == item.Value.id)
+            {
+                session = item.Key;
+                break;
+            }
+               
+        }
+
+        return session;
+    }
+    #endregion
 }
 
