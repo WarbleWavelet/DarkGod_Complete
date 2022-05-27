@@ -39,6 +39,7 @@ public class MainCityWnd : WindowRoot
     public Button btnStrong;
     public Button btnMKCoin;
     public Button btnTask;
+    public Button btnInstance;
 
 
     [Header("左下")]
@@ -77,6 +78,7 @@ public class MainCityWnd : WindowRoot
         btnMKCoin.onClick.AddListener(ClickBtnMKCoin);
         btnChat.onClick.AddListener(ClickBtnChat);
         btnTask.onClick.AddListener(ClickBtnTask);
+        btnInstance.onClick.AddListener(ClickBtnInstance);
         //
         defaultPos = imgDirBg.transform.position;
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
@@ -88,7 +90,11 @@ public class MainCityWnd : WindowRoot
        
     }
 
-
+    private void ClickBtnInstance()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        MainCitySys.Instance.EnterInstance();
+    }
 
     void Update()
     {

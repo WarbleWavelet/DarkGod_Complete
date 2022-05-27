@@ -75,6 +75,8 @@ public class GameRoot : MonoBehaviour
         //
         MainCitySys maincitySys = GetComponent<MainCitySys>();
         maincitySys.InitSys();
+        InstanceSys instanceSys= GetComponent<InstanceSys>();
+        instanceSys.InitSys();
         TimerSvc timerSvc = GetComponent<TimerSvc>();
         timerSvc.InitSys();
         //TestTimerSvc(); 

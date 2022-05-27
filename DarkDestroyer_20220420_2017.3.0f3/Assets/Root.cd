@@ -29,7 +29,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ResSvc" Collapsed="true">
-    <Position X="6" Y="7.25" Width="1.5" />
+    <Position X="10.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEwAAQIgAEQAAAEUAAJEACQGgQgAIAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
@@ -78,9 +78,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="NetSvc" Collapsed="true">
-    <Position X="10.25" Y="1.75" Width="1.5" />
+    <Position X="10.25" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAgAAAAIAAAAAAAAAAAAAAAACAAQAAABYAEAAg=</HashCode>
       <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -143,7 +143,7 @@
   <Class Name="MainCitySys" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAAAAAAAAAAAACAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>CERAiBIhACEkQEAAgIAgAAECACAIARQQyCEIHkCBIBA=</HashCode>
       <FileName>Assets\Scripts\System\MainCitySys.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -177,7 +177,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TimerSvc" Collapsed="true">
-    <Position X="8.25" Y="6.75" Width="1.5" />
+    <Position X="10.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQEAAAAACAAAAAAAAAAAAAAAIAAAEAAQAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\TimerSvc.cs</FileName>
@@ -186,7 +186,7 @@
   <Class Name="TaskWnd" Collapsed="true">
     <Position X="4.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIGAAAgAQAAAAAAAAEAIAYAAAAAAAAAQIAAAEAAAIY=</HashCode>
+      <HashCode>AAIGAAAgAAAAAAAAAAEAIAYAAAAAAAAAQIAAAEAAAIY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\TaskWnd.cs</FileName>
     </TypeIdentifier>
   </Class>

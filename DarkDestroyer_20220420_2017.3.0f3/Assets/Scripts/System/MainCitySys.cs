@@ -14,6 +14,10 @@ using UnityEngine.AI;
 
 public class MainCitySys : SystemRoot
 {
+
+    #region 字段
+
+    [Header("MainCitySys")]
     public static MainCitySys Instance;
     public MainCityWnd maincityWnd;
     public PlayerController playerCtrl;
@@ -52,6 +56,14 @@ public class MainCitySys : SystemRoot
     [Header("任务")]
     public TaskWnd taskWnd;
     List<TaskRewardData> taskDataLst = new List<TaskRewardData>();
+
+
+
+    [Header("副本")]
+    public InstanceWnd instanceWnd;
+    #endregion
+
+
     void Update()
     {
         if (isNavGuide)
@@ -63,8 +75,6 @@ public class MainCitySys : SystemRoot
                 StopNavTask();
                 OpenGuideWnd();
             }
-
-
         }
 
     }
@@ -73,7 +83,7 @@ public class MainCitySys : SystemRoot
     {
         base.InitSys();
         Instance = this;
-        PECommon.Log("Init MainCitySys");
+        PECommon.Log("MainCitySys Init");
     }
 
 
@@ -111,10 +121,13 @@ public class MainCitySys : SystemRoot
 
 
 
+
+
+
     #endregion
 
 
-    #region Player
+    #region 玩家
     /// <summary>
     /// 加载游戏主角
     /// </summary>
@@ -166,18 +179,7 @@ public class MainCitySys : SystemRoot
         playerCtrl.transform.localEulerAngles = new Vector3(0f, playerStartRotate + rotate, 0f);
     }
 
-    internal void OpenMKCoinWnd()
-    {
-        buyWnd.SetWndState();
-        buyWnd.RefreshUI(10,BuyType.DIAMOND,1000,GoodType.COIN);
-    }
 
-    internal void OpenAddPowerWnd()
-    {
-       
-        buyWnd.SetWndState();
-        buyWnd.RefreshUI(10, BuyType.DIAMOND, 100, GoodType.POWER);
-    }
     #endregion
 
 
@@ -227,7 +229,7 @@ public class MainCitySys : SystemRoot
     #endregion
 
 
-    #region AutoTask
+    #region 引导
     internal void RunNavTask(AutoGuideCfg agc)
     {
         if (agc != null)
@@ -245,7 +247,10 @@ public class MainCitySys : SystemRoot
     }
 
 
-
+    /// <summary>
+    /// 已经到达？
+    /// </summary>
+    /// <returns></returns>
     bool IsNavArrived()
     {
         return Vector3.Distance(playerCtrl.transform.position, navTarget.position) < navStoppedDis;
@@ -259,10 +264,7 @@ public class MainCitySys : SystemRoot
             nav.speed = Constants.PlayerMoveSpeed;
             nav.SetDestination(navTarget.position);
             playerCtrl.SetBlend(Constants.BlendWalk);
-
-
         }
-
     }
 
   public void StopNavTask()
@@ -309,11 +311,12 @@ public class MainCitySys : SystemRoot
     }
 
 
-    #region 引导
+
     public void RspGuide(GameMsg msg)
     {
       
         RspGuide data = msg.rspGuide;
+
         GameRoot.AddTips(Constants.Color( "获得奖励！",TxtColor.Blue));
         GameRoot.AddTips(Constants.Color("获得经验:" +agc.exp, TxtColor.Blue));
         GameRoot.AddTips(Constants.Color("获得金币:" +agc.coin, TxtColor.Blue));
@@ -322,39 +325,40 @@ public class MainCitySys : SystemRoot
         {
             case  0:
                 {
-                    // 智者
+                    GameRoot.AddTips("已完成任务："+resSvc.GetGuideCfg(data.guideid).ID);
+
                 }
                 break;
             case 1:
                 {
-                    //副本
+                    EnterInstance();
                 }
                 break;
             case 2:
                 {
                     //强化
+                    OpenStrongWnd();
                 }
                 break;
             case 3:
                 {
                     //体力
+                    OpenAddPowerWnd();
                 }
                 break;
             case 4:
                 {
                     //金币
+                    OpenMKCoinWnd();
                 }
                 break;
             case 5:
                 {
                     //聊天
+                    chatWnd.SetWndState();
                 }
                 break;
-            default:
-                {
-
-                }
-                break;
+            default: break;
         }
 
         GameRoot.Instance.SetPlayerDataByGuide(data);
@@ -367,6 +371,14 @@ public class MainCitySys : SystemRoot
 
     }
 
+
+
+
+    #endregion
+
+
+
+    #region 强化
     internal void RspStrong(GameMsg msg)
     {
         GameRoot.Instance.SetPlayerDataByStrong (msg);
@@ -374,18 +386,12 @@ public class MainCitySys : SystemRoot
 
         if (msg.pshTaskPrgs != null)
         {
-            MainCitySys.Instance.PshTaskPrgs (msg);
+           PshTaskPrgs (msg);
         }
     }
-    #endregion
-
-    #endregion
-
-
-
-    #region 强化
     public void OpenStrongWnd()
     {
+      Common_BeforeOpenWnd();
         strongWnd.SetWndState();
     }
 
@@ -416,13 +422,14 @@ public class MainCitySys : SystemRoot
     #region 任务
     public void OpenTaskRewardWnd()
     {
-       
+        Common_BeforeOpenWnd();
         taskWnd.SetWndState();
         taskWnd.RefreshUI();
     }
 
     internal void PshTaskPrgs(GameMsg msg)
     {
+        
         PshTaskPrgs data = msg.pshTaskPrgs;
         GameRoot.Instance.SetPlayerDataByTaskPrgs(data);
         
@@ -445,8 +452,41 @@ public class MainCitySys : SystemRoot
 
     #endregion
 
+    #region 副本
+    /// <summary>
+    /// 进入副本
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    internal void EnterInstance()
+    {
+        Common_BeforeOpenWnd();
+        instanceWnd.SetWndState(true);
+    }
+    public void OpenInstanceWnd()
+    {
+        Common_BeforeOpenWnd();
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        instanceWnd.SetWndState(true);
+    }
+
+    #endregion
 
 
+
+    #region 购买、交易
+    internal void OpenMKCoinWnd()
+    {
+        Common_BeforeOpenWnd();
+        buyWnd.SetWndState();
+        buyWnd.RefreshUI(10, BuyType.DIAMOND, 1000, GoodType.COIN);
+    }
+
+    internal void OpenAddPowerWnd()
+    {
+        Common_BeforeOpenWnd();
+        buyWnd.SetWndState();
+        buyWnd.RefreshUI(10, BuyType.DIAMOND, 100, GoodType.POWER);
+    }
     internal void RspPower(GameMsg msg)
     {
         PshPower data = msg.pshPower;
@@ -473,4 +513,20 @@ public class MainCitySys : SystemRoot
 
         }
     }
+    #endregion
+
+
+
+    #region Common
+    /// <summary>
+    /// 打开WND之前的统一操作
+    /// </summary>
+    void Common_BeforeOpenWnd()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);    
+        StopNavTask ();
+    }
+    #endregion
+
+
 }

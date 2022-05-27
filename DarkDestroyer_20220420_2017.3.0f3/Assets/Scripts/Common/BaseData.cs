@@ -134,3 +134,9 @@ public enum TaskState
     Got
 }
 #endregion
+
+public enum NPCID
+{
+    WiseMan=0,
+
+}

@@ -30,11 +30,12 @@ public class GuideSys : SystemRoot
     }
     #endregion
 
-
-    void Init()
+    public override void InitSys()
     {
+        base.InitSys();
         PECommon.Log("GuideSys Init");
     }
+
 
 
 }
