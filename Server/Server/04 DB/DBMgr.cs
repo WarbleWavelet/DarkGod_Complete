@@ -53,7 +53,7 @@ class DBMgr
             "acct=@acct,pass=@pass,name = @name,lv = @lv,exp = @exp,power = @power," +
             "coin = @coin,diamond = @diamond,crystal=@crystal," +
             "ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-            "guideid=@guideid,strong=@strong,time=@time,taskreward=@taskreward";
+            "guideid=@guideid,strong=@strong,time=@time,taskreward=@taskreward,instance=@instance";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
             cmd.Parameters.AddWithValue("acct", acct);
@@ -77,7 +77,7 @@ class DBMgr
             cmd.Parameters.AddWithValue("strong", Strong_ArrToString(pd.strongArr));
             cmd.Parameters.AddWithValue("time", pd.time);
             cmd.Parameters.AddWithValue("taskreward", TaskReward_ArrToString(pd.taskRewardArr)  );
-
+            cmd.Parameters.AddWithValue("instance", pd.instance);
             cmd.ExecuteNonQuery();
             id = (int)cmd.LastInsertedId;
             PECommon.Log("已增id:" + id);
@@ -145,6 +145,7 @@ class DBMgr
                         strongArr=Strong_StringToArr( reader.GetString("strong") ),
                         time= reader.GetInt64("time"),
                         taskRewardArr = TaskReward_StringToArr(reader.GetString("taskreward")),
+                        instance = reader.GetInt32("instance")
 
                     };
                     PECommon.Log("已查到acct:" + acct);
@@ -192,6 +193,7 @@ class DBMgr
                         "5|0|2",
                         "6|0|2"
                     },
+                    instance=10001
                 };
                 playerData.id = InsertPlayerData(acct, pass, playerData);
             }
@@ -240,7 +242,7 @@ class DBMgr
                 " name = @name,lv = @lv,exp = @exp,power = @power," +
                 "coin = @coin,diamond = @diamond,crystal=@crystal," +
                 " ad = @ad,ap = @ap,addef = @addef,apdef = @apdef,dodge = @dodge,critical = @critical,pierce = @pierce," +
-                " guideid=@guideid,strong=@strong,time=@time,taskreward=@taskreward" +
+                " guideid=@guideid,strong=@strong,time=@time,taskreward=@taskreward, instance=@instance" +
                 " where id=@id";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("name", pd.name);
@@ -262,6 +264,8 @@ class DBMgr
             cmd.Parameters.AddWithValue("strong", Strong_ArrToString(pd.strongArr));
             cmd.Parameters.AddWithValue("time", pd.time);
             cmd.Parameters.AddWithValue("taskreward", TaskReward_ArrToString(pd.taskRewardArr));
+            cmd.Parameters.AddWithValue("instance", pd.instance);
+
             cmd.Parameters.AddWithValue("id", id);
             cmd.ExecuteNonQuery();
         }
@@ -277,7 +281,7 @@ class DBMgr
         return true;
     }
 
-    #region   StrongArr
+    #region   强化
 
     string Strong_ArrToString(int[] strongArr)
     {

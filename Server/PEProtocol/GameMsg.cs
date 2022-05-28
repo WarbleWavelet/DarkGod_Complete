@@ -44,6 +44,7 @@ namespace PEProtocol
         public int[] strongArr;
         public long time;
         public string[] taskRewardArr;   // ID | 已经完成次数 | 是否已经领取奖励
+        public int instance;
     }
     #endregion
 
