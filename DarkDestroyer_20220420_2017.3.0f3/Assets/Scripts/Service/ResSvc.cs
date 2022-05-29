@@ -24,7 +24,8 @@ public class ResSvc : MonoBehaviour
     {
         Instance = this;
         InitRDNameCfg(PathDefine.RDNameCfg);
-        InitMapCfg(PathDefine.MapCfg);
+        //InitMapCfg(PathDefine.MapCfg);
+        InitMapCfg(PathDefine.MapCfg_V1);
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrongCfg(PathDefine.StrongCfg);
         InitTaskRewardCfg(PathDefine.TaskRewardCfg);
@@ -316,11 +317,12 @@ public class ResSvc : MonoBehaviour
                                 c.playerBornRote = ParseVector3ByXmlElement(e);
                             }
                             break;
-                        default:
+                        case "power":
                             {
-
+                                c.power = int.Parse(e.InnerText);
                             }
                             break;
+                        default:break;
                     }
                     
                 }

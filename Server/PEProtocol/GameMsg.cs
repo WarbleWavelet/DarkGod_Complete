@@ -78,6 +78,8 @@ namespace PEProtocol
         public ReqTakeTaskReward reqTakeTaskReward;
         public RspTakeTaskReward rspTakeTaskReward;
         public PshTaskPrgs pshTaskPrgs;
+        public ReqInstanceFight reqInstanceFight;
+        public RspInstanceFight rspInstanceFight;
 
 
 
@@ -107,7 +109,10 @@ namespace PEProtocol
         ReqTakeTaskReward = 210,
         RspTakeTaskReward = 211,
         [Description("任务进度")]
-        PshTaskPrgs = 212
+        PshTaskPrgs = 212,
+        //副本
+        ReqInstanceFight=301,
+        RspInstanceFight=302
     }
 
     /// <summary>
@@ -141,6 +146,8 @@ namespace PEProtocol
         LackDiamond,
         /// <summary>水晶不足</summary>
         LackCrystal,
+        [Description("体力不足")]
+        LackPower,
         #endregion 
 
         /// <summary>密码精度不足</summary>
@@ -260,6 +267,21 @@ namespace PEProtocol
     {
         public string name;
         public string chat;
+    }
+    #endregion
+
+    #region 副本
+    [Serializable]
+    public class ReqInstanceFight
+    {
+        public int instanceID;
+    }
+
+    [Serializable]
+    public class RspInstanceFight
+    {
+        public int instanceID;
+        public int power;
     }
     #endregion
     #endregion

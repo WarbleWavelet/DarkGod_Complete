@@ -32,9 +32,10 @@ class CfgSvc
 
     public void Init()
     {
-        InitGuideCfg();
-        InitStrongCfg();
-        InitTaskRewardCfg();
+        InitGuideCfg(PathDefine.Guide);
+        InitStrongCfg(PathDefine.Strong);
+        InitTaskRewardCfg(PathDefine.TaskReward);
+        InitInstanceCfg(PathDefine.Instance);
 
         PECommon.Log("CfgSvc Init");
 
@@ -45,11 +46,11 @@ class CfgSvc
     public List<string> guideLst = new List<string>();
     Dictionary<int, GuideCfg> guideTaskDic = new Dictionary<int, GuideCfg>();
 
-    private void InitGuideCfg()
+    private void InitGuideCfg(string path)
     {
         XmlDocument doc = new XmlDocument();
-        //doc.LoadXml(@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\guide.xml");
-        doc.Load(@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\guide.xml");
+        //doc.LoadXml(@"");失败
+        doc.Load(path);
         XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
         //
         for (int i = 0; i < nodLst.Count; i++)
@@ -110,10 +111,10 @@ class CfgSvc
     public List<string> strongLst = new List<string>();
     Dictionary<int, Dictionary<int, StrongCfg>> strongDic = new Dictionary<int, Dictionary<int, StrongCfg>>();
 
-    private void InitStrongCfg()
+    private void InitStrongCfg(string path)
     {
         XmlDocument doc = new XmlDocument();
-        doc.Load(@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\strong.xml");
+        doc.Load(path);
         XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
         //
         for (int i = 0; i < nodLst.Count; i++)
@@ -217,10 +218,10 @@ class CfgSvc
     public List<string> taskRewardLst = new List<string>();
     Dictionary<int, TaskRewardCfg> taskRewardDic = new Dictionary<int, TaskRewardCfg>();
 
-    private void InitTaskRewardCfg()
+    private void InitTaskRewardCfg(string path)
     {
         XmlDocument doc = new XmlDocument();
-        doc.Load(@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\taskreward.xml");
+        doc.Load(path);
         XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
         //
         for (int i = 0; i < nodLst.Count; i++)
@@ -268,6 +269,63 @@ class CfgSvc
     {
         TaskRewardCfg c = null;
         if (taskRewardDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    #endregion
+
+    #region 副本
+
+    public List<string> instanceLst = new List<string>();
+    Dictionary<int, InstanceCfg> instanceDic = new Dictionary<int, InstanceCfg>();
+
+    private void InitInstanceCfg(string path)
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(path);
+        XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
+        //
+        for (int i = 0; i < nodLst.Count; i++)
+        {
+            XmlElement ele = nodLst[i] as XmlElement;
+            if (ele.GetAttributeNode("ID") == null)
+                continue;
+            int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+            //nodLst，ID
+            InstanceCfg c = new InstanceCfg
+            {
+                ID = ID
+            };
+            foreach (XmlElement e in nodLst[i].ChildNodes)
+            {
+                switch (e.Name)
+                {
+                    case "power":
+                        {
+                            c.power = int.Parse(e.InnerText);
+                        }
+                        break;
+
+                    default: break;
+                }
+
+            }
+            //
+            instanceDic.Add(ID, c);
+        }
+
+
+    }
+    public InstanceCfg GetInstanceCfg(int ID)
+    {
+        InstanceCfg c = null;
+        if (instanceDic.TryGetValue(ID, out c))
         {
             return c;
         }
@@ -359,6 +417,32 @@ public class TaskRewardData : BaseData<TaskRewardData>
     public TaskState state;
     /// <summary>已经完成的次数</summary>
     public int prgs;
+}
+
+
+#endregion
+
+#region  副本
+/**
+	<item ID="10000">
+		<mapName>圣光主城</mapName>
+		<sceneName>SceneMainCity</sceneName>
+		<power>0</power>
+		<mainCamPos>17.4,7,50</mainCamPos>
+		<mainCamRote>45,135,0</mainCamRote>
+		<playerBornPos>22,-1.1,45</playerBornPos>
+		<playerBornRote>0,0,0</playerBornRote>
+	</item>
+    **/
+public class InstanceCfg : BaseData<InstanceCfg>
+{
+    public string mapName;
+    public string sceneName;
+    public int power;
+    public float[] mainCamPos;
+    public float[] mainCamRote;
+    public float[] playerBornPos;
+    public float[] playerBornRote;
 }
 
 

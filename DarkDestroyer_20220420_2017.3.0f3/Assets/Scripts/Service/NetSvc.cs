@@ -139,25 +139,31 @@ public class NetSvc : MonoBehaviour
                 break;
             case ErrorCode.LackCoin:
               
-                {  PECommon.Log("金币不足", LogType.Error);
+                {  PECommon.Log(ErrorCode.LackCoin.ToDes(), LogType.Error);
                 }
                 break;
             case ErrorCode.LackDiamond:
 
                 {
-                    PECommon.Log("钻石不足", LogType.Error);
+                    PECommon.Log(ErrorCode.LackDiamond.ToDes(), LogType.Error);
                 }
                 break;
             case ErrorCode.LackCrystal:
 
                 {
-                    PECommon.Log("水晶不足", LogType.Error);
+                    PECommon.Log(ErrorCode.LackCrystal.ToDes(), LogType.Error);
+                }
+                break;
+            case ErrorCode.LackPower:
+
+                {
+                    PECommon.Log(ErrorCode.LackPower.ToDes(), LogType.Error);
                 }
                 break;
             case ErrorCode.LackLv:
 
                 {
-                    PECommon.Log("等级不足", LogType.Error);
+                    PECommon.Log(ErrorCode.LackLv.ToDes(), LogType.Error);
                 }
                 break;
             case ErrorCode.ClientDataError:
@@ -218,12 +224,16 @@ public class NetSvc : MonoBehaviour
                     MainCitySys.Instance.RspTakeTaskReward(msg);
                 }
                 break;
-            case CMD.PshTaskPrgs:
+            case CMD.PshTaskPrgs://包合并，节省流量
                 {
                    //MainCitySys.Instance.PshTaskPrgs(msg);
                 }
                 break;
-        
+            case CMD.RspInstanceFight:
+                {
+                    InstanceSys.Instance.RspInstanceFight(msg);
+                }
+                break;
         }
     }
     #endregion

@@ -5269,7 +5269,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1142136885769874, guid: bd55612b253521d45af953ba53b72934, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114696372075279934, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
@@ -14404,6 +14404,7 @@ GameObject:
   - component: {fileID: 1332992449}
   - component: {fileID: 1332992450}
   - component: {fileID: 1332992451}
+  - component: {fileID: 1332992452}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Untagged
@@ -14603,7 +14604,21 @@ MonoBehaviour:
   resSvc: {fileID: 0}
   audioSvc: {fileID: 0}
   netSvc: {fileID: 0}
-  instanceWnd: {fileID: 0}
+  instanceWnd: {fileID: 1169551042}
+--- !u!114 &1332992452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332992440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2763641bd13eb74aadf7b39ee5c0dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resSvc: {fileID: 0}
+  audioSvc: {fileID: 0}
+  netSvc: {fileID: 0}
 --- !u!1 &1333119474
 GameObject:
   m_ObjectHideFlags: 0

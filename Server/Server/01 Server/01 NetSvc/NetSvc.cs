@@ -100,6 +100,11 @@ class NetSvc
                     TaskSys.Instance.ReqTakeTaskReward(pack);
                 }
                 break;
+            case CMD.ReqInstanceFight:
+                {
+                    InstanceSys.Instance.ReqInstanceFight(pack);
+                }
+                break;
             default: break;
         }
 

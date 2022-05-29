@@ -465,7 +465,6 @@ public class MainCitySys : SystemRoot
     public void OpenInstanceWnd()
     {
         Common_BeforeOpenWnd();
-        audioSvc.PlayUIAudio(Constants.UIClickBtn);
         instanceWnd.SetWndState(true);
     }
 

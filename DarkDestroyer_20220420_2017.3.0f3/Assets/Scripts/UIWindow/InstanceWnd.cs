@@ -33,6 +33,7 @@ public class InstanceWnd : WindowRoot
     [Header("副本")]
     public bool isFirst = true;
     public PlayerData pd;
+    /// <summary>显示看的</summary>
     public int instance=0;
     protected override void InitWnd()
     {
@@ -79,21 +80,47 @@ public class InstanceWnd : WindowRoot
         instanceTransArr = new Transform[childCount];
         for (int i = 0; i < childCount ; i++)
         {
-            int index = i;
+            int index = i;//直接用iBug
             instanceTransArr[index] = instanceRoot.GetChild(index);
-            instanceTransArr[index].gameObject.GetComponent<Button>().onClick.AddListener(() =>ClickInstanceItem(index));
+            instanceTransArr[index].gameObject.GetComponent<Button>().onClick.AddListener(
+                () =>ClickInstanceItem(index)
+            );
         }
     }
 
-    private void ClickInstanceItem(int idx)
+
+   /// <summary>
+   /// 点击副本
+   /// </summary>
+   /// <param name="childIndex"></param>
+    private void ClickInstanceItem(int childIndex)
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        instance = idx;
+        instance = childIndex;
+        int instanceID = ChildIndexToInstanceID(childIndex);
+        int power=resSvc.GetMapDataCfg(instanceID).power;
+        if (pd.power >= power)
+        {
+            GameMsg msg = new GameMsg
+            {
+                cmd = (int)CMD.ReqInstanceFight,
+                reqInstanceFight = new ReqInstanceFight
+                {
+                    instanceID = instanceID,
+                }
+            };
+
+            netSvc.SendMsg(msg);
+        }
+        else
+        {
+            GameRoot.AddTips(ErrorCode.LackPower.ToDes());
+        }
     }
 
     void RefreshUI()
     {
-         instance = pd.instance % 1000 - 1;
+         instance =  InstanceIDToChildIndex( pd.instance) ;
         if (instance > instanceTransArr.Length) return;
         for (int i = 0; i < instanceTransArr.Length; i++)
         {
@@ -113,4 +140,17 @@ public class InstanceWnd : WindowRoot
 
         }
     }
+
+    #region 数据转换
+    int InstanceIDToChildIndex(int itemID)
+    {
+        return itemID % 1000 - 1;
+    }
+
+    int ChildIndexToInstanceID(int childIndex)
+    { 
+        return childIndex +10001;
+    }
+    #endregion
+
 }

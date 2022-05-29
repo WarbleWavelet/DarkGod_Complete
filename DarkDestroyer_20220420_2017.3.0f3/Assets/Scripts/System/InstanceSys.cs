@@ -6,6 +6,8 @@
 	功能：副本系统
 *****************************************************/
 
+using PEProtocol;
+using System;
 using UnityEngine;
 
 public class InstanceSys : SystemRoot 
@@ -34,5 +36,27 @@ public class InstanceSys : SystemRoot
     {
         base.InitSys();
         _instance = this;
+    }
+
+    internal void RspInstanceFight(GameMsg msg)
+    {
+        RspInstanceFight data = msg.rspInstanceFight;
+        GameRoot.Instance.SetPlayerDataByInstance(data);
+        MainCitySys.Instance.maincityWnd.SetWndState(false);
+        MainCitySys.Instance.instanceWnd.SetWndState(false);
+
+        BattleSys.Instance.EnterMap(data.instanceID);
+        
+    }
+
+    void SetInstanceState(bool state=true)
+    {
+        instanceWnd.SetWndState(state);
+       
+    }
+
+    void EnterInstance()
+    { 
+        SetInstanceState();
     }
 }

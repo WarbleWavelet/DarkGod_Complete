@@ -43,6 +43,7 @@ class ServerRoot
         //TestTimerSvc();
         PowerSys.Instance.Init();
         TaskSys.Instance.Init();
+        InstanceSys.Instance.Init();
     }
 
     public void Update()

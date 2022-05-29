@@ -22,6 +22,8 @@ public class MapCfg : BaseData<MapCfg>
     public Vector3 mainCamRote;
     public Vector3 playerBornPos;
     public Vector3 playerBornRote;
+    /// <summary>体力限制</summary>
+    public int power;
 }
 
 

@@ -77,6 +77,9 @@ public class GameRoot : MonoBehaviour
         maincitySys.InitSys();
         InstanceSys instanceSys= GetComponent<InstanceSys>();
         instanceSys.InitSys();
+        BattleSys battleSys = GetComponent<BattleSys>();
+        battleSys.InitSys();
+        //
         TimerSvc timerSvc = GetComponent<TimerSvc>();
         timerSvc.InitSys();
         //TestTimerSvc(); 
@@ -224,7 +227,10 @@ public class GameRoot : MonoBehaviour
     {
         PlayerData.taskRewardArr = data.taskArr;
     }
-
+    internal void SetPlayerDataByInstance(RspInstanceFight data)
+    {
+        PlayerData.power = data.power;
+    }
     #endregion
 
 

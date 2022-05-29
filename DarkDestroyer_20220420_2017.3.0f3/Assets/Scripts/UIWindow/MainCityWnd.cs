@@ -93,7 +93,7 @@ public class MainCityWnd : WindowRoot
     private void ClickBtnInstance()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        MainCitySys.Instance.EnterInstance();
+        MainCitySys.Instance.OpenInstanceWnd();
     }
 
     void Update()

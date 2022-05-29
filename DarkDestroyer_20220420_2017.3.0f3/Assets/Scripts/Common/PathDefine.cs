@@ -14,6 +14,7 @@ public class PathDefine
     #region Cfg
     public const string RDNameCfg = "ResCfgs/rdname";
     public const string MapCfg = "ResCfgs/map";
+    public const string MapCfg_V1 = "ResCfgs/map_v1";
     public const string GuideCfg = "ResCfgs/guide";
     public const string StrongCfg = "ResCfgs/strong";
     public const string TaskRewardCfg = "ResCfgs/taskreward";

@@ -43,7 +43,7 @@ class CacheSvc
 
     public void Init()
     {
-        PECommon.Log("CacheSvc Inited");
+        PECommon.Log("CacheSvc Init");
         dBMgr = DBMgr.Instance;
 
     }
