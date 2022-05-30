@@ -12,6 +12,6 @@ public class SkillMgr :MonoBehaviour
 {
     public void Init()
     {
-
+        PECommon.Log(this.GetType().ToString()+" Init");
     }
 }

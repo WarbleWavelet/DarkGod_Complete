@@ -90,11 +90,7 @@ public class MainCityWnd : WindowRoot
        
     }
 
-    private void ClickBtnInstance()
-    {
-        audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        MainCitySys.Instance.OpenInstanceWnd();
-    }
+
 
     void Update()
     {
@@ -182,6 +178,12 @@ public class MainCityWnd : WindowRoot
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         MainCitySys.Instance.OpenTaskRewardWnd();
+    }
+
+    private void ClickBtnInstance()
+    {
+        audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        MainCitySys.Instance.OpenInstanceWnd();
     }
     #endregion
 

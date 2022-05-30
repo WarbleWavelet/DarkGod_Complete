@@ -31,6 +31,7 @@ public class InstanceSys : SystemRoot
 
     [Header("副本系统")]
     public InstanceWnd instanceWnd;
+    public PlayerCtrlWnd playerCtrlWnd;
 
     public override void InitSys()
     {
@@ -46,7 +47,6 @@ public class InstanceSys : SystemRoot
         MainCitySys.Instance.instanceWnd.SetWndState(false);
 
         BattleSys.Instance.EnterMap(data.instanceID);
-        
     }
 
     void SetInstanceState(bool state=true)
@@ -59,4 +59,6 @@ public class InstanceSys : SystemRoot
     { 
         SetInstanceState();
     }
+
+
 }

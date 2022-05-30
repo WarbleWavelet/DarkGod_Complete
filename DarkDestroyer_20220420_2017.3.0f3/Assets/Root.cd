@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="9.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QEAAAAABEAAEJCoAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
+      <HashCode>QEAAAAABkAAEJCoAACUQECAAIABYQAgECAAAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="8.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIBIAiAAiAAAAAAAAQAAAQiyqAAABCIAYCEQGKBCA=</HashCode>
+      <HashCode>AAAIBIAiAAiAAAAAAAAQAAAQiyqAAABCIAYCEQOKBCA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -85,10 +85,10 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PlayerController" Collapsed="true">
-    <Position X="7.75" Y="1.75" Width="1.5" />
+    <Position X="4" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAQABAAAACAAAgEiAgAAIAQAAAAIAAAQBAACAAIAIAA=</HashCode>
-      <FileName>Assets\Scripts\PlayerController.cs</FileName>
+      <FileName>Assets\Scripts\Battle\Controller\PlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MainCityWnd" Collapsed="true">
@@ -200,31 +200,66 @@
   <Class Name="BattleSys" Collapsed="true">
     <Position X="7.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAACAAAAAAAAAAAAAAAAAAAAAAQAACAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAACAAAAAAAAAIAAAAAAAIAgAAQAACAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\BattleSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleMgr" Collapsed="true">
-    <Position X="3.5" Y="8.25" Width="1.5" />
+    <Position X="2" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAQBAAAAAAIAAAAABAAAAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SkillMgr" Collapsed="true">
-    <Position X="2.75" Y="9" Width="1.5" />
+    <Position X="0.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\SkillMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StateMgr" Collapsed="true">
-    <Position X="4.25" Y="9" Width="1.5" />
+    <Position X="2" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\Battle\StateMgr.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAEAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="MapMgr" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\MapMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCtrlWnd" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AaQEAAAAgAAAAAAAAAEABBAhAAEAAAQIQAkEAAAAEQI=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstanceSys" Collapsed="true">
+    <Position X="7.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAACAAAAAgAAAACAAAAQAAABAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\System\InstanceSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityBase" Collapsed="true">
+    <Position X="3.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACABAAIAAAAAAAAAAIAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IState" Collapsed="true">
+    <Position X="10" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\IState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="ChatType" Collapsed="true">
     <Position X="7.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>

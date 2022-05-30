@@ -12,7 +12,7 @@ public class MapMgr : MonoBehaviour
 {
     public void Init()
     {
-
+        PECommon.Log(this.GetType().ToString() + " Init");
 
     }
 }

@@ -35,7 +35,8 @@ public class WindowRoot : MonoBehaviour
     /// </summary>
     /// <param name="isActive"></param>
     public void SetWndState(bool isActive = true)
-    { if ( gameObject.activeSelf != isActive )
+    { 
+        if ( gameObject.activeSelf != isActive )
         {
             gameObject.SetActive(!gameObject.activeSelf);
         }

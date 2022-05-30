@@ -3,7 +3,7 @@
 	作者：lenovo
     邮箱: 
     日期：2022/5/29 10:41:4
-	功能：战斗系统
+	功能：战斗系统(Sys=>各种Mgr)
 *****************************************************/
 
 using UnityEngine;
@@ -27,8 +27,8 @@ public class BattleSys : SystemRoot
     }
     #endregion
 
- //  [Header("BattleSys")]
-  
+    [Header("BattleSys")]
+   public BattleMgr battleMgr;
     public override void InitSys()
     {
         base.InitSys(); 
@@ -39,14 +39,25 @@ public class BattleSys : SystemRoot
     {
         GameObject go = new GameObject
         { 
-            name="BatleRoot",     
+            name="BattleRoot",     
+           
         };
         go.transform.SetParent(GameRoot.Instance.transform);
         //
-        BattleMgr battleMgr=go.AddComponent<BattleMgr>();
+         battleMgr=go.AddComponent<BattleMgr>();
         battleMgr.InitMap(mapID);
         //
+
+       
     
     }
 
+    public void ReqReleaseSkill(int idx)
+    {
+        battleMgr.ReqReleaseSkill(idx);
+    }
+    public void SetMoveDir(Vector2 dir)
+    {
+        battleMgr.SetMoveDir(dir);
+    }
 }
