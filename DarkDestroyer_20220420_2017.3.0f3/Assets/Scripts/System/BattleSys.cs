@@ -37,6 +37,12 @@ public class BattleSys : SystemRoot
 
     public void EnterMap(int mapID)
     {
+
+        InstantiateBattleRoot( mapID);
+        //
+    }
+    void InstantiateBattleRoot(int mapID)
+    { 
         GameObject go = new GameObject
         { 
             name="BattleRoot",     
@@ -44,14 +50,14 @@ public class BattleSys : SystemRoot
         };
         go.transform.SetParent(GameRoot.Instance.transform);
         //
-         battleMgr=go.AddComponent<BattleMgr>();
-        battleMgr.InitMap(mapID);
-        //
+        battleMgr=go.AddComponent<BattleMgr>();
 
-       
-    
+        battleMgr.InitMap(mapID);
     }
 
+
+
+    #region 控制玩家        
     public void ReqReleaseSkill(int idx)
     {
         battleMgr.ReqReleaseSkill(idx);
@@ -60,4 +66,6 @@ public class BattleSys : SystemRoot
     {
         battleMgr.SetMoveDir(dir);
     }
+    #endregion
+
 }

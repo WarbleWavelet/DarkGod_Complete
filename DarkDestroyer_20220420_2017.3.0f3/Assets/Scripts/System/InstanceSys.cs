@@ -55,10 +55,6 @@ public class InstanceSys : SystemRoot
        
     }
 
-    void EnterInstance()
-    { 
-        SetInstanceState();
-    }
 
 
 }

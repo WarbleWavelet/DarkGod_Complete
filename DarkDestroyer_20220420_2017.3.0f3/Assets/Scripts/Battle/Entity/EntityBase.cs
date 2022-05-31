@@ -8,19 +8,41 @@
 
 
 
+using UnityEngine;
+
 public class EntityBase
 {
-    public AniState curState=AniState.None;
+    public AniState curState = AniState.None;
     public StateMgr stateMgr = null;
-    public PlayerController playerCtrl = null;
+    public Controller ctrl = null;
 
     public void Move()
     {
-        stateMgr.ChaungeStaus(this, AniState.Move);
+        stateMgr.ChangeStaus(this, AniState.Move);
+       // SetBlend(Constants.BlendWalk);
     }
 
     public void Idle()
     {
-        stateMgr.ChaungeStaus(this, AniState.Idle);
+        stateMgr.ChangeStaus(this, AniState.Idle);
+      //  SetBlend(Constants.BlendIdle);
+    }
+
+    public virtual void SetBlend(float blend)
+    {
+        if (ctrl != null)
+        {
+            ctrl.SetBlend(blend);
+        }
+
+    }
+
+    public virtual void SetDir(Vector2 dir)
+    {
+        if (ctrl != null)
+        {
+            ctrl.Dir = dir;
+        }
+
     }
 }

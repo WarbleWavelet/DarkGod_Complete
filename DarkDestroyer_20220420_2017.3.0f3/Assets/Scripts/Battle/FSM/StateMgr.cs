@@ -20,7 +20,7 @@ public class StateMgr :MonoBehaviour
         dic.Add(AniState.Move,new StateMove());
     }
 
-    public void ChaungeStaus(EntityBase entity, AniState targetState)
+    public void ChangeStaus(EntityBase entity, AniState targetState)
     {
         if (entity.curState == targetState)
         {
@@ -29,7 +29,11 @@ public class StateMgr :MonoBehaviour
 
         if (dic.ContainsKey(targetState))
         {
-            dic[entity.curState].Exit(entity);
+            if (entity.curState != AniState.None)
+            { 
+                dic[entity.curState].Exit(entity);
+            }                                
+            
             dic[targetState].Enter(entity);
             dic[targetState].Process(entity);
         }

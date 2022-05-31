@@ -12,16 +12,18 @@ public class StateMove : IState
 {
     public void Enter(EntityBase entity)
     {
-        throw new System.NotImplementedException();
+        entity.curState = AniState.Move;
+        PECommon.Log(this.GetType().ToString() + " Enter");
     }
 
     public void Exit(EntityBase entity)
     {
-        throw new System.NotImplementedException();
+        PECommon.Log(this.GetType().ToString() + " Exit");
     }
 
     public void Process(EntityBase entity)
     {
-        throw new System.NotImplementedException();
+        PECommon.Log(this.GetType().ToString() + " Process");
+        entity.SetBlend(Constants.BlendWalk);
     }
 }
