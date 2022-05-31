@@ -30,15 +30,16 @@ public class BattleMgr : MonoBehaviour
 
 
     #region 实例地图 场景 人物
+
+
     public void InitMap(int mapID)
     {
         InitMgr_ToBattleRoot();
         InitSvc();
         //
         MapCfg cfg = resSvc.GetMapDataCfg(mapID);
-        resSvc.AsyncLoadScene(cfg.sceneName, () =>{ InitScene(cfg); });
+        resSvc.AsyncLoadScene(cfg.sceneName, () => { InitScene(cfg); });
     }
-
     void InitMgr_ToBattleRoot()
     { 
         mapMgr=gameObject.AddComponent<MapMgr>();
@@ -110,18 +111,22 @@ public class BattleMgr : MonoBehaviour
     void ReleaseNormalAttack()
     {
         PECommon.Log("ReleaseNormalAttack");
+        playerEntity.SetAction(0);
     }
     void ReleaseSkill1()
     {
         PECommon.Log("ReleaseSkill1");
+        playerEntity.SetAction(1);
     }
     void ReleaseSkill2()
     {
         PECommon.Log("ReleaseSkill2");
+        playerEntity.SetAction(2);
     }
     void ReleaseSkill3()
     {
         PECommon.Log("ReleaseSkill3");
+        playerEntity.SetAction(3);
     }
 
 

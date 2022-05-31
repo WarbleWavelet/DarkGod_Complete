@@ -8,6 +8,7 @@
 
 
 
+using System.Collections;
 using UnityEngine;
 
 public class EntityBase
@@ -15,6 +16,8 @@ public class EntityBase
     public AniState curState = AniState.None;
     public StateMgr stateMgr = null;
     public Controller ctrl = null;
+
+
 
     public void Move()
     {
@@ -28,11 +31,11 @@ public class EntityBase
       //  SetBlend(Constants.BlendIdle);
     }
 
-    public virtual void SetBlend(float blend)
+    public virtual void SetBlend(float value)
     {
         if (ctrl != null)
         {
-            ctrl.SetBlend(blend);
+            ctrl.SetBlend(value);
         }
 
     }
@@ -45,4 +48,20 @@ public class EntityBase
         }
 
     }
+
+
+    public virtual void SetAction(int value)
+    {
+        if (ctrl != null)
+        {
+            ctrl.SetAction(value);
+          
+        }
+
+    }
+
+
+
+
+
 }

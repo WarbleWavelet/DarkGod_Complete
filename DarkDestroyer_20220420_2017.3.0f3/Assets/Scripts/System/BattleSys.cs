@@ -51,7 +51,7 @@ public class BattleSys : SystemRoot
         go.transform.SetParent(GameRoot.Instance.transform);
         //
         battleMgr=go.AddComponent<BattleMgr>();
-
+        //TODO
         battleMgr.InitMap(mapID);
     }
 

@@ -69,13 +69,18 @@ public abstract class Controller :MonoBehaviour
 
 
     #region 动画
-    public virtual void SetBlend(float blend)
+    public virtual void SetBlend(float value)
     {
 
-        ani.SetFloat("Blend",blend);
+        ani.SetFloat("Blend", value);
 
     }
+    public virtual void SetAction(int value)
+    {
 
+        ani.SetInteger("Action", value);
+
+    }
     #endregion
 
 

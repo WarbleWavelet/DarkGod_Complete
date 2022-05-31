@@ -3997,6 +3997,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295141032}
+--- !u!1 &298238974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 298238975}
+  m_Layer: 0
+  m_Name: '------------------'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &298238975
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 298238974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 943.25415, y: 136.67297, z: -2.125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &299514711
 GameObject:
   m_ObjectHideFlags: 0
@@ -22485,6 +22513,7 @@ MonoBehaviour:
   defaultPos: {x: 0, y: 0}
   txtExpPrg: {fileID: 1151616127}
   expPrgTrans: {fileID: 2091747232}
+  isFirst: 1
 --- !u!224 &1842509711 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224260288584090732, guid: bc1fbf77f4b6d2545b191027a079df07,
