@@ -24,12 +24,29 @@ public class SkillMgr :MonoBehaviour
     {
         skillID += 100;
         SkillCfg cfg=resSvc.GetSkillCfg(skillID);
-        entity.SetAction(cfg.aniAction);
-        entity.SetSkillFbx(cfg.fx, cfg.skillTime );
+        SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMove);
         //
+        entity.SetSkillFbx(cfg.fx, cfg.skillTime);
+        SetState(entity, cfg);
+        SetSkillMove(entity, moveCfg);
+    }
+
+    void SetState(EntityBase entity, SkillCfg cfg)
+    { 
+        entity.SetAction(cfg.aniAction);
 
         timerSvc.AddTimerTask((tid) => {
             entity.Idle();
         }, cfg.skillTime);
+    }
+
+    void SetSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
+    { 
+        float speed = 1000.0f*moveCfg.moveDis / (moveCfg.moveTime );
+        entity.SetSkillMove(true, speed);
+
+        timerSvc.AddTimerTask((tid) => {
+            entity.SetSkillMove(false);
+        }, moveCfg.moveTime);
     }
 }

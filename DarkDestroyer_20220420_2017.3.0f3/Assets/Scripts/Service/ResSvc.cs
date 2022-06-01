@@ -30,6 +30,7 @@ public class ResSvc : MonoBehaviour
         InitStrongCfg(PathDefine.StrongCfg);
         InitTaskRewardCfg(PathDefine.TaskRewardCfg);
         InitSkillCfg(PathDefine.SkillCfg);
+        InitSkillMoveCfg(PathDefine.SkillMoveCfg);
         PECommon.Log("ResSvc Init");
     }
 
@@ -682,7 +683,11 @@ public class ResSvc : MonoBehaviour
                                 c.fx = e.InnerText;
                             }
                             break;
-
+                        case "skillMove":
+                            {
+                                c.skillMove = int.Parse(e.InnerText);
+                            }
+                            break;
                         default:break;
                     }
 
@@ -707,7 +712,67 @@ public class ResSvc : MonoBehaviour
     }
     #endregion
 
+    #region 技能产生的移动
+    Dictionary<int, SkillMoveCfg> skillMoveDic = new Dictionary<int, SkillMoveCfg>();
 
+    private void InitSkillMoveCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            // <taskName>智者点拨</taskName>
+            // < count > 1 </ count >
+            // < exp > 1130 </ exp >
+            // < coin > 1280 </ coin >
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                    continue;
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                //nodLst，ID
+                SkillMoveCfg c = new SkillMoveCfg
+                {
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "moveTime":
+                            {
+                                c.moveTime = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "moveDis":
+                            {
+                                c.moveDis = float.Parse(e.InnerText);
+                            }
+                            break;
+                        default: break;
+                    }
+
+                }
+                //
+                skillMoveDic.Add(ID, c);
+
+            }
+        }
+    }
+    public SkillMoveCfg GetSkillMoveCfg(int ID)
+    {
+        SkillMoveCfg c = null;
+        if (skillMoveDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    #endregion
 
 }
 

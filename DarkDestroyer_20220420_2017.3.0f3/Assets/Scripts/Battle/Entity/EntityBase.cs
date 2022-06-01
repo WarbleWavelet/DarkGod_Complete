@@ -88,4 +88,12 @@ public class EntityBase
         }
 
     }
+
+    public virtual void SetSkillMove(bool move, float speed=0f)
+    {
+        if (ctrl != null)
+        {
+            ctrl.SetSkillMoveState(move, speed);
+        }
+     }
 }

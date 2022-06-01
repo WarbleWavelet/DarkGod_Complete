@@ -34,6 +34,8 @@ public class PlayerController : Controller
 
         AddSkillFbx(draggeratk1fx);
 
+        isSkillMove = true;
+
     }
 
 
@@ -48,14 +50,23 @@ public class PlayerController : Controller
         {
             UpdateMixBlend();
         }
+
         if (isMove)
         {
-            SetDir();
+            SetDir();        
+            SetMainCamera(); 
             SetMove();
+        }
+        //
+       if (isSkillMove)
+        {
             SetMainCamera();
+            SetSkillMove();
         }
 
     }
+
+
     #endregion
 
 
@@ -105,9 +116,14 @@ public class PlayerController : Controller
 
 
     #region 移动
-    private void SetMove()
+    private void SetMove(float speed= Constants.PlayerMoveSpeed)
     {
-        ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);
+        ctrl.Move(transform.forward * Time.deltaTime * speed);
+    }
+
+    private void SetSkillMove()
+    {
+        ctrl.Move(transform.forward * Time.deltaTime * this.skillMoveSpeed);
     }
     #endregion
 

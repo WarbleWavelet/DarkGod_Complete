@@ -51,6 +51,11 @@ public abstract class Controller :MonoBehaviour
     [Header("技能和特效")]
     public Dictionary<string, GameObject> skillDic = new Dictionary<string, GameObject>();
 
+
+    [Header("技能速度")]
+    public float skillMoveSpeed;
+    public bool isSkillMove;
+
     #region 生命
 
     public virtual void Init()
@@ -73,6 +78,14 @@ public abstract class Controller :MonoBehaviour
 
 
     #region 动画
+
+    public void SetSkillMoveState(bool isSkillMove, float skillMoveSpeed = 0f)
+    {
+        this.isSkillMove = isSkillMove;
+        this.skillMoveSpeed = skillMoveSpeed;
+    }
+
+
     public virtual void SetBlend(float value)
     {
 
@@ -142,5 +155,18 @@ public abstract class Controller :MonoBehaviour
         }
     }
     #endregion
+
+    /// <summary>
+    /// 技能产生的移动
+    /// </summary>
+    /// <param name="move"></param>
+    /// <param name="speed"></param>
+    public void SetSkillMove(bool move, float speed)
+    {
+        isSkillMove = move;
+        skillMoveSpeed = speed;
+
+
+    }
 
 }

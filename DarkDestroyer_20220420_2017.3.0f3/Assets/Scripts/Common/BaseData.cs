@@ -162,6 +162,19 @@ public class SkillCfg: BaseData<SkillCfg>
     public int aniAction;
     /// <summary>特效名<summary>
     public string fx;
+    [Description("技能产生的移动")]
+    public int skillMove;
+
+}
+
+public class SkillMoveCfg : BaseData<SkillMoveCfg>
+{
+
+    [Description("节能产生移动的时间")]
+    public int moveTime;
+
+    [Description("技能产生的移动")]
+    public float moveDis;
 
 }
 #endregion
