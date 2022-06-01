@@ -6,20 +6,26 @@
 	功能：抽取人和敌人的公共Ctrl
 *****************************************************/
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Controller :MonoBehaviour
 {
 
-    public Animator ani;
+    [Header("Controller")]
+
+    [Header("Svc")]
+    public TimerSvc timerSvc;
     //
-   public Camera cam;
-    public Vector3 camOffset;
-    public Transform camTrans;
+
+
     //
+
+    [Header("角色控制器和运动")]
     public CharacterController ctrl;
+    public Animator ani;
    public bool isMove = false;
-    //
     Vector2 dir = Vector2.zero;
     public Vector2 Dir
     {
@@ -42,26 +48,24 @@ public abstract class Controller :MonoBehaviour
         }
     }
 
-
+    [Header("技能和特效")]
+    public Dictionary<string, GameObject> skillDic = new Dictionary<string, GameObject>();
 
     #region 生命
 
-    public void Init()
+    public virtual void Init()
     {
-        cam = Camera.main;
-        camTrans = cam.transform;
-        camOffset = transform.position - camTrans.position;
         ctrl = transform.GetComponent<CharacterController>();
         ani = transform.GetComponent<Animator>();
+        timerSvc = TimerSvc.Instance;
+
     }
     void Update()
     {
-        InputByWSAD();
         if (isMove)
         {
             SetDir();
-            SetMove();
-            SetMainCamera();
+            SetMove();    
         }
 
     }
@@ -79,8 +83,10 @@ public abstract class Controller :MonoBehaviour
     {
 
         ani.SetInteger("Action", value);
-
+        
     }
+
+
     #endregion
 
 
@@ -88,7 +94,7 @@ public abstract class Controller :MonoBehaviour
     #region 方向
     public virtual void SetDir()
     {
-        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) ;
         Vector3 eulerAngles = new Vector3(0f, angle, 0f);
         transform.localEulerAngles = eulerAngles;
     }
@@ -103,43 +109,38 @@ public abstract class Controller :MonoBehaviour
     #endregion
 
 
-    #region 相机
-    public void SetMainCamera()
+
+
+
+
+
+
+
+    #region 特效
+    internal void SetSkillFbx(string skillName, float lifeTime)
     {
-        if (cam != null)
-        {
-            camTrans.position = transform.position - camOffset;
+        GameObject go=null;
+        if ( skillDic.TryGetValue(skillName, out go) )
+        { 
+            go.SetActive(true);
+            timerSvc.AddTimerTask((int tid) => {
+                go.SetActive(false); 
+            }, lifeTime);
         }
-
     }
-    #endregion
 
 
-
-
-    #region 输入
     /// <summary>
-    /// 键盘控制移动
+    /// 添加特效Go
     /// </summary>
-
-    private void InputByWSAD()
+    /// <param name="go"></param>
+    internal void AddSkillFbx(GameObject go)
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Vector2 _dir = new Vector2(h, v).normalized;
-
-        if (_dir != Vector2.zero)
+        if (go != null)
         {
-            Dir = _dir;
-            SetBlend((float)Constants.BlendWalk);
-        }
-        else
-        {
-            Dir = Vector2.zero;
-            SetBlend((float)Constants.BlendIdle);
+            skillDic.Add(go.name, go);
         }
     }
     #endregion
-
 
 }

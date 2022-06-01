@@ -18,6 +18,7 @@ public class PathDefine
     public const string GuideCfg = "ResCfgs/guide";
     public const string StrongCfg = "ResCfgs/strong";
     public const string TaskRewardCfg = "ResCfgs/taskreward";
+    public const string SkillCfg = "ResCfgs/skill";
     #endregion
 
     #region AutoGuide

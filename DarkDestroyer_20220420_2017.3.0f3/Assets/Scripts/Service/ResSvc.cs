@@ -29,7 +29,8 @@ public class ResSvc : MonoBehaviour
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrongCfg(PathDefine.StrongCfg);
         InitTaskRewardCfg(PathDefine.TaskRewardCfg);
-        PECommon.Log("Init ResSvc",LogType.Log);
+        InitSkillCfg(PathDefine.SkillCfg);
+        PECommon.Log("ResSvc Init");
     }
 
     void Update()
@@ -562,7 +563,7 @@ public class ResSvc : MonoBehaviour
 
     public List<TaskRewardData> taskRewardLst = new List<TaskRewardData>();
     Dictionary<int, TaskRewardCfg> taskRewardDic = new Dictionary<int, TaskRewardCfg>();
-    
+
     private void InitTaskRewardCfg(string path)
     {
         TextAsset xml = Resources.Load<TextAsset>(path);
@@ -590,7 +591,7 @@ public class ResSvc : MonoBehaviour
                     {
                         case "taskName":
                             {
-                                c.taskName =e.InnerText;
+                                c.taskName = e.InnerText;
                             }
                             break;
                         case "count":
@@ -600,7 +601,7 @@ public class ResSvc : MonoBehaviour
                             break;
                         case "coin":
                             {
-                                c.coin =  int.Parse(e.InnerText);
+                                c.coin = int.Parse(e.InnerText);
                             }
                             break;
                         case "exp":
@@ -609,7 +610,7 @@ public class ResSvc : MonoBehaviour
                             }
                             break;
 
-                        default:break;
+                        default: break;
                     }
 
                 }
@@ -632,6 +633,81 @@ public class ResSvc : MonoBehaviour
         }
     }
     #endregion
+
+    #region 技能
+    Dictionary<int, SkillCfg> skillDic = new Dictionary<int, SkillCfg>();
+    
+    private void InitSkillCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            // <taskName>智者点拨</taskName>
+            // < count > 1 </ count >
+            // < exp > 1130 </ exp >
+            // < coin > 1280 </ coin >
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                    continue;
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                //nodLst，ID
+                SkillCfg c = new SkillCfg
+                {
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "skillName":
+                            {
+                                c.skillName =e.InnerText;
+                            }
+                            break;
+                        case "skillTime":
+                            {
+                                c.skillTime = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "aniAction":
+                            {
+                                c.aniAction =  int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "fx":
+                            {
+                                c.fx = e.InnerText;
+                            }
+                            break;
+
+                        default:break;
+                    }
+
+                }
+                //
+                skillDic.Add(ID, c);
+
+            }
+        }
+    }
+    public SkillCfg GetSkillCfg(int ID)
+    {
+        SkillCfg c = null;
+        if (skillDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    #endregion
+
+
 
 }
 

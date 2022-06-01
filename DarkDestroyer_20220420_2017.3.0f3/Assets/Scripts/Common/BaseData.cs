@@ -142,3 +142,26 @@ public enum NPCID
     WiseMan=0,
 
 }
+
+#region 技能
+/**
+	<item ID="101">
+		<skillName>穿刺</skillName>
+		<skillTime>900</skillTime>
+		<aniAction>1</aniAction>
+		<fx>dagger_skill1</fx>
+	</item>
+ * **/
+public class SkillCfg: BaseData<SkillCfg>
+{
+    /// <summary>技能名</summary>
+    public string skillName;
+    /// <summary>技能时间</summary>
+    public int skillTime;
+    /// <summary>对应动画</summary>
+    public int aniAction;
+    /// <summary>特效名<summary>
+    public string fx;
+
+}
+#endregion

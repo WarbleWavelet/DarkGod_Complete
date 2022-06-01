@@ -6,6 +6,7 @@
 	功能：玩家逻辑实体类
 *****************************************************/
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityPlayer :EntityBase

@@ -89,7 +89,16 @@ public class Constants
     public const float AccelerSpeed = 5f;
     public const int BlendIdle = 0;
     public const int BlendWalk = 1;
-    #endregion 
+    #endregion
+
+
+    #region ctrl Action
+    public const int ActionDefault = -1;
+    public const int ActionAtk = 0;
+    public const int ActionSkill1 = 1;
+    public const int ActionSkill2 = 2;
+    public const int ActionSkill3 = 3;
+    #endregion
 
 
     #region AutoGuide

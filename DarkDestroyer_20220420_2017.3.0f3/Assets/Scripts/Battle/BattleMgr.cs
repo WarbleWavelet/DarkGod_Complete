@@ -19,9 +19,9 @@ public class BattleMgr : MonoBehaviour
     AudioSvc audioSvc;
     //
     //
-    MapMgr mapMgr;
-    SkillMgr skillMgr;
-    StateMgr stateMgr;
+  public  MapMgr mapMgr;
+  public  SkillMgr skillMgr;
+  public  StateMgr stateMgr;
     //
     EntityPlayer playerEntity;//注入了stateMgr、playerCtrl
     PlayerController playerCtrl;
@@ -99,6 +99,7 @@ public class BattleMgr : MonoBehaviour
         {
             stateMgr = stateMgr,
             ctrl = playerCtrl,
+            skillMgr=this.skillMgr
         };
     }
 
@@ -111,22 +112,22 @@ public class BattleMgr : MonoBehaviour
     void ReleaseNormalAttack()
     {
         PECommon.Log("ReleaseNormalAttack");
-        playerEntity.SetAction(0);
+        playerEntity.Attack(0);
     }
     void ReleaseSkill1()
     {
         PECommon.Log("ReleaseSkill1");
-        playerEntity.SetAction(1);
+        playerEntity.Attack(1);
     }
     void ReleaseSkill2()
     {
         PECommon.Log("ReleaseSkill2");
-        playerEntity.SetAction(2);
+        playerEntity.Attack(2);
     }
     void ReleaseSkill3()
     {
         PECommon.Log("ReleaseSkill3");
-        playerEntity.SetAction(3);
+        playerEntity.Attack(3);
     }
 
 

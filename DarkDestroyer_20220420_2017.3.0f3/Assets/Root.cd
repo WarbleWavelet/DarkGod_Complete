@@ -31,7 +31,7 @@
   <Class Name="ResSvc" Collapsed="true">
     <Position X="9.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEwAAQIgAEQAAAEUAAJEACQGgQgAIAARQEIFAQAACAA=</HashCode>
+      <HashCode>AE0AAQIgAEQAEAEUAAJEACQGgQgAIAARQEIFAQAACAA=</HashCode>
       <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="8.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIBIAiAAiAAAAAAAAQAAAQiyqAAABCIAYCEQOKBCA=</HashCode>
+      <HashCode>AAAIBIAiAAiAAAAAAAAQAAAQiyqAACBCIAYCEQOKBCA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
   <Class Name="PlayerController" Collapsed="true">
     <Position X="4" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAQABAEAACAAAgEiAgAAIAQAAAAIAAAQBAACAAAAIAA=</HashCode>
+      <HashCode>AAQABIAAAAAAAgECAgAAAAQAAAAIAAAQBAACAAAAIAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Controller\PlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -106,7 +106,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BaseData&lt;T&gt;" Collapsed="true">
-    <Position X="7.25" Y="10.25" Width="1.5" />
+    <Position X="7.5" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
@@ -200,28 +200,28 @@
   <Class Name="BattleSys" Collapsed="true">
     <Position X="3.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAACAAAAAAAAAIAAAAAAAIAgAAQAACAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAACAAAAAAAAAIAAAAAAAIQgAAQAACAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\BattleSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleMgr" Collapsed="true">
     <Position X="3.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACIBoEAAAQBAAAAAIIAAAAABIAAAAAAAEAC0gAAA=</HashCode>
+      <HashCode>AAAACIApECAAQBAAAAAIIAAAAABIAAAAAAAAAC1gAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SkillMgr" Collapsed="true">
     <Position X="2.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAACAQAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\SkillMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StateMgr" Collapsed="true">
     <Position X="0.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAACAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\FSM\StateMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -242,14 +242,14 @@
   <Class Name="InstanceSys" Collapsed="true">
     <Position X="7.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAABAACAAAAAgAAAACAAAAQAAABAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAABAACAAAAAAAAAACAAAAQAAABAAQAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\InstanceSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACABAAIAAAAAAAAAAIAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAABAAIBAAAAEAgAAIAQAAIBCAAAAAAAAAQAgAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -279,7 +279,7 @@
   <Class Name="Controller" Collapsed="true">
     <Position X="4" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAUAACAAACBAAgAkAgAAIASAAAACIAAAAAACAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Controller\Controller.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -296,6 +296,14 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityPlayer.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="StateAttack" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateAttack.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="IState" Collapsed="true">
     <Position X="7.75" Y="11.5" Width="1.5" />
@@ -314,7 +322,7 @@
   <Enum Name="AniState" Collapsed="true">
     <Position X="0.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\FSM\IState.cs</FileName>
     </TypeIdentifier>
   </Enum>

@@ -9,11 +9,16 @@
 
 public interface IState
 {
-    void Enter(EntityBase entity);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="args">可变参数</param>
+    void Enter(EntityBase entity, params object[] args);
 
-    void Process(EntityBase entity);
+    void Process(EntityBase entity, params object[] args);
 
-    void Exit(EntityBase entity);
+    void Exit(EntityBase entity, params object[] args);
 }
 
 public enum AniState
@@ -21,4 +26,5 @@ public enum AniState
     None,
     Idle,
     Move,
+    Attack
 }

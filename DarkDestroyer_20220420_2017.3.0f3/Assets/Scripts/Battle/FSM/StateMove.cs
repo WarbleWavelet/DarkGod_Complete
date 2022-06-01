@@ -10,18 +10,18 @@ using UnityEngine;
 
 public class StateMove : IState
 {
-    public void Enter(EntityBase entity)
+    public void Enter(EntityBase entity, params object[] args)
     {
         entity.curState = AniState.Move;
         PECommon.Log(this.GetType().ToString() + " Enter");
     }
 
-    public void Exit(EntityBase entity)
+    public void Exit(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Exit");
     }
 
-    public void Process(EntityBase entity)
+    public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
         entity.SetBlend(Constants.BlendWalk);

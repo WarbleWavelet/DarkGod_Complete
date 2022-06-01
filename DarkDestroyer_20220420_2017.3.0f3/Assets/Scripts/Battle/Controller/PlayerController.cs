@@ -7,12 +7,36 @@
 *****************************************************/
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : Controller
 {
+
+
+    [Header("动画融合")]    
     public  float targetBlend;
     public  float currentBlend;
+
+    [Header("相机")]
+    public Camera cam;
+    public Vector3 camOffset;
+    public Transform camTrans;
+
+    [Header("技能和特效")]
+    public GameObject draggeratk1fx;
+    public override void Init()
+    {
+        base.Init();
+        cam = Camera.main;
+        camTrans = cam.transform;
+        camOffset = transform.position - camTrans.position;
+
+        AddSkillFbx(draggeratk1fx);
+
+    }
+
+
 
     #region 生命
 
@@ -71,7 +95,12 @@ public class PlayerController : Controller
 
 
     #region 方向
-
+    public override void SetDir()
+    {
+        float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
+        Vector3 eulerAngles = new Vector3(0f, angle, 0f);
+        transform.localEulerAngles = eulerAngles;
+    }
     #endregion
 
 
@@ -84,7 +113,14 @@ public class PlayerController : Controller
 
 
     #region 相机
+    public void SetMainCamera()
+    {
+        if (cam != null)
+        {
+            camTrans.position = transform.position - camOffset;
+        }
 
+    }
     #endregion
 
 

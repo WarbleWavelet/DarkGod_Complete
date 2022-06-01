@@ -12,30 +12,31 @@ using UnityEngine;
 public class StateMgr :MonoBehaviour
 {
 
-    public Dictionary<AniState, IState> dic = new Dictionary<AniState, IState>();
+    public Dictionary<AniState, IState> fsm = new Dictionary<AniState, IState>();
     public void Init()
     {
         PECommon.Log(this.GetType().ToString() + " Init");
-        dic.Add(AniState.Idle,new StateIdle());
-        dic.Add(AniState.Move,new StateMove());
+        fsm.Add(AniState.Idle,new StateIdle());
+        fsm.Add(AniState.Move,new StateMove());
+        fsm.Add(AniState.Attack,new StateAttack());
     }
 
-    public void ChangeStaus(EntityBase entity, AniState targetState)
+    public void ChangeStaus(EntityBase entity, AniState targetState, params object[] args)
     {
         if (entity.curState == targetState)
         {
             return;
         }
 
-        if (dic.ContainsKey(targetState))
+        if (fsm.ContainsKey(targetState))
         {
             if (entity.curState != AniState.None)
             { 
-                dic[entity.curState].Exit(entity);
+                fsm[entity.curState].Exit(entity, args);
             }                                
             
-            dic[targetState].Enter(entity);
-            dic[targetState].Process(entity);
+            fsm[targetState].Enter(entity, args);
+            fsm[targetState].Process(entity, args);
         }
     }
 }

@@ -9,13 +9,16 @@
 
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityBase
 {
     public AniState curState = AniState.None;
     public StateMgr stateMgr = null;
+    public SkillMgr skillMgr = null;
     public Controller ctrl = null;
+   
 
 
 
@@ -29,6 +32,11 @@ public class EntityBase
     {
         stateMgr.ChangeStaus(this, AniState.Idle);
       //  SetBlend(Constants.BlendIdle);
+    }
+
+    public void Attack( int skillID)
+    {
+        stateMgr.ChangeStaus( this, AniState.Attack, skillID );
     }
 
     public virtual void SetBlend(float value)
@@ -60,8 +68,24 @@ public class EntityBase
 
     }
 
+    public virtual void AttackEffect(int value)
+    {
+        if (skillMgr != null)
+        {
+            skillMgr.AttackEffect(this, value);
+
+        }
+
+    }
 
 
+    public virtual void SetSkillFbx(string skillName, float lifeTime)
+    {
+        if (ctrl != null)
+        {
+            ctrl.SetSkillFbx(skillName, lifeTime);
 
+        }
 
+    }
 }

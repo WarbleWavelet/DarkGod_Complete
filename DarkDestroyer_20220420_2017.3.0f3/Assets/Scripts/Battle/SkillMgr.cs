@@ -10,8 +10,26 @@ using UnityEngine;
 
 public class SkillMgr :MonoBehaviour
 {
+
+    ResSvc resSvc;
+    TimerSvc timerSvc;
     public void Init()
     {
+        timerSvc = TimerSvc.Instance;
+        resSvc = ResSvc.Instance;
         PECommon.Log(this.GetType().ToString()+" Init");
+    }
+
+    public void AttackEffect(EntityBase entity, int skillID)
+    {
+        skillID += 100;
+        SkillCfg cfg=resSvc.GetSkillCfg(skillID);
+        entity.SetAction(cfg.aniAction);
+        entity.SetSkillFbx(cfg.fx, cfg.skillTime );
+        //
+
+        timerSvc.AddTimerTask((tid) => {
+            entity.Idle();
+        }, cfg.skillTime);
     }
 }
