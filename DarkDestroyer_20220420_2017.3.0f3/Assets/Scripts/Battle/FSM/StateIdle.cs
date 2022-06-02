@@ -24,6 +24,19 @@ public class StateIdle : IState
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
-       entity.SetBlend(Constants.BlendIdle);
+      
+
+        if (IsPlayerAndHaveInput(entity))
+        {
+            entity.SetDir(entity.GetInputDir());
+        }
+        else {
+             entity.SetBlend(Constants.BlendIdle);
+        }
+    }
+
+    bool IsPlayerAndHaveInput(EntityBase entity)
+    {
+        return entity.GetInputDir()!=Vector2.zero;
     }
 }

@@ -33,8 +33,12 @@ public class SkillMgr :MonoBehaviour
         SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
         //
         entity.SetSkillFbx(cfg.fx, cfg.skillTime);
-        SetState(entity, cfg);
-        SetSkillMove(entity, moveCfg);
+        //
+        entity.canCtrl = false;
+        entity.SetDir(Vector2.zero);
+        //
+        CalcState(entity, cfg);
+        CalcSkillMove(entity, moveCfg);
     }
 
 
@@ -43,7 +47,7 @@ public class SkillMgr :MonoBehaviour
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="cfg"></param>
-    void SetState(EntityBase entity, SkillCfg cfg)
+    void CalcState(EntityBase entity, SkillCfg cfg)
     { 
         entity.SetAction(cfg.aniAction);
 
@@ -58,7 +62,7 @@ public class SkillMgr :MonoBehaviour
     /// <param name="entity"></param>
     /// <param name="moveCfg"></param>
 
-    void SetSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
+    void CalcSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
     { 
         float speed = 1000.0f*moveCfg.moveDis / (moveCfg.moveTime );
 

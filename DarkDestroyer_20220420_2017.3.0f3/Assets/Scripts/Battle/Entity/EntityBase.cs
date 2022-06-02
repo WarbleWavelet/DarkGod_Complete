@@ -15,10 +15,11 @@ using UnityEngine;
 public class EntityBase
 {
     public AniState curState = AniState.None;
+    public BattleMgr battleMgr = null;
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
     public Controller ctrl = null;
-   
+    public bool canCtrl=true;
 
 
 
@@ -57,6 +58,11 @@ public class EntityBase
 
     }
 
+
+    public virtual Vector2 GetInputDir()
+    {
+        return Vector2.zero;
+    }
 
     public virtual void SetAction(int value)
     {

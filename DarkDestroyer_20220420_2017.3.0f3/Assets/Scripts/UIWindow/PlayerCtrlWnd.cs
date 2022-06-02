@@ -16,7 +16,8 @@ public class PlayerCtrlWnd : WindowRoot
 {
 
 
-    #region 单例
+    #region 属性
+   #region 单例
     private static PlayerCtrlWnd _instance;      
 
     public static PlayerCtrlWnd Instance
@@ -54,10 +55,15 @@ public class PlayerCtrlWnd : WindowRoot
 
     [Header("总")]
     public bool isFirst=true;
+    public bool canMove = true;
+    /// <summary>解决技能后需要动下摇杆才能移动</summary> 
+    public Vector2 curDir;
 
 
     [Header("调试技能数据")]
     public Button btnTest;
+    #endregion
+ 
 
     protected override void InitWnd()
     {
@@ -77,6 +83,7 @@ public class PlayerCtrlWnd : WindowRoot
             btnTest.onClick.AddListener(ClickTestBtn);
             isFirst =false;
         }
+        //
 
 
     }
@@ -120,7 +127,10 @@ public class PlayerCtrlWnd : WindowRoot
     void Update()
     {
 
-
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ClickSkill1Btn();
+        }
 
 
     }
@@ -151,7 +161,8 @@ public class PlayerCtrlWnd : WindowRoot
             imgDirBg.transform.position = defaultPos;
             imgDirPoint.transform.localPosition = Vector2.zero;
             SetActive(imgDirPoint, false);
-            BattleSys.Instance.SetMoveDir(Vector2.zero);
+            curDir = Vector2.zero;
+            BattleSys.Instance.SetMoveDir(curDir);
         });
 
         OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
@@ -168,7 +179,11 @@ public class PlayerCtrlWnd : WindowRoot
             {
                 imgDirPoint.transform.position = evt.position;
             }
-            BattleSys.Instance.SetMoveDir(dir.normalized);
+
+            curDir = dir.normalized;
+                BattleSys.Instance.SetMoveDir( curDir );
+            
+           
 
         });
     }
@@ -242,6 +257,8 @@ public class PlayerCtrlWnd : WindowRoot
     {
         BattleSys.Instance.ReqReleaseSkill(3);
     }
+
+    
     #endregion
 
 

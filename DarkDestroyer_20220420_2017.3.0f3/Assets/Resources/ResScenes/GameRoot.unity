@@ -16502,6 +16502,7 @@ MonoBehaviour:
   audioSvc: {fileID: 0}
   netSvc: {fileID: 0}
   battleMgr: {fileID: 0}
+  playerCtrlWnd: {fileID: 1842444395}
 --- !u!1 &1333119474
 GameObject:
   m_ObjectHideFlags: 0
@@ -22700,6 +22701,8 @@ MonoBehaviour:
   txtExpPrg: {fileID: 1151616127}
   expPrgTrans: {fileID: 2091747232}
   isFirst: 1
+  canMove: 1
+  curDir: {x: 0, y: 0}
   btnTest: {fileID: 915435295}
 --- !u!224 &1842509711 stripped
 RectTransform:

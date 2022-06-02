@@ -23,7 +23,7 @@ public class BattleMgr : MonoBehaviour
   public  SkillMgr skillMgr;
   public  StateMgr stateMgr;
     //
-    EntityPlayer playerEntity;//注入了stateMgr、playerCtrl
+   public EntityPlayer playerEntity;//注入了stateMgr、playerCtrl
     PlayerController playerCtrl;
 
     public Vector2 dir;
@@ -99,7 +99,8 @@ public class BattleMgr : MonoBehaviour
         {
             stateMgr = stateMgr,
             ctrl = playerCtrl,
-            skillMgr=this.skillMgr
+            skillMgr=this.skillMgr,
+            battleMgr=this
         };
     }
 
@@ -164,6 +165,10 @@ public class BattleMgr : MonoBehaviour
 
     public void SetMoveDir(Vector2 dir)
     {
+        if (playerEntity.canCtrl == false) 
+            return;
+
+
         //PECommon.Log(dir.ToString());
         if (dir == Vector2.zero)
         {
@@ -176,7 +181,12 @@ public class BattleMgr : MonoBehaviour
             playerEntity.SetDir(dir);
         }
     }
+
+    public Vector2 GetInputDir()
+    {
+        return BattleSys.Instance.GetInputDir();
+    }
     #endregion
 
-
+    
 }

@@ -29,6 +29,7 @@ public class BattleSys : SystemRoot
 
     [Header("BattleSys")]
    public BattleMgr battleMgr;
+    public PlayerCtrlWnd playerCtrlWnd;
     public override void InitSys()
     {
         base.InitSys(); 
@@ -68,4 +69,9 @@ public class BattleSys : SystemRoot
     }
     #endregion
 
+
+    public Vector2 GetInputDir()
+    {
+        return playerCtrlWnd.curDir;
+    }
 }
