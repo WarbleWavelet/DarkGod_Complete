@@ -20,6 +20,12 @@ public class SkillMgr :MonoBehaviour
         PECommon.Log(this.GetType().ToString()+" Init");
     }
 
+
+    /// <summary>
+    /// 放技能的效果
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="skillID"></param>
     public void AttackEffect(EntityBase entity, int skillID)
     {
         skillID += 100;
@@ -31,6 +37,12 @@ public class SkillMgr :MonoBehaviour
         SetSkillMove(entity, moveCfg);
     }
 
+
+    /// <summary>
+    /// 状态变化
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cfg"></param>
     void SetState(EntityBase entity, SkillCfg cfg)
     { 
         entity.SetAction(cfg.aniAction);
@@ -40,13 +52,39 @@ public class SkillMgr :MonoBehaviour
         }, cfg.skillTime);
     }
 
+    /// <summary>
+    /// 技能产生的位移变化
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="moveCfg"></param>
+
     void SetSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
     { 
         float speed = 1000.0f*moveCfg.moveDis / (moveCfg.moveTime );
-        entity.SetSkillMove(true, speed);
 
-        timerSvc.AddTimerTask((tid) => {
-            entity.SetSkillMove(false);
-        }, moveCfg.moveTime);
+
+        if (moveCfg.delayTime > 0)
+        {
+            timerSvc.AddTimerTask((tid) =>
+            {
+                entity.SetSkillMove(true, speed);
+            }, moveCfg.delayTime);
+            //
+            timerSvc.AddTimerTask((tid) => {
+                entity.SetSkillMove(false);
+            }, moveCfg.delayTime+moveCfg.moveTime);
+        }
+        else
+        {
+            entity.SetSkillMove(true, speed);
+            //
+            timerSvc.AddTimerTask((tid) => {
+                entity.SetSkillMove(false);
+            }, moveCfg.moveTime);
+        }
+
+
+
+
     }
 }

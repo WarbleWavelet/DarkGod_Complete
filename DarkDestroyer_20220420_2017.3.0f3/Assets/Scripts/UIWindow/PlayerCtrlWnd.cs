@@ -55,6 +55,10 @@ public class PlayerCtrlWnd : WindowRoot
     [Header("总")]
     public bool isFirst=true;
 
+
+    [Header("调试技能数据")]
+    public Button btnTest;
+
     protected override void InitWnd()
     {
         base.InitWnd();
@@ -70,11 +74,14 @@ public class PlayerCtrlWnd : WindowRoot
             InitSkillBtn(skill1Trans);
             InitSkillBtn(skill2Trans);
             InitSkillBtn(skill3Trans);
-            isFirst=false;
+            btnTest.onClick.AddListener(ClickTestBtn);
+            isFirst =false;
         }
 
 
     }
+
+
 
     private void InitAtkBtn(Transform t)
     {
@@ -237,4 +244,12 @@ public class PlayerCtrlWnd : WindowRoot
     }
     #endregion
 
+
+
+    #region 测试
+    private void ClickTestBtn()
+    {
+        resSvc.ResetSkillCfgs();
+    }
+    #endregion
 }

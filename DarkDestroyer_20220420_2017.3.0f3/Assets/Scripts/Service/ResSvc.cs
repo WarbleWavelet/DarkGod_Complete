@@ -43,6 +43,15 @@ public class ResSvc : MonoBehaviour
     }
 
 
+    #region 调试技能
+    internal void ResetSkillCfgs()
+    {
+        skillDic.Clear();
+        skillMoveDic.Clear();
+        InitSkillCfg(PathDefine.SkillCfg);
+        InitSkillMoveCfg(PathDefine.SkillMoveCfg);
+    }
+    #endregion
 
 
 
@@ -238,6 +247,9 @@ public class ResSvc : MonoBehaviour
 
     #region 预制体
     Dictionary<string,GameObject> goDic=new Dictionary<string,GameObject>();
+
+
+
     public GameObject LoadPrefab(string path, bool cache = false)
     { 
         GameObject prefab=null;
@@ -748,6 +760,11 @@ public class ResSvc : MonoBehaviour
                         case "moveDis":
                             {
                                 c.moveDis = float.Parse(e.InnerText);
+                            }
+                            break;
+                        case "delayTime":
+                            {
+                                c.delayTime = int.Parse(e.InnerText);
                             }
                             break;
                         default: break;

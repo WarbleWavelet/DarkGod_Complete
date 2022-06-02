@@ -170,11 +170,14 @@ public class SkillCfg: BaseData<SkillCfg>
 public class SkillMoveCfg : BaseData<SkillMoveCfg>
 {
 
-    [Description("节能产生移动的时间")]
+    [Description("节能产生移动的时间,单位毫秒")]
     public int moveTime;
 
     [Description("技能产生的移动")]
     public float moveDis;
+
+    [Description("施法时间（多久后才会位移），单位毫秒")]
+    public int delayTime;
 
 }
 #endregion

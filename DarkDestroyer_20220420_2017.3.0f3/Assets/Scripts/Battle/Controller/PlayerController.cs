@@ -34,7 +34,7 @@ public class PlayerController : Controller
 
         AddSkillFbx(draggeratk1fx);
 
-        isSkillMove = true;
+        isSkillMove = false;
 
     }
 
@@ -121,9 +121,14 @@ public class PlayerController : Controller
         ctrl.Move(transform.forward * Time.deltaTime * speed);
     }
 
-    private void SetSkillMove()
+    private void SetSkillMove(bool isMove=true)
     {
-        ctrl.Move(transform.forward * Time.deltaTime * this.skillMoveSpeed);
+        if (isMove)
+            ctrl.Move(transform.forward * Time.deltaTime * this.skillMoveSpeed);
+        else
+            this.skillMoveSpeed = 0f;
+        
+       
     }
     #endregion
 
