@@ -30,7 +30,7 @@ public class SkillMgr :MonoBehaviour
     {
         skillID += 100;
         SkillCfg cfg=resSvc.GetSkillCfg(skillID);
-        SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMove);
+        SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
         //
         entity.SetSkillFbx(cfg.fx, cfg.skillTime);
         SetState(entity, cfg);

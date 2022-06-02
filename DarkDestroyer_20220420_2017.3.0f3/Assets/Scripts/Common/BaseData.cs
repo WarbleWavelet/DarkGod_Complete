@@ -6,6 +6,7 @@
 	功能：数据配置类
 *****************************************************/
 
+using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -163,7 +164,7 @@ public class SkillCfg: BaseData<SkillCfg>
     /// <summary>特效名<summary>
     public string fx;
     [Description("技能产生的移动")]
-    public int skillMove;
+    public List<int> skillMoveLst;
 
 }
 

@@ -29,8 +29,10 @@ public class ResSvc : MonoBehaviour
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrongCfg(PathDefine.StrongCfg);
         InitTaskRewardCfg(PathDefine.TaskRewardCfg);
-        InitSkillCfg(PathDefine.SkillCfg);
+        //
         InitSkillMoveCfg(PathDefine.SkillMoveCfg);
+        InitSkillCfg(PathDefine.SkillCfg);
+        //
         PECommon.Log("ResSvc Init");
     }
 
@@ -695,9 +697,11 @@ public class ResSvc : MonoBehaviour
                                 c.fx = e.InnerText;
                             }
                             break;
-                        case "skillMove":
+                        case "skillMoveLst":
                             {
-                                c.skillMove = int.Parse(e.InnerText);
+                                int[] arr=  StringArr_ToIntArr( e.InnerText);
+                                c.skillMoveLst=new List<int>();//不初始化空指针
+                                c.skillMoveLst.AddRange(arr);
                             }
                             break;
                         default:break;
@@ -721,6 +725,23 @@ public class ResSvc : MonoBehaviour
         {
             return null;
         }
+    }
+
+    int[] StringArr_ToIntArr(string text)
+    {
+        string[] skillMoveArr = text.Split('|');
+        int[] arr=new int[skillMoveArr.Length];
+        int j = 0;
+        for (int i = 0; i < skillMoveArr.Length; i++)
+        {
+            if (skillMoveArr[i] == "")
+            {
+                j--;
+             
+            }
+            arr[i] = int.Parse(skillMoveArr[i]);
+        }
+        return arr;
     }
     #endregion
 
@@ -792,6 +813,8 @@ public class ResSvc : MonoBehaviour
     #endregion
 
 }
+
+
 
 
 #region 强化
