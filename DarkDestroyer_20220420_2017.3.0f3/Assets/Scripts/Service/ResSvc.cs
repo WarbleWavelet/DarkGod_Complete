@@ -23,15 +23,16 @@ public class ResSvc : MonoBehaviour
     public void InitSvc()
     {
         Instance = this;
+        InitMap();
         InitRDNameCfg(PathDefine.RDNameCfg);
-        //InitMapCfg(PathDefine.MapCfg);
-        InitMapCfg(PathDefine.MapCfg_V1);
+
         InitGuideCfg(PathDefine.GuideCfg);
         InitStrongCfg(PathDefine.StrongCfg);
         InitTaskRewardCfg(PathDefine.TaskRewardCfg);
         //
-        InitSkillMoveCfg(PathDefine.SkillMoveCfg);
-        InitSkillCfg(PathDefine.SkillCfg);
+        InitSkill();
+        //
+
         //
         PECommon.Log("ResSvc Init");
     }
@@ -44,6 +45,25 @@ public class ResSvc : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 控制顺序
+    /// </summary>
+    void InitSkill()
+    { 
+        InitSkillMoveCfg(PathDefine.SkillMoveCfg);
+        InitSkillCfg(PathDefine.SkillCfg);
+    }
+
+
+    /// <summary>
+    /// 控制顺序
+    /// </summary>
+    void InitMap()
+    {
+        InitMonsterCfg(PathDefine.MonsterCfg);
+
+        InitMapCfg(PathDefine.MapCfg);
+    }
 
     #region 调试技能
     internal void ResetSkillCfgs()
@@ -220,7 +240,7 @@ public class ResSvc : MonoBehaviour
     /// </summary>
     /// <param name="e"></param>
     /// <returns></returns>
-    Vector3 ParseVector3ByXmlElement(XmlElement e)
+    Vector3 XmlElement_ToVector3(XmlElement e)
     {
         string[] valArr = e.InnerText.Split(',');
         return new Vector3(float.Parse(valArr[0]), float.Parse(valArr[1]), float.Parse(valArr[2]));
@@ -243,6 +263,23 @@ public class ResSvc : MonoBehaviour
             return nodLst;
           
         }
+    }
+
+
+    List<string> String_SplitToStringLst(string text, char split)
+    {
+        string[] arr = text.Split(split);
+        List<string> lst = new List<string>();
+        //
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == "")
+            {
+                continue;
+            }
+            lst.Add(arr[i]);
+        }
+        return lst;
     }
     #endregion
 
@@ -275,7 +312,7 @@ public class ResSvc : MonoBehaviour
 
     #endregion
 
-    #region map
+    #region 副本地图
     public List<string> mapLst = new List<string>();
     Dictionary<int, MapCfg> mapCfgDataDic=new Dictionary<int, MapCfg> ();
     /// <summary>
@@ -299,6 +336,7 @@ public class ResSvc : MonoBehaviour
                 { 
                     ID = ID
                 };
+
                 foreach (XmlElement e in nodLst[i].ChildNodes)
                 {
                     switch (e.Name)
@@ -315,27 +353,32 @@ public class ResSvc : MonoBehaviour
                             break;
                         case "mainCamPos":
                             {
-                                c.mainCamPos = ParseVector3ByXmlElement(e);
+                                c.mainCamPos = XmlElement_ToVector3(e);
                             }
                             break;
                         case "mainCamRote":
                             {
-                                c.mainCamRote = ParseVector3ByXmlElement(e);
+                                c.mainCamRote = XmlElement_ToVector3(e);
                             }
                             break;
                         case "playerBornPos":
                             {
-                                c.playerBornPos = ParseVector3ByXmlElement(e);
+                                c.playerBornPos = XmlElement_ToVector3(e);
                             }
                             break;
                         case "playerBornRote":
                             {
-                                c.playerBornRote = ParseVector3ByXmlElement(e);
+                                c.playerBornRote = XmlElement_ToVector3(e);
                             }
                             break;
                         case "power":
                             {
                                 c.power = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "monsterLst":
+                            {
+                                c.monsterLst = String_ToMonsterDataLst(e.InnerText) ;
                             }
                             break;
                         default:break;
@@ -363,6 +406,9 @@ public class ResSvc : MonoBehaviour
             return null;
         }
     }
+
+
+
     #endregion
 
     #region 任务引导
@@ -739,7 +785,7 @@ public class ResSvc : MonoBehaviour
                 j--;
              
             }
-            arr[i] = int.Parse(skillMoveArr[i]);
+            arr[j] = int.Parse(skillMoveArr[i]);
         }
         return arr;
     }
@@ -810,6 +856,125 @@ public class ResSvc : MonoBehaviour
             return null;
         }
     }
+    #endregion
+
+
+
+    #region monster
+    Dictionary<int, MonsterCfg> monsterCfgDic = new Dictionary<int, MonsterCfg>();
+
+    private void InitMonsterCfg(string path)
+    {
+        TextAsset xml = Resources.Load<TextAsset>(path);
+        XmlNodeList nodLst = GetListFromTextAsset(xml);
+        if (nodLst != null)
+        {
+            //public string mName;
+            //public string resPath;
+            for (int i = 0; i < nodLst.Count; i++)
+            {
+                XmlElement ele = nodLst[i] as XmlElement;
+                if (ele.GetAttributeNode("ID") == null)
+                    continue;
+                int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+                //nodLst，ID
+                MonsterCfg c = new MonsterCfg
+                {
+                    ID = ID
+                };
+                foreach (XmlElement e in nodLst[i].ChildNodes)
+                {
+                    switch (e.Name)
+                    {
+                        case "mName":
+                            {
+                                c.mName = e.InnerText;
+                            }
+                            break;
+                        case "resPath":
+                            {
+                                c.resPath = e.InnerText;
+                            }
+                            break;
+                        default: break;
+                    }
+
+                }
+                //
+                monsterCfgDic.Add(ID, c);
+
+            }
+        }
+    }
+    public MonsterCfg GetMonsterCfg(int ID)
+    {
+        MonsterCfg c = null;
+        if (monsterCfgDic.TryGetValue(ID, out c))
+        {
+            return c;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
+
+
+    /**
+        < monsterLst >
+            #|1001,-4.39,13.14,3.79,-50
+            | 1001,-7.55,13.1, 3,0
+            #|1001,18.86,13.6,3.7,-107.3
+            | 1001,14.35,13.35,5.95,-117.4
+            | 1001,15.11,13.35,1.63,-66.1
+            #|1001,18.16,8.8,32,188
+            | 1001,11.8,8.8,30.8,145.5
+            | 1001,15.38,8.8,40.7,173.3
+            | 1001,9,8.9,38.6,145.5
+            | 2001,11.4,8.85,41,142
+        </ monsterLst >
+    **/
+
+    List<MonsterData> String_ToMonsterDataLst(string text)
+    {
+        List<string> waveLst = String_SplitToStringLst(text,'#');
+        List<MonsterData> lst=new List<MonsterData>();
+        //
+        for (int i = 0; i < waveLst.Count; i++)
+        {
+
+            List<string> indexLst = String_SplitToStringLst(waveLst[i], '|');
+
+            for (int j = 0; j < indexLst.Count; j++)
+            {
+                List<string > dataLst = String_SplitToStringLst( indexLst[j], ',');
+               
+                int ID = int.Parse(dataLst[0]);
+                float x = float.Parse(dataLst[1]);
+                float y = float.Parse(dataLst[2]);
+                float z = float.Parse(dataLst[3]);
+                float r = float.Parse(dataLst[4]);
+                //
+                MonsterData data = new MonsterData
+                {
+                    ID = ID,
+                    mWave = i,
+                    mIndex = j,
+                    mBornPos = new Vector3(x, y, z),
+                    mBornRot = new Vector3(0f, r, 0f),
+                    mCfg = GetMonsterCfg(ID)
+
+                };
+                lst.Add(data);
+            }
+        }
+
+        return lst;
+    }
+
+
     #endregion
 
 }
