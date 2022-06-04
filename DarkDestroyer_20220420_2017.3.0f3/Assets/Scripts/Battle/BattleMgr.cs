@@ -7,6 +7,7 @@
 *****************************************************/
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleMgr : MonoBehaviour 
@@ -15,8 +16,8 @@ public class BattleMgr : MonoBehaviour
 
     [Header("BattleMgr")]
 
-    ResSvc resSvc;
-    AudioSvc audioSvc;
+   public ResSvc resSvc;
+   public AudioSvc audioSvc;
     //
     //
   public  MapMgr mapMgr;
@@ -28,26 +29,46 @@ public class BattleMgr : MonoBehaviour
 
     public Vector2 dir;
 
+    public MapCfg mapCfg;
+    
+    public List<GameObject> monsterLst = new List<GameObject>();
 
     #region 实例地图 场景 人物
+    void Awake()
+    {
+            InitSvc();
 
+      
+    }
 
     public void InitMap(int mapID)
     {
-        InitMgr_ToBattleRoot();
-        InitSvc();
+
+        CtrlInit(mapID);
         //
-        MapCfg cfg = resSvc.GetMapDataCfg(mapID);
-        resSvc.AsyncLoadScene(cfg.sceneName, () => { InitScene(cfg); });
+       
+        resSvc.AsyncLoadScene(mapCfg.sceneName, () => { InitScene(mapCfg); });
     }
+
+    /// <summary>
+    /// 控制顺序
+    /// </summary>
+    void CtrlInit(int mapID)
+    {
+        InitSvc();
+        mapCfg = resSvc.GetMapCfg(mapID);
+        InitMgr_ToBattleRoot(); 
+    }
+
     void InitMgr_ToBattleRoot()
     { 
         mapMgr=gameObject.AddComponent<MapMgr>();
         skillMgr = gameObject.AddComponent<SkillMgr>();
         stateMgr = gameObject.AddComponent<StateMgr>();
-        mapMgr.Init();
         skillMgr.Init();
         stateMgr.Init();
+        mapMgr.Init(this);
+
     }
     void InitSvc()
     {
@@ -63,18 +84,20 @@ public class BattleMgr : MonoBehaviour
         transform.position = Vector3.zero;
         transform.localScale = Vector3.one;
         //
-        LoadPlayer(cfg);
+        LoadPlayerByMapCfg(cfg);
         audioSvc.PlayBgMusic(Constants.BGHuangYe);
         //
         InstanceSys.Instance.playerCtrlWnd.SetWndState();
+
+       //LoadMonsterByWave(0);
     }
 
 
     /// <summary>
-    /// 加载游戏主角
+    /// 加载游戏主角,一个地图就一个玩家
     /// </summary>
     /// <param name="cfg"></param>
-    void LoadPlayer(MapCfg cfg)
+    void LoadPlayerByMapCfg(MapCfg cfg)
     {
         GameObject player = resSvc.LoadPrefab(PathDefine.AssassinBattlePlayerPrefab, true);
         //
@@ -188,5 +211,64 @@ public class BattleMgr : MonoBehaviour
     }
     #endregion
 
-    
+
+    #region Monster
+    /// <summary>
+    /// 加载该地图第几波怪物
+    /// </summary>
+    /// <param name="wave">第几波</param>
+    public void LoadMonsterByWave(int wave)
+    {
+        for (int i = 0; i < mapCfg.monsterLst.Count; i++)
+        {
+
+            MonsterData data = mapCfg.monsterLst[i];
+            
+            if (data.mWave == wave)
+            {
+                //物体
+                MonsterCfg cfg = resSvc.GetMonsterCfg(data.ID);
+                GameObject go = resSvc.LoadPrefab(cfg.resPath, true);
+                go.name = cfg.mName + "_" + data.mWave + "_" + data.mIndex;
+                go.transform.position = data.mBornPos;
+                go.transform.localEulerAngles = data.mBornRot;
+                go.transform.localScale = Vector3.one;
+                
+                //表现实体
+                MonsterController mCtrl = go.GetComponent<MonsterController>();
+                mCtrl.Init();
+
+                //逻辑实体
+                EntityMonster entity = InitEntityMonster(stateMgr, mCtrl);
+                monsterLst.Add(go);
+                // DontDestroyOnLoad(go);
+                //
+                // go.SetActive(true);
+
+                print( go.name+"   "+go.GetInstanceID() );
+            }
+        }
+
+        for (int i = 0; i < monsterLst.Count; i++)
+        {
+            if (monsterLst[i] != null)
+                DontDestroyOnLoad(monsterLst[i]);
+        }
+    }
+
+
+
+    private EntityMonster InitEntityMonster(StateMgr stateMgr, MonsterController monsterCtrl)
+    {
+         EntityMonster entityMonster = new EntityMonster
+         {
+            stateMgr = stateMgr,
+            ctrl = monsterCtrl,
+            skillMgr = this.skillMgr,
+            battleMgr = this
+        };
+
+        return entityMonster;
+    }
+    #endregion
 }

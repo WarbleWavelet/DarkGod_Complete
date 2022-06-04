@@ -93,7 +93,7 @@ public class MainCitySys : SystemRoot
     #region Scene
     public void EnterMainCity()
     {
-        MapCfg cfg = ResSvc.Instance.GetMapDataCfg(Constants.MainCityMapID);
+        MapCfg cfg = ResSvc.Instance.GetMapCfg(Constants.MainCityMapID);
         resSvc.AsyncLoadScene(cfg.sceneName, () => {
             PECommon.Log("进入主城");
             //

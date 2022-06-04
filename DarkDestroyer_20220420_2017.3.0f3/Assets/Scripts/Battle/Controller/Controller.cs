@@ -23,7 +23,7 @@ public abstract class Controller :MonoBehaviour
     //
 
     [Header("角色控制器和运动")]
-    public CharacterController ctrl;
+    public CharacterController ctrl=null;
     public Animator ani;
    public bool isMove = false;
     Vector2 dir = Vector2.zero;
@@ -60,7 +60,15 @@ public abstract class Controller :MonoBehaviour
 
     public virtual void Init()
     {
-        ctrl = transform.GetComponent<CharacterController>();
+        if (transform.GetComponent<CharacterController>() == null)
+        {
+            ctrl = transform.gameObject.AddComponent<CharacterController>();
+        }
+        else
+        {
+            ctrl = transform.GetComponent<CharacterController>();
+        }
+      
         ani = transform.GetComponent<Animator>();
         timerSvc = TimerSvc.Instance;
 

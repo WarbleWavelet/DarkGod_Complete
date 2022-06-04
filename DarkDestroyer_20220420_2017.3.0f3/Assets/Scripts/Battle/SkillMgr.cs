@@ -91,4 +91,9 @@ public class SkillMgr :MonoBehaviour
 
 
     }
+
+    public void AttackDamage(EntityBase entity, int skillID)
+        {
+        
+        }
 }

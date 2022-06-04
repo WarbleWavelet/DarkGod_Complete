@@ -102,4 +102,10 @@ public class EntityBase
             ctrl.SetSkillMoveState(move, speed);
         }
      }
+
+
+    public void AttackDamage(int skillID)
+    {
+        skillMgr.AttackDamage(this, skillID);
+    }
 }

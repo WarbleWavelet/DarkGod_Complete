@@ -27,5 +27,6 @@ public class StateAttack : IState
     {
         PECommon.Log(this.GetType().ToString() + " Process");
         entity.AttackEffect( (int)args[0] );
+        entity.AttackDamage( (int)args[0] );
     }
 }

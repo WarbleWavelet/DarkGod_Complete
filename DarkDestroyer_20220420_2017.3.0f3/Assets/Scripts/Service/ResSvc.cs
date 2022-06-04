@@ -314,7 +314,7 @@ public class ResSvc : MonoBehaviour
 
     #region 副本地图
     public List<string> mapLst = new List<string>();
-    Dictionary<int, MapCfg> mapCfgDataDic=new Dictionary<int, MapCfg> ();
+    Dictionary<int, MapCfg> mapCfgDic=new Dictionary<int, MapCfg> ();
     /// <summary>
     /// 初始化随机名字的配置文件
     /// </summary>
@@ -386,7 +386,7 @@ public class ResSvc : MonoBehaviour
                     
                 }
                 //
-                mapCfgDataDic.Add(ID, c);
+                mapCfgDic.Add(ID, c);
 
             }
         }
@@ -394,10 +394,10 @@ public class ResSvc : MonoBehaviour
 
     }
 
-    public MapCfg GetMapDataCfg(int ID)
+    public MapCfg GetMapCfg(int ID)
     {
         MapCfg c = null;
-        if (mapCfgDataDic.TryGetValue(ID, out c))
+        if (mapCfgDic.TryGetValue(ID, out c))
         {
             return c;
         }

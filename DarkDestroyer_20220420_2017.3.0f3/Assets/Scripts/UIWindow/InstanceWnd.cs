@@ -98,7 +98,7 @@ public class InstanceWnd : WindowRoot
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         instance = childIndex;
         int instanceID = ChildIndexToInstanceID(childIndex);
-        int power=resSvc.GetMapDataCfg(instanceID).power;
+        int power=resSvc.GetMapCfg(instanceID).power;
         if (pd.power >= power)
         {
             GameMsg msg = new GameMsg

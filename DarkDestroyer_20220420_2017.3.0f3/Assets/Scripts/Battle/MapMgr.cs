@@ -8,10 +8,22 @@
 
 using UnityEngine;
 
+
 public class MapMgr : MonoBehaviour 
 {
-    public void Init()
+
+    [Header("MapMgr")]
+    public BattleMgr battleMgr;
+    public int wave = 0;
+
+    
+    public void Init(BattleMgr battleMgr)
     {
+    
+        this.battleMgr = battleMgr;
+
+        // battleMgr.LoadMonsterByWave(0);
+        this.battleMgr.LoadMonsterByWave( wave );
         PECommon.Log(this.GetType().ToString() + " Init");
 
     }
