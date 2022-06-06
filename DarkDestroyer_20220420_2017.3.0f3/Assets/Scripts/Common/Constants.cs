@@ -134,10 +134,11 @@ public class Constants
 
 
     #region 延时播放动画
-    public const int DelayDefault = 1000;//1s
+    public const int DelayDefault = 500;//1s
     public const int DelayBorn = 500;
     public const int DelayIdle = 500;
     public const int DelayActive = 500;
+    public const int DelayDieAniLength = 5000;
 
     #endregion
 

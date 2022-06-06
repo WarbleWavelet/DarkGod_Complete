@@ -27,5 +27,6 @@ public enum AniState
     Born=0,
     Idle,
     Move,
-    Attack
+    Attack,
+    Die=100
 }

@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="7.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QEAAAQABkAAEJCoAACUQEKAAIABYQAgECAAAgAgAAoA=</HashCode>
+      <HashCode>REgAAQoBkAAEJCoAACUQFKAAIABYwAgECAIAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -252,7 +252,7 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAJAAKBAAAAMBgAAIAwAQIDCAgAYgABAAAAgAAI=</HashCode>
+      <HashCode>AAAAAAJAAKBAAAAsBgAAIAwAQIDCAgAYgABAAIAgAAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -316,6 +316,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="StateDie" Collapsed="true">
+    <Position X="0.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateDie.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="IState" Collapsed="true">
     <Position X="7.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
@@ -333,7 +341,7 @@
   <Enum Name="AniState" Collapsed="true">
     <Position X="0.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAAIAAAAAIAAAAAAAAAIAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAABAAIAAAAAoAAAAAAAAAIAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\FSM\IState.cs</FileName>
     </TypeIdentifier>
   </Enum>

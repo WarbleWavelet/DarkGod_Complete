@@ -210,8 +210,24 @@ public class SkillMgr :MonoBehaviour
             default: break;
         }
 
-        if(dmgSum<0) 
+        if (dmgSum < 0)
+        {
             dmgSum = 0;
+            return;
+        }
+
+        if (dmgSum >= to.HP)
+        { 
+         to.HP = 0;
+            to.Die();
+        }
+           
+        else
+        { 
+        to.HP -= dmgSum;
+        }
+            
+
             
     }
 

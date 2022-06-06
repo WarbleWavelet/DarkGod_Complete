@@ -20,7 +20,6 @@ public class StateBorn : IState
     public void Exit(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Exit");
-        throw new System.NotImplementedException();
     }
 
     public void Process(EntityBase entity, params object[] args)
@@ -29,7 +28,7 @@ public class StateBorn : IState
         entity.SetAction(Constants.ActionBorn);
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {
-            entity.SetAction(Constants.ActionDefault);
+            entity.SetAction(Constants.ActionIdle);
         }, Constants.DelayDefault);
     }
 }

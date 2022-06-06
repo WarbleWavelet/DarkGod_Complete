@@ -46,6 +46,7 @@ public class EntityBase
 
         set
         {
+            PECommon.Log("HP change to " + value) ;
             hp = value;
         }
     }
@@ -57,29 +58,31 @@ public class EntityBase
     #region ChangeStaus
  public void Move()
     {
-        stateMgr.ChangeStaus(this, AniState.Move);
+        stateMgr.ChangeStaus(this, AniState.Move, null);
     }
 
     public void Idle()
     {
-        stateMgr.ChangeStaus(this, AniState.Idle);
+        stateMgr.ChangeStaus(this, AniState.Idle, null);
     }
     public void Born()
     {
-        stateMgr.ChangeStaus(this, AniState.Born);
+        stateMgr.ChangeStaus(this, AniState.Born, null);
+    }
+    public void Attack(int skillID)
+    {
+        stateMgr.ChangeStaus(this, AniState.Attack, skillID);
+    }
+
+    public void Die( )
+    {
+        stateMgr.ChangeStaus(this, AniState.Die, null);
     }
     #endregion
-   
 
 
-    public virtual void SetBlend(float value)
-    {
-        if (ctrl != null)
-        {
-            ctrl.SetBlend(value);
-        }
 
-    }
+
 
     public virtual void SetDir(Vector2 dir)
     {
@@ -96,6 +99,15 @@ public class EntityBase
         return Vector2.zero;
     }
 
+    #region 动画器
+    public virtual void SetBlend(float value)
+    {
+        if (ctrl != null)
+        {
+            ctrl.SetBlend(value);
+        }
+
+    }
     public virtual void SetAction(int value)
     {
         if (ctrl != null)
@@ -105,6 +117,8 @@ public class EntityBase
         }
 
     }
+    #endregion
+
 
 
     #region Skill Atk
@@ -138,10 +152,7 @@ public class EntityBase
     }
  
 
-    public void Attack(int skillID)
-    {
-        stateMgr.ChangeStaus(this, AniState.Attack, skillID);
-    }
+
     #endregion
 
 
@@ -172,4 +183,12 @@ public class EntityBase
         HP = props.hp;
     }
 
+
+    public void SetActive(bool state = true)
+    {
+        if (ctrl != null)
+        {
+            ctrl.gameObject.SetActive(state);
+        }
+    }
 }
