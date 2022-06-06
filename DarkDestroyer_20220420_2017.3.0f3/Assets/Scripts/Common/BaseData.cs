@@ -57,9 +57,6 @@ public class MapCfg : BaseData<MapCfg>
 #endregion
 
 
-
-
-
 #region 引导
 /**
 <item ID="1001">
@@ -123,6 +120,7 @@ public class StrongCfg : BaseData<StrongCfg>
 
 #endregion
 
+
 #region 任务奖励
 /**
 	<item ID="1">
@@ -169,11 +167,13 @@ public enum TaskState
 }
 #endregion
 
+
 public enum NPCID
 {
     WiseMan=0,
 
 }
+
 
 #region 技能
 /**
@@ -194,11 +194,24 @@ public class SkillCfg: BaseData<SkillCfg>
     public int aniAction;
     /// <summary>特效名<summary>
     public string fx;
+    //
     [Description("技能产生的移动")]
     public List<int> skillMoveLst;
+    //以下两者索引一一对应
+    /// <summary>一个技能几段伤害（范围 角度 延时）</summary>
+    public List<int> skillActionLst;
+    /// <summary>一个技能几段伤害的数值</summary>
+    public List<int> skillDamageLst;
+    //
+    public DmgType dmgType;
+
+
 
 }
 
+/// <summary>
+/// 兰陵王大招这种
+/// </summary>
 public class SkillMoveCfg : BaseData<SkillMoveCfg>
 {
 
@@ -212,6 +225,29 @@ public class SkillMoveCfg : BaseData<SkillMoveCfg>
     public int delayTime;
 
 }
+
+/// <summary>
+/// 技能判定(技能的距离,角度，是否延时)
+/// </summary>
+public class SkillActionCfg:BaseData<SkillActionCfg>
+{
+    /**
+    < item ID = "1011" >
+            < delayTime > 100 </ delayTime >
+            < radius > 2.5 </ radius >
+            < angle > 360 </ angle >
+    </ item >
+    **/
+    public int delayTime;
+    /// <summary>范围,距离</summary>
+    public float radius;
+    /// <summary>角度，视野，角度</summary>
+    public int angle ;
+
+
+}
+
+
 #endregion
 
 
@@ -227,24 +263,34 @@ public class MonsterCfg:BaseData<MonsterCfg>
 {
     public string mName;
     public string resPath;
+    public BattleProps props;
 }
 
-/**
-< monsterLst >
-    #|1001,-4.39,13.14,3.79,-50
-    | 1001,-7.55,13.1, 3,0
-    #|1001,18.86,13.6,3.7,-107.3
-    | 1001,14.35,13.35,5.95,-117.4
-    | 1001,15.11,13.35,1.63,-66.1
-    #|1001,18.16,8.8,32,188
-    | 1001,11.8,8.8,30.8,145.5
-    | 1001,15.38,8.8,40.7,173.3
-    | 1001,9,8.9,38.6,145.5
-    | 2001,11.4,8.85,41,142
-</ monsterLst >
-**/
+
 public class MonsterData : BaseData<MonsterData>
 {
+/**
+<item ID="10003">
+    <mapName>荒野遗迹</mapName>
+    <sceneName>SceneOrge</sceneName>
+    <power>5</power>
+    <mainCamPos>-13.19,18.87,14.69</mainCamPos>
+    <mainCamRote>45,135,0</mainCamRote>
+    <playerBornPos>-10,13.2,11.5</playerBornPos>
+    <playerBornRote>0,145,0</playerBornRote>
+    <monsterLst>#|1001,-4.39,13.14,3.79,-50,1
+        |1001,-7.55,13.1, 3,0,1
+        #|1001,18.86,13.6,3.7,-107.3,2
+        |1001,14.35,13.35,5.95,-117.4,2
+        |1001,15.11,13.35,1.63,-66.1,2
+        #|1001,18.16,8.8,32,188,3
+        |1001,11.8,8.8,30.8,145.5,3
+        |1001,15.38,8.8,40.7,173.3,3
+        |1001,9,8.9,38.6,145.5,3
+        |2001,11.4,8.85,41,142,1
+    </monsterLst>
+</item>
+**/
     public Vector3 mBornRot;
     public Vector3 mBornPos;
     /// <summary>第几波</summary>
@@ -253,6 +299,44 @@ public class MonsterData : BaseData<MonsterData>
     public int mIndex;
     /// <summary>monster的cfg</summary> 
     public MonsterCfg mCfg;
+    public int lv;
+}
+
+#endregion
+
+
+
+#region 战斗需要的属性
+public class BattleProps
+{
+    /*
+    //含义看数据库
+    public int id;
+    public string name;
+    public int exp;
+    public int lv;
+    public int power;
+    public int coin;
+    public int diamond;
+    public int crystal;
+    //
+    public int guideid;
+    public int[] strongArr;
+    public long time;
+    public string[] taskRewardArr;   // ID | 已经完成次数 | 是否已经领取奖励
+    public int instance;
+    //
+    */
+    public int hp;
+    public int ad;
+    public int ap;
+    public int addef;
+    public int apdef;
+    public int dodge;
+    public int critical;
+    public int pierce;
+    //
+
 }
 
 #endregion

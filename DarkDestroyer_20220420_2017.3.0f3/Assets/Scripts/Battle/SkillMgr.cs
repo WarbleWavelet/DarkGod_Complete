@@ -6,6 +6,8 @@
 	功能：技能管理器
 *****************************************************/
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillMgr :MonoBehaviour
@@ -21,25 +23,7 @@ public class SkillMgr :MonoBehaviour
     }
 
 
-    /// <summary>
-    /// 放技能的效果
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="skillID"></param>
-    public void AttackEffect(EntityBase entity, int skillID)
-    {
-        skillID += 100;
-        SkillCfg cfg=resSvc.GetSkillCfg(skillID);
-        SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
-        //
-        entity.SetSkillFbx(cfg.fx, cfg.skillTime);
-        //
-        entity.canCtrl = false;
-        entity.SetDir(Vector2.zero);
-        //
-        CalcState(entity, cfg);
-        CalcSkillMove(entity, moveCfg);
-    }
+
 
 
     /// <summary>
@@ -92,8 +76,214 @@ public class SkillMgr :MonoBehaviour
 
     }
 
+
+    #region 攻击
+    public void SkillAttack(EntityBase entity, int skillID)
+    {
+        AttackEffect(entity, skillID);
+        AttackDamage(entity, skillID);
+    }
+
     public void AttackDamage(EntityBase entity, int skillID)
+    {
+        skillID = 101;
+        SkillCfg skillCfg=resSvc.GetSkillCfg(skillID);
+        List<int> actionLst = skillCfg.skillActionLst;
+
+
+        int sum = 0;//计时从一开始，不清0
+        for (int i = 0; i < actionLst.Count; i++)
+
         {
-        
+            SkillActionCfg action = resSvc.GetSkillActionCfg(actionLst[i]);
+            sum += action.delayTime;
+            int actionIdx = i;
+            if (sum > 0)
+            {
+                timerSvc.AddTimerTask((int tid) =>
+                {
+                    SkillAction(entity, skillCfg, actionIdx);
+                }, sum);
+            }
+            else
+            {
+                SkillAction(entity, skillCfg, actionIdx);
+            }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="from">攻击发起者</param>
+    /// <param name="skillCfg"></param>
+    /// <param name="actionIdx">skillActionLst和<para/>skillDamageLst的索引</param>
+    private void SkillAction(EntityBase from, SkillCfg skillCfg, int actionIdx)
+    {
+
+        List<EntityMonster> entityLst = from.battleMgr.GetEntityMonster();
+        SkillActionCfg action = resSvc.GetSkillActionCfg(skillCfg.skillActionLst[actionIdx] );
+        int damage=skillCfg.skillDamageLst[actionIdx];
+
+        for (int i = 0; i < entityLst.Count; i++)
+        {
+            EntityMonster to= entityLst[i];
+            bool inRange = InRange(from.GetPos(), to.GetPos(), action.radius);
+            bool inAngle = InAngle(from.GetTrans(), to.GetTrans(), action.angle);
+
+            if (inRange && inAngle)
+            {
+                CalcDamage(from, to,skillCfg, damage);
+            
+            }
+        }
+    }
+
+
+    private void CalcDamage( EntityBase from, EntityBase  to, SkillCfg skillCfg, int damage)
+    {
+        int dmgSum = damage;
+        switch (skillCfg.dmgType)
+        {
+            case DmgType.None :
+                {
+
+                }
+                break;
+            case DmgType.AD:
+                {
+                    float rate = 0f;
+                    rate = PETools.RDInt(1, 100);
+                    if ( rate < to.Props.dodge)
+                    {
+
+                        print("闪避"+rate);
+                        return;
+                    }
+                    dmgSum += from.Props.ad;
+                    //
+                    rate = PETools.RDInt(1, 100);
+                    if ( rate < to.Props.critical)
+                    {
+                        print("暴击" + rate);
+                        rate = PETools.RDInt(1, 100);
+                        dmgSum = (int) (dmgSum * (1f + rate / 100f));
+                    }
+                    //
+                    int def = (int) ( (1f - from.Props.pierce / 100.0f) * to.Props.addef );
+                    print("护甲" + def);
+                    dmgSum -=def;
+
+
+                    print("最终伤害"+dmgSum);
+
+
+
+                }
+                break;
+            case DmgType.ADC:
+                {
+
+                }
+                break;
+            case DmgType.AP:
+                {
+                    dmgSum += from.Props.ap;
+                    dmgSum -= to.Props.apdef;
+                }
+                break;
+            case DmgType.APC:
+                {
+
+                }
+                break;
+            case DmgType.TD:
+                {
+
+                }
+                break;
+            case DmgType.TDC:
+                {
+
+                }
+                break;
+            default: break;
+        }
+
+        if(dmgSum<0) 
+            dmgSum = 0;
+            
+    }
+
+    private void CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
+    {
+
+
+
+    }
+
+
+    /// <summary>
+    /// 在范围内
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    bool InRange(Vector3 from, Vector3 to, float range)
+    {
+        return Vector3.Distance(from, to) <= range;
+    
+    }
+
+    /// <summary>
+    /// 在视野内
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    bool InAngle(Transform from, Transform to, float angle)
+    {
+        if (angle == 360)
+        { 
+            return true;
+        }
+
+        Vector3 forward = from.forward;
+        Vector3 dir = (to.position - from.position).normalized;
+        float ang = Vector3.Angle(forward, dir);
+
+        if (ang <= angle / 2)
+        {
+            return true;
+        }
+        else
+        { 
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// 放技能的效果
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="skillID"></param>
+    public void AttackEffect(EntityBase entity, int skillID)
+    {
+        skillID += 100;
+        SkillCfg cfg = resSvc.GetSkillCfg(skillID);
+        SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
+        //
+        entity.SetSkillFbx(cfg.fx, cfg.skillTime);
+        //
+        entity.canCtrl = false;
+        entity.SetDir(Vector2.zero);
+        //
+        CalcState(entity, cfg);
+        CalcSkillMove(entity, moveCfg);
+    }
+    #endregion
+  
 }

@@ -18,7 +18,7 @@ public class Test_Controller : MonoBehaviour
     public Animator ani;
     //
     public Camera cam;
-    public Vector3 camOffset;
+      public Vector3 camOffset;
     public Transform camTrans;
     //
     public CharacterController ctrl;

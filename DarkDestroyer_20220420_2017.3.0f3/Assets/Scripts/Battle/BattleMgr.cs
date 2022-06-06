@@ -6,6 +6,7 @@
 	功能：战场管理器
 *****************************************************/
 
+using PEProtocol;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,24 +15,28 @@ public class BattleMgr : MonoBehaviour
 {
 
 
+    #region 字属
     [Header("BattleMgr")]
 
-   public ResSvc resSvc;
-   public AudioSvc audioSvc;
+    public ResSvc resSvc;
+    public AudioSvc audioSvc;
+    public TimerSvc timer;
     //
     //
-  public  MapMgr mapMgr;
-  public  SkillMgr skillMgr;
-  public  StateMgr stateMgr;
+    public MapMgr mapMgr;
+    public SkillMgr skillMgr;
+    public StateMgr stateMgr;
     //
-   public EntityPlayer playerEntity;//注入了stateMgr、playerCtrl
+    public EntityPlayer playerEntity;//注入了stateMgr、playerCtrl
     PlayerController playerCtrl;
 
     public Vector2 dir;
 
     public MapCfg mapCfg;
-    
-    public List<GameObject> monsterLst = new List<GameObject>();
+
+    Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
+    #endregion
+
 
     #region 实例地图 场景 人物
     void Awake()
@@ -74,6 +79,7 @@ public class BattleMgr : MonoBehaviour
     {
         resSvc = ResSvc.Instance;
         audioSvc = AudioSvc.Instance;
+        timer = TimerSvc.Instance;
     }
 
     private void InitScene(MapCfg cfg)
@@ -89,7 +95,8 @@ public class BattleMgr : MonoBehaviour
         //
         InstanceSys.Instance.playerCtrlWnd.SetWndState();
 
-       //LoadMonsterByWave(0);
+        //LoadMonsterByWave(0);
+        DelayActiveMonster();
     }
 
 
@@ -110,6 +117,7 @@ public class BattleMgr : MonoBehaviour
         playerCtrl.Init();
         //
         InitEntityPlayer(this.stateMgr, playerCtrl);
+        InitPlayerBattleProps( playerEntity );
     }
 
     /// <summary>
@@ -125,6 +133,27 @@ public class BattleMgr : MonoBehaviour
             skillMgr=this.skillMgr,
             battleMgr=this
         };
+    }
+
+    void InitPlayerBattleProps(EntityBase entity)
+    {
+        PlayerData pd = GameRoot.Instance.PlayerData;
+        BattleProps props = new BattleProps
+        {
+            hp = pd.hp,
+            ad = pd.ad,
+            ap = pd.ap,
+            addef = pd.addef,
+            apdef = pd.apdef,
+            dodge = pd.dodge,
+            critical = pd.critical,
+            pierce = pd.pierce,
+
+        };
+
+
+        entity.SetBattleProps(props);
+
     }
 
 
@@ -221,7 +250,6 @@ public class BattleMgr : MonoBehaviour
     {
         for (int i = 0; i < mapCfg.monsterLst.Count; i++)
         {
-
             MonsterData data = mapCfg.monsterLst[i];
             
             if (data.mWave == wave)
@@ -239,36 +267,61 @@ public class BattleMgr : MonoBehaviour
                 mCtrl.Init();
 
                 //逻辑实体
-                EntityMonster entity = InitEntityMonster(stateMgr, mCtrl);
-                monsterLst.Add(go);
-                // DontDestroyOnLoad(go);
-                //
-                // go.SetActive(true);
+                EntityMonster entity = InitEntityMonster(stateMgr, mCtrl,data);
+                monsterDic.Add(go.name, entity);
 
                 print( go.name+"   "+go.GetInstanceID() );
             }
         }
 
-        for (int i = 0; i < monsterLst.Count; i++)
+
+        foreach (var item in monsterDic)
         {
-            if (monsterLst[i] != null)
-                DontDestroyOnLoad(monsterLst[i]);
+            DontDestroyOnLoad(item.Value.ctrl.gameObject);
         }
     }
 
 
 
-    private EntityMonster InitEntityMonster(StateMgr stateMgr, MonsterController monsterCtrl)
+    private EntityMonster InitEntityMonster(StateMgr stateMgr, MonsterController monsterCtrl, MonsterData data)
     {
          EntityMonster entityMonster = new EntityMonster
          {
             stateMgr = stateMgr,
             ctrl = monsterCtrl,
             skillMgr = this.skillMgr,
-            battleMgr = this
+            battleMgr = this,
+            monsterData=data
         };
 
+        entityMonster.SetBattleProps( data.mCfg.props);
+
         return entityMonster;
+    }
+
+    /// <summary>
+    /// 获取Monster
+    /// </summary>
+    /// <returns></returns>
+    public List<EntityMonster> GetEntityMonster()
+    {
+        List<EntityMonster> lst = new List<EntityMonster>();
+        foreach (var item in monsterDic)
+        {
+            lst.Add(item.Value);
+        }
+        return lst;
+    }
+
+    void DelayActiveMonster(bool state =true, int milsec=500)
+    {
+        timer.AddTimerTask((int tid)=> {
+            foreach (var item in monsterDic)
+            {
+                item.Value.ctrl.gameObject.SetActive(state);
+            }
+        
+        }, milsec);
     }
     #endregion
 }

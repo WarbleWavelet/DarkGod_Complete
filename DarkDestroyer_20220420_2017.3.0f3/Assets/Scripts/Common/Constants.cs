@@ -8,6 +8,33 @@
 
 using UnityEngine;
 
+
+#region 伤害类型
+/// <summary>
+/// 伤害类型
+/// </summary>
+public enum DmgType
+{
+    /**
+        AD是Attack Damage的缩写，意思为物理伤害。
+        ADC是Attack Damage Carry的缩写，是指物理伤害输出类型英雄的简称。
+        AP是Ability Power的缩写，主要指法术伤害。
+        APC是Ability Power Carry的缩写，是使用法术造成大量法术伤害的英雄的简称。
+        TD，（ture damage，真实伤害）
+    **/
+    None,
+    AD,
+    ADC,
+    AP,
+    APC,
+    TD,
+    TDC
+}
+#endregion
+
+
+
+#region 打印 tips颜色
 public enum TxtColor
 {
     Red,
@@ -16,6 +43,8 @@ public enum TxtColor
     Yellow
 
 }
+#endregion
+
 public class Constants
 {
 

@@ -21,7 +21,38 @@ public class EntityBase
     public Controller ctrl = null;
     public bool canCtrl=true;
 
+    #region 战斗属性
+   BattleProps props;
 
+    public BattleProps Props
+    {
+        get
+        {
+            return props;
+        }
+
+       protected set
+        {
+            props = value;
+        }
+    }
+
+    public int HP
+    {
+        get
+        {
+            return hp;
+        }
+
+        set
+        {
+            hp = value;
+        }
+    }
+
+    int hp;
+    #endregion
+ 
 
     public void Move()
     {
@@ -35,10 +66,7 @@ public class EntityBase
       //  SetBlend(Constants.BlendIdle);
     }
 
-    public void Attack( int skillID)
-    {
-        stateMgr.ChangeStaus( this, AniState.Attack, skillID );
-    }
+
 
     public virtual void SetBlend(float value)
     {
@@ -74,18 +102,9 @@ public class EntityBase
 
     }
 
-    public virtual void AttackEffect(int value)
-    {
-        if (skillMgr != null)
-        {
-            skillMgr.AttackEffect(this, value);
 
-        }
-
-    }
-
-
-    public virtual void SetSkillFbx(string skillName, float lifeTime)
+    #region Skill Atk
+  public virtual void SetSkillFbx(string skillName, float lifeTime)
     {
         if (ctrl != null)
         {
@@ -104,8 +123,49 @@ public class EntityBase
      }
 
 
-    public void AttackDamage(int skillID)
-    {
-        skillMgr.AttackDamage(this, skillID);
+
+    public void SkillAttack(int skillID)
+    { 
+        if (skillMgr != null)
+        {
+            skillMgr.SkillAttack(this, skillID);
+
+        }    
     }
+ 
+
+    public void Attack(int skillID)
+    {
+        stateMgr.ChangeStaus(this, AniState.Attack, skillID);
+    }
+    #endregion
+
+
+    public Vector3 GetPos()
+    {
+        if (ctrl != null)
+        { 
+            return ctrl.transform.position;
+        }
+
+        throw new System.Exception("异常");
+
+    }
+
+    public Transform GetTrans()
+    {
+        if (ctrl != null)
+        {
+            return ctrl.transform;
+        }
+
+        throw new System.Exception("异常");
+    }
+
+    public virtual void SetBattleProps(BattleProps props)
+    {
+        this.Props = props;
+        HP = props.hp;
+    }
+
 }
