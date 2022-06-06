@@ -277,7 +277,9 @@ public class BattleMgr : MonoBehaviour
 
         foreach (var item in monsterDic)
         {
-            DontDestroyOnLoad(item.Value.ctrl.gameObject);
+            GameObject go = item.Value.ctrl.gameObject;
+            DontDestroyOnLoad( go );
+            go.SetActive(false);
         }
     }
 
@@ -313,15 +315,29 @@ public class BattleMgr : MonoBehaviour
         return lst;
     }
 
-    void DelayActiveMonster(bool state =true, int milsec=500)
+
+    /// <summary>
+    /// delay后产生敌人
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="delay"></param>
+    void DelayActiveMonster(bool state =true)
     {
         timer.AddTimerTask((int tid)=> {
             foreach (var item in monsterDic)
             {
-                item.Value.ctrl.gameObject.SetActive(state);
+                EntityMonster entity = item.Value;
+                entity.ctrl.gameObject.SetActive(state);
+                entity.Born();
+                timer.AddTimerTask((int tid_1 ) => { 
+                    entity.Idle();
+                },Constants.DelayIdle);
             }
         
-        }, milsec);
+        }, Constants.DelayActive);
     }
+
+
+
     #endregion
 }

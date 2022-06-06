@@ -52,20 +52,24 @@ public class EntityBase
 
     int hp;
     #endregion
- 
 
-    public void Move()
+
+    #region ChangeStaus
+ public void Move()
     {
         stateMgr.ChangeStaus(this, AniState.Move);
-       // SetBlend(Constants.BlendWalk);
     }
 
     public void Idle()
     {
         stateMgr.ChangeStaus(this, AniState.Idle);
-      //  SetBlend(Constants.BlendIdle);
     }
-
+    public void Born()
+    {
+        stateMgr.ChangeStaus(this, AniState.Born);
+    }
+    #endregion
+   
 
 
     public virtual void SetBlend(float value)

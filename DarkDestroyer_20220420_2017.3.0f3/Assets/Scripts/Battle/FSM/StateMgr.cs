@@ -16,6 +16,7 @@ public class StateMgr :MonoBehaviour
     public void Init()
     {
         PECommon.Log(this.GetType().ToString() + " Init");
+        fsm.Add(AniState.Born,new StateBorn());
         fsm.Add(AniState.Idle,new StateIdle());
         fsm.Add(AniState.Move,new StateMove());
         fsm.Add(AniState.Attack,new StateAttack());

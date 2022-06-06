@@ -210,7 +210,7 @@
   <Class Name="BattleMgr" Collapsed="true">
     <Position X="4" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAoACoIpECAASBAAAAAIIgAAAABIAAAAAAAEAC1gGEA=</HashCode>
+      <HashCode>AAwACoIpECAASBAAAAAIIgAAAABIAAAAAAAEAC1gGEA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -252,7 +252,7 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAJAAKBAAAAEBgAAIAwAQIDCAgAYgABAAAAgAAI=</HashCode>
+      <HashCode>AAAAAAJAAKBAAAAMBgAAIAwAQIDCAgAYgABAAAAgAAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -308,6 +308,14 @@
       <FileName>Assets\Scripts\Battle\Entity\EntityMonster.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="StateBorn" Collapsed="true">
+    <Position X="0.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateBorn.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="IState" Collapsed="true">
     <Position X="7.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
@@ -325,7 +333,7 @@
   <Enum Name="AniState" Collapsed="true">
     <Position X="0.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAABAAIAAAAAIAAAAAAAAAIAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\FSM\IState.cs</FileName>
     </TypeIdentifier>
   </Enum>

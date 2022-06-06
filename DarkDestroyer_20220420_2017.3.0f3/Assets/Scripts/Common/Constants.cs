@@ -121,12 +121,26 @@ public class Constants
     #endregion
 
 
-    #region ctrl Action
+    #region ctrl Action 动画器的参数
     public const int ActionDefault = -1;
-    public const int ActionAtk = 0;
-    public const int ActionSkill1 = 1;
-    public const int ActionSkill2 = 2;
-    public const int ActionSkill3 = 3;
+    public const int ActionBorn = 0;
+    public const int ActionIdle = 1;
+    public const int ActionDie = 100;
+
+    public const int ActionAtk = 10;
+    public const int ActionSkill1 = 11;
+    public const int ActionSkill2 = 12;
+    public const int ActionSkill3 = 13;
+
+
+    #region 延时播放动画
+    public const int DelayDefault = 1000;//1s
+    public const int DelayBorn = 500;
+    public const int DelayIdle = 500;
+    public const int DelayActive = 500;
+
+    #endregion
+
     #endregion
 
 
@@ -142,10 +156,16 @@ public class Constants
     #endregion
     /// <summary>最高星级</summary>
     public const int MaxStarLv = 10;
+
+
+
+    #region 聊天
     /// <summary>每句字数</summary>
     public const int MaxChatLenth = 12;
     /// <summary>同时多少句</summary>
     public const int MaxChatCount= 12;
+    #endregion
+
 
 
 }
