@@ -122,11 +122,12 @@ public class Constants
 
 
     #region ctrl Action 动画器的参数
+    /// <summary>Idle和Move的BlendTree</summary>
     public const int ActionDefault = -1;
     public const int ActionBorn = 0;
     public const int ActionIdle = 1;
     public const int ActionDie = 100;
-
+    public const int ActionHit = 101;
     public const int ActionAtk = 10;
     public const int ActionSkill1 = 11;
     public const int ActionSkill2 = 12;

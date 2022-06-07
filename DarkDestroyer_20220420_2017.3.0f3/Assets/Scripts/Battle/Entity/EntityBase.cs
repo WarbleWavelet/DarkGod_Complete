@@ -78,6 +78,11 @@ public class EntityBase
     {
         stateMgr.ChangeStaus(this, AniState.Die, null);
     }
+
+    public void Hit()
+    {
+        stateMgr.ChangeStaus(this, AniState.Hit, null);
+    }
     #endregion
 
 

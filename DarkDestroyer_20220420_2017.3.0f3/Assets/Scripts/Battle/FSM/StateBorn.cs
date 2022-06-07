@@ -28,7 +28,8 @@ public class StateBorn : IState
         entity.SetAction(Constants.ActionBorn);
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {
-            entity.SetAction(Constants.ActionIdle);
+            entity.SetAction(Constants.ActionDefault);
+            entity.Idle();
         }, Constants.DelayDefault);
     }
 }

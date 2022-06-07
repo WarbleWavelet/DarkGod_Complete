@@ -21,6 +21,7 @@ public class StateMgr :MonoBehaviour
         fsm.Add(AniState.Move,new StateMove());
         fsm.Add(AniState.Attack,new StateAttack());
         fsm.Add(AniState.Die,new StateDie());
+        fsm.Add(AniState.Hit,new StateHit());
     }
 
     public void ChangeStaus(EntityBase entity, AniState targetState, params object[] args)

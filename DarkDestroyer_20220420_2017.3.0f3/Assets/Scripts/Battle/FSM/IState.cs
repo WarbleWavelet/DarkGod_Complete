@@ -28,5 +28,6 @@ public enum AniState
     Idle,
     Move,
     Attack,
-    Die=100
+    Die=100,
+    Hit=101,
 }
