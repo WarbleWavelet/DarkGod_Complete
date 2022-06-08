@@ -23,6 +23,12 @@ public class DynamicWnd : WindowRoot
     /// <summary>有没有人</summary>
     public  bool isTipsShow=false;
 
+    [Header("血条相关")]
+    public Dictionary<string, ItemEntityHp> hpDic=new Dictionary<string, ItemEntityHp>();
+    /// <summary>挂靴调的父节点</summary> 
+    public Transform hpItmRoot;
+
+
    public void Init()
     {
         InitWnd();
@@ -52,7 +58,7 @@ public class DynamicWnd : WindowRoot
     
     }
 
-     void SetTips(string tips)
+    public void SetTips(string tips)
     {
         SetActive(txtTips);
         SetText(txtTips,tips);
@@ -90,6 +96,25 @@ public class DynamicWnd : WindowRoot
         lock (tipsQuene)
         {
             tipsQuene.Enqueue(tips);
+
+        }
+    }
+
+  public  void AddHpItemInfo(Transform t, Transform hpRoot,string mName, int hp )
+    {
+        ItemEntityHp item = null;
+        if (hpDic.TryGetValue(mName, out item))
+        {
+            return;
+        }
+        else
+        {
+            GameObject go = resSvc.LoadPrefab(PathDefine.ItemEntityHp,true);
+            go.transform.SetParent(hpItmRoot);
+            go.transform.localPosition = new Vector3(-1000,0,0);//看不到
+            item = go.GetComponent<ItemEntityHp>();
+            item.InitItemHpInfo(t, hpRoot, hp);
+            hpDic.Add(mName, item);
 
         }
     }

@@ -15,6 +15,7 @@ public class EntityMonster : EntityBase
     public override void SetBattleProps(BattleProps props)
     {
         int lv = monsterData.lv;
+        /// <summary>基础属性</summary>
         BattleProps _props = new BattleProps
         {
             hp = lv * props.hp,

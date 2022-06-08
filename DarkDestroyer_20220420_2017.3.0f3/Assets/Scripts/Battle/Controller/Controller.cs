@@ -56,6 +56,10 @@ public abstract class Controller :MonoBehaviour
     public float skillMoveSpeed;
     public bool isSkillMove;
 
+
+    [Header("UI")]
+    public Transform HPRoot;
+
     #region 生命
 
     public virtual void Init()

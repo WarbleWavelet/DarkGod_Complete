@@ -112,7 +112,14 @@ public class MainCitySys : SystemRoot
             charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
             //
             GetNpcPosTrans();
-            nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
+            if (playerCtrl.transform.GetComponent<NavMeshAgent>() == null)
+            {
+                nav  = playerCtrl.transform.gameObject.AddComponent<NavMeshAgent>();
+            }
+            else
+            {
+                nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
+            }
             strongWnd.RefreshItem(0);
 
         });

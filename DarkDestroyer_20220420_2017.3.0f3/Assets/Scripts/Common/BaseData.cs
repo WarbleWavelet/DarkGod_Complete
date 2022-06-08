@@ -307,6 +307,9 @@ public class MonsterData : BaseData<MonsterData>
 
 
 #region 战斗需要的属性
+/// <summary>
+/// 不同等级的敌人，属性的复用，一级*1，两级*2之类
+/// </summary>
 public class BattleProps
 {
     /*

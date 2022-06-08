@@ -270,6 +270,9 @@ public class BattleMgr : MonoBehaviour
                 EntityMonster entity = InitEntityMonster(stateMgr, mCtrl,data);
                 monsterDic.Add(go.name, entity);
 
+                //
+                Transform hpRoot = go.transform.Find("hpRoot");
+                GameRoot.Instance.dynamicWnd.AddHpItemInfo(  go.transform, hpRoot, go.name, entity.HP  );
                 print( go.name+"   "+go.GetInstanceID() );
             }
         }

@@ -73,5 +73,11 @@ public class PathDefine
     public const string TaskItemPrefab = "PrefabUI/ItemTaskPrefab";
     public const string TaskPrizeImg = "ResImages/box2";
     public const string TaskPrizeGrayImg = "ResImages/box1";
+
+    #endregion
+
+
+    #region UI
+    public const string ItemEntityHp = "PrefabUI/ItemEntityHp";
     #endregion
 }
