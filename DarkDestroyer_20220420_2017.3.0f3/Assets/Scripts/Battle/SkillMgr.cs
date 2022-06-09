@@ -221,13 +221,15 @@ public class SkillMgr :MonoBehaviour
         if (dmgSum < 0)
         {
             dmgSum = 0;
+
             return;
         }
 
-        if (dmgSum >= to.Props.hp)
+        if (dmgSum >= to.HP)
         { 
             to.HP = 0;
             to.Die();
+            to.battleMgr.RemoveMonsterEntity(to.Name);
         }           
         else
         { 

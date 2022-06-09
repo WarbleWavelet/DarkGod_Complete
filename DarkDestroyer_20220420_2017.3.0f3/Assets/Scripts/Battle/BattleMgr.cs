@@ -341,7 +341,20 @@ public class BattleMgr : MonoBehaviour
         }, Constants.DelayActive);
     }
 
+    /// <summary>
+    /// 敌人死亡
+    /// </summary>
+    /// <param name="key"></param>
+    public void RemoveMonsterEntity(string key)
+    {
+        EntityMonster entity = null;
+        if (monsterDic.TryGetValue(key, out entity))
+        {
 
+            GameRoot.Instance.dynamicWnd.RemoveHpItemInfo( key);
+            monsterDic.Remove(key);
+        }
+    }
 
     #endregion
 }

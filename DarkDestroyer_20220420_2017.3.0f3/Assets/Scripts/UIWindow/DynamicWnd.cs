@@ -24,7 +24,7 @@ public class DynamicWnd : WindowRoot
     public  bool isTipsShow=false;
 
     [Header("血条相关")]
-    public Dictionary<string, ItemEntityHp> hpDic=new Dictionary<string, ItemEntityHp>();
+    public Dictionary<string, ItemEntityHp> hpItemDic=new Dictionary<string, ItemEntityHp>();
     /// <summary>挂靴调的父节点</summary> 
     public Transform hpItmRoot;
 
@@ -106,7 +106,7 @@ public class DynamicWnd : WindowRoot
     public void AddHpItemInfo(Transform t, Transform hpRoot, string mName, int hp)
     {
         ItemEntityHp item = null;
-        if (hpDic.TryGetValue(mName, out item))
+        if (hpItemDic.TryGetValue(mName, out item))
         {
             return;
         }
@@ -117,15 +117,26 @@ public class DynamicWnd : WindowRoot
             go.transform.localPosition = new Vector3(-1000, 0, 0);//看不到
             item = go.GetComponent<ItemEntityHp>();
             item.InitItemHpInfo(t, hpRoot, hp);
-            hpDic.Add(mName, item);
+            hpItemDic.Add(mName, item);
 
         }
+    }
+
+    public void RemoveHpItemInfo(string mName)
+    {
+        ItemEntityHp item = null;
+        if (hpItemDic.TryGetValue(mName, out item))
+        {
+            Destroy(item.gameObject);
+            hpItemDic.Remove(mName);
+        }
+    
     }
 
     public void SetHurt(string mName, int hp)
     {
         ItemEntityHp item = null;
-        if (hpDic.TryGetValue(mName, out item))
+        if (hpItemDic.TryGetValue(mName, out item))
         {
             item.SetHurt(hp);
         }
@@ -134,7 +145,7 @@ public class DynamicWnd : WindowRoot
     public void SetCritical(string mName, int hp)
     {
         ItemEntityHp item = null;
-        if (hpDic.TryGetValue(mName, out item))
+        if (hpItemDic.TryGetValue(mName, out item))
         {
             item.SetCritical(hp);
         }
@@ -143,7 +154,7 @@ public class DynamicWnd : WindowRoot
     public void SetDodge(string mName)
     {
         ItemEntityHp item = null;
-        if (hpDic.TryGetValue(mName, out item))
+        if (hpItemDic.TryGetValue(mName, out item))
         {
             item.SetDodge();
         }
@@ -154,7 +165,7 @@ public class DynamicWnd : WindowRoot
     internal void SetHpVal(string mName, int oldVal, int newVal)
     {
         ItemEntityHp item = null;
-        if (hpDic.TryGetValue(mName, out item))
+        if (hpItemDic.TryGetValue(mName, out item))
         {
             item.SetHPVal(oldVal, newVal);
         }
