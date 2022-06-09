@@ -724,6 +724,11 @@ public class ResSvc : MonoBehaviour
                                 c.dmgType = (DmgType)int.Parse(e.InnerText);
                             }
                             break;
+                        case "cdTime":
+                            {
+                                c.cdTime = float.Parse(e.InnerText);
+                            }
+                            break;
                         default:break;
                     }
 

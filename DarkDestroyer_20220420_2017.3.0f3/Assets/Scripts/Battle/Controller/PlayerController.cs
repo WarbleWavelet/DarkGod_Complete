@@ -23,8 +23,16 @@ public class PlayerController : Controller
     public Vector3 camOffset;
     public Transform camTrans;
 
-    [Header("技能和特效")]
-    public GameObject draggeratk1fx;
+    [Header("技能特效,平A特效")]
+    public GameObject dagger_skill1;
+    public GameObject dagger_skill2;
+    public GameObject dagger_skill3;
+    public GameObject dagger_atk1;
+    public GameObject dagger_atk2;
+    public GameObject dagger_atk3;
+    public GameObject dagger_atk4;
+    public GameObject dagger_atk5;
+
     public override void Init()
     {
         base.Init();
@@ -32,7 +40,15 @@ public class PlayerController : Controller
         camTrans = cam.transform;
         camOffset = transform.position - camTrans.position;
 
-        AddSkillFbx(draggeratk1fx);
+        AddSkillFbx(dagger_skill1);
+        AddSkillFbx(dagger_skill2);
+        AddSkillFbx(dagger_skill3);
+        AddSkillFbx(dagger_atk1);
+        AddSkillFbx(dagger_atk2);
+        AddSkillFbx(dagger_atk3);
+        AddSkillFbx(dagger_atk4);
+        AddSkillFbx(dagger_atk5);
+
 
         isSkillMove = false;
 

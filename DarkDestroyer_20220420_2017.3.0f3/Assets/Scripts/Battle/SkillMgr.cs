@@ -298,17 +298,20 @@ public class SkillMgr :MonoBehaviour
     /// <param name="skillID"></param>
     public void AttackEffect(EntityBase entity, int skillID)
     {
-        skillID += 100;
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
-        SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
-        //
-        entity.SetSkillFbx(cfg.fx, cfg.skillTime);
-        //
-        entity.canCtrl = false;
-        entity.SetDir(Vector2.zero);
-        //
-        CalcState(entity, cfg);
-        CalcSkillMove(entity, moveCfg);
+        if (cfg != null)
+        {
+            SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
+            //
+            entity.SetSkillFbx(cfg.fx, cfg.skillTime);
+            //
+            entity.canCtrl = false;
+            entity.SetDir(Vector2.zero);
+            //
+            CalcState(entity, cfg);
+            CalcSkillMove(entity, moveCfg);
+        }
+
     }
     #endregion
   

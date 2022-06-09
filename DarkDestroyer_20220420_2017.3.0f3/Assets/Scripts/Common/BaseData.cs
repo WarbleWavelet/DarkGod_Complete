@@ -204,6 +204,7 @@ public class SkillCfg: BaseData<SkillCfg>
     public List<int> skillDamageLst;
     //
     public DmgType dmgType;
+    public float cdTime;
 
 
 

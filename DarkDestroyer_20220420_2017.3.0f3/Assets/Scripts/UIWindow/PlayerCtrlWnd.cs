@@ -77,9 +77,9 @@ public class PlayerCtrlWnd : WindowRoot
         if (isFirst)
         { 
             InitAtkBtn(normalAtkTrans);
-            InitSkillBtn(skill1Trans);
-            InitSkillBtn(skill2Trans);
-            InitSkillBtn(skill3Trans);
+            InitSkillBtn(101,skill1Trans);
+            InitSkillBtn(102,skill2Trans);
+            InitSkillBtn(103,skill3Trans);
             btnTest.onClick.AddListener(ClickTestBtn);
             isFirst =false;
         }
@@ -95,23 +95,31 @@ public class PlayerCtrlWnd : WindowRoot
         Button btn = t.Find("icon").GetComponent<Button>();
         btn.onClick.AddListener(ClickNormalAtkBtn);
     }
-    private void InitSkillBtn(Transform t)
+    private void InitSkillBtn( int skillID ,Transform t)
     {
-        Button btn = t.Find("icon").GetComponent<Button>();
-        Image imgCD = t.Find("imgCD").GetComponent<Image>();
-        Text txtCD = imgCD.GetComponentInChildren<Text>();
-        txtCD.text = "";
+        SkillItem skill = t.gameObject.GetComponent<SkillItem>();
 
-        switch (t.gameObject.name  )
+        if (skill == null)
+        { 
+            skill = t.gameObject.AddComponent<SkillItem>();
+        }
+            
+        
+
+        SkillCfg cfg = resSvc.GetSkillCfg(skillID);
+        skill.Init(cfg.cdTime/1000);
+
+        Button btn = t.Find("icon").GetComponent<Button>();
+        switch (t.gameObject.name)
         {
-            case "btnSkill1" :
+            case "btnSkill1":
                 {
                     btn.onClick.AddListener(ClickSkill1Btn);
                 }
                 break;
             case "btnSkill2":
                 {
-                    btn.onClick.AddListener(ClickSkill2Btn) ;
+                    btn.onClick.AddListener(ClickSkill2Btn);
                 }
                 break;
             case "btnSkill3":
@@ -119,7 +127,7 @@ public class PlayerCtrlWnd : WindowRoot
                     btn.onClick.AddListener(ClickSkill3Btn);
                 }
                 break;
-            default:break;
+            default: break;
         }
 
 
@@ -186,6 +194,8 @@ public class PlayerCtrlWnd : WindowRoot
            
 
         });
+
+
     }
     #endregion
 
@@ -269,4 +279,13 @@ public class PlayerCtrlWnd : WindowRoot
         resSvc.ResetSkillCfgs();
     }
     #endregion
+}
+
+enum SkillType
+{
+    Attack,
+    Skill1,
+    Skill2,
+    Skill3
+
 }

@@ -171,18 +171,21 @@ public class BattleMgr : MonoBehaviour
     }
     void ReleaseSkill1()
     {
+        int skillID = 101;
         PECommon.Log("ReleaseSkill1");
-        playerEntity.Attack(1);
+        playerEntity.Attack(skillID);
     }
     void ReleaseSkill2()
     {
+        int skillID = 102;
         PECommon.Log("ReleaseSkill2");
-        playerEntity.Attack(2);
+        playerEntity.Attack(skillID);
     }
     void ReleaseSkill3()
     {
+        int skillID = 103;
         PECommon.Log("ReleaseSkill3");
-        playerEntity.Attack(3);
+        playerEntity.Attack(skillID);
     }
 
 
