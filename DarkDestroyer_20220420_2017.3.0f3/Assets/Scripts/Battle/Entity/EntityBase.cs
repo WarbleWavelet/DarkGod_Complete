@@ -18,11 +18,13 @@ public class EntityBase
     public BattleMgr battleMgr = null;
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
-    public Controller ctrl = null;
+    protected Controller ctrl = null;
     public bool canCtrl=true;                                                                                                                    
-
+    BattleProps props;    
+    int hp;
+    string name;
     #region 属性
-   BattleProps props;
+
     public BattleProps Props
     {
         get
@@ -36,7 +38,7 @@ public class EntityBase
         }
     }
     //
-    int hp;
+
     public int HP
     {
         get
@@ -52,7 +54,20 @@ public class EntityBase
         }
     }
 
-    
+    public string Name
+    {
+        get
+        {
+            return name;
+        }
+
+        set
+        {
+            name = value;
+        }
+    }
+
+
     #endregion
 
 
@@ -203,7 +218,7 @@ public class EntityBase
     /// </summary>
     public void SetHurt(int dmg )
     {
-        GameRoot.Instance.dynamicWnd.SetHurt( GetTrans().name, dmg );
+        GameRoot.Instance.dynamicWnd.SetHurt( Name, dmg );
     }
 
     /// <summary>
@@ -212,7 +227,7 @@ public class EntityBase
     /// <param name="dmg"></param>
     public void SetCritical(int dmg)
     { 
-        GameRoot.Instance.dynamicWnd.SetCritical( GetTrans().name, dmg);
+        GameRoot.Instance.dynamicWnd.SetCritical(Name, dmg);
     }
 
     /// <summary>
@@ -220,7 +235,7 @@ public class EntityBase
     /// </summary>
     public void SetDodge( )
     { 
-        GameRoot.Instance.dynamicWnd.SetDodge(GetTrans().name);
+        GameRoot.Instance.dynamicWnd.SetDodge( Name );
     }
 
 
@@ -237,4 +252,22 @@ public class EntityBase
         }
        
     }
+
+
+    public AnimationClip[] GetAniClips()
+    {
+        return ctrl.ani.runtimeAnimatorController.animationClips;
+    }
+
+
+    public void SetCtrl(Controller ctrl)
+    {
+        this.ctrl = ctrl;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return ctrl.gameObject;
+    }
+
 }

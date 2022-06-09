@@ -124,15 +124,17 @@ public class BattleMgr : MonoBehaviour
     /// stateMgr注入逻辑实体类
     /// </summary>
     /// <param name="stateMgr"></param>
-    private void InitEntityPlayer(StateMgr stateMgr, PlayerController playerCtrl)
+    private void InitEntityPlayer(StateMgr stateMgr, PlayerController ctrl)
     {
         playerEntity = new EntityPlayer
         {
             stateMgr = stateMgr,
-            ctrl = playerCtrl,
             skillMgr=this.skillMgr,
-            battleMgr=this
+            battleMgr=this,
+            Name=ctrl.gameObject.name
         };
+
+        playerEntity.SetCtrl(ctrl);
     }
 
     void InitPlayerBattleProps(EntityBase entity)
@@ -280,7 +282,7 @@ public class BattleMgr : MonoBehaviour
 
         foreach (var item in monsterDic)
         {
-            GameObject go = item.Value.ctrl.gameObject;
+            GameObject go = item.Value.GetGameObject();
             DontDestroyOnLoad( go );
             go.SetActive(false);
         }
@@ -288,17 +290,17 @@ public class BattleMgr : MonoBehaviour
 
 
 
-    private EntityMonster InitEntityMonster(StateMgr stateMgr, MonsterController monsterCtrl, MonsterData data)
+    private EntityMonster InitEntityMonster(StateMgr stateMgr, MonsterController ctrl, MonsterData data)
     {
          EntityMonster entityMonster = new EntityMonster
          {
             stateMgr = stateMgr,
-            ctrl = monsterCtrl,
             skillMgr = this.skillMgr,
             battleMgr = this,
-            monsterData=data
+            monsterData=data,
+            Name=ctrl.gameObject.name
         };
-       
+        entityMonster.SetCtrl(ctrl);
         entityMonster.SetBattleProps( data.mCfg.props);
         return entityMonster;
     }
@@ -329,7 +331,7 @@ public class BattleMgr : MonoBehaviour
             foreach (var item in monsterDic)
             {
                 EntityMonster entity = item.Value;
-                entity.ctrl.gameObject.SetActive(state);
+                entity.SetActive(state);
                 entity.Born();
                 timer.AddTimerTask((int tid_1 ) => { 
                     entity.Idle();

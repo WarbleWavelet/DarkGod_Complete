@@ -30,8 +30,8 @@ public class StateHit : IState
         entity.SetDir( Vector2.zero);
         entity.SetAction(Constants.ActionHit);
 
-
-        int time = (int)( GetHitAniTime( entity )*1000.0f);
+        string[] hitClipNameArr = { "hit", "Hit", "HIT" };
+        int time = (int)( GetHitAniTime( entity, hitClipNameArr) *1000.0f);
         TimerSvc.Instance.AddTimerTask(( int tid) => {
             entity.SetAction(Constants.ActionDefault);//动画器
             entity.Idle();//状态机
@@ -39,17 +39,26 @@ public class StateHit : IState
         //TODO 玩家 敌人 恢复状态的时间不同
     }
 
-    private float GetHitAniTime(EntityBase entity)
+
+    /// <summary>
+    /// Hit hit HIT 都可以
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="arr"></param>
+    /// <returns></returns>
+    private float GetHitAniTime(EntityBase entity, string[] arr)
     {
-        AnimationClip[] clipArr = entity.ctrl.ani.runtimeAnimatorController.animationClips;
+        AnimationClip[] clipArr = entity.GetAniClips();
 
         for (int i = 0; i < clipArr.Length; i++)
         {
             AnimationClip clip = clipArr[i];
-            bool state = clip.name.Contains("Hit");
-            state = state || clip.name.Contains("hit");
-            state = state || clip.name.Contains("HIT");
-
+            bool state = false;
+            for (int j = 0; j < arr.Length; j++)
+            {
+                state = state || clip.name.Contains(arr[j]);
+            }
+            //
             if (state)
             {
                 return clip.length;
