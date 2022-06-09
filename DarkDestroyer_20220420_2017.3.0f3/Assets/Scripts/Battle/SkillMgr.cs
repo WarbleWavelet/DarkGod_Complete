@@ -158,25 +158,33 @@ public class SkillMgr :MonoBehaviour
                     {
 
                         //print("闪避"+rate);
+                        to.SetDodge();
                         return;
                     }
                     dmgSum += from.Props.ad;
                     //
+                    bool isCritical = false;
                     rate = PETools.RDInt(1, 100);
                     if ( rate < to.Props.critical)
                     {
-                       // print("暴击" + rate);
+                        
+                        // print("暴击" + rate);
                         rate = PETools.RDInt(1, 100);
                         dmgSum = (int) (dmgSum * (1f + rate / 100f));
+                        //
+                        isCritical = true;
+                       
                     }
                     //
                     int def = (int) ( (1f - from.Props.pierce / 100.0f) * to.Props.addef );
-                    //print("护甲" + def);
                     dmgSum -=def;
-
+                    //print("护甲" + def);
 
                     //print("最终伤害"+dmgSum);
-
+                    if (isCritical)
+                        to.SetCritical(dmgSum);
+                    else
+                        to.SetHurt(dmgSum);
 
 
                 }
@@ -218,13 +226,12 @@ public class SkillMgr :MonoBehaviour
 
         if (dmgSum >= to.Props.hp)
         { 
-         to.HP = 0;
+            to.HP = 0;
             to.Die();
-        }
-           
+        }           
         else
         { 
-            to.Props.hp -= dmgSum;
+            to.HP -= dmgSum;
             to.Hit();
         }
             

@@ -100,7 +100,10 @@ public class DynamicWnd : WindowRoot
         }
     }
 
-  public  void AddHpItemInfo(Transform t, Transform hpRoot,string mName, int hp )
+
+
+    #region 血条
+    public void AddHpItemInfo(Transform t, Transform hpRoot, string mName, int hp)
     {
         ItemEntityHp item = null;
         if (hpDic.TryGetValue(mName, out item))
@@ -109,13 +112,53 @@ public class DynamicWnd : WindowRoot
         }
         else
         {
-            GameObject go = resSvc.LoadPrefab(PathDefine.ItemEntityHp,true);
+            GameObject go = resSvc.LoadPrefab(PathDefine.ItemEntityHp, true);
             go.transform.SetParent(hpItmRoot);
-            go.transform.localPosition = new Vector3(-1000,0,0);//看不到
+            go.transform.localPosition = new Vector3(-1000, 0, 0);//看不到
             item = go.GetComponent<ItemEntityHp>();
             item.InitItemHpInfo(t, hpRoot, hp);
             hpDic.Add(mName, item);
 
         }
     }
+
+    public void SetHurt(string mName, int hp)
+    {
+        ItemEntityHp item = null;
+        if (hpDic.TryGetValue(mName, out item))
+        {
+            item.SetHurt(hp);
+        }
+    }
+
+    public void SetCritical(string mName, int hp)
+    {
+        ItemEntityHp item = null;
+        if (hpDic.TryGetValue(mName, out item))
+        {
+            item.SetCritical(hp);
+        }
+    }
+
+    public void SetDodge(string mName)
+    {
+        ItemEntityHp item = null;
+        if (hpDic.TryGetValue(mName, out item))
+        {
+            item.SetDodge();
+        }
+    }
+
+
+
+    internal void SetHpVal(string mName, int oldVal, int newVal)
+    {
+        ItemEntityHp item = null;
+        if (hpDic.TryGetValue(mName, out item))
+        {
+            item.SetHPVal(oldVal, newVal);
+        }
+    }
+    #endregion
+
 }

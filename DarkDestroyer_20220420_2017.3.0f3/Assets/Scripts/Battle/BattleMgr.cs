@@ -270,10 +270,10 @@ public class BattleMgr : MonoBehaviour
                 EntityMonster entity = InitEntityMonster(stateMgr, mCtrl,data);
                 monsterDic.Add(go.name, entity);
 
-                //
+                //加血条
                 Transform hpRoot = go.transform.Find("hpRoot");
-                GameRoot.Instance.dynamicWnd.AddHpItemInfo(  go.transform, hpRoot, go.name, entity.HP  );
-                print( go.name+"   "+go.GetInstanceID() );
+                GameRoot.Instance.dynamicWnd.AddHpItemInfo(  go.transform, hpRoot, go.name, entity.Props.hp  );
+                //print( go.name+"   "+go.GetInstanceID() );
             }
         }
 
@@ -298,9 +298,8 @@ public class BattleMgr : MonoBehaviour
             battleMgr = this,
             monsterData=data
         };
-
+       
         entityMonster.SetBattleProps( data.mCfg.props);
-
         return entityMonster;
     }
 

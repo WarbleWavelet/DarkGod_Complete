@@ -116,6 +116,7 @@ public class Constants
 
     /// <summary>加速度，过渡动画</summary>
     public const float AccelerSpeed = 5f;
+
     public const int BlendIdle = 0;
     public const int BlendWalk = 1;
     #endregion
@@ -168,6 +169,6 @@ public class Constants
     public const int MaxChatCount= 12;
     #endregion
 
-
-
+    /// <summary>头上血条内层的变化速度</summary>
+    public const float ItemHpPrgSpeed = 0.05f;
 }

@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="7.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>REgAAQoBkAAEJCoAACUQFKAAIABYwAgEKAIAgAgAAoA=</HashCode>
+      <HashCode>REgAAQoBkEAEJCoAACUQFKAAIABYwAgEKAIAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,7 +59,7 @@
   <Class Name="DynamicWnd" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAQgAAAAEAAAAAAAgAEAgAAAAAAAAAAAAAACAEAAAAA=</HashCode>
+      <HashCode>BCQgAAAAGAAAAgAAgAEAgAAAAACACAQAAQACAEAAAAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\DynamicWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="PathDefine" Collapsed="true">
     <Position X="7.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIBIAiAAiAAAAAAAARAAAQiyqAACBCIAYCEQOKJCA=</HashCode>
+      <HashCode>AAgIBIAiAAiAAAAAAAARAAAQiyqAACBCIAYCEQOKJCA=</HashCode>
       <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -252,7 +252,7 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAJAAKBAAAAsBgIAIAwAQIDCAgAYgABAAIAgAAI=</HashCode>
+      <HashCode>ACAAAAJACKBAAAAsBgIAIAwAQIDCCgAYgABAAIAgAAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -331,6 +331,13 @@
       <FileName>Assets\Scripts\Battle\FSM\StateHit.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ItemEntityHp" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>HGQQCAAASCABAAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\ItemEntityHp.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="IState" Collapsed="true">
     <Position X="7.75" Y="11.5" Width="1.5" />

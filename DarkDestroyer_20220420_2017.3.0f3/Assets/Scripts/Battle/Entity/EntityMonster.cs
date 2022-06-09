@@ -26,10 +26,8 @@ public class EntityMonster : EntityBase
             dodge = lv * props.dodge,
             critical = lv * props.critical,
             pierce = lv * props.pierce
-
-
         };
-
+        HP = _props.hp;
         Props = _props;
     }
 }

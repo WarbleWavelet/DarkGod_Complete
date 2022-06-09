@@ -57,8 +57,8 @@ public abstract class Controller :MonoBehaviour
     public bool isSkillMove;
 
 
-    [Header("UI")]
-    public Transform HPRoot;
+    //[Header("UI")]
+    //public Transform hpRoot;
 
     #region 生命
 
@@ -89,7 +89,7 @@ public abstract class Controller :MonoBehaviour
     #endregion
 
 
-    #region 动画
+    #region 动画 动画器
 
     public void SetSkillMoveState(bool isSkillMove, float skillMoveSpeed = 0f)
     {
@@ -116,17 +116,14 @@ public abstract class Controller :MonoBehaviour
 
 
 
-    #region 方向
+    #region 方向 移动
     public virtual void SetDir()
     {
         float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) ;
         Vector3 eulerAngles = new Vector3(0f, angle, 0f);
         transform.localEulerAngles = eulerAngles;
     }
-    #endregion
 
-
-    #region 移动
     private void SetMove()
     {
         ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);

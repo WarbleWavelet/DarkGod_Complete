@@ -328,6 +328,13 @@ MonoBehaviour:
   aniDodge: {fileID: 0}
   txtHp: {fileID: 114930054232153198}
   aniHp: {fileID: 0}
+  rect: {fileID: 0}
+  rootTrans: {fileID: 0}
+  scaleRate: 1
+  curPrg: 0
+  tarPrg: 0
+  offsetPos: {x: 0, y: 20, z: 0}
+  hpRoot: {fileID: 0}
 --- !u!114 &114930054232153198
 MonoBehaviour:
   m_ObjectHideFlags: 1

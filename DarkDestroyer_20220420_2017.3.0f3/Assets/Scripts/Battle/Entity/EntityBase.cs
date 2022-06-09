@@ -19,11 +19,10 @@ public class EntityBase
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
     public Controller ctrl = null;
-    public bool canCtrl=true;
+    public bool canCtrl=true;                                                                                                                    
 
-    #region 战斗属性
+    #region 属性
    BattleProps props;
-
     public BattleProps Props
     {
         get
@@ -36,7 +35,8 @@ public class EntityBase
             props = value;
         }
     }
-
+    //
+    int hp;
     public int HP
     {
         get
@@ -46,17 +46,18 @@ public class EntityBase
 
         set
         {
-            PECommon.Log("HP change to " + value) ;
+            //PECommon.Log("HP change to " + value) ;
+            SetHpVal(hp, value);
             hp = value;
         }
     }
 
-    int hp;
+    
     #endregion
 
 
     #region ChangeStaus
- public void Move()
+    public void Move()
     {
         stateMgr.ChangeStaus(this, AniState.Move, null);
     }
@@ -185,7 +186,7 @@ public class EntityBase
     public virtual void SetBattleProps(BattleProps props)
     {
         this.Props = props;
-        HP = props.hp;
+        HP = props.hp ;
     }
 
 
@@ -195,5 +196,45 @@ public class EntityBase
         {
             ctrl.gameObject.SetActive(state);
         }
+    }
+
+    /// <summary>
+    /// 飘字
+    /// </summary>
+    public void SetHurt(int dmg )
+    {
+        GameRoot.Instance.dynamicWnd.SetHurt( GetTrans().name, dmg );
+    }
+
+    /// <summary>
+    /// 飘字
+    /// </summary>
+    /// <param name="dmg"></param>
+    public void SetCritical(int dmg)
+    { 
+        GameRoot.Instance.dynamicWnd.SetCritical( GetTrans().name, dmg);
+    }
+
+    /// <summary>
+    /// 飘字
+    /// </summary>
+    public void SetDodge( )
+    { 
+        GameRoot.Instance.dynamicWnd.SetDodge(GetTrans().name);
+    }
+
+
+    /// <summary>
+    /// 设置血条的prg
+    /// </summary>
+    /// <param name="oldVal"></param>
+    /// <param name="newVal"></param>
+    public void SetHpVal(int oldVal, int newVal)
+    {
+        if (GameRoot.Instance.dynamicWnd != null && GameRoot.Instance != null)
+        { 
+            GameRoot.Instance.dynamicWnd.SetHpVal( GetTrans().name,  oldVal,  newVal);
+        }
+       
     }
 }
