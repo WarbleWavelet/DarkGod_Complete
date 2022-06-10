@@ -35,6 +35,13 @@ public class BattleMgr : MonoBehaviour
     public MapCfg mapCfg;
 
     Dictionary<string, EntityMonster> monsterDic = new Dictionary<string, EntityMonster>();
+
+
+    [Header("Combo")]
+    public double lastAtkTime = 0d;
+    /// <summary>Combo的平A的SkillID</summary>
+    public int[] comboArr = new int[] { Constants.AttackID1, Constants.AttackID2, Constants.AttackID3, Constants.AttackID4, Constants.AttackID5 };
+    public int comboIndex = 0;
     #endregion
 
 
@@ -99,8 +106,11 @@ public class BattleMgr : MonoBehaviour
         DelayActiveMonster();
     }
 
+    #endregion
 
-    /// <summary>
+
+    #region Player
+   /// <summary>
     /// 加载游戏主角,一个地图就一个玩家
     /// </summary>
     /// <param name="cfg"></param>
@@ -129,9 +139,10 @@ public class BattleMgr : MonoBehaviour
         playerEntity = new EntityPlayer
         {
             stateMgr = stateMgr,
-            skillMgr=this.skillMgr,
-            battleMgr=this,
-            Name=ctrl.gameObject.name
+            skillMgr = this.skillMgr,
+            battleMgr = this,
+            Name = ctrl.gameObject.name,
+            combo = ctrl.gameObject.AddComponent<Combo>()
         };
 
         playerEntity.SetCtrl(ctrl);
@@ -158,68 +169,89 @@ public class BattleMgr : MonoBehaviour
 
     }
 
-
     #endregion
 
-    #region 移动 攻击
 
 
-    void ReleaseNormalAttack()
-    {
-        PECommon.Log("ReleaseNormalAttack");
-        playerEntity.Attack(0);
-    }
-    void ReleaseSkill1()
-    {
-        int skillID = 101;
-        PECommon.Log("ReleaseSkill1");
-        playerEntity.Attack(skillID);
-    }
-    void ReleaseSkill2()
-    {
-        int skillID = 102;
-        PECommon.Log("ReleaseSkill2");
-        playerEntity.Attack(skillID);
-    }
-    void ReleaseSkill3()
-    {
-        int skillID = 103;
-        PECommon.Log("ReleaseSkill3");
-        playerEntity.Attack(skillID);
-    }
 
 
-    public void ReqReleaseSkill(int idx)
+    #region Player 攻击
+  public void ReqReleaseSkill(int idx)
     {
-
         switch (idx)
         {
-            case 0:
-                {
-                    ReleaseNormalAttack();
-
-                }
-                break;
-            case 1:
-                {
-                    ReleaseSkill1();
-                }
-                break;
-            case 2:
-                {
-                    ReleaseSkill2();
-                }
-                break;
-            case 3:
-                {
-                    ReleaseSkill3();
-                }
-                break;
+            case 0: ReleaseNormalAttack(); break;
+            case 1: ReleaseSkill1(); break;
+            case 2: ReleaseSkill2(); break;
+            case 3: ReleaseSkill3(); break;
             default: break;
         }
 
     }
 
+    
+    
+    void ReleaseNormalAttack()
+    {
+        PECommon.Log("ReleaseNormalAttack");
+
+        switch ( playerEntity.curState )
+        {
+            case AniState.Attack:
+                {
+                    double curAtkTime = TimerSvc.Instance.GetNowTime();
+                    if ((curAtkTime - lastAtkTime) < Constants.ComboSpace
+                        && lastAtkTime != 0)
+                    {
+                        bool isComboFull = comboIndex >= comboArr.Length - 1;
+                        if (isComboFull)
+                        {
+                            comboIndex = 0;
+                            lastAtkTime = 0;
+                        }
+                        else
+                        {
+                            comboIndex++;
+                            lastAtkTime = curAtkTime;
+                            //
+                            int skillID = comboArr[comboIndex];
+                            playerEntity.combo.EnqueueComboQue(skillID);
+                        }
+                    }
+                }
+                break;
+            case AniState.Idle:
+            case AniState.Move:
+            case AniState.None:
+                {
+                    comboIndex = 0; 
+                    lastAtkTime = TimerSvc.Instance.GetNowTime();
+                    //
+                    playerEntity.Attack( Constants.AttackID1 );
+                }
+                break;
+            default:break;
+        }
+
+    }
+    void ReleaseSkill1()
+    {
+        PECommon.Log("ReleaseSkill1");
+        playerEntity.Attack(Constants.SkillID1);
+    }
+    void ReleaseSkill2()
+    {
+        PECommon.Log("ReleaseSkill2");
+        playerEntity.Attack(Constants.SkillID2);
+    }
+    void ReleaseSkill3()
+    {
+        PECommon.Log("ReleaseSkill3");
+        playerEntity.Attack(Constants.SkillID3);
+    }
+    #endregion
+
+    #region Player 移动
     public void SetMoveDir(Vector2 dir)
     {
         if (playerEntity.canCtrl == false) 

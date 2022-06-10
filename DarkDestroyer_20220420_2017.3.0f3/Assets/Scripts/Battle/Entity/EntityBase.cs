@@ -14,7 +14,7 @@ using UnityEngine;
 
 public class EntityBase
 {
-    public AniState curState = AniState.None;
+    public AniState curState = AniState.Idle;
     public BattleMgr battleMgr = null;
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
@@ -70,6 +70,9 @@ public class EntityBase
 
     #endregion
 
+
+    public Combo combo;
+    public SkillCfg curSkillCfg;
 
     #region ChangeStaus
     public void Move()
@@ -168,7 +171,7 @@ public class EntityBase
         if (skillMgr != null)
         {
             skillMgr.SkillAttack(this, skillID);
-
+            combo.ExitCurSkill(this, curSkillCfg);
         }    
     }
  

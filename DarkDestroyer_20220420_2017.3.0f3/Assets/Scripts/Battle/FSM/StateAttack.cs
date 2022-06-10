@@ -14,18 +14,35 @@ public class StateAttack : IState
     {
         PECommon.Log(this.GetType().ToString() + " Enter");
         entity.curState = AniState.Attack;
+        entity.curSkillCfg = ResSvc.Instance.GetSkillCfg( (int)args[0] );
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-       entity.canCtrl = true;
+
         PECommon.Log(this.GetType().ToString() + " Exit");
+
+        entity.canCtrl = true;
+        if (args == null)
+        {
+
+            Debug.Log("StateAttack.Exit有时报空");
+        }
+        else
+        {
+            int skillID = (int)args[0];
+            entity.combo.ExitCurSkill(entity, entity.curSkillCfg);
+        }
         entity.SetAction(Constants.ActionDefault);
+
+
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
-        entity.SkillAttack( (int)args[0]);
+        //
+        int skillID = (int)args[0];
+        entity.SkillAttack( skillID);
     }
 }

@@ -729,6 +729,11 @@ public class ResSvc : MonoBehaviour
                                 c.cdTime = float.Parse(e.InnerText);
                             }
                             break;
+                        case "isCombo":
+                            {
+                                c.isCombo = int.Parse(e.InnerText)==1?true:false;
+                            }
+                            break;
                         default:break;
                     }
 

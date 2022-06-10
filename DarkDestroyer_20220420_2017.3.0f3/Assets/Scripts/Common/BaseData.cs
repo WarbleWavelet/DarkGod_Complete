@@ -205,6 +205,7 @@ public class SkillCfg: BaseData<SkillCfg>
     //
     public DmgType dmgType;
     public float cdTime;
+    public bool isCombo;
 
 
 

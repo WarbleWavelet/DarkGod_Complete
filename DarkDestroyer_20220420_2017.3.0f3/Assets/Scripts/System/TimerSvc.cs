@@ -40,7 +40,7 @@ public class TimerSvc : SystemRoot
         {
             PECommon.Log(info);
         });
-        PECommon.Log("TimerSvc Inited");
+        PECommon.Log("TimerSvc Init");
     }
 
     void Update()
@@ -55,5 +55,10 @@ public class TimerSvc : SystemRoot
     public int AddTimerTask(Action<int> cb, double delay,PETimeUnit timeUnit=PETimeUnit.Millisecond)
     {
        return pt.AddTimeTask(cb,delay,timeUnit);
+    }
+
+    public double GetNowTime()
+    {
+        return pt.GetMillisecondsTime();
     }
 }

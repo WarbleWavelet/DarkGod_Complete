@@ -38,9 +38,9 @@ public class SkillItem : MonoBehaviour
 
     }
 
-  public  void Init(float milSec=5f)
+  public  void Init(float sec=5f)
     {
-        time = milSec;
+        time = sec;
         isCooled = true;
         BindUI();
     }

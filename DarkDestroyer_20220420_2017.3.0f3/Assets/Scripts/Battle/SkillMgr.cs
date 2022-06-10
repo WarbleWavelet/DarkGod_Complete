@@ -23,60 +23,6 @@ public class SkillMgr :MonoBehaviour
     }
 
 
-
-
-
-    /// <summary>
-    /// 状态变化
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cfg"></param>
-    void CalcState(EntityBase entity, SkillCfg cfg)
-    { 
-        entity.SetAction(cfg.aniAction);
-
-        timerSvc.AddTimerTask((tid) => {
-            entity.Idle();
-        }, cfg.skillTime);
-    }
-
-    /// <summary>
-    /// 技能产生的位移变化
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="moveCfg"></param>
-
-    void CalcSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
-    { 
-        float speed = 1000.0f*moveCfg.moveDis / (moveCfg.moveTime );
-
-
-        if (moveCfg.delayTime > 0)
-        {
-            timerSvc.AddTimerTask((tid) =>
-            {
-                entity.SetSkillMove(true, speed);
-            }, moveCfg.delayTime);
-            //
-            timerSvc.AddTimerTask((tid) => {
-                entity.SetSkillMove(false);
-            }, moveCfg.delayTime+moveCfg.moveTime);
-        }
-        else
-        {
-            entity.SetSkillMove(true, speed);
-            //
-            timerSvc.AddTimerTask((tid) => {
-                entity.SetSkillMove(false);
-            }, moveCfg.moveTime);
-        }
-
-
-
-
-    }
-
-
     #region 攻击
     public void SkillAttack(EntityBase entity, int skillID)
     {
@@ -84,33 +30,7 @@ public class SkillMgr :MonoBehaviour
         AttackDamage(entity, skillID);
     }
 
-    public void AttackDamage(EntityBase entity, int skillID)
-    {
-        skillID = 101;
-        SkillCfg skillCfg=resSvc.GetSkillCfg(skillID);
-        List<int> actionLst = skillCfg.skillActionLst;
-
-
-        int sum = 0;//计时从一开始，不清0
-        for (int i = 0; i < actionLst.Count; i++)
-
-        {
-            SkillActionCfg action = resSvc.GetSkillActionCfg(actionLst[i]);
-            sum += action.delayTime;
-            int actionIdx = i;
-            if (sum > 0)
-            {
-                timerSvc.AddTimerTask((int tid) =>
-                {
-                    SkillAction(entity, skillCfg, actionIdx);
-                }, sum);
-            }
-            else
-            {
-                SkillAction(entity, skillCfg, actionIdx);
-            }
-        }
-    }
+   
 
     /// <summary>
     /// 
@@ -138,7 +58,7 @@ public class SkillMgr :MonoBehaviour
             }
         }
     }
-
+   
 
     private void CalcDamage( EntityBase from, EntityBase  to, SkillCfg skillCfg, int damage)
     {
@@ -152,39 +72,7 @@ public class SkillMgr :MonoBehaviour
                 break;
             case DmgType.AD:
                 {
-                    float rate = 0f;
-                    rate = PETools.RDInt(1, 100);
-                    if ( rate < to.Props.dodge)
-                    {
-
-                        //print("闪避"+rate);
-                        to.SetDodge();
-                        return;
-                    }
-                    dmgSum += from.Props.ad;
-                    //
-                    bool isCritical = false;
-                    rate = PETools.RDInt(1, 100);
-                    if ( rate < to.Props.critical)
-                    {
-                        
-                        // print("暴击" + rate);
-                        rate = PETools.RDInt(1, 100);
-                        dmgSum = (int) (dmgSum * (1f + rate / 100f));
-                        //
-                        isCritical = true;
-                       
-                    }
-                    //
-                    int def = (int) ( (1f - from.Props.pierce / 100.0f) * to.Props.addef );
-                    dmgSum -=def;
-                    //print("护甲" + def);
-
-                    //print("最终伤害"+dmgSum);
-                    if (isCritical)
-                        to.SetCritical(dmgSum);
-                    else
-                        to.SetHurt(dmgSum);
+                    dmgSum = CalcDamage_AD( from,   to,  skillCfg,  damage);
 
 
                 }
@@ -196,8 +84,7 @@ public class SkillMgr :MonoBehaviour
                 break;
             case DmgType.AP:
                 {
-                    dmgSum += from.Props.ap;
-                    dmgSum -= to.Props.apdef;
+                    CalcDamage_AP(from, to, skillCfg, damage );
                 }
                 break;
             case DmgType.APC:
@@ -218,78 +105,17 @@ public class SkillMgr :MonoBehaviour
             default: break;
         }
 
-        if (dmgSum < 0)
-        {
-            dmgSum = 0;
+        CalcDamage_Res( to,  dmgSum);
 
-            return;
-        }
-
-        if (dmgSum >= to.HP)
-        { 
-            to.HP = 0;
-            to.Die();
-            to.battleMgr.RemoveMonsterEntity(to.Name);
-        }           
-        else
-        { 
-            to.HP -= dmgSum;
-            to.Hit();
-        }
-            
 
             
     }
 
-    private void CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
-    {
 
 
+    #endregion
 
-    }
-
-
-    /// <summary>
-    /// 在范围内
-    /// </summary>
-    /// <param name="from"></param>
-    /// <param name="to"></param>
-    /// <param name="range"></param>
-    /// <returns></returns>
-    bool InRange(Vector3 from, Vector3 to, float range)
-    {
-        return Vector3.Distance(from, to) <= range;
-    
-    }
-
-    /// <summary>
-    /// 在视野内
-    /// </summary>
-    /// <param name="from"></param>
-    /// <param name="to"></param>
-    /// <param name="angle"></param>
-    /// <returns></returns>
-    bool InAngle(Transform from, Transform to, float angle)
-    {
-        if (angle == 360)
-        { 
-            return true;
-        }
-
-        Vector3 forward = from.forward;
-        Vector3 dir = (to.position - from.position).normalized;
-        float ang = Vector3.Angle(forward, dir);
-
-        if (ang <= angle / 2)
-        {
-            return true;
-        }
-        else
-        { 
-            return false;
-        }
-    }
-
+    #region 辅助
 
     /// <summary>
     /// 放技能的效果
@@ -313,6 +139,197 @@ public class SkillMgr :MonoBehaviour
         }
 
     }
+
+
+
+    /// <summary>
+    /// 计算伤害
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="skillID"></param>
+    public void AttackDamage(EntityBase entity, int skillID)
+    {
+        SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
+        List<int> actionLst = skillCfg.skillActionLst;
+
+
+        int sum = 0;//计时从一开始，不清0
+        for (int i = 0; i < actionLst.Count; i++)
+        {
+            SkillActionCfg action = resSvc.GetSkillActionCfg(actionLst[i]);
+            sum += action.delayTime;
+            int actionIdx = i;
+            if (sum > 0)
+            {
+                timerSvc.AddTimerTask((int tid) =>
+                {
+                    SkillAction(entity, skillCfg, actionIdx);
+                }, sum);
+            }
+            else
+            {
+                SkillAction(entity, skillCfg, actionIdx);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 在距离内
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    bool InRange(Vector3 from, Vector3 to, float range)
+    {
+        return Vector3.Distance(from, to) <= range;
+
+    }
+
+    /// <summary>
+    /// 在视野内
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="angle"></param>
+    /// <returns></returns>
+    bool InAngle(Transform from, Transform to, float angle)
+    {
+        if (angle == 360)
+        {
+            return true;
+        }
+
+        Vector3 forward = from.forward;
+        Vector3 dir = (to.position - from.position).normalized;
+        float ang = Vector3.Angle(forward, dir);
+
+        if (ang <= angle / 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// 状态变化
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="cfg"></param>
+    void CalcState(EntityBase entity, SkillCfg cfg)
+    {
+        entity.SetAction(cfg.aniAction);
+
+        timerSvc.AddTimerTask((tid) => {
+            entity.Idle();
+        }, cfg.skillTime);
+    }
+
+    /// <summary>
+    /// 技能产生的位移变化
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="moveCfg"></param>
+
+    void CalcSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
+    {
+        float speed = 1000.0f * moveCfg.moveDis / (moveCfg.moveTime);
+
+
+        if (moveCfg.delayTime > 0)
+        {
+            timerSvc.AddTimerTask((tid) =>
+            {
+                entity.SetSkillMove(true, speed);
+            }, moveCfg.delayTime);
+            //
+            timerSvc.AddTimerTask((tid) => {
+                entity.SetSkillMove(false);
+            }, moveCfg.delayTime + moveCfg.moveTime);
+        }
+        else
+        {
+            entity.SetSkillMove(true, speed);
+            //
+            timerSvc.AddTimerTask((tid) => {
+                entity.SetSkillMove(false);
+            }, moveCfg.moveTime);
+        }
+    }
+
+
+    int CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
+    {
+        int dmgSum = damage;
+        float rate = 0f;
+        rate = PETools.RDInt(1, 100);
+        if (rate < to.Props.dodge)
+        {
+
+            //print("闪避"+rate);
+            to.SetDodge();
+            return 0;
+        }
+        dmgSum += from.Props.ad;
+        //
+        bool isCritical = false;
+        rate = PETools.RDInt(1, 100);
+        if (rate < to.Props.critical)
+        {
+
+            // print("暴击" + rate);
+            rate = PETools.RDInt(1, 100);
+            dmgSum = (int)(dmgSum * (1f + rate / 100f));
+            //
+            isCritical = true;
+
+        }
+        //
+        int def = (int)((1f - from.Props.pierce / 100.0f) * to.Props.addef);
+        dmgSum -= def;
+        //print("护甲" + def);
+
+        //print("最终伤害"+dmgSum);
+        if (isCritical)
+            to.SetCritical(dmgSum);
+        else
+            to.SetHurt(dmgSum);
+
+        return dmgSum;
+    }
+    int CalcDamage_AP(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
+    {
+        int dmgSum = damage;
+        dmgSum += from.Props.ap;
+        dmgSum -= to.Props.apdef;
+        return dmgSum;
+    }
+    private void CalcDamage_Res(EntityBase to, int dmgSum)
+    {
+        if (dmgSum < 0)
+        {
+            dmgSum = 0;
+
+            return;
+        }
+
+        if (dmgSum >= to.HP)
+        {
+            to.HP = 0;
+            to.Die();
+            to.battleMgr.RemoveMonsterEntity(to.Name);
+        }
+        else
+        {
+            to.HP -= dmgSum;
+            to.Hit();
+        }
+    }
     #endregion
-  
+
+
 }

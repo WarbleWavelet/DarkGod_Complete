@@ -24,15 +24,24 @@ public class StateIdle : IState
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
-      
 
-        if (IsPlayerAndHaveInput(entity))
+        bool isCombo = entity.combo.nextSkillID != Constants.NoComboNextSkillID;
+        if ( isCombo)
         {
-            entity.SetDir(entity.GetInputDir());
+            entity.Attack(entity.combo.nextSkillID);
         }
-        else {
-             entity.SetBlend(Constants.BlendIdle);
+        else
+        {
+            if (IsPlayerAndHaveInput(entity))
+            {
+                entity.SetDir(entity.GetInputDir());
+            }
+            else
+            {
+                entity.SetBlend(Constants.BlendIdle);
+            }
         }
+
     }
 
     bool IsPlayerAndHaveInput(EntityBase entity)

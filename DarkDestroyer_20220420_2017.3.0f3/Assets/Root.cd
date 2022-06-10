@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="7.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>REgAAQoBkEAEJCoAACUQFKAAIABYwAgEKAIAgAgAAoA=</HashCode>
+      <HashCode>REgAAQoBkEAEJCoAACUQFKAAIABYxgkMKAIAgAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,7 +59,7 @@
   <Class Name="DynamicWnd" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BCQgAAAAGAAAAgAAgAEAgAAAAACACAQAAQACAEAAAAA=</HashCode>
+      <HashCode>BCQgAAAAGAQAAgAAgAEAoAAAAACACAAAAQACAEAAAAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\DynamicWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
   <Class Name="PlayerController" Collapsed="true">
     <Position X="4" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQABIAAAAAAAgECAgAAAAQAAAAIAAAYBAACAAAAIAA=</HashCode>
+      <HashCode>AAQABACAAAAAAgECAhAAAAQAAAgIAAAYhAcCAAAAIAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Controller\PlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -182,7 +182,7 @@
   <Class Name="TimerSvc" Collapsed="true">
     <Position X="9.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQEAAAAACAAAAAAAAAAAAAAAIAAAEAAQAAAAAAAAAA=</HashCode>
+      <HashCode>gAQEAAAAACAAAAAAAAAAAAAAAIAAAEAAQAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\TimerSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -210,7 +210,7 @@
   <Class Name="BattleMgr" Collapsed="true">
     <Position X="4" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAwACoIpECAASBAAAAAIIgAAAABIAAAAAAAEAC1gGEA=</HashCode>
+      <HashCode>AA4ACoIpECAASBAAAAAIIgQCAABIAAAAAgAEAC1gGEA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -252,7 +252,7 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAAJACKBAAAAsBgIAIAwAQIDCCgAYgABAAIAgAAI=</HashCode>
+      <HashCode>CCAAAAJACKBIAAAsBgIAIAwAQIDGCgAYgAhAAIAgAAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -335,8 +335,15 @@
   <Class Name="ItemEntityHp" Collapsed="true">
     <Position X="2.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>HGQQCAAASCABAAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
+      <HashCode>HGQQCAEASCABAAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\ItemEntityHp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Combo" Collapsed="true">
+    <Position X="4" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAABAEAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Combo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="IState" Collapsed="true">

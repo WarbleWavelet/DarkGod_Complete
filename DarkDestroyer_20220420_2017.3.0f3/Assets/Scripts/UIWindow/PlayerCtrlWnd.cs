@@ -95,17 +95,12 @@ public class PlayerCtrlWnd : WindowRoot
         Button btn = t.Find("icon").GetComponent<Button>();
         btn.onClick.AddListener(ClickNormalAtkBtn);
     }
+
+
     private void InitSkillBtn( int skillID ,Transform t)
     {
-        SkillItem skill = t.gameObject.GetComponent<SkillItem>();
 
-        if (skill == null)
-        { 
-            skill = t.gameObject.AddComponent<SkillItem>();
-        }
-            
-        
-
+        SkillItem skill=GetOrAddSkillItem( t);
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
         skill.Init(cfg.cdTime/1000);
 
@@ -241,13 +236,7 @@ public class PlayerCtrlWnd : WindowRoot
     #endregion
 
 
-    #region 左上头像
-    public void ClickHeadBtn()
-    {
-        audioSvc.PlayUIAudio(Constants.UIOpenPage);
-        MainCitySys.Instance.OpenInfoWnd();
-    }
-    #endregion
+   
 
 
     #region 技能
@@ -277,6 +266,32 @@ public class PlayerCtrlWnd : WindowRoot
     private void ClickTestBtn()
     {
         resSvc.ResetSkillCfgs();
+    }
+    #endregion
+
+
+    /// <summary>
+    /// 计时组件
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
+    SkillItem GetOrAddSkillItem(Transform t)
+    {
+        SkillItem skill = t.gameObject.GetComponent<SkillItem>();
+
+        if (skill == null)
+        {
+            skill = t.gameObject.AddComponent<SkillItem>();
+        }
+
+        return skill;
+    }
+
+    #region 左上头像
+    public void ClickHeadBtn()
+    {
+        audioSvc.PlayUIAudio(Constants.UIOpenPage);
+        MainCitySys.Instance.OpenInfoWnd();
     }
     #endregion
 }

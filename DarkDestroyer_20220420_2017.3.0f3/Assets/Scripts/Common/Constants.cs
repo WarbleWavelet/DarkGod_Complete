@@ -129,12 +129,24 @@ public class Constants
     public const int ActionIdle = 1;
     public const int ActionDie = 100;
     public const int ActionHit = 101;
-    public const int ActionAtk = 10;
-    public const int ActionSkill1 = 11;
-    public const int ActionSkill2 = 12;
-    public const int ActionSkill3 = 13;
+    public const int ActionAtk1 = 11;
+    public const int ActionAtk2 = 12;
+    public const int ActionAtk3 = 13;
+    public const int ActionAtk4 = 14;
+    public const int ActionAtk5 = 15;
+    public const int ActionSkill1 = 1;
+    public const int ActionSkill2 = 2;
+    public const int ActionSkill3 = 3;
 
-
+    /// <summary>skill cfg里的ID</summary>
+    public const int AttackID1 = 111;
+    public const int AttackID2 = 112;
+    public const int AttackID3 = 113;
+    public const int AttackID4 = 114;
+    public const int AttackID5 = 115;
+    public const int SkillID1 = 101;
+    public const int SkillID2 = 102;
+    public const int SkillID3 = 103;
     #region 延时播放动画
     public const int DelayDefault = 500;//1s
     public const int DelayBorn = 500;
@@ -171,4 +183,8 @@ public class Constants
 
     /// <summary>头上血条内层的变化速度</summary>
     public const float ItemHpPrgSpeed = 0.05f;
+
+    /// <summary> 毫米秒内再按生效，连招</summary>
+    public const int ComboSpace = 500;
+    public const int NoComboNextSkillID = 0;
 }
