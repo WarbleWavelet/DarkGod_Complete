@@ -188,9 +188,14 @@ public class BattleMgr : MonoBehaviour
         }
 
     }
-
+    bool IsBelongCombo()
+    {
+        return lastAtkTime != 0;
+    }
     
-    
+    /// <summary>
+    /// 平A和连招
+    /// </summary>
     void ReleaseNormalAttack()
     {
         PECommon.Log("ReleaseNormalAttack");
@@ -200,22 +205,17 @@ public class BattleMgr : MonoBehaviour
             case AniState.Attack:
                 {
                     double curAtkTime = TimerSvc.Instance.GetNowTime();
-                    if ((curAtkTime - lastAtkTime) < Constants.ComboSpace
-                        && lastAtkTime != 0)
+                    if ( (curAtkTime - lastAtkTime) < Constants.ComboSpace && 
+                        IsBelongCombo() )
                     {
                         bool isComboFull = comboIndex >= comboArr.Length - 1;
                         if (isComboFull)
                         {
-                            comboIndex = 0;
-                            lastAtkTime = 0;
+                            ResetCombo();
                         }
                         else
                         {
-                            comboIndex++;
-                            lastAtkTime = curAtkTime;
-                            //
-                            int skillID = comboArr[comboIndex];
-                            playerEntity.combo.EnqueueComboQue(skillID);
+                            PlayCombo(curAtkTime);
                         }
                     }
                 }
@@ -227,27 +227,44 @@ public class BattleMgr : MonoBehaviour
                     comboIndex = 0; 
                     lastAtkTime = TimerSvc.Instance.GetNowTime();
                     //
-                    playerEntity.Attack( Constants.AttackID1 );
+                    playerEntity.StateAttack( Constants.AttackID1 );
                 }
                 break;
             default:break;
         }
 
     }
+
+    void ResetCombo()
+    {
+        comboIndex = 0;
+        lastAtkTime = 0;
+    }
+
+    void PlayCombo(double curAtkTime)
+    {
+        comboIndex++;
+        lastAtkTime = curAtkTime;
+        //
+        int skillID = comboArr[comboIndex];
+        playerEntity.combo.EnqueueComboQue(skillID);
+    }
+
+
     void ReleaseSkill1()
     {
         PECommon.Log("ReleaseSkill1");
-        playerEntity.Attack(Constants.SkillID1);
+        playerEntity.StateAttack(Constants.SkillID1);
     }
     void ReleaseSkill2()
     {
         PECommon.Log("ReleaseSkill2");
-        playerEntity.Attack(Constants.SkillID2);
+        playerEntity.StateAttack(Constants.SkillID2);
     }
     void ReleaseSkill3()
     {
         PECommon.Log("ReleaseSkill3");
-        playerEntity.Attack(Constants.SkillID3);
+        playerEntity.StateAttack(Constants.SkillID3);
     }
     #endregion
 
@@ -261,12 +278,12 @@ public class BattleMgr : MonoBehaviour
         //PECommon.Log(dir.ToString());
         if (dir == Vector2.zero)
         {
-            playerEntity.Idle();//动画的逻辑和表现
+            playerEntity.StateIdle();//动画的逻辑和表现
             playerEntity.SetDir(Vector2.zero);//转向和移动
         }
         else
         {
-            playerEntity.Move();
+            playerEntity.StateMove();
             playerEntity.SetDir(dir);
         }
     }
@@ -367,9 +384,9 @@ public class BattleMgr : MonoBehaviour
             {
                 EntityMonster entity = item.Value;
                 entity.SetActive(state);
-                entity.Born();
+                entity.StateBorn();
                 timer.AddTimerTask((int tid_1 ) => { 
-                    entity.Idle();
+                    entity.StateIdle();
                 },Constants.DelayIdle);
             }
         

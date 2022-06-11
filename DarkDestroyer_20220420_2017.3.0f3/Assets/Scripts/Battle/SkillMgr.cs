@@ -24,6 +24,11 @@ public class SkillMgr :MonoBehaviour
 
 
     #region 攻击
+    /// <summary>
+    /// 动画 伤害 特效
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="skillID"></param>
     public void SkillAttack(EntityBase entity, int skillID)
     {
         AttackEffect(entity, skillID);
@@ -73,8 +78,6 @@ public class SkillMgr :MonoBehaviour
             case DmgType.AD:
                 {
                     dmgSum = CalcDamage_AD( from,   to,  skillCfg,  damage);
-
-
                 }
                 break;
             case DmgType.ADC:
@@ -106,9 +109,6 @@ public class SkillMgr :MonoBehaviour
         }
 
         CalcDamage_Res( to,  dmgSum);
-
-
-            
     }
 
 
@@ -124,20 +124,51 @@ public class SkillMgr :MonoBehaviour
     /// <param name="skillID"></param>
     public void AttackEffect(EntityBase entity, int skillID)
     {
+         SetAtkDir( entity );
+        //
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
         if (cfg != null)
         {
-            SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
-            //
-            entity.SetSkillFbx(cfg.fx, cfg.skillTime);
-            //
+            //Stop DirMove
             entity.canCtrl = false;
             entity.SetDir(Vector2.zero);
-            //
-            CalcState(entity, cfg);
+            //SkillMove
+            SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
             CalcSkillMove(entity, moveCfg);
+            //Ani
+            entity.SetAniAction(cfg.aniAction);
+            //FX
+            entity.SetFX(cfg.fx, cfg.skillTime);
+           //State
+            CalcState(entity, cfg);
+            
         }
+      
+    }
 
+    /// <summary>
+    /// 连招时控制方向
+    /// </summary>
+    /// <param name="entity"></param>
+
+    private void SetAtkDir(EntityBase entity)
+    {
+
+        Vector2 dir = ((EntityPlayer)entity).GetInputDir();
+        if (dir == Vector2.zero)
+        {
+            FindMonster();
+        }
+        else
+        {
+            entity.SetAtkDir(dir);
+        }
+    }
+
+    private void FindMonster()
+    {
+
+        
     }
 
 
@@ -222,10 +253,10 @@ public class SkillMgr :MonoBehaviour
     /// <param name="cfg"></param>
     void CalcState(EntityBase entity, SkillCfg cfg)
     {
-        entity.SetAction(cfg.aniAction);
+        entity.SetAniAction(cfg.aniAction);
 
         timerSvc.AddTimerTask((tid) => {
-            entity.Idle();
+            entity.StateIdle();
         }, cfg.skillTime);
     }
 
@@ -262,6 +293,8 @@ public class SkillMgr :MonoBehaviour
     }
 
 
+
+    #region CalcDamage
     int CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
     {
         int dmgSum = damage;
@@ -271,7 +304,7 @@ public class SkillMgr :MonoBehaviour
         {
 
             //print("闪避"+rate);
-            to.SetDodge();
+            to.SetUIDodge();
             return 0;
         }
         dmgSum += from.Props.ad;
@@ -295,9 +328,9 @@ public class SkillMgr :MonoBehaviour
 
         //print("最终伤害"+dmgSum);
         if (isCritical)
-            to.SetCritical(dmgSum);
+            to.SetUICritical(dmgSum);
         else
-            to.SetHurt(dmgSum);
+            to.SetUIHurt(dmgSum);
 
         return dmgSum;
     }
@@ -313,22 +346,23 @@ public class SkillMgr :MonoBehaviour
         if (dmgSum < 0)
         {
             dmgSum = 0;
-
-            return;
         }
 
         if (dmgSum >= to.HP)
         {
             to.HP = 0;
-            to.Die();
+            to.StateDie();
             to.battleMgr.RemoveMonsterEntity(to.Name);
         }
         else
         {
             to.HP -= dmgSum;
-            to.Hit();
+            to.StateHit();
         }
     }
+    #endregion
+
+
     #endregion
 
 

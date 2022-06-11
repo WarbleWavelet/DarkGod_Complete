@@ -27,7 +27,9 @@ public abstract class Controller :MonoBehaviour
     public Animator ani;
    public bool isMove = false;
     Vector2 dir = Vector2.zero;
-    public Vector2 Dir
+
+    #region 属性
+ public Vector2 Dir
     {
         get
         {
@@ -47,6 +49,8 @@ public abstract class Controller :MonoBehaviour
             dir = value;
         }
     }
+    #endregion
+   
 
     [Header("技能和特效")]
     public Dictionary<string, GameObject> skillDic = new Dictionary<string, GameObject>();
@@ -57,6 +61,8 @@ public abstract class Controller :MonoBehaviour
     public bool isSkillMove;
 
 
+    [Header("Camera")]
+    public Transform camTrans;
     //[Header("UI")]
     //public Transform hpRoot;
 
@@ -117,6 +123,9 @@ public abstract class Controller :MonoBehaviour
 
 
     #region 方向 移动
+    /// <summary>
+    /// 只摇杆在移动方向
+    /// </summary>
     public virtual void SetDir()
     {
         float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) ;
@@ -124,21 +133,28 @@ public abstract class Controller :MonoBehaviour
         transform.localEulerAngles = eulerAngles;
     }
 
+    /// <summary>
+    /// 移动
+    /// </summary>
     private void SetMove()
     {
         ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);
     }
+    /// <summary>
+    /// 连招时摇杆转向
+    /// </summary>
+    /// <param name="dir"></param>
+    internal virtual void SetComboDir(Vector2 comboDir)
+    {
+        float angle = Vector2.SignedAngle( comboDir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
+        Vector3 eulerAngles = new Vector3(0f, angle, 0f);
+        transform.localEulerAngles = eulerAngles;
+    }
     #endregion
 
-
-
-
-
-
-
-
-
     #region 特效
+
+
     internal void SetSkillFbx(string skillName, float lifeTime)
     {
         GameObject go=null;
@@ -150,6 +166,8 @@ public abstract class Controller :MonoBehaviour
             }, lifeTime);
         }
     }
+
+
 
 
     /// <summary>

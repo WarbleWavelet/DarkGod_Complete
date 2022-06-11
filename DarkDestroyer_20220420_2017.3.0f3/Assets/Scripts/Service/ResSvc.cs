@@ -359,9 +359,6 @@ public class ResSvc : MonoBehaviour
             return null;
         }
     }
-
-
-
     #endregion
 
 
@@ -832,7 +829,6 @@ public class ResSvc : MonoBehaviour
     #endregion
 
 
-
     #region 技能Action
     Dictionary<int, SkillActionCfg> skillActionDic = new Dictionary<int, SkillActionCfg>();
 
@@ -896,6 +892,7 @@ public class ResSvc : MonoBehaviour
         }
     }
     #endregion
+
 
     #region monster
     Dictionary<int, MonsterCfg> monsterCfgDic = new Dictionary<int, MonsterCfg>();
@@ -1130,9 +1127,6 @@ public class ResSvc : MonoBehaviour
     }
     #endregion
 }
-
-
-
 
 #region 强化
 public enum PosType

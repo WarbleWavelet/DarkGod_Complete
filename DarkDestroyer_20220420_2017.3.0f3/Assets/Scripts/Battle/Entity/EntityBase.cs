@@ -14,12 +14,16 @@ using UnityEngine;
 
 public class EntityBase
 {
+
+    #region 字段 属性
     public AniState curState = AniState.Idle;
     public BattleMgr battleMgr = null;
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
     protected Controller ctrl = null;
-    public bool canCtrl=true;                                                                                                                    
+    /// <summary>攻击时不移动</summary>
+    public bool canCtrl = true;
+    /// <summary>基础属性</summary>
     BattleProps props;    
     int hp;
     string name;
@@ -49,7 +53,7 @@ public class EntityBase
         set
         {
             //PECommon.Log("HP change to " + value) ;
-            SetHpVal(hp, value);
+            SetUIHpVal(hp, value);
             hp = value;
         }
     }
@@ -73,58 +77,50 @@ public class EntityBase
 
     public Combo combo;
     public SkillCfg curSkillCfg;
+    #endregion
 
-    #region ChangeStaus
-    public void Move()
+    public virtual void SetBattleProps(BattleProps props)
+    {
+        this.Props = props;
+        HP = props.hp ;
+    }
+
+
+
+
+    #region State ChangeStaus
+    public void StateMove()
     {
         stateMgr.ChangeStaus(this, AniState.Move, null);
     }
 
-    public void Idle()
+    public void StateIdle()
     {
         stateMgr.ChangeStaus(this, AniState.Idle, null);
     }
-    public void Born()
+    public void StateBorn()
     {
         stateMgr.ChangeStaus(this, AniState.Born, null);
     }
-    public void Attack(int skillID)
+    public void StateAttack(int skillID)
     {
         stateMgr.ChangeStaus(this, AniState.Attack, skillID);
     }
 
-    public void Die( )
+    public void StateDie( )
     {
         stateMgr.ChangeStaus(this, AniState.Die, null);
     }
 
-    public void Hit()
+    public void StateHit()
     {
         stateMgr.ChangeStaus(this, AniState.Hit, null);
     }
     #endregion
 
 
-
-
-
-    public virtual void SetDir(Vector2 dir)
-    {
-        if (ctrl != null)
-        {
-            ctrl.Dir = dir;
-        }
-
-    }
-
-
-    public virtual Vector2 GetInputDir()
-    {
-        return Vector2.zero;
-    }
-
     #region 动画器
-    public virtual void SetBlend(float value)
+    public virtual void SetAniBlend(float value)
     {
         if (ctrl != null)
         {
@@ -132,7 +128,7 @@ public class EntityBase
         }
 
     }
-    public virtual void SetAction(int value)
+    public virtual void SetAniAction(int value)
     {
         if (ctrl != null)
         {
@@ -141,12 +137,40 @@ public class EntityBase
         }
 
     }
+
+    public AnimationClip[] GetAniClips()
+    {
+        return ctrl.ani.runtimeAnimatorController.animationClips;
+    }
     #endregion
 
 
+    #region Skill Atk  移动
+    public virtual void SetDir(Vector2 dir)
+    {
+        if (ctrl != null)
+        {
+            ctrl.Dir = dir;
+        }
+    }
 
-    #region Skill Atk
-  public virtual void SetSkillFbx(string skillName, float lifeTime)
+    /// <summary>
+    /// 连招改方向
+    /// </summary>
+    /// <param name="dir"></param>
+    public virtual void SetAtkDir(Vector2 dir)
+    {
+        if (ctrl != null)
+        {
+            ctrl.SetComboDir(dir);
+        }
+    }
+
+    public virtual Vector2 GetInputDir()
+    {
+        return Vector2.zero;
+    }
+    public virtual void SetFX(string skillName, float lifeTime)
     {
         if (ctrl != null)
         {
@@ -174,11 +198,22 @@ public class EntityBase
             combo.ExitCurSkill(this, curSkillCfg);
         }    
     }
- 
+
 
 
     #endregion
 
+
+    #region Untiy
+    public void SetCtrl(Controller ctrl)
+    {
+        this.ctrl = ctrl;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return ctrl.gameObject;
+    }
 
     public Vector3 GetPos()
     {
@@ -201,11 +236,7 @@ public class EntityBase
         throw new System.Exception("异常");
     }
 
-    public virtual void SetBattleProps(BattleProps props)
-    {
-        this.Props = props;
-        HP = props.hp ;
-    }
+
 
 
     public void SetActive(bool state = true)
@@ -215,11 +246,14 @@ public class EntityBase
             ctrl.gameObject.SetActive(state);
         }
     }
+    #endregion
+  
 
-    /// <summary>
+    #region UI
+ /// <summary>
     /// 飘字
     /// </summary>
-    public void SetHurt(int dmg )
+    public void SetUIHurt(int dmg )
     {
         GameRoot.Instance.dynamicWnd.SetHurt( Name, dmg );
     }
@@ -228,7 +262,7 @@ public class EntityBase
     /// 飘字
     /// </summary>
     /// <param name="dmg"></param>
-    public void SetCritical(int dmg)
+    public void SetUICritical(int dmg)
     { 
         GameRoot.Instance.dynamicWnd.SetCritical(Name, dmg);
     }
@@ -236,7 +270,7 @@ public class EntityBase
     /// <summary>
     /// 飘字
     /// </summary>
-    public void SetDodge( )
+    public void SetUIDodge( )
     { 
         GameRoot.Instance.dynamicWnd.SetDodge( Name );
     }
@@ -247,7 +281,7 @@ public class EntityBase
     /// </summary>
     /// <param name="oldVal"></param>
     /// <param name="newVal"></param>
-    public void SetHpVal(int oldVal, int newVal)
+    public void SetUIHpVal(int oldVal, int newVal)
     {
         if (GameRoot.Instance.dynamicWnd != null && GameRoot.Instance != null)
         { 
@@ -255,22 +289,6 @@ public class EntityBase
         }
        
     }
-
-
-    public AnimationClip[] GetAniClips()
-    {
-        return ctrl.ani.runtimeAnimatorController.animationClips;
-    }
-
-
-    public void SetCtrl(Controller ctrl)
-    {
-        this.ctrl = ctrl;
-    }
-
-    public GameObject GetGameObject()
-    {
-        return ctrl.gameObject;
-    }
+    #endregion
 
 }

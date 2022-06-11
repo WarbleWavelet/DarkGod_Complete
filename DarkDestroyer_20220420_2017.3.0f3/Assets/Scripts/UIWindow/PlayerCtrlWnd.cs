@@ -63,7 +63,6 @@ public class PlayerCtrlWnd : WindowRoot
     [Header("调试技能数据")]
     public Button btnTest;
     #endregion
- 
 
     protected override void InitWnd()
     {
@@ -90,52 +89,24 @@ public class PlayerCtrlWnd : WindowRoot
 
 
 
-    private void InitAtkBtn(Transform t)
-    {
-        Button btn = t.Find("icon").GetComponent<Button>();
-        btn.onClick.AddListener(ClickNormalAtkBtn);
-    }
+   
 
 
-    private void InitSkillBtn( int skillID ,Transform t)
-    {
-
-        SkillItem skill=GetOrAddSkillItem( t);
-        SkillCfg cfg = resSvc.GetSkillCfg(skillID);
-        skill.Init(cfg.cdTime/1000);
-
-        Button btn = t.Find("icon").GetComponent<Button>();
-        switch (t.gameObject.name)
-        {
-            case "btnSkill1":
-                {
-                    btn.onClick.AddListener(ClickSkill1Btn);
-                }
-                break;
-            case "btnSkill2":
-                {
-                    btn.onClick.AddListener(ClickSkill2Btn);
-                }
-                break;
-            case "btnSkill3":
-                {
-                    btn.onClick.AddListener(ClickSkill3Btn);
-                }
-                break;
-            default: break;
-        }
-
-
-    }
+    
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ClickSkill1Btn();
-        }
+        TestCode();
 
 
+        
+    }
+
+    private void TestCode()
+    {
+        if (Input.GetKeyDown(KeyCode.Q)) ClickNormalAtkBtn();
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ClickSkill1Btn();
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ClickSkill2Btn();
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ClickSkill3Btn();
     }
 
 
@@ -236,10 +207,45 @@ public class PlayerCtrlWnd : WindowRoot
     #endregion
 
 
-   
+
 
 
     #region 技能
+    private void InitAtkBtn(Transform t)
+    {
+        Button btn = t.Find("icon").GetComponent<Button>();
+        btn.onClick.AddListener(ClickNormalAtkBtn);
+    }
+
+
+    private void InitSkillBtn(int skillID, Transform t)
+    {
+
+        SkillItem skill = GetOrAddSkillItem(t);
+        SkillCfg cfg = resSvc.GetSkillCfg(skillID);
+        skill.Init(cfg.cdTime / 1000);
+
+        Button btn = t.Find("icon").GetComponent<Button>();
+        switch (t.gameObject.name)
+        {
+            case "btnSkill1":
+                {
+                    btn.onClick.AddListener(ClickSkill1Btn);
+                }
+                break;
+            case "btnSkill2":
+                {
+                    btn.onClick.AddListener(ClickSkill2Btn);
+                }
+                break;
+            case "btnSkill3":
+                {
+                    btn.onClick.AddListener(ClickSkill3Btn);
+                }
+                break;
+            default: break;
+        }
+    }
     public void ClickNormalAtkBtn()
     {
         BattleSys.Instance.ReqReleaseSkill(0);
@@ -257,19 +263,6 @@ public class PlayerCtrlWnd : WindowRoot
         BattleSys.Instance.ReqReleaseSkill(3);
     }
 
-    
-    #endregion
-
-
-
-    #region 测试
-    private void ClickTestBtn()
-    {
-        resSvc.ResetSkillCfgs();
-    }
-    #endregion
-
-
     /// <summary>
     /// 计时组件
     /// </summary>
@@ -286,6 +279,19 @@ public class PlayerCtrlWnd : WindowRoot
 
         return skill;
     }
+    #endregion
+
+
+
+    #region 测试
+    private void ClickTestBtn()
+    {
+        resSvc.ResetSkillCfgs();
+    }
+    #endregion
+
+
+
 
     #region 左上头像
     public void ClickHeadBtn()

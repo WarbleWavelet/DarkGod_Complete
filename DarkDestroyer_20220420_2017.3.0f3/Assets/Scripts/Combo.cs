@@ -28,7 +28,7 @@ public class Combo : MonoBehaviour
     }
 
     /// <summary>
-    /// StateAttack.Exit()
+    /// StateAttack.Exit(),放出连招或0
     /// </summary>
     /// <returns></returns>
     public void ExitCurSkill(EntityBase entity, SkillCfg cfg)

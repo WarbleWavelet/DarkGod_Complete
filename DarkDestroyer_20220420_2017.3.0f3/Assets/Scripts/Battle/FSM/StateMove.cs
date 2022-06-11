@@ -24,6 +24,6 @@ public class StateMove : IState
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
-        entity.SetBlend(Constants.BlendWalk);
+        entity.SetAniBlend(Constants.BlendWalk);
     }
 }

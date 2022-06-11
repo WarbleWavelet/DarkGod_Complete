@@ -28,13 +28,13 @@ public class StateHit : IState
         PECommon.Log(this.GetType().ToString() +"_"+MethodBase.GetCurrentMethod().Name);
         //
         entity.SetDir( Vector2.zero);
-        entity.SetAction(Constants.ActionHit);
+        entity.SetAniAction(Constants.ActionHit);
 
         string[] hitClipNameArr = { "hit", "Hit", "HIT" };
         int time = (int)( GetHitAniTime( entity, hitClipNameArr) *1000.0f);
         TimerSvc.Instance.AddTimerTask(( int tid) => {
-            entity.SetAction(Constants.ActionDefault);//动画器
-            entity.Idle();//状态机
+            entity.SetAniAction(Constants.ActionDefault);//动画器
+            entity.StateIdle();//状态机
         },time);
         //TODO 玩家 敌人 恢复状态的时间不同
     }

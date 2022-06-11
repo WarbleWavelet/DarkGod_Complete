@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="7.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>REgAAQoBkEAEJCoAACUQFKAAIABYxgkMKAIAgAgAAoA=</HashCode>
+      <HashCode>REgIBQoBkEAEJCoAICUQFKAAIABYxgkMKAIAoAgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -182,7 +182,7 @@
   <Class Name="TimerSvc" Collapsed="true">
     <Position X="9.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAQEAAAAACAAAAAAAAAAAAAAAIAAAEAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAQEAAAAACAAAAAAAAAAAAAAAIgAAEAAQAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\TimerSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -217,7 +217,7 @@
   <Class Name="SkillMgr" Collapsed="true">
     <Position X="2.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAQAAABAAAAAAAAAAAIAwAAAACsQABAAA=</HashCode>
+      <HashCode>AgCAAAAAAAAAQAAABAAAAAAAAAAAIAwAAAACsQABCAA=</HashCode>
       <FileName>Assets\Scripts\Battle\SkillMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -238,7 +238,7 @@
   <Class Name="PlayerCtrlWnd" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AaQEAAAAgAAgAAAAAAEgBBAhAAEgAISIQCkAAAAAEQI=</HashCode>
+      <HashCode>AaQEAAAAgAAgAAAAAAEgBBAhAAEgAISIQCkAAAAAFQI=</HashCode>
       <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -252,7 +252,7 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CCAAAAJACKBIAAAsBgIAIAwAQIDGCgAYgAhAAIAgAAI=</HashCode>
+      <HashCode>CQAAAAIAACBMACAARgAAIAwAQCDOFiIYgApAAIAiAAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>

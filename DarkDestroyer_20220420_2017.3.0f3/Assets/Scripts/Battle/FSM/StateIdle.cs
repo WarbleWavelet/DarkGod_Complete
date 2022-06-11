@@ -13,6 +13,7 @@ public class StateIdle : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         entity.curState = AniState.Idle;
+        entity.SetDir( Vector2.zero );
         PECommon.Log(this.GetType().ToString()+" Enter");
     }
 
@@ -28,17 +29,18 @@ public class StateIdle : IState
         bool isCombo = entity.combo.nextSkillID != Constants.NoComboNextSkillID;
         if ( isCombo)
         {
-            entity.Attack(entity.combo.nextSkillID);
+            entity.StateAttack(entity.combo.nextSkillID);
         }
         else
         {
             if (IsPlayerAndHaveInput(entity))
             {
+                entity.StateMove();
                 entity.SetDir(entity.GetInputDir());
             }
             else
             {
-                entity.SetBlend(Constants.BlendIdle);
+                entity.SetAniBlend(Constants.BlendIdle);
             }
         }
 

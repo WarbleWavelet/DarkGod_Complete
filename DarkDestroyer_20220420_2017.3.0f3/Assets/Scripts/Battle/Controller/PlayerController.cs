@@ -21,7 +21,7 @@ public class PlayerController : Controller
     [Header("相机")]
     public Camera cam;
     public Vector3 camOffset;
-    public Transform camTrans;
+
 
     [Header("技能特效,平A特效")]
     public GameObject dagger_skill1;
@@ -39,7 +39,7 @@ public class PlayerController : Controller
         cam = Camera.main;
         camTrans = cam.transform;
         camOffset = transform.position - camTrans.position;
-
+        //
         AddSkillFbx(dagger_skill1);
         AddSkillFbx(dagger_skill2);
         AddSkillFbx(dagger_skill3);
@@ -48,8 +48,7 @@ public class PlayerController : Controller
         AddSkillFbx(dagger_atk3);
         AddSkillFbx(dagger_atk4);
         AddSkillFbx(dagger_atk5);
-
-
+        //
         isSkillMove = false;
 
     }

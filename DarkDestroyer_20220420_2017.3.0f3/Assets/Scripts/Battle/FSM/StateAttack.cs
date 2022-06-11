@@ -13,27 +13,20 @@ public class StateAttack : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Enter");
+        //
         entity.curState = AniState.Attack;
-        entity.curSkillCfg = ResSvc.Instance.GetSkillCfg( (int)args[0] );
+        int skillID = (int)args[0];
+        entity.curSkillCfg = ResSvc.Instance.GetSkillCfg(skillID );
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
 
         PECommon.Log(this.GetType().ToString() + " Exit");
-
+        //
         entity.canCtrl = true;
-        if (args == null)
-        {
-
-            Debug.Log("StateAttack.Exit有时报空");
-        }
-        else
-        {
-            int skillID = (int)args[0];
-            entity.combo.ExitCurSkill(entity, entity.curSkillCfg);
-        }
-        entity.SetAction(Constants.ActionDefault);
+        AddCombo(  entity, args);
+        entity.SetAniAction(Constants.ActionDefault);
 
 
     }
@@ -43,6 +36,20 @@ public class StateAttack : IState
         PECommon.Log(this.GetType().ToString() + " Process");
         //
         int skillID = (int)args[0];
-        entity.SkillAttack( skillID);
+        entity.SkillAttack(skillID);
+    }
+
+    void AddCombo(EntityBase entity, params object[] args )
+    { 
+            if (args == null)
+        {
+
+            Debug.Log("StateAttack.Exit有时报空");
+        }
+        else
+        {
+           
+            entity.combo.ExitCurSkill(entity, entity.curSkillCfg);
+        }
     }
 }

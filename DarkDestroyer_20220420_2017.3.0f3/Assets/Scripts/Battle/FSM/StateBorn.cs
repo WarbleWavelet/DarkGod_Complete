@@ -25,11 +25,11 @@ public class StateBorn : IState
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
-        entity.SetAction(Constants.ActionBorn);
+        entity.SetAniAction(Constants.ActionBorn);
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {
-            entity.SetAction(Constants.ActionDefault);
-            entity.Idle();
+            entity.SetAniAction(Constants.ActionDefault);
+            entity.StateIdle();
         }, Constants.DelayDefault);
     }
 }
