@@ -33,6 +33,8 @@ public class PlayerController : Controller
     public GameObject dagger_atk4;
     public GameObject dagger_atk5;
 
+
+
     public override void Init()
     {
         base.Init();
@@ -60,6 +62,7 @@ public class PlayerController : Controller
 
     void Update()
     {
+        
         //InputByWSAD();
         if (currentBlend != targetBlend)
         {
@@ -86,7 +89,7 @@ public class PlayerController : Controller
 
 
     #region 动画
-    public override void SetBlend(float blend)
+    public override void SetAniBlend(float blend)
     {
 
         targetBlend = blend;
@@ -121,20 +124,17 @@ public class PlayerController : Controller
 
 
 
-    #region 方向
+    #region 方向 移动
     public override void SetDir()
     {
         float angle = Vector2.SignedAngle(Dir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
         Vector3 eulerAngles = new Vector3(0f, angle, 0f);
         transform.localEulerAngles = eulerAngles;
     }
-    #endregion
 
-
-    #region 移动
-    private void SetMove(float speed= Constants.PlayerMoveSpeed)
+    public override void SetMove( )
     {
-        ctrl.Move(transform.forward * Time.deltaTime * speed);
+        ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);
     }
 
     private void SetSkillMove(bool isMove=true)
@@ -177,12 +177,12 @@ public class PlayerController : Controller
         if (_dir != Vector2.zero)
         {
             Dir = _dir;
-            SetBlend((float)Constants.BlendWalk);
+            SetAniBlend((float)Constants.BlendWalk);
         }
         else
         {
             Dir = Vector2.zero;
-            SetBlend((float)Constants.BlendIdle);
+            SetAniBlend((float)Constants.BlendIdle);
         }
     }
     #endregion

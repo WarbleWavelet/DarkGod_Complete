@@ -17,6 +17,7 @@ public class EntityBase
 
     #region 字段 属性
     public AniState curState = AniState.Idle;
+    public bool isDead = false;
     public BattleMgr battleMgr = null;
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
@@ -77,6 +78,7 @@ public class EntityBase
 
     public Combo combo;
     public SkillCfg curSkillCfg;
+    public EntityType entityType=EntityType.None;
     #endregion
 
     public virtual void SetBattleProps(BattleProps props)
@@ -85,10 +87,22 @@ public class EntityBase
         HP = props.hp ;
     }
 
+    public void Idle()
+    {
+        StateIdle();//动画的逻辑和表现
+        SetDir(Vector2.zero);//转向和移动
+
+    }
 
 
+    public void Move( Vector2 dir)
+    {
+        StateMove();
+        SetDir(dir);
+    }
 
-    #region State ChangeStaus
+
+    #region State ChangeStaus 状态机
     public void StateMove()
     {
         stateMgr.ChangeStaus(this, AniState.Move, null);
@@ -124,7 +138,7 @@ public class EntityBase
     {
         if (ctrl != null)
         {
-            ctrl.SetBlend(value);
+            ctrl.SetAniBlend(value);
         }
 
     }
@@ -132,7 +146,7 @@ public class EntityBase
     {
         if (ctrl != null)
         {
-            ctrl.SetAction(value);
+            ctrl.SetAniAction(value);
           
         }
 
@@ -145,7 +159,11 @@ public class EntityBase
     #endregion
 
 
-    #region Skill Atk  移动
+    #region Skill Atk  移动 方向
+    /// <summary>
+    /// 设置isMove，间接控制表现层ctrl
+    /// </summary>
+    /// <param name="dir"></param>
     public virtual void SetDir(Vector2 dir)
     {
         if (ctrl != null)
@@ -155,21 +173,34 @@ public class EntityBase
     }
 
     /// <summary>
-    /// 连招改方向
+    /// true连招改方向 false最近敌人
     /// </summary>
     /// <param name="dir"></param>
-    public virtual void SetAtkDir(Vector2 dir)
+    public virtual void SetAtkDir(Vector2 dir, bool offset=false)
     {
         if (ctrl != null)
         {
-            ctrl.SetComboDir(dir);
+            if (offset)
+            {
+                ctrl.SetComboDir(dir);
+            }
+            else
+            {
+                ctrl.SetClosedTargetDir(dir);
+            }
+            
         }
     }
 
+    /// <summary>
+    /// 会被重写
+    /// </summary>
+    /// <returns></returns>
     public virtual Vector2 GetInputDir()
     {
         return Vector2.zero;
     }
+
     public virtual void SetFX(string skillName, float lifeTime)
     {
         if (ctrl != null)
@@ -184,7 +215,7 @@ public class EntityBase
     {
         if (ctrl != null)
         {
-            ctrl.SetSkillMoveState(move, speed);
+            ctrl.SetSkillMove(move, speed);
         }
      }
 
@@ -195,7 +226,11 @@ public class EntityBase
         if (skillMgr != null)
         {
             skillMgr.SkillAttack(this, skillID);
-            combo.ExitCurSkill(this, curSkillCfg);
+            if ( combo != null )
+            { 
+                combo.ExitCurSkill(this, curSkillCfg);
+            }
+            
         }    
     }
 
@@ -291,4 +326,19 @@ public class EntityBase
     }
     #endregion
 
+
+    public virtual Vector2 CalcTargetDir()
+    { 
+        return Vector2.zero;
+    }
+
+
+}
+
+
+public enum EntityType
+{ 
+    None,
+Player,
+Monster
 }

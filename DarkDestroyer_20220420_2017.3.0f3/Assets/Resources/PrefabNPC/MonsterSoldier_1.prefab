@@ -934,6 +934,7 @@ MonoBehaviour:
   isMove: 0
   skillMoveSpeed: 0
   isSkillMove: 0
+  state: 0
 --- !u!137 &137648384874465220
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

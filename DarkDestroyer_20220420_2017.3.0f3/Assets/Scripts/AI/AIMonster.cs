@@ -1,0 +1,149 @@
+/****************************************************
+    文件：AiMonster.cs
+	作者：lenovo
+    邮箱: 
+    日期：2022/6/12 13:19:38
+	功能：MonsterAI
+*****************************************************/
+
+using System;
+using UnityEngine;
+
+public class AIMonster : AILogic
+{
+    [Header("AiMonster")]
+    public float findTimer = 0f;
+    /// <summary>检测玩家位置的间隔</summary>
+    public float findTime = 2f;
+    public float atkTimer = 0f;
+    public float atkTime = 1f;
+    public EntityMonster from;
+    public EntityPlayer to;
+    public bool runAI = false;
+
+    public void Init(EntityMonster from, EntityPlayer to)
+    {
+        runAI = true;
+        findTimer = 0f;
+        findTime = 2f;//Animator Born的时长是2.13
+        atkTimer = 0f;
+        atkTime = 2f;
+        //
+        this.from = from;
+        this.to = to;
+
+    }
+
+
+    /// <summary>
+    /// 放在Update的AI逻辑
+    /// </summary>
+    public override void TickAILogic()
+    {
+        
+        if (!runAI)
+        {
+            return;
+        }
+
+        //if (from.curState != AniState.Idle && from.curState != AniState.Move )
+        //{
+        //    return;
+        //}
+        if (from.curState == AniState.Idle || from.curState == AniState.Move)
+        {
+            findTimer += Time.deltaTime;
+            if (findTimer < findTime)
+            {
+                return;
+            }
+            else
+            {
+               
+                Vector2 toDir = CalcTargetDir();
+                if (toDir == Vector2.zero)
+                {
+                    runAI = false;
+                    return;
+                }
+                to = from.battleMgr.playerEntity;
+                if (InAtkRange(from, to, from.monsterData.mCfg.atkDis)== false )
+                {
+                    from.SetDir(toDir);
+                    from.StateMove();
+                }
+                else
+                {
+
+                    from.SetDir(Vector2.zero);
+                    atkTimer += findTime;//跑归来的时间算进攻速里面
+                    if (atkTimer >= atkTime)
+                    {
+
+                        from.SetAtkDir(toDir, false);
+                        from.SkillAttack(from.monsterData.mCfg.skillID);
+                        //
+                        atkTimer = 0f;
+                    }
+                    else
+                    {
+                        from.SetDir(Vector2.zero);
+                        from.StateIdle();
+                    }
+                    
+                }
+                findTimer = 0f;
+                findTime = (PETools.RDInt(1, 5) * 1.0f) / 10;
+
+
+            }
+        }
+       
+    }
+
+    
+    #region 辅助
+
+    void Attack( Vector2 dir)
+    {
+        
+
+    }
+
+
+
+    Vector2 CalcTargetDir()
+    {
+       return from.CalcTargetDir();
+    }
+
+
+    /// <summary>
+    /// 打得着
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns></returns>
+    bool InAtkRange(EntityMonster from, EntityPlayer to, float atkDis)
+    {
+        if (to == null || to.curState == AniState.Die)
+        {
+            runAI = false;//试了不要提出去
+            return false;
+        }
+        else
+        {
+            Vector3 fromPos = from.GetPos();
+            Vector3 toPos = to.GetPos();
+            fromPos.y = 0;
+            toPos.y = 0;
+            float dis = Vector3.Distance(fromPos, toPos);
+            bool inRange = dis <=atkDis;
+
+            return inRange;
+        }
+    }
+    #endregion
+
+
+}

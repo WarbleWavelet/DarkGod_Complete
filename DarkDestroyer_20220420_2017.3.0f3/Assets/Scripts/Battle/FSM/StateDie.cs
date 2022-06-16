@@ -24,10 +24,16 @@ public class StateDie : IState
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
+        //
+        if ( entity.isDead==true )
+        { 
+            return;
+        } 
         entity.SetAniAction(Constants.ActionDie);
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {
            entity.SetActive(false);
         }, Constants.DelayDieAniLength);
+        entity.isDead = true;
     }
 }

@@ -25,11 +25,12 @@ public abstract class Controller :MonoBehaviour
     [Header("角色控制器和运动")]
     public CharacterController ctrl=null;
     public Animator ani;
-   public bool isMove = false;
+    /// <summary>受Dir控制</summary>
+    public bool isMove = false;
     Vector2 dir = Vector2.zero;
 
     #region 属性
- public Vector2 Dir
+     public Vector2 Dir
     {
         get
         {
@@ -62,10 +63,10 @@ public abstract class Controller :MonoBehaviour
 
 
     [Header("Camera")]
-    public Transform camTrans;
+    protected Transform camTrans;
     //[Header("UI")]
     //public Transform hpRoot;
-
+    public AniState state;
     #region 生命
 
     public virtual void Init()
@@ -78,13 +79,14 @@ public abstract class Controller :MonoBehaviour
         {
             ctrl = transform.GetComponent<CharacterController>();
         }
-      
+        isMove = false;
         ani = transform.GetComponent<Animator>();
         timerSvc = TimerSvc.Instance;
 
     }
     void Update()
     {
+        
         if (isMove)
         {
             SetDir();
@@ -97,20 +99,16 @@ public abstract class Controller :MonoBehaviour
 
     #region 动画 动画器
 
-    public void SetSkillMoveState(bool isSkillMove, float skillMoveSpeed = 0f)
-    {
-        this.isSkillMove = isSkillMove;
-        this.skillMoveSpeed = skillMoveSpeed;
-    }
 
 
-    public virtual void SetBlend(float value)
+
+    public virtual void SetAniBlend(float value)
     {
 
         ani.SetFloat("Blend", value);
 
     }
-    public virtual void SetAction(int value)
+    public virtual void SetAniAction(int value)
     {
 
         ani.SetInteger("Action", value);
@@ -136,20 +134,31 @@ public abstract class Controller :MonoBehaviour
     /// <summary>
     /// 移动
     /// </summary>
-    private void SetMove()
+    public virtual void SetMove()
     {
-        ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);
+        ctrl.Move(transform.forward * Time.deltaTime * Constants.DefaultMoveSpeed);
     }
+
     /// <summary>
     /// 连招时摇杆转向
     /// </summary>
     /// <param name="dir"></param>
     internal virtual void SetComboDir(Vector2 comboDir)
     {
-        float angle = Vector2.SignedAngle( comboDir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
+        float angle = Vector2.SignedAngle(comboDir, new Vector2(0, 1)) + camTrans.eulerAngles.y;
         Vector3 eulerAngles = new Vector3(0f, angle, 0f);
         transform.localEulerAngles = eulerAngles;
     }
+
+    internal virtual void SetClosedTargetDir(Vector2 toDir)
+    {
+        float angle = Vector2.SignedAngle(toDir, new Vector2(0, 1));
+        Vector3 eulerAngles = new Vector3(0f, angle, 0f);
+        transform.localEulerAngles = eulerAngles;
+    }
+
+
+
     #endregion
 
     #region 特效

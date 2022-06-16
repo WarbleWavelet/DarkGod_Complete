@@ -12,6 +12,7 @@ public class EntityMonster : EntityBase
 {
 
     public MonsterData monsterData;
+    public AIMonster aiMonster;
     public override void SetBattleProps(BattleProps props)
     {
         int lv = monsterData.lv;
@@ -29,5 +30,23 @@ public class EntityMonster : EntityBase
         };
         HP = _props.hp;
         Props = _props;
+    }
+
+    public override Vector2 CalcTargetDir()
+    {
+        EntityMonster from = this;
+        EntityPlayer to = battleMgr.playerEntity;
+        //
+        if (to == null || to.curState == AniState.Die)
+        {
+            return Vector2.zero;
+        }
+        else
+        {
+            Vector3 fromPos = from.GetPos();
+            Vector3 toPos = to.GetPos();
+            Vector2 toDir=new Vector2(toPos.x - fromPos.x, toPos.z - fromPos.z).normalized;
+            return toDir;
+        }
     }
 }

@@ -44,14 +44,23 @@ public class BattleMgr : MonoBehaviour
     public int comboIndex = 0;
     #endregion
 
-
-    #region 实例地图 场景 人物
     void Awake()
     {
-            InitSvc();
-
-      
+        InitSvc();
     }
+
+    void Update()
+    {
+        if (monsterDic == null || monsterDic.Count == 0)
+            return;
+        foreach (var item in monsterDic)
+        {
+           item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
+        }
+    }
+
+    #region 实例地图 场景 人物
+
 
     public void InitMap(int mapID)
     {
@@ -62,7 +71,8 @@ public class BattleMgr : MonoBehaviour
         resSvc.AsyncLoadScene(mapCfg.sceneName, () => { InitScene(mapCfg); });
     }
 
-    /// <summary>
+    #region Init
+  /// <summary>
     /// 控制顺序
     /// </summary>
     void CtrlInit(int mapID)
@@ -104,8 +114,10 @@ public class BattleMgr : MonoBehaviour
 
         //LoadMonsterByWave(0);
         DelayActiveMonster();
+   
+  
     }
-
+ #endregion  
     #endregion
 
 
@@ -142,10 +154,15 @@ public class BattleMgr : MonoBehaviour
             skillMgr = this.skillMgr,
             battleMgr = this,
             Name = ctrl.gameObject.name,
-            combo = ctrl.gameObject.AddComponent<Combo>()
+            combo = ctrl.gameObject.AddComponent<Combo>(),
+            entityType=EntityType.Player
         };
-
         playerEntity.SetCtrl(ctrl);
+        //
+        foreach (var item in monsterDic)
+        {
+            item.Value.aiMonster.Init(item.Value, playerEntity);
+        }
     }
 
     void InitPlayerBattleProps(EntityBase entity)
@@ -163,10 +180,7 @@ public class BattleMgr : MonoBehaviour
             pierce = pd.pierce,
 
         };
-
-
         entity.SetBattleProps(props);
-
     }
 
     #endregion
@@ -269,7 +283,7 @@ public class BattleMgr : MonoBehaviour
     #endregion
 
     #region Player 移动
-    public void SetMoveDir(Vector2 dir)
+    public void SetPlayerMoveDir( Vector2 dir)
     {
         if (playerEntity.canCtrl == false) 
             return;
@@ -287,6 +301,8 @@ public class BattleMgr : MonoBehaviour
             playerEntity.SetDir(dir);
         }
     }
+
+
 
     public Vector2 GetInputDir()
     {
@@ -350,10 +366,14 @@ public class BattleMgr : MonoBehaviour
             skillMgr = this.skillMgr,
             battleMgr = this,
             monsterData=data,
-            Name=ctrl.gameObject.name
+            Name=ctrl.gameObject.name,
+            aiMonster=ctrl.gameObject.AddComponent<AIMonster>(),
+            entityType=EntityType.Monster
         };
         entityMonster.SetCtrl(ctrl);
         entityMonster.SetBattleProps( data.mCfg.props);
+        //entityMonster.aiMonster.Init( entityMonster,playerEntity);//这时playerEntity未赋值，所以到EntityInitPlayer
+        //
         return entityMonster;
     }
 
@@ -379,10 +399,12 @@ public class BattleMgr : MonoBehaviour
     /// <param name="delay"></param>
     void DelayActiveMonster(bool state =true)
     {
+        
         timer.AddTimerTask((int tid)=> {
             foreach (var item in monsterDic)
             {
                 EntityMonster entity = item.Value;
+
                 entity.SetActive(state);
                 entity.StateBorn();
                 timer.AddTimerTask((int tid_1 ) => { 
@@ -408,5 +430,25 @@ public class BattleMgr : MonoBehaviour
         }
     }
 
+    #endregion
+
+
+    #region Monster 移动
+    public void SetMonMoveDir(EntityMonster entity, Vector2 dir)
+    {
+        if (entity.canCtrl == false)
+            return;
+
+
+        //PECommon.Log(dir.ToString());
+        if (dir == Vector2.zero)
+        {
+            entity.Idle();
+        }
+        else
+        {
+            entity.Move(dir);
+        }
+    }
     #endregion
 }

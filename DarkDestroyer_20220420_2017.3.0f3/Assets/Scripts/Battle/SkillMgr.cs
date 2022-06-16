@@ -22,8 +22,6 @@ public class SkillMgr :MonoBehaviour
         PECommon.Log(this.GetType().ToString()+" Init");
     }
 
-
-    #region 攻击
     /// <summary>
     /// 动画 伤害 特效
     /// </summary>
@@ -32,10 +30,41 @@ public class SkillMgr :MonoBehaviour
     public void SkillAttack(EntityBase entity, int skillID)
     {
         AttackEffect(entity, skillID);
-        AttackDamage(entity, skillID);
-    }
+        SkillChain(entity, skillID);
+    
+    #region 攻击 伤害
+}
 
-   
+    /// <summary>
+    /// 技能链条，延时即时
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="skillID"></param>
+    public void SkillChain(EntityBase entity, int skillID)
+    {
+        SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
+        List<int> actionLst = skillCfg.skillActionLst;
+
+
+        int sum = 0;//计时从一开始，不清0
+        for (int i = 0; i < actionLst.Count; i++)
+        {
+            SkillActionCfg action = resSvc.GetSkillActionCfg(actionLst[i]);
+            sum += action.delayTime;
+            int actionIdx = i;
+            if (sum > 0)
+            {
+                timerSvc.AddTimerTask((int tid) =>
+                {
+                    SkillAction(entity, skillCfg, actionIdx);
+                }, sum);
+            }
+            else
+            {
+                SkillAction(entity, skillCfg, actionIdx);
+            }
+        }
+    }
 
     /// <summary>
     /// 
@@ -45,22 +74,48 @@ public class SkillMgr :MonoBehaviour
     /// <param name="actionIdx">skillActionLst和<para/>skillDamageLst的索引</param>
     private void SkillAction(EntityBase from, SkillCfg skillCfg, int actionIdx)
     {
-
         List<EntityMonster> entityLst = from.battleMgr.GetEntityMonster();
-        SkillActionCfg action = resSvc.GetSkillActionCfg(skillCfg.skillActionLst[actionIdx] );
-        int damage=skillCfg.skillDamageLst[actionIdx];
-
-        for (int i = 0; i < entityLst.Count; i++)
+        SkillActionCfg action = resSvc.GetSkillActionCfg(skillCfg.skillActionLst[actionIdx]);
+        int damage = skillCfg.skillDamageLst[actionIdx];
+        EntityBase to;
+        //
+        switch (from.entityType)
         {
-            EntityMonster to= entityLst[i];
-            bool inRange = InRange(from.GetPos(), to.GetPos(), action.radius);
-            bool inAngle = InAngle(from.GetTrans(), to.GetTrans(), action.angle);
+            case EntityType.Player:
+                {
+                    for (int i = 0; i < entityLst.Count; i++)
+                    {
+                        to = entityLst[i];
+                        SkillActionCalcDamage(from, to, skillCfg, action, damage);
+                    }
+                }
+                break;
+            case EntityType.Monster:
+                {
+                    to = from.battleMgr.playerEntity;
+                    SkillActionCalcDamage(from, to, skillCfg, action, damage);
+                }
+                break;
+            default: break;
+        }
+        //
+    }
 
-            if (inRange && inAngle)
-            {
-                CalcDamage(from, to,skillCfg, damage);
-            
-            }
+
+
+    public void SkillActionCalcDamage(EntityBase from, EntityBase to, SkillCfg skillCfg, SkillActionCfg action, int damage)
+    { 
+        bool inRange = InRange(from.GetPos(), to.GetPos(), action.radius);
+        bool inAngle = InAngle(from.GetTrans(), to.GetTrans(), action.angle);
+
+        if (inRange && inAngle)
+        {
+            CalcDamage(from, to, skillCfg, damage);
+
+        }
+        else
+        { 
+        
         }
     }
    
@@ -108,40 +163,56 @@ public class SkillMgr :MonoBehaviour
             default: break;
         }
 
-        CalcDamage_Res( to,  dmgSum);
+        CalcDamage_Result( to,  dmgSum);
+       to.GetGameObject().GetComponent<Controller>().state= to.curState;
     }
 
 
 
     #endregion
 
-    #region 辅助
+    #region 攻击 数值
 
     /// <summary>
     /// 放技能的效果
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="from"></param>
     /// <param name="skillID"></param>
-    public void AttackEffect(EntityBase entity, int skillID)
+    public void AttackEffect(EntityBase from, int skillID)
     {
-         SetAtkDir( entity );
-        //
+        if(from.entityType ==EntityType.Player)
+            CalcAtkDir( (EntityPlayer)from );
+        if (from.entityType == EntityType.Monster)
+            CalcAtkDir( (EntityMonster)from );
+
+
+
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
         if (cfg != null)
         {
             //Stop DirMove
-            entity.canCtrl = false;
-            entity.SetDir(Vector2.zero);
+            from.canCtrl = false;
+            from.SetDir(Vector2.zero);
             //SkillMove
-            SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
-            CalcSkillMove(entity, moveCfg);
-            //Ani
-            entity.SetAniAction(cfg.aniAction);
+            if (cfg.skillMoveLst != null && cfg.skillMoveLst.Count > 0)
+            {
+                SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
+                CalcSkillMove(from, moveCfg);
+            }
+
+
             //FX
-            entity.SetFX(cfg.fx, cfg.skillTime);
-           //State
-            CalcState(entity, cfg);
-            
+            if (cfg.fx != null)
+            {
+                from.SetFX(cfg.fx, cfg.skillTime);
+            }
+
+            //State Ani
+            from.SetAniAction(cfg.aniAction);
+            timerSvc.AddTimerTask((tid) => {
+                from.StateIdle();
+            }, cfg.skillTime);
+
         }
       
     }
@@ -149,60 +220,28 @@ public class SkillMgr :MonoBehaviour
     /// <summary>
     /// 连招时控制方向
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="from"></param>
 
-    private void SetAtkDir(EntityBase entity)
+    private void CalcAtkDir(EntityBase from)
     {
 
-        Vector2 dir = ((EntityPlayer)entity).GetInputDir();
+        Vector2 dir = ( from).GetInputDir();
         if (dir == Vector2.zero)
         {
-            FindMonster();
+            dir = from.CalcTargetDir();
+            from.SetAtkDir( dir , false);
         }
         else
         {
-            entity.SetAtkDir(dir);
+            from.SetAtkDir(dir,true);
         }
     }
 
-    private void FindMonster()
-    {
-
-        
-    }
 
 
 
-    /// <summary>
-    /// 计算伤害
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="skillID"></param>
-    public void AttackDamage(EntityBase entity, int skillID)
-    {
-        SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
-        List<int> actionLst = skillCfg.skillActionLst;
 
 
-        int sum = 0;//计时从一开始，不清0
-        for (int i = 0; i < actionLst.Count; i++)
-        {
-            SkillActionCfg action = resSvc.GetSkillActionCfg(actionLst[i]);
-            sum += action.delayTime;
-            int actionIdx = i;
-            if (sum > 0)
-            {
-                timerSvc.AddTimerTask((int tid) =>
-                {
-                    SkillAction(entity, skillCfg, actionIdx);
-                }, sum);
-            }
-            else
-            {
-                SkillAction(entity, skillCfg, actionIdx);
-            }
-        }
-    }
 
     /// <summary>
     /// 在距离内
@@ -246,19 +285,7 @@ public class SkillMgr :MonoBehaviour
     }
 
 
-    /// <summary>
-    /// 状态变化
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="cfg"></param>
-    void CalcState(EntityBase entity, SkillCfg cfg)
-    {
-        entity.SetAniAction(cfg.aniAction);
 
-        timerSvc.AddTimerTask((tid) => {
-            entity.StateIdle();
-        }, cfg.skillTime);
-    }
 
     /// <summary>
     /// 技能产生的位移变化
@@ -297,6 +324,7 @@ public class SkillMgr :MonoBehaviour
     #region CalcDamage
     int CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
     {
+       
         int dmgSum = damage;
         float rate = 0f;
         rate = PETools.RDInt(1, 100);
@@ -341,8 +369,9 @@ public class SkillMgr :MonoBehaviour
         dmgSum -= to.Props.apdef;
         return dmgSum;
     }
-    private void CalcDamage_Res(EntityBase to, int dmgSum)
+    private void CalcDamage_Result(EntityBase to, int dmgSum)
     {
+        if (to.curState == AniState.Die) return;
         if (dmgSum < 0)
         {
             dmgSum = 0;
@@ -359,6 +388,8 @@ public class SkillMgr :MonoBehaviour
             to.HP -= dmgSum;
             to.StateHit();
         }
+
+        
     }
     #endregion
 

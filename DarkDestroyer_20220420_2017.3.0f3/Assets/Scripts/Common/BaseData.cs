@@ -266,33 +266,29 @@ public class MonsterCfg:BaseData<MonsterCfg>
     public string mName;
     public string resPath;
     public BattleProps props;
+    public int skillID;
+    public float atkDis;
 }
 
 
 public class MonsterData : BaseData<MonsterData>
 {
-/**
-<item ID="10003">
-    <mapName>荒野遗迹</mapName>
-    <sceneName>SceneOrge</sceneName>
-    <power>5</power>
-    <mainCamPos>-13.19,18.87,14.69</mainCamPos>
-    <mainCamRote>45,135,0</mainCamRote>
-    <playerBornPos>-10,13.2,11.5</playerBornPos>
-    <playerBornRote>0,145,0</playerBornRote>
-    <monsterLst>#|1001,-4.39,13.14,3.79,-50,1
-        |1001,-7.55,13.1, 3,0,1
-        #|1001,18.86,13.6,3.7,-107.3,2
-        |1001,14.35,13.35,5.95,-117.4,2
-        |1001,15.11,13.35,1.63,-66.1,2
-        #|1001,18.16,8.8,32,188,3
-        |1001,11.8,8.8,30.8,145.5,3
-        |1001,15.38,8.8,40.7,173.3,3
-        |1001,9,8.9,38.6,145.5,3
-        |2001,11.4,8.85,41,142,1
-    </monsterLst>
-</item>
-**/
+    /**
+        <item ID="1001">
+            <mName>铁甲战士</mName>
+            <resPath>PrefabNPC/MonsterSoldier_1</resPath>
+            <skillID>201</skillID>
+            <atkDis>2</atkDis>
+            <hp>2000</hp>
+            <ad>100</ad>
+            <ap>80</ap>
+            <addef>5</addef>
+            <apdef>10</apdef>
+            <dodge>40</dodge>
+            <pierce>5</pierce>
+            <critical>35</critical>
+        </item>
+    **/
     public Vector3 mBornRot;
     public Vector3 mBornPos;
     /// <summary>第几波</summary>

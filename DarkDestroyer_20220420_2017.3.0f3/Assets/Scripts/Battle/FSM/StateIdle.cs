@@ -25,8 +25,12 @@ public class StateIdle : IState
     public void Process(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Process");
-
-        bool isCombo = entity.combo.nextSkillID != Constants.NoComboNextSkillID;
+        bool isCombo = false;
+        if (entity.combo != null)//Monster没Combo
+        { 
+            isCombo = entity.combo.nextSkillID != Constants.NoComboNextSkillID;
+        }
+             
         if ( isCombo)
         {
             entity.StateAttack(entity.combo.nextSkillID);
@@ -40,6 +44,7 @@ public class StateIdle : IState
             }
             else
             {
+                entity.SetAniAction(Constants.ActionDefault);
                 entity.SetAniBlend(Constants.BlendIdle);
             }
         }

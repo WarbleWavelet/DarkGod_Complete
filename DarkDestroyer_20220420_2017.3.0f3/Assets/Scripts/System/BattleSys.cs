@@ -63,9 +63,9 @@ public class BattleSys : SystemRoot
     {
         battleMgr.ReqReleaseSkill(idx);
     }
-    public void SetMoveDir(Vector2 dir)
+    public void SetPlayerMoveDir(Vector2 dir)
     {
-        battleMgr.SetMoveDir(dir);
+        battleMgr.SetPlayerMoveDir(dir);
     }
     #endregion
 

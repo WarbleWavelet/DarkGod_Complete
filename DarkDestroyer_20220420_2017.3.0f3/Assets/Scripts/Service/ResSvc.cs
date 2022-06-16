@@ -971,6 +971,16 @@ public class ResSvc : MonoBehaviour
                                 c.props.pierce = int.Parse(e.InnerText);
                             }
                             break;
+                        case "skillID":
+                            {
+                                c.skillID = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "atkDis":
+                            {
+                                c.atkDis = float.Parse(e.InnerText);
+                            }
+                            break;
                         default: break;
                     }
 

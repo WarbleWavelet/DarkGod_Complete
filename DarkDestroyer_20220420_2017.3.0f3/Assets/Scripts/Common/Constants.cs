@@ -111,8 +111,9 @@ public class Constants
 
 
     #region Ani
+    public const int DefaultMoveSpeed = 8;
     public const int PlayerMoveSpeed = 8;
-    public const int MonsterMoveSpeed = 4;
+    public const int MonsterMoveSpeed = 3;
 
     /// <summary>加速度，过渡动画</summary>
     public const float AccelerSpeed = 5f;
@@ -150,7 +151,9 @@ public class Constants
     #region 延时播放动画
     public const int DelayDefault = 500;//1s
     public const int DelayBorn = 500;
-    public const int DelayIdle = 500;
+    /// <summary>Born后延时</summary>
+    public const int BornDelay = 1500;
+    public const int DelayIdle = 1000;
     public const int DelayActive = 500;
     public const int DelayDieAniLength = 5000;
 

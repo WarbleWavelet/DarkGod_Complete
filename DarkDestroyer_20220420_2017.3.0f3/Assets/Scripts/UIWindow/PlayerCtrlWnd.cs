@@ -83,22 +83,11 @@ public class PlayerCtrlWnd : WindowRoot
             isFirst =false;
         }
         //
-
-
     }
 
-
-
-   
-
-
-    
     void Update()
     {
         TestCode();
-
-
-        
     }
 
     private void TestCode()
@@ -136,7 +125,7 @@ public class PlayerCtrlWnd : WindowRoot
             imgDirPoint.transform.localPosition = Vector2.zero;
             SetActive(imgDirPoint, false);
             curDir = Vector2.zero;
-            BattleSys.Instance.SetMoveDir(curDir);
+            BattleSys.Instance.SetPlayerMoveDir(curDir);
         });
 
         OnDrag(imgTouch.gameObject, (PointerEventData evt) => {
@@ -155,13 +144,8 @@ public class PlayerCtrlWnd : WindowRoot
             }
 
             curDir = dir.normalized;
-                BattleSys.Instance.SetMoveDir( curDir );
-            
-           
-
+            BattleSys.Instance.SetPlayerMoveDir( curDir );
         });
-
-
     }
     #endregion
 

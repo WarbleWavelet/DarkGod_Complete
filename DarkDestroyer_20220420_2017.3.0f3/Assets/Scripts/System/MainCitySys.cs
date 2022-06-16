@@ -164,11 +164,11 @@ public class MainCitySys : SystemRoot
         //
         if (dir == Vector2.zero)
         {
-            playerCtrl.SetBlend(Constants.BlendIdle);
+            playerCtrl.SetAniBlend(Constants.BlendIdle);
         }
         else
         {
-            playerCtrl.SetBlend(Constants.BlendWalk);
+            playerCtrl.SetAniBlend(Constants.BlendWalk);
         }
         playerCtrl.Dir = dir;
 
@@ -270,7 +270,7 @@ public class MainCitySys : SystemRoot
         //
             nav.speed = Constants.PlayerMoveSpeed;
             nav.SetDestination(navTarget.position);
-            playerCtrl.SetBlend(Constants.BlendWalk);
+            playerCtrl.SetAniBlend(Constants.BlendWalk);
         }
     }
 
@@ -282,7 +282,7 @@ public class MainCitySys : SystemRoot
             navTarget = null;
             nav.enabled = false;
             //
-            playerCtrl.SetBlend(Constants.BlendIdle);
+            playerCtrl.SetAniBlend(Constants.BlendIdle);
             isNavGuide = false;
         }
 

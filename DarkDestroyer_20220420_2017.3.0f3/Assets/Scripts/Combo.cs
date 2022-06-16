@@ -3,7 +3,7 @@
 	作者：lenovo
     邮箱: 
     日期：2022/6/10 16:17:26
-	功能：平A连招
+	功能：平A连招，原写在Entity里面。拆分一下
 *****************************************************/
 
 
@@ -42,7 +42,7 @@ public class Combo : MonoBehaviour
             }
             else
             {
-                nextSkillID = Constants.NoComboNextSkillID;
+                nextSkillID = Constants.ActionDefault;
             }
         }
         //
