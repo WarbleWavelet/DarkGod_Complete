@@ -45,7 +45,6 @@ public class StateIdle : IState
             else
             {
                 entity.SetAniAction(Constants.ActionDefault);
-                entity.SetAniBlend(Constants.BlendIdle);
             }
         }
 

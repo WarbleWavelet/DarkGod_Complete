@@ -79,6 +79,13 @@ public class EntityPlayer :EntityBase
     }
     #endregion
 
+    public override void SetUIHpVal(int oldVal, int newVal)
+    {
+        BattleSys.Instance.playerCtrlWnd.SetPrgHP( newVal);
+    }
 
-
+    public override void SetUIDodge()
+    {
+        GameRoot.Instance.dynamicWnd.SetPlayerDodge();
+    }
 }

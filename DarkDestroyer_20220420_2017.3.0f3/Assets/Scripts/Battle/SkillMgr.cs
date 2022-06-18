@@ -30,7 +30,7 @@ public class SkillMgr :MonoBehaviour
     public void SkillAttack(EntityBase entity, int skillID)
     {
         AttackEffect(entity, skillID);
-        SkillChain(entity, skillID);
+        SkillDamageChain(entity, skillID);
     
     #region 攻击 伤害
 }
@@ -40,9 +40,15 @@ public class SkillMgr :MonoBehaviour
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="skillID"></param>
-    public void SkillChain(EntityBase entity, int skillID)
+    public void SkillDamageChain(EntityBase entity, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
+        if (skillCfg == null)
+        { 
+            return;
+        }
+
+        //
         List<int> actionLst = skillCfg.skillActionLst;
 
 
@@ -164,7 +170,6 @@ public class SkillMgr :MonoBehaviour
         }
 
         CalcDamage_Result( to,  dmgSum);
-       to.GetGameObject().GetComponent<Controller>().state= to.curState;
     }
 
 
@@ -174,25 +179,48 @@ public class SkillMgr :MonoBehaviour
     #region 攻击 数值
 
     /// <summary>
-    /// 放技能的效果
+    /// 放技能的效果 动画
     /// </summary>
     /// <param name="from"></param>
     /// <param name="skillID"></param>
     public void AttackEffect(EntityBase from, int skillID)
     {
-        if(from.entityType ==EntityType.Player)
-            CalcAtkDir( (EntityPlayer)from );
-        if (from.entityType == EntityType.Monster)
-            CalcAtkDir( (EntityMonster)from );
+
+        switch (from.entityType)
+        {
+            case EntityType.Player: 
+                {
+                    Vector2 dir = from.GetInputDir();
+                    if (dir == Vector2.zero)
+                    {
+                        dir = from.CalcTargetDir();
+                        if (dir != Vector2.zero)
+                        {
+                           // from.SetAtkDir(dir, AtkDirType.NearTarget);
+                            from.SetAtkDir(dir);
+                        }
+                    }
+                    else
+                    {
+                      //  from.SetAtkDir(dir, AtkDirType.ChangeComboDir);
+                        from.SetAtkDir(dir, AtkDirType.ChangeComboDir);
+                    }
+                } break;
+            case EntityType.Monster: break;
+            default: break;
+        }
 
 
-
+        //
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
         if (cfg != null)
         {
-            //Stop DirMove
-            from.canCtrl = false;
-            from.SetDir(Vector2.zero);
+            from.SetAniAction(cfg.aniAction);
+            //FX
+            if (cfg.fx != null)
+            {
+                from.SetFX(cfg.fx, cfg.skillTime);
+            }
             //SkillMove
             if (cfg.skillMoveLst != null && cfg.skillMoveLst.Count > 0)
             {
@@ -201,14 +229,11 @@ public class SkillMgr :MonoBehaviour
             }
 
 
-            //FX
-            if (cfg.fx != null)
-            {
-                from.SetFX(cfg.fx, cfg.skillTime);
-            }
-
+            //Stop DirMove
+            from.canCtrl = false;
+            from.SetDir(Vector2.zero);
             //State Ani
-            from.SetAniAction(cfg.aniAction);
+
             timerSvc.AddTimerTask((tid) => {
                 from.StateIdle();
             }, cfg.skillTime);
@@ -225,16 +250,7 @@ public class SkillMgr :MonoBehaviour
     private void CalcAtkDir(EntityBase from)
     {
 
-        Vector2 dir = ( from).GetInputDir();
-        if (dir == Vector2.zero)
-        {
-            dir = from.CalcTargetDir();
-            from.SetAtkDir( dir , false);
-        }
-        else
-        {
-            from.SetAtkDir(dir,true);
-        }
+
     }
 
 

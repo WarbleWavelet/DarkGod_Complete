@@ -80,7 +80,7 @@ public class AIMonster : AILogic
                     if (atkTimer >= atkTime)
                     {
 
-                        from.SetAtkDir(toDir, false);
+                        from.SetAtkDir(toDir);
                         from.SkillAttack(from.monsterData.mCfg.skillID);
                         //
                         atkTimer = 0f;

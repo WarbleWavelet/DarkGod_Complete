@@ -24,11 +24,11 @@ public class StateAttack : IState
 
         PECommon.Log(this.GetType().ToString() + " Exit");
         //
-        entity.canCtrl = true;
-        AddCombo(  entity, args);
-        entity.SetAniAction(Constants.ActionDefault);
-
-
+        if (entity.combo != null)
+        { 
+            entity.combo.ExitCurSkill(entity);
+        }
+        
     }
 
     public void Process(EntityBase entity, params object[] args)
@@ -39,17 +39,6 @@ public class StateAttack : IState
         entity.SkillAttack(skillID);
     }
 
-    void AddCombo(EntityBase entity, params object[] args )
-    { 
-            if (args == null)
-        {
 
-            Debug.Log("StateAttack.Exit有时报空");
-        }
-        else
-        {
-           
-            entity.combo.ExitCurSkill(entity, entity.curSkillCfg);
-        }
-    }
+
 }

@@ -66,7 +66,7 @@ public abstract class Controller :MonoBehaviour
     protected Transform camTrans;
     //[Header("UI")]
     //public Transform hpRoot;
-    public AniState state;
+    public AniState curState;
     #region 生命
 
     public virtual void Init()
@@ -150,7 +150,7 @@ public abstract class Controller :MonoBehaviour
         transform.localEulerAngles = eulerAngles;
     }
 
-    internal virtual void SetClosedTargetDir(Vector2 toDir)
+    internal virtual void SetNearTargetDir(Vector2 toDir)
     {
         float angle = Vector2.SignedAngle(toDir, new Vector2(0, 1));
         Vector3 eulerAngles = new Vector3(0f, angle, 0f);

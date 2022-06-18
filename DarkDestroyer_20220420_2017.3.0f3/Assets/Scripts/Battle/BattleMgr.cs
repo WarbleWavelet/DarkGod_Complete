@@ -28,7 +28,7 @@ public class BattleMgr : MonoBehaviour
     public StateMgr stateMgr;
     //
     public EntityPlayer playerEntity;//注入了stateMgr、playerCtrl
-    PlayerController playerCtrl;
+   public PlayerController playerCtrl;
 
     public Vector2 dir;
 
@@ -57,6 +57,12 @@ public class BattleMgr : MonoBehaviour
         {
            item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
         }
+
+        if (playerEntity != null)
+        { 
+         playerEntity.ctrl.curState = playerEntity.curState;
+        }
+       
     }
 
     #region 实例地图 场景 人物
@@ -202,10 +208,7 @@ public class BattleMgr : MonoBehaviour
         }
 
     }
-    bool IsBelongCombo()
-    {
-        return lastAtkTime != 0;
-    }
+
     
     /// <summary>
     /// 平A和连招
@@ -248,7 +251,10 @@ public class BattleMgr : MonoBehaviour
         }
 
     }
-
+    bool IsBelongCombo()
+    {
+        return lastAtkTime != 0;
+    }
     void ResetCombo()
     {
         comboIndex = 0;

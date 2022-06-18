@@ -19,6 +19,8 @@ public class StateMove : IState
     public void Exit(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + " Exit");
+        entity.SetAniAction(Constants.ActionDefault);
+        entity.SetAniBlend(Constants.BlendIdle);
     }
 
     public void Process(EntityBase entity, params object[] args)

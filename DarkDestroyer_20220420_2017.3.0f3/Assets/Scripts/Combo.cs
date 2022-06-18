@@ -31,22 +31,28 @@ public class Combo : MonoBehaviour
     /// StateAttack.Exit(),放出连招或0
     /// </summary>
     /// <returns></returns>
-    public void ExitCurSkill(EntityBase entity, SkillCfg cfg)
+    public void ExitCurSkill(EntityBase entity)
     {
-       // SkillCfg cfg = ResSvc.Instance.GetSkillCfg(skillID);
-        if (cfg.isCombo)
+        entity.canCtrl = true;
+        SkillCfg cfg = entity.curSkillCfg;
+        if ( cfg!= null)
         {
-            if (comboQue.Count > 0)
+            if (cfg.isCombo)
             {
-                nextSkillID = comboQue.Dequeue();
+                if (comboQue.Count > 0)
+                {
+                    nextSkillID = comboQue.Dequeue();
+                }
+                else
+                {
+                    nextSkillID = Constants.SkillIDDefault;
+                }
             }
-            else
-            {
-                nextSkillID = Constants.ActionDefault;
-            }
+            entity.curSkillCfg = null;
         }
         //
-
+        entity.SetAniAction(Constants.ActionDefault);
     }
+
 
 }

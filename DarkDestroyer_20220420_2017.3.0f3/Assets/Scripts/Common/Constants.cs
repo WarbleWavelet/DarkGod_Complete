@@ -148,6 +148,7 @@ public class Constants
     public const int SkillID1 = 101;
     public const int SkillID2 = 102;
     public const int SkillID3 = 103;
+    public const int SkillIDDefault = 0;
     #region 延时播放动画
     public const int DelayDefault = 500;//1s
     public const int DelayBorn = 500;

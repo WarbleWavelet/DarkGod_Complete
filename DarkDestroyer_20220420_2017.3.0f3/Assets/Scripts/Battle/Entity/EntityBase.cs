@@ -21,7 +21,7 @@ public class EntityBase
     public BattleMgr battleMgr = null;
     public StateMgr stateMgr = null;
     public SkillMgr skillMgr = null;
-    protected Controller ctrl = null;
+    public Controller ctrl = null;
     /// <summary>攻击时不移动</summary>
     public bool canCtrl = true;
     /// <summary>基础属性</summary>
@@ -80,6 +80,11 @@ public class EntityBase
     public SkillCfg curSkillCfg;
     public EntityType entityType=EntityType.None;
     #endregion
+
+    public AniState GetState()
+    {
+        return curState;
+    }
 
     public virtual void SetBattleProps(BattleProps props)
     {
@@ -176,19 +181,25 @@ public class EntityBase
     /// true连招改方向 false最近敌人
     /// </summary>
     /// <param name="dir"></param>
-    public virtual void SetAtkDir(Vector2 dir, bool offset=false)
+    public virtual void SetAtkDir(Vector2 dir, AtkDirType type= AtkDirType.NearTarget)
     {
         if (ctrl != null)
         {
-            if (offset)
+            switch (type)
             {
-                ctrl.SetComboDir(dir);
+                case AtkDirType.NearTarget:
+                    {
+                        ctrl.SetNearTargetDir(dir);
+                    }
+                    break;
+                case AtkDirType.ChangeComboDir:
+                    {
+                        ctrl.SetComboDir(dir);
+                    }
+                    break;
+                default:break;
             }
-            else
-            {
-                ctrl.SetClosedTargetDir(dir);
-            }
-            
+
         }
     }
 
@@ -226,10 +237,10 @@ public class EntityBase
         if (skillMgr != null)
         {
             skillMgr.SkillAttack(this, skillID);
-            if ( combo != null )
-            { 
-                combo.ExitCurSkill(this, curSkillCfg);
-            }
+            //if ( combo != null&& curSkillCfg !=null)
+            //{ 
+            //    combo.ExitCurSkill(this);//StateAttack.Exit用
+            //}
             
         }    
     }
@@ -305,7 +316,7 @@ public class EntityBase
     /// <summary>
     /// 飘字
     /// </summary>
-    public void SetUIDodge( )
+    public virtual void SetUIDodge( )
     { 
         GameRoot.Instance.dynamicWnd.SetDodge( Name );
     }
@@ -316,7 +327,7 @@ public class EntityBase
     /// </summary>
     /// <param name="oldVal"></param>
     /// <param name="newVal"></param>
-    public void SetUIHpVal(int oldVal, int newVal)
+    public virtual void SetUIHpVal(int oldVal, int newVal)
     {
         if (GameRoot.Instance.dynamicWnd != null && GameRoot.Instance != null)
         { 
@@ -339,6 +350,11 @@ public class EntityBase
 public enum EntityType
 { 
     None,
-Player,
-Monster
+    Player,
+    Monster
+}
+public  enum AtkDirType
+{
+    ChangeComboDir,
+    NearTarget
 }

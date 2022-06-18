@@ -35,7 +35,7 @@ public class PlayerController : Controller
 
 
 
-    public override void Init()
+    public override void Init( )
     {
         base.Init();
         cam = Camera.main;
@@ -62,7 +62,7 @@ public class PlayerController : Controller
 
     void Update()
     {
-        
+
         //InputByWSAD();
         if (currentBlend != targetBlend)
         {
@@ -82,6 +82,7 @@ public class PlayerController : Controller
             SetSkillMove();
         }
 
+     
     }
 
 

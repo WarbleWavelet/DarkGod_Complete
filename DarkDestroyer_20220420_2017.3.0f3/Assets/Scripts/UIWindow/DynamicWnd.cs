@@ -24,12 +24,13 @@ public class DynamicWnd : WindowRoot
     public  bool isTipsShow=false;
 
     [Header("血条相关")]
-    public Dictionary<string, ItemEntityHp> hpItemDic=new Dictionary<string, ItemEntityHp>();
+   
     /// <summary>挂靴调的父节点</summary> 
     public Transform hpItmRoot;
-
-
-   public void Init()
+    public AnimationClip playerDodgeClip;  
+    public Animation playerDodgeAni;  
+    public Dictionary<string, ItemEntityHp> hpItemDic=new Dictionary<string, ItemEntityHp>();
+    public void Init()
     {
         InitWnd();
         SetActive(txtTips, false);
@@ -58,23 +59,7 @@ public class DynamicWnd : WindowRoot
     
     }
 
-    public void SetTips(string tips)
-    {
-        SetActive(txtTips);
-        SetText(txtTips,tips);
 
-       
-        AnimationClip clip = tipsAni.GetClip("TipsShowAni");
-        tipsAni.Play();
-        StartCoroutine(AniPlayDone(clip.length, () =>
-        {
-          
-             SetActive(txtTips, false);
-             isTipsShow = false;
-        }));
-
-        
-    }
 
 
   
@@ -170,6 +155,35 @@ public class DynamicWnd : WindowRoot
             item.SetHPVal(oldVal, newVal);
         }
     }
+
+    public void SetPlayerDodge()
+    {
+        playerDodgeAni.Stop();
+        playerDodgeAni.Play();
+    }
+    #endregion
+
+
+    #region 动画
+    public void SetTips(string tips)
+    {
+        SetActive(txtTips);
+        SetText(txtTips, tips);
+
+
+        AnimationClip clip = tipsAni.GetClip("TipsShowAni");
+        tipsAni.Play();
+        StartCoroutine(AniPlayDone(clip.length, () =>
+        {
+
+            SetActive(txtTips, false);
+            isTipsShow = false;
+        }));
+
+
+    }
+
+
     #endregion
 
 }

@@ -33,6 +33,11 @@ public class PlayerCtrlWnd : WindowRoot
     }
     #endregion
 
+    [Header("左上")]
+    public Image imgHP;
+    public Text txtHP;
+    public int HPSum;
+
     [Header("右下")]
     public Transform normalAtkTrans;
     public Transform skill1Trans;
@@ -72,6 +77,7 @@ public class PlayerCtrlWnd : WindowRoot
         pointDis = AdaptDirPoint();//放这里，运行时改变无效
         SetActive(imgDirPoint, false);
         RegisterTouchEvets();
+
         //
         if (isFirst)
         { 
@@ -80,10 +86,31 @@ public class PlayerCtrlWnd : WindowRoot
             InitSkillBtn(102,skill2Trans);
             InitSkillBtn(103,skill3Trans);
             btnTest.onClick.AddListener(ClickTestBtn);
+            imgHP = transform.Find("TopLeftPin/prgHP/imgHP").GetComponent<Image>();
+            txtHP = transform.Find("TopLeftPin/prgHP/txtHP").GetComponent<Text>();
             isFirst =false;
+
         }
         //
+        InitPrgHP();
     }
+
+
+    #region 左上HP
+    void InitPrgHP()
+    { 
+            PlayerData pd = GameRoot.Instance.PlayerData;
+        HPSum = pd.hp;
+        SetPrgHP( HPSum );
+    }
+    public void SetPrgHP( int val)
+    {
+
+        imgHP.fillAmount = ( 1.0f * val )/ HPSum;
+        txtHP.text = val  +"/" +HPSum;    
+    }
+    #endregion
+
 
     void Update()
     {
