@@ -191,4 +191,8 @@ public class Constants
     /// <summary> 毫米秒内再按生效，连招</summary>
     public const int ComboSpace = 500;
     public const int NoComboNextSkillID = 0;
+
+    //Layer
+    public const int LayerPlayer = 9;
+    public const int LayerMonster = 10;
 }

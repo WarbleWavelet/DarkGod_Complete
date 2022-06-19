@@ -206,6 +206,8 @@ public class SkillCfg: BaseData<SkillCfg>
     public DmgType dmgType;
     public float cdTime;
     public bool isCombo;
+    public bool isCollide;
+    public bool isBreak;
 
 
 

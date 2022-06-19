@@ -178,6 +178,8 @@ public class SkillMgr :MonoBehaviour
 
     #region 攻击 数值
 
+  
+
     /// <summary>
     /// 放技能的效果 动画
     /// </summary>
@@ -185,49 +187,24 @@ public class SkillMgr :MonoBehaviour
     /// <param name="skillID"></param>
     public void AttackEffect(EntityBase from, int skillID)
     {
-
-        switch (from.entityType)
-        {
-            case EntityType.Player: 
-                {
-                    Vector2 dir = from.GetInputDir();
-                    if (dir == Vector2.zero)
-                    {
-                        dir = from.CalcTargetDir();
-                        if (dir != Vector2.zero)
-                        {
-                           // from.SetAtkDir(dir, AtkDirType.NearTarget);
-                            from.SetAtkDir(dir);
-                        }
-                    }
-                    else
-                    {
-                      //  from.SetAtkDir(dir, AtkDirType.ChangeComboDir);
-                        from.SetAtkDir(dir, AtkDirType.ChangeComboDir);
-                    }
-                } break;
-            case EntityType.Monster: break;
-            default: break;
-        }
-
-
-        //
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
+
+        CalcSkillCollide(cfg);
+        //
+        SetEntityAtkDir( from);
+        //
+      
         if (cfg != null)
         {
-            from.SetAniAction(cfg.aniAction);
-            //FX
+            //FX Ani
+            from.SetAniAction(cfg.aniAction);          
             if (cfg.fx != null)
             {
                 from.SetFX(cfg.fx, cfg.skillTime);
             }
-            //SkillMove
-            if (cfg.skillMoveLst != null && cfg.skillMoveLst.Count > 0)
-            {
-                SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(cfg.skillMoveLst[0]);
-                CalcSkillMove(from, moveCfg);
-            }
 
+            //SkillMove
+            CalcSkillMoveLst(from, cfg);
 
             //Stop DirMove
             from.canCtrl = false;
@@ -242,19 +219,52 @@ public class SkillMgr :MonoBehaviour
       
     }
 
+
+
     /// <summary>
-    /// 连招时控制方向
+    /// 技能穿过敌人
     /// </summary>
-    /// <param name="from"></param>
-
-    private void CalcAtkDir(EntityBase from)
-    {
-
-
+    /// <param name="cfg"></param>
+    void CalcSkillCollide(SkillCfg cfg) {
+        // 与敌人忽略 地面不忽略
+        if (cfg.isCollide)
+        {
+            Physics.IgnoreLayerCollision(Constants.LayerPlayer, Constants.LayerMonster);
+            timerSvc.AddTimerTask((int tid) => {
+                Physics.IgnoreLayerCollision(Constants.LayerPlayer, Constants.LayerMonster, false);
+            }, cfg.skillTime);
+        }
     }
 
-
-
+    /// <summary>
+    /// 设置攻击方向
+    /// </summary>
+    /// <param name="from"></param>
+    void SetEntityAtkDir(EntityBase from)
+    {
+        switch (from.entityType)
+        {
+            case EntityType.Player:
+                {
+                    Vector2 dir = from.GetInputDir();
+                    if (dir == Vector2.zero)
+                    {
+                        dir = from.CalcTargetDir();
+                        if (dir != Vector2.zero)
+                        {
+                            from.SetAtkDir(dir);
+                        }
+                    }
+                    else
+                    {
+                        from.SetAtkDir(dir, AtkDirType.ChangeComboDir);
+                    }
+                }
+                break;
+            case EntityType.Monster: break;//AIMonster控制
+            default: break;
+        }
+    }
 
 
 
@@ -301,7 +311,19 @@ public class SkillMgr :MonoBehaviour
     }
 
 
+    void CalcSkillMoveLst(EntityBase from, SkillCfg cfg)
+    {
+        if (cfg.skillMoveLst != null && cfg.skillMoveLst.Count > 0)
+        {
+            foreach (var item in cfg.skillMoveLst)
+            {
+                SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(item);
+                CalcSkillMove(from, moveCfg);
+            }
 
+        }
+
+    }
 
     /// <summary>
     /// 技能产生的位移变化

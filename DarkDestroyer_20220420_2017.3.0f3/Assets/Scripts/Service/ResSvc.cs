@@ -731,6 +731,16 @@ public class ResSvc : MonoBehaviour
                                 c.isCombo = int.Parse(e.InnerText)==1?true:false;
                             }
                             break;
+                        case "isCollide":
+                            {
+                                c.isCollide = int.Parse(e.InnerText) == 0 ? true : false;
+                            }
+                            break;
+                        case "isBreak":
+                            {
+                                c.isBreak = int.Parse(e.InnerText) == 0 ? true : false;
+                            }
+                            break;
                         default:break;
                     }
 

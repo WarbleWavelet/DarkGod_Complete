@@ -40,7 +40,7 @@ public class AIMonster : AILogic
     /// </summary>
     public override void TickAILogic()
     {
-        
+        return;
         if (!runAI)
         {
             return;
