@@ -8,6 +8,7 @@
 
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,7 @@ public class EntityBase
      string name;
     public EntityState entityState=EntityState.None;
     public SkillCalback skillCalback;
+    public bool runAI=true;
     #region 属性
 
     public BattleProps Props
@@ -81,7 +83,7 @@ public class EntityBase
     public Combo combo;
     public SkillCfg curSkillCfg;
     public EntityType entityType=EntityType.None;
-    /// <summary>放技能时，被击中时</summary>
+    /// <summary>到IState中赋值，到技能释放中使用。</summary>
     public bool canRlsSkill = true;
     #endregion
 
@@ -357,7 +359,10 @@ public class EntityBase
      
     }
 
-
+    public virtual bool GetBreakState()
+    {
+        return false;
+    }
 }
 
 

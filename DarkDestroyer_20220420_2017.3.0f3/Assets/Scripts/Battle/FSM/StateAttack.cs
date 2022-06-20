@@ -41,6 +41,10 @@ public class StateAttack : IState
     {
         PECommon.Log(this.GetType().ToString() + " Process");
         //
+        if (entity.entityType == EntityType.Player)
+        {
+            entity.canRlsSkill = false;
+        }
         int skillID = (int)args[0];
         entity.SkillAttack(skillID);
     }

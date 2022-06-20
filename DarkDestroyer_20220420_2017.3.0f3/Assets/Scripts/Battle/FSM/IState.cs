@@ -25,8 +25,10 @@ public enum AniState
 {
     None=-1,
     Born=0,
+    // -1时为BlendTree
     Idle,
     Move,
+    //Atk12345 SkillAtk123
     Attack,
     Die=100,
     Hit=101,

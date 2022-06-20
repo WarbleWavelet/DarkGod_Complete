@@ -25,9 +25,9 @@ public class AIMonster : AILogic
     {
         runAI = true;
         findTimer = 0f;
-        findTime = 2f;//Animator Born的时长是2.13
+        findTime = 3f;//Animator Born的时长是2.13
         atkTimer = 0f;
-        atkTime = 2f;
+        atkTime = 3f;
         //
         this.from = from;
         this.to = to;
@@ -40,16 +40,7 @@ public class AIMonster : AILogic
     /// </summary>
     public override void TickAILogic()
     {
-       // return;
-        if (!runAI)
-        {
-            return;
-        }
-
-        //if (from.curState != AniState.Idle && from.curState != AniState.Move )
-        //{
-        //    return;
-        //}
+        if (!runAI)  return;
         if (from.curState == AniState.Idle || from.curState == AniState.Move)
         {
             findTimer += Time.deltaTime;
@@ -59,13 +50,13 @@ public class AIMonster : AILogic
             }
             else
             {
-               
                 Vector2 toDir = CalcTargetDir();
                 if (toDir == Vector2.zero)
                 {
                     runAI = false;
                     return;
                 }
+                //
                 to = from.battleMgr.playerEntity;
                 if (InAtkRange(from, to, from.monsterData.mCfg.atkDis)== false )
                 {
@@ -74,10 +65,9 @@ public class AIMonster : AILogic
                 }
                 else
                 {
-
                     from.SetDir(Vector2.zero);
                     atkTimer += findTime;//跑归来的时间算进攻速里面
-                    if (atkTimer >= atkTime)
+                    if (atkTimer > atkTime)
                     {
 
                         from.SetAtkDir(toDir);
@@ -87,30 +77,19 @@ public class AIMonster : AILogic
                     }
                     else
                     {
+                        from.SetAniAction(Constants.ActionDefault);
                         from.SetDir(Vector2.zero);
                         from.StateIdle();
                     }
-                    
                 }
                 findTimer = 0f;
-                findTime = (PETools.RDInt(1, 5) * 1.0f) / 10;
-
-
+                findTime = (PETools.RDInt(1, 5) * 1.0f) / 10;   
             }
         }
-       
     }
 
     
     #region 辅助
-
-    void Attack( Vector2 dir)
-    {
-        
-
-    }
-
-
 
     Vector2 CalcTargetDir()
     {
@@ -126,7 +105,7 @@ public class AIMonster : AILogic
     /// <returns></returns>
     bool InAtkRange(EntityMonster from, EntityPlayer to, float atkDis)
     {
-        if (to == null || to.curState == AniState.Die)
+        if (to == null || to.curState == AniState.Die )
         {
             runAI = false;//试了不要提出去
             return false;

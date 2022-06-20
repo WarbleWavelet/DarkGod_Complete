@@ -991,6 +991,11 @@ public class ResSvc : MonoBehaviour
                                 c.atkDis = float.Parse(e.InnerText);
                             }
                             break;
+                        case "isStop":
+                            {
+                                c.isStop = (e.InnerText).Equals("1");
+                            }
+                            break;
                         default: break;
                     }
 

@@ -96,14 +96,14 @@ public class SkillMgr :MonoBehaviour
                     for (int i = 0; i < entityLst.Count; i++)
                     {
                         to = entityLst[i];
-                        SkillActionCalcDamage(from, to, skillCfg, action, damage);
+                        CalcDamageBySkillAction(from, to, skillCfg, action, damage);
                     }
                 }
                 break;
             case EntityType.Monster:
                 {
                     to = from.battleMgr.playerEntity;
-                    SkillActionCalcDamage(from, to, skillCfg, action, damage);
+                    CalcDamageBySkillAction(from, to, skillCfg, action, damage);
                 }
                 break;
             default: break;
@@ -113,7 +113,7 @@ public class SkillMgr :MonoBehaviour
 
 
 
-    public void SkillActionCalcDamage(EntityBase from, EntityBase to, SkillCfg skillCfg, SkillActionCfg action, int damage)
+    public void CalcDamageBySkillAction(EntityBase from, EntityBase to, SkillCfg skillCfg, SkillActionCfg action, int damage)
     { 
         bool inRange = InRange(from.GetPos(), to.GetPos(), action.radius);
         bool inAngle = InAngle(from.GetTrans(), to.GetTrans(), action.angle);
@@ -122,10 +122,6 @@ public class SkillMgr :MonoBehaviour
         {
             CalcDamage(from, to, skillCfg, damage);
 
-        }
-        else
-        { 
-        
         }
     }
    
@@ -156,13 +152,88 @@ public class SkillMgr :MonoBehaviour
         CalcDamage_Result( to,  dmgSum);
     }
 
+    int CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
+    {
 
+        int dmgSum = damage;
+        float rate = 0f;
+        rate = PETools.RDInt(1, 100);
+        if (rate < to.Props.dodge)
+        {
+
+            //print("闪避"+rate);
+            to.SetUIDodge();
+            return 0;
+        }
+        dmgSum += from.Props.ad;
+        //
+        bool isCritical = false;
+        rate = PETools.RDInt(1, 100);
+        if (rate < to.Props.critical)
+        {
+
+            // print("暴击" + rate);
+            rate = PETools.RDInt(1, 100);
+            dmgSum = (int)(dmgSum * (1f + rate / 100f));
+            //
+            isCritical = true;
+
+        }
+        //
+        int def = (int)((1f - from.Props.pierce / 100.0f) * to.Props.addef);
+        dmgSum -= def;
+        //print("护甲" + def);
+
+        //print("最终伤害"+dmgSum);
+        if (isCritical)
+            to.SetUICritical(dmgSum);
+        else
+            to.SetUIHurt(dmgSum);
+
+        return dmgSum;
+    }
+    int CalcDamage_AP(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
+    {
+        int dmgSum = damage;
+        dmgSum += from.Props.ap;
+        dmgSum -= to.Props.apdef;
+        return dmgSum;
+    }
+    private void CalcDamage_Result(EntityBase to, int dmgSum)
+    {
+        if (to.curState == AniState.Die) return;
+        if (dmgSum < 0)
+        {
+            dmgSum = 0;
+        }
+
+        if (dmgSum >= to.HP)
+        {
+            to.HP = 0;
+            to.StateDie();
+            to.battleMgr.RemoveMonsterEntity(to.Name);
+        }
+        else
+        {
+            to.HP -= dmgSum;
+            if (to.entityState == EntityState.None)
+            {
+                switch (to.entityType)
+                {
+                    case EntityType.Player:  AudioSvc.Instance.PlayEntityAudio(to.GetAudio(), Constants.AssassinHit);break;
+                    default:break;
+                }
+                //
+                to.StateHit();
+            }
+        }
+    }
 
     #endregion
 
     #region 攻击 数值
 
-  
+
 
     /// <summary>
     /// 放技能的效果 动画
@@ -343,83 +414,7 @@ public class SkillMgr :MonoBehaviour
 
 
     #region CalcDamage
-    int CalcDamage_AD(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
-    {
-       
-        int dmgSum = damage;
-        float rate = 0f;
-        rate = PETools.RDInt(1, 100);
-        if (rate < to.Props.dodge)
-        {
-
-            //print("闪避"+rate);
-            to.SetUIDodge();
-            return 0;
-        }
-        dmgSum += from.Props.ad;
-        //
-        bool isCritical = false;
-        rate = PETools.RDInt(1, 100);
-        if (rate < to.Props.critical)
-        {
-
-            // print("暴击" + rate);
-            rate = PETools.RDInt(1, 100);
-            dmgSum = (int)(dmgSum * (1f + rate / 100f));
-            //
-            isCritical = true;
-
-        }
-        //
-        int def = (int)((1f - from.Props.pierce / 100.0f) * to.Props.addef);
-        dmgSum -= def;
-        //print("护甲" + def);
-
-        //print("最终伤害"+dmgSum);
-        if (isCritical)
-            to.SetUICritical(dmgSum);
-        else
-            to.SetUIHurt(dmgSum);
-
-        return dmgSum;
-    }
-    int CalcDamage_AP(EntityBase from, EntityBase to, SkillCfg skillCfg, int damage)
-    {
-        int dmgSum = damage;
-        dmgSum += from.Props.ap;
-        dmgSum -= to.Props.apdef;
-        return dmgSum;
-    }
-    private void CalcDamage_Result(EntityBase to, int dmgSum)
-    {
-        if (to.curState == AniState.Die) return;
-        if (dmgSum < 0)
-        {
-            dmgSum = 0;
-        }
-
-        if (dmgSum >= to.HP)
-        {
-            to.HP = 0;
-            to.StateDie();
-            to.battleMgr.RemoveMonsterEntity(to.Name);
-        }
-        else
-        {
-            to.HP -= dmgSum;
-            if (to.entityState != EntityState.EndureState)
-            {
-                if (to.entityType == EntityType.Player)
-                {
-                    AudioSvc.Instance.PlayEntityAudio(to.GetAudio(), Constants.AssassinHit);
-                }
-                to.StateHit();
-            }
-           
-        }
-
-        
-    }
+ 
 
 
     #endregion

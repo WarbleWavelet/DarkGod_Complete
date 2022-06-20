@@ -263,17 +263,14 @@ public class PlayerCtrlWnd : WindowRoot
     }
     public void ClickSkill1Btn()
     {
-        if (!CanRlsSkill()) return;
         BattleSys.Instance.ReqReleaseSkill(1);
     }
     public void ClickSkill2Btn()
     {
-        if (!CanRlsSkill()) return;
         BattleSys.Instance.ReqReleaseSkill(2);
     }
     public void ClickSkill3Btn()
     {
-        if (!CanRlsSkill()) return;
         BattleSys.Instance.ReqReleaseSkill(3);
     }
 
@@ -315,7 +312,7 @@ public class PlayerCtrlWnd : WindowRoot
     }
     #endregion
 
-    public bool CanRlsSkill()
+    public bool GetCanRlsSkill()
     {
         return BattleSys.Instance.CanRlsSkill();
     }

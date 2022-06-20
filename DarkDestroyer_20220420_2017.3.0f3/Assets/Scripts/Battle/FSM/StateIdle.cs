@@ -41,6 +41,7 @@ public class StateIdle : IState
             {
                 entity.canRlsSkill = true;
             }
+            //
             if (IsPlayerAndHaveInput(entity))
             {
                 entity.StateMove();

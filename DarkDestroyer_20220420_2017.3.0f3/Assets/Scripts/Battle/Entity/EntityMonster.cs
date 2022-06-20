@@ -49,4 +49,26 @@ public class EntityMonster : EntityBase
             return toDir;
         }
     }
+
+    public override bool GetBreakState()
+    {
+        if (monsterData.mCfg.isStop)
+        {
+            if (curSkillCfg != null)
+            {
+                return curSkillCfg.isBreak;
+
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        { 
+        
+            return false;
+        }
+
+    }
 }

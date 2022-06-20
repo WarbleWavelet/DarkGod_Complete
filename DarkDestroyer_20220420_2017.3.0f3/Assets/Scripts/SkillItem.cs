@@ -26,6 +26,10 @@ public class SkillItem : MonoBehaviour
     public Image imgCD;
     public Text txtCD;
     public Button btn;
+    /// <summary>被点击时设置为该按钮的selfID，结束后重置为-1</summary>
+    int curID = -1;
+    /// <summary>技能123分别是123</summary>
+    int selfID = -1;
     void BindUI()
     {
         btn=transform.Find("icon").GetComponent<Button>();
@@ -42,6 +46,8 @@ public class SkillItem : MonoBehaviour
     {
         time = sec;
         isCooled = true;
+        curID = -1;
+        selfID = GetSelfIDByName();
         BindUI();
     }
 
@@ -50,20 +56,20 @@ public class SkillItem : MonoBehaviour
         deltaSum = 0f;
         timer = 0f;
         delta = 0.1f;
-        
+        curID = selfID;
         isCooled = false;
     }
 
     void Update()
     {
-        if (isCooled == false)
+        if (isCooled == false || PlayerCtrlWnd.Instance.GetCanRlsSkill()==false)
         {
             btn.interactable = false;
             //
             timer += Time.deltaTime;
             if (timer > delta)
             {
-                deltaSum += 0.1f;
+                deltaSum += delta;
 
                 timer = 0f;
             }
@@ -75,19 +81,34 @@ public class SkillItem : MonoBehaviour
                 timer = 0f;
 
             }
+            if (curID == selfID)//该按钮是点击的技能按钮
+            { 
+                txtCD.text = (time - deltaSum).ToString("0.0");
+                imgCD.fillAmount = 1.0f - deltaSum / time; 
+            }
 
-            txtCD.text = (time - deltaSum).ToString("0.0");
-            imgCD.fillAmount = 1.0f - deltaSum / time;
         }
         else
         {
-            txtCD.text ="";
+            txtCD.text = "";
             imgCD.fillAmount = 0;
             btn.interactable = true;
+            curID = -1;
         }
 
     }
 
-#endregion
+    #endregion
 
+    /// <summary>
+    /// 该按钮是哪个技能
+    /// </summary>
+    /// <returns></returns>
+    int GetSelfIDByName()
+    {
+        if (gameObject.name.Equals("1")) return 1;
+        if (gameObject.name.Equals("2")) return 2;
+        if (gameObject.name.Equals("3")) return 3;
+        return 0;
+    }
 }

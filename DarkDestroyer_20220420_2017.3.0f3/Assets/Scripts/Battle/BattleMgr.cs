@@ -55,7 +55,8 @@ public class BattleMgr : MonoBehaviour
             return;
         foreach (var item in monsterDic)
         {
-           item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
+            if(item.Value.curState!=AniState.Hit)
+                item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
         }
 
         if (playerEntity != null)

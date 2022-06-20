@@ -15,13 +15,27 @@ public class StateHit : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
-        entity.curState = AniState.Hit;
+        if (entity.entityType == EntityType.Monster)
+        {
+            entity.curState = AniState.Hit;
+            
+            
+        }
+        else {
+            entity.curState = AniState.Hit;
+        }
         entity.skillCalback.DeleteSkillCbLst();
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
+        if (entity.entityType == EntityType.Monster)
+        {
+            entity.runAI = true;
+        }
+
+        
     }
 
     public void Process(EntityBase entity, params object[] args)
@@ -32,44 +46,65 @@ public class StateHit : IState
         {
             entity.canRlsSkill = false;
         }
-        //
-        entity.SetDir( Vector2.zero);
-        entity.SetAniAction(Constants.ActionHit);
-
-        string[] hitClipNameArr = { "hit", "Hit", "HIT" };
-        int time = (int)( GetHitAniTime( entity, hitClipNameArr) *1000.0f);
-        TimerSvc.Instance.AddTimerTask(( int tid) => {
-            entity.SetAniAction(Constants.ActionDefault);//动画器
-            entity.StateIdle();//状态机
-        },time);
+        ProcessPlayer(entity);
+        ProcessMonster(entity);
         //TODO 玩家 敌人 恢复状态的时间不同
     }
 
+    void ProcessPlayer(EntityBase entity)
+    {
+        if (entity.entityType != EntityType.Player) return;
+        entity.canRlsSkill = false;
+        entity.SetDir(Vector2.zero);
+        entity.SetAniAction(Constants.ActionHit);
 
-    /// <summary>
-    /// Hit hit HIT 都可以
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="arr"></param>
-    /// <returns></returns>
-    private float GetHitAniTime(EntityBase entity, string[] arr)
+        //
+        int time = (int)(GetHitAniTime(entity) * 1000.0f);
+        TimerSvc.Instance.AddTimerTask((int tid) => {
+            entity.SetAniAction(Constants.ActionDefault);//动画器
+            entity.StateIdle();//状态机
+        }, time);
+    }
+    void ProcessMonster(EntityBase entity)
+    {
+        if (entity.entityType != EntityType.Monster) return;
+            entity.SetDir(Vector2.zero);
+            entity.SetAniAction(Constants.ActionHit);
+        //
+        int time = (int)(GetHitAniTime(entity) * 1000.0f);
+        TimerSvc.Instance.AddTimerTask((int tid) => {
+            entity.SetAniAction(Constants.ActionDefault);//动画器
+            entity.StateIdle();//状态机
+        }, time);
+    }
+        #region 说明
+        /// <summary>
+        /// Hit hit HIT 都可以
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        private float GetHitAniTime(EntityBase entity)
     {
         AnimationClip[] clipArr = entity.GetAniClips();
+        string[] arr = { "hit", "Hit", "HIT" };
 
         for (int i = 0; i < clipArr.Length; i++)
         {
             AnimationClip clip = clipArr[i];
-            bool state = false;
             for (int j = 0; j < arr.Length; j++)
             {
-                state = state || clip.name.Contains(arr[j]);
+                if (clip.name.Contains(arr[j]))
+                {
+                    return clip.length;
+                }
             }
             //
-            if (state)
-            {
-                return clip.length;
-            }
+
         }
-        return 1f;
+        return 0.25f;
     }
+    #endregion
+
+
 }

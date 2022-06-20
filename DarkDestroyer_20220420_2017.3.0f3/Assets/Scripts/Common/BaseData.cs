@@ -270,6 +270,7 @@ public class MonsterCfg:BaseData<MonsterCfg>
     public BattleProps props;
     public int skillID;
     public float atkDis;
+    public bool isStop;
 }
 
 

@@ -48,9 +48,10 @@ public class Combo : MonoBehaviour
                     nextSkillID = Constants.SkillIDDefault;
                 }
             }
-            entity.curSkillCfg = null;
+           entity.curSkillCfg = null;
         }
         //
+         
         entity.SetAniAction(Constants.ActionDefault);
     }
 
