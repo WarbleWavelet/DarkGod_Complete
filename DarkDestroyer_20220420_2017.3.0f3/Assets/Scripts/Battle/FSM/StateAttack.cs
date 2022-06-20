@@ -25,9 +25,15 @@ public class StateAttack : IState
         PECommon.Log(this.GetType().ToString() + " Exit");
         //
         if (entity.combo != null)
-        { 
+        {
+            if ( entity.curSkillCfg.isBreak == false)
+            {
+                entity.entityState = EntityState.None;
+            }
             entity.combo.ExitCurSkill(entity);
         }
+        //
+
         
     }
 

@@ -209,6 +209,12 @@ public class SkillMgr :MonoBehaviour
             //Stop DirMove
             from.canCtrl = false;
             from.SetDir(Vector2.zero);
+
+            //entityState
+            if ( cfg.isBreak==false )
+            {
+                from.entityState = EntityState.EndureState;
+            }
             //State Ani
 
             timerSvc.AddTimerTask((tid) => {
@@ -424,11 +430,21 @@ public class SkillMgr :MonoBehaviour
         else
         {
             to.HP -= dmgSum;
-            to.StateHit();
+            if (to.entityState != EntityState.EndureState)
+            {
+                if (to.entityType == EntityType.Player)
+                {
+                    AudioSvc.Instance.PlayEntityAudio(to.GetAudio(), Constants.AssassinHit);
+                }
+                to.StateHit();
+            }
+           
         }
 
         
     }
+
+
     #endregion
 
 

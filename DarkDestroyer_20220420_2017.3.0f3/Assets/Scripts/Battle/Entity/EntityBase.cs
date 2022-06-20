@@ -27,7 +27,8 @@ public class EntityBase
     /// <summary>基础属性</summary>
     BattleProps props;    
     int hp;
-    string name;
+     string name;
+    public EntityState entityState=EntityState.None; 
     #region 属性
 
     public BattleProps Props
@@ -79,6 +80,8 @@ public class EntityBase
     public Combo combo;
     public SkillCfg curSkillCfg;
     public EntityType entityType=EntityType.None;
+    /// <summary>放技能时，被击中时</summary>
+    public bool canRlsSkill = true;
     #endregion
 
     public AniState GetState()
@@ -343,6 +346,16 @@ public class EntityBase
         return Vector2.zero;
     }
 
+    public AudioSource GetAudio()
+    {
+        if (ctrl != null)
+        { 
+           return ctrl.gameObject.GetComponent<AudioSource>();
+        }
+        return null;
+     
+    }
+
 
 }
 
@@ -357,4 +370,11 @@ public  enum AtkDirType
 {
     ChangeComboDir,
     NearTarget
+}
+/// <summary></summary>
+public enum EntityState
+{
+    None,
+    /// <summary>霸体，不可控制，可受伤害</summary> 
+    EndureState,
 }

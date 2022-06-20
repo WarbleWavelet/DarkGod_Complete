@@ -457,4 +457,9 @@ public class BattleMgr : MonoBehaviour
         }
     }
     #endregion
+
+    public bool CanRlsSkill()
+    {
+        return playerEntity.canRlsSkill;
+    }
 }

@@ -27,6 +27,11 @@ public class StateHit : IState
     {
         PECommon.Log(this.GetType().ToString() +"_"+MethodBase.GetCurrentMethod().Name);
         //
+        if (entity.entityType == EntityType.Player)
+        {
+            entity.canRlsSkill = false;
+        }
+        //
         entity.SetDir( Vector2.zero);
         entity.SetAniAction(Constants.ActionHit);
 

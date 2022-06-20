@@ -36,7 +36,7 @@
 		<mainCamRote>45,135,0</mainCamRote>
 		<playerBornPos>-10,13.2,11.5</playerBornPos>
 		<playerBornRote>0,145,0</playerBornRote>
-		<monsterLst>#|1001,-4.39,13.3,3.79,-50,1
+		<monsterLst>#|2001,-4.39,13.3,3.79,-50,1
  |1001,-7.55,13.3, 3,0,1
 #|1001,18.86,13.6,3.7,-107.3,2
  |1001,14.35,13.35,5.95,-117.4,2

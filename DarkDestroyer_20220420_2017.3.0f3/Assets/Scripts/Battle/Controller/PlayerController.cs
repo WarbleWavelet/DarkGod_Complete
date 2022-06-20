@@ -138,6 +138,11 @@ public class PlayerController : Controller
         ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);
     }
 
+
+    #endregion
+
+
+    #region 技能
     private void SetSkillMove(bool isMove=true)
     {
         if (isMove)
@@ -147,6 +152,7 @@ public class PlayerController : Controller
         
        
     }
+
     #endregion
 
 

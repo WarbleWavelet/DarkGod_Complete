@@ -98,6 +98,7 @@ public class Constants
     public const string UIExtenBtn = "uiExtenBtn";
     /// <summary>强化</summary>
     public const string FBItemEnter = "fbitem";
+    public const string AssassinHit = "assassin_Hit";
     #endregion
 
 

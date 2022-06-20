@@ -74,4 +74,9 @@ public class BattleSys : SystemRoot
     {
         return playerCtrlWnd.curDir;
     }
+
+    public bool CanRlsSkill()
+    {
+        return battleMgr.playerEntity.canRlsSkill;
+    }
 }

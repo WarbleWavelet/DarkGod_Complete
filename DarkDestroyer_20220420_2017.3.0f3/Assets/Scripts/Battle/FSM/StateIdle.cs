@@ -37,6 +37,10 @@ public class StateIdle : IState
         }
         else
         {
+            if (entity.entityType == EntityType.Player)
+            {
+                entity.canRlsSkill = true;
+            }
             if (IsPlayerAndHaveInput(entity))
             {
                 entity.StateMove();

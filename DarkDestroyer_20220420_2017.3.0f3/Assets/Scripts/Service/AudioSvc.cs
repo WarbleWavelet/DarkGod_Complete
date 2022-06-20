@@ -60,4 +60,18 @@ public class AudioSvc : MonoBehaviour
         uiAudio = transform.Find("UIAudio").GetComponent<AudioSource>();
 
     }
+
+    /// <summary>
+    /// 播放玩家身上的音效
+    /// </summary>
+    /// <param name="to"></param>
+    /// <param name="name"></param>
+   public void PlayEntityAudio( AudioSource audio, string name)
+    {
+
+            AudioClip clip = ResSvc.Instance.LoadAudio("ResAudio/" + name, true);
+            audio.clip = clip;
+            audio.Play();
+        
+    }
 }
