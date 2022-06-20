@@ -25,12 +25,14 @@ public class SkillMgr :MonoBehaviour
     /// <summary>
     /// 动画 伤害 特效
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="from"></param>
     /// <param name="skillID"></param>
-    public void SkillAttack(EntityBase entity, int skillID)
+    public void SkillAttack(EntityBase from, int skillID)
     {
-        AttackEffect(entity, skillID);
-        SkillDamageChain(entity, skillID);
+        from.skillCalback.ClearSkillCbLst();
+        //
+        AttackEffect(from, skillID);
+        SkillDamageChain(from, skillID);
     
     #region 攻击 伤害
 }
@@ -38,9 +40,9 @@ public class SkillMgr :MonoBehaviour
     /// <summary>
     /// 技能链条，延时即时
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="from"></param>
     /// <param name="skillID"></param>
-    public void SkillDamageChain(EntityBase entity, int skillID)
+    public void SkillDamageChain(EntityBase from, int skillID)
     {
         SkillCfg skillCfg = resSvc.GetSkillCfg(skillID);
         if (skillCfg == null)
@@ -58,16 +60,18 @@ public class SkillMgr :MonoBehaviour
             SkillActionCfg action = resSvc.GetSkillActionCfg(actionLst[i]);
             sum += action.delayTime;
             int actionIdx = i;
-            if (sum > 0)
+            if (sum > 0)//延时
             {
-                timerSvc.AddTimerTask((int tid) =>
+               int actionID = timerSvc.AddTimerTask((int tid) =>
                 {
-                    SkillAction(entity, skillCfg, actionIdx);
+                    from.skillCalback.RemoveSkillActionCb(tid);
+                    SkillAction(from, skillCfg, actionIdx);
                 }, sum);
+                from.skillCalback.AddSkillActionCb( actionID );
             }
-            else
+            else//即时
             {
-                SkillAction(entity, skillCfg, actionIdx);
+                SkillAction(from, skillCfg, actionIdx);
             }
         }
     }
@@ -131,41 +135,21 @@ public class SkillMgr :MonoBehaviour
         int dmgSum = damage;
         switch (skillCfg.dmgType)
         {
-            case DmgType.None :
-                {
-
-                }
-                break;
+            case DmgType.None : break;
             case DmgType.AD:
                 {
                     dmgSum = CalcDamage_AD( from,   to,  skillCfg,  damage);
                 }
                 break;
-            case DmgType.ADC:
-                {
-
-                }
-                break;
+            case DmgType.ADC: break;
             case DmgType.AP:
                 {
                     CalcDamage_AP(from, to, skillCfg, damage );
                 }
                 break;
-            case DmgType.APC:
-                {
-
-                }
-                break;
-            case DmgType.TD:
-                {
-
-                }
-                break;
-            case DmgType.TDC:
-                {
-
-                }
-                break;
+            case DmgType.APC: break;
+            case DmgType.TD:  break;
+            case DmgType.TDC: break;
             default: break;
         }
 
@@ -321,47 +305,40 @@ public class SkillMgr :MonoBehaviour
     {
         if (cfg.skillMoveLst != null && cfg.skillMoveLst.Count > 0)
         {
+            int sum = 0;
             foreach (var item in cfg.skillMoveLst)
             {
                 SkillMoveCfg moveCfg = resSvc.GetSkillMoveCfg(item);
-                CalcSkillMove(from, moveCfg);
+                float speed = 1000.0f * moveCfg.moveDis / (moveCfg.moveTime);
+                sum += moveCfg.delayTime;
+                //
+                if ( sum > 0)//延时
+                {
+                    int moveID = timerSvc.AddTimerTask((tid) =>
+                    {
+                        from.SetSkillMove(true, speed);
+                        from.skillCalback.RemoveSkillMoveCb(tid);
+                    }, sum);
+                    from.skillCalback.AddSkillMoveCb(moveID);
+                }
+                else//即时
+                {
+                    from.SetSkillMove(true, speed);
+                }
+                //恢复
+                sum += moveCfg.moveTime;
+                int stopID = timerSvc.AddTimerTask((tid) => {
+                    //注意顺序，不然速度不能复原
+                    from.SetSkillMove(false);
+                    from.skillCalback.RemoveSkillMoveCb(tid);
+                }, sum);
+                from.skillCalback.AddSkillMoveCb( stopID);
             }
 
         }
 
     }
 
-    /// <summary>
-    /// 技能产生的位移变化
-    /// </summary>
-    /// <param name="entity"></param>
-    /// <param name="moveCfg"></param>
-
-    void CalcSkillMove(EntityBase entity, SkillMoveCfg moveCfg)
-    {
-        float speed = 1000.0f * moveCfg.moveDis / (moveCfg.moveTime);
-
-
-        if (moveCfg.delayTime > 0)
-        {
-            timerSvc.AddTimerTask((tid) =>
-            {
-                entity.SetSkillMove(true, speed);
-            }, moveCfg.delayTime);
-            //
-            timerSvc.AddTimerTask((tid) => {
-                entity.SetSkillMove(false);
-            }, moveCfg.delayTime + moveCfg.moveTime);
-        }
-        else
-        {
-            entity.SetSkillMove(true, speed);
-            //
-            timerSvc.AddTimerTask((tid) => {
-                entity.SetSkillMove(false);
-            }, moveCfg.moveTime);
-        }
-    }
 
 
 

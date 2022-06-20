@@ -28,7 +28,8 @@ public class EntityBase
     BattleProps props;    
     int hp;
      string name;
-    public EntityState entityState=EntityState.None; 
+    public EntityState entityState=EntityState.None;
+    public SkillCalback skillCalback;
     #region 属性
 
     public BattleProps Props

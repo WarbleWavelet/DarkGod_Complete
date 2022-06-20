@@ -161,7 +161,8 @@ public class BattleMgr : MonoBehaviour
             battleMgr = this,
             Name = ctrl.gameObject.name,
             combo = ctrl.gameObject.AddComponent<Combo>(),
-            entityType=EntityType.Player
+            entityType=EntityType.Player,
+            skillCalback = new SkillCalback()
         };
         playerEntity.SetCtrl(ctrl);
         //
@@ -374,7 +375,9 @@ public class BattleMgr : MonoBehaviour
             monsterData=data,
             Name=ctrl.gameObject.name,
             aiMonster=ctrl.gameObject.AddComponent<AIMonster>(),
-            entityType=EntityType.Monster
+            entityType=EntityType.Monster,
+            skillCalback=new SkillCalback()
+
         };
         entityMonster.SetCtrl(ctrl);
         entityMonster.SetBattleProps( data.mCfg.props);

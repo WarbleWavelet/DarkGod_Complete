@@ -16,6 +16,7 @@ public class StateHit : IState
     {
         PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
         entity.curState = AniState.Hit;
+        entity.skillCalback.DeleteSkillCbLst();
     }
 
     public void Exit(EntityBase entity, params object[] args)
