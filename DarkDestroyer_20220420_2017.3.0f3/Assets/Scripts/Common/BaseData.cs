@@ -207,6 +207,7 @@ public class SkillCfg: BaseData<SkillCfg>
     public float cdTime;
     public bool isCombo;
     public bool isCollide;
+    /// <summary>技能中断</summary>
     public bool isBreak;
 
 
