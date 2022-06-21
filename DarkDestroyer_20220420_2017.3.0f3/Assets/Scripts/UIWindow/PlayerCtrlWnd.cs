@@ -67,6 +67,7 @@ public class PlayerCtrlWnd : WindowRoot
 
     [Header("调试技能数据")]
     public Button btnTest;
+    public int timePara;
     #endregion
 
     protected override void InitWnd()
@@ -85,11 +86,12 @@ public class PlayerCtrlWnd : WindowRoot
             InitSkillBtn(101,skill1Trans);
             InitSkillBtn(102,skill2Trans);
             InitSkillBtn(103,skill3Trans);
-            btnTest.onClick.AddListener(ClickTestBtn);
+
             imgHP = transform.Find("TopLeftPin/prgHP/imgHP").GetComponent<Image>();
             txtHP = transform.Find("TopLeftPin/prgHP/txtHP").GetComponent<Text>();
             isFirst =false;
 
+            btnTest.onClick.AddListener(ClickTestBtn);
         }
         //
         InitPrgHP();
@@ -120,9 +122,9 @@ public class PlayerCtrlWnd : WindowRoot
     private void TestCode()
     {
         if (Input.GetKeyDown(KeyCode.Q)) ClickNormalAtkBtn();
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ClickSkill1Btn();
-        if (Input.GetKeyDown(KeyCode.Alpha2)) ClickSkill2Btn();
-        if (Input.GetKeyDown(KeyCode.Alpha3)) ClickSkill3Btn();
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ClickSkillBtnByKey(skill1Trans);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ClickSkillBtnByKey(skill2Trans);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ClickSkillBtnByKey(skill3Trans);
     }
 
 
@@ -257,6 +259,9 @@ public class PlayerCtrlWnd : WindowRoot
             default: break;
         }
     }
+
+
+    #region 通知战场的
     public void ClickNormalAtkBtn()
     {
         BattleSys.Instance.ReqReleaseSkill(0);
@@ -272,6 +277,22 @@ public class PlayerCtrlWnd : WindowRoot
     public void ClickSkill3Btn()
     {
         BattleSys.Instance.ReqReleaseSkill(3);
+    }
+    #endregion  
+
+    void ClickSkillBtnByKey(Transform t)
+    {
+        SkillItem skillItem = t.gameObject.GetComponent<SkillItem>();
+        if (skillItem.btn.interactable == false)
+        { 
+            return;
+        } 
+        ClickSkill1Btn();
+        skillItem.ClickBtn();
+    }
+    public bool GetCanRlsSkill()
+    {
+        return BattleSys.Instance.CanRlsSkill();
     }
 
     /// <summary>
@@ -312,10 +333,7 @@ public class PlayerCtrlWnd : WindowRoot
     }
     #endregion
 
-    public bool GetCanRlsSkill()
-    {
-        return BattleSys.Instance.CanRlsSkill();
-    }
+
 }
 
 enum SkillType

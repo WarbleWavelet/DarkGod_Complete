@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="7.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>REgIBQoBkEAEZCoAICURFKAAIAFYxgkMKAII4AgAAoA=</HashCode>
+      <HashCode>RUgIBQoBkEAEZCoAICURFKAAIAFYxgkMKAII4AgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -182,7 +182,7 @@
   <Class Name="TimerSvc" Collapsed="true">
     <Position X="9.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQEAAAAACAAAAAAAAAAAAAAAIgAAEAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAQEAAAAACAAAAAAAAAAAAAAAIgAAEAAQAAAIAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\TimerSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -203,21 +203,21 @@
   <Class Name="BattleSys" Collapsed="true">
     <Position X="4" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAJAACAAAAAAAAAIAACAAAAAQgAAQAACAAAAAAA=</HashCode>
+      <HashCode>AAAEAAJAACAAAAAAAAAIAACAAAAAQgAAQAACAAAEAAA=</HashCode>
       <FileName>Assets\Scripts\System\BattleSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleMgr" Collapsed="true">
     <Position X="4" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AA4gCoIpECAASJAAAIAIIgSCAABAAAAAAgAEAC1gGEA=</HashCode>
+      <HashCode>AA4gCoIpECAASJAAAIAIIgSCAABAAAAAAgAEAC1kGEA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SkillMgr" Collapsed="true">
     <Position X="2.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAABAAACQBAABAICAAAAAAAAIAQAAAAC4QABCAA=</HashCode>
+      <HashCode>AgAAAAABAAACQAAABAICAAAAEAAAIAQAAAAC4QAACAA=</HashCode>
       <FileName>Assets\Scripts\Battle\SkillMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -238,7 +238,7 @@
   <Class Name="PlayerCtrlWnd" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EaQEAAAAgAAgAAAAAAEgRFAhAAEgAISIQikBAQAAFQI=</HashCode>
+      <HashCode>EaQEAAAAgAAgAAAAAAEgRFQhAAEgAISIQisBAQAAFQI=</HashCode>
       <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -260,7 +260,7 @@
   <Class Name="StateIdle" Collapsed="true">
     <Position X="0.5" Y="13" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAgAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\FSM\StateIdle.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -298,7 +298,7 @@
   <Class Name="EntityMonster" Collapsed="true">
     <Position X="5.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAABAAAAAQBAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAEAAAAAAAAAAAAAABAAAAAQBAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityMonster.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -321,7 +321,7 @@
   <Class Name="StateHit" Collapsed="true">
     <Position X="0.5" Y="16" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAEAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>GAAAAAAAAAAAAAAAAgAAAAEAAAAEAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\FSM\StateHit.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -350,7 +350,7 @@
   <Class Name="AIMonster" Collapsed="true">
     <Position X="2.5" Y="13.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAYAAAAAAAAAICAAAAgAAIAAIAAAgAACEAAAAAA=</HashCode>
+      <HashCode>AAABAAYAAAAAAAAAICAAAAgAAAAAIAAggAACEAAAAAA=</HashCode>
       <FileName>Assets\Scripts\AI\AIMonster.cs</FileName>
       <NewMemberFileName>Assets\Scripts\AI\AiMonster.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -358,8 +358,22 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CQABAUJAAKAcACAARgAAIAwAQDDOFiIYgApAAIAiQAI=</HashCode>
+      <HashCode>CQABAUJAAKEcACAARgAAIAwQQDDOFiIYgA5ACIAiUAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillCalback" Collapsed="true">
+    <Position X="4" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABEAABEAAAAAAAACgAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SkillCalback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillItem" Collapsed="true">
+    <Position X="2.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBEACQgAAAAAAAAAAAAAEAAAAAACAAECACAEAgACA=</HashCode>
+      <FileName>Assets\Scripts\SkillItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="IState" Collapsed="true">

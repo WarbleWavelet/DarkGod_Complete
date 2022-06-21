@@ -50,6 +50,8 @@ public abstract class Controller :MonoBehaviour
             dir = value;
         }
     }
+
+    public bool runAI;
     #endregion
    
 
@@ -93,6 +95,7 @@ public abstract class Controller :MonoBehaviour
             SetMove();    
         }
 
+      
     }
     #endregion
 

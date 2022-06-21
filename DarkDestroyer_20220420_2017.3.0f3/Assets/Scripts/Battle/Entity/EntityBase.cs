@@ -31,7 +31,6 @@ public class EntityBase
      string name;
     public EntityState entityState=EntityState.None;
     public SkillCalback skillCalback;
-    public bool runAI=true;
     #region 属性
 
     public BattleProps Props
@@ -329,7 +328,7 @@ public class EntityBase
 
 
     /// <summary>
-    /// 设置血条的prg
+    /// 设置血条的prg,头上或UI上，多态显示
     /// </summary>
     /// <param name="oldVal"></param>
     /// <param name="newVal"></param>

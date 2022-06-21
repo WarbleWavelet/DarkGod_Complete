@@ -42,21 +42,19 @@ public class StateIdle : IState
                 entity.canRlsSkill = true;
             }
             //
-            if (IsPlayerAndHaveInput(entity))
+            if ( entity.GetInputDir()!=Vector2.zero)
             {
                 entity.StateMove();
                 entity.SetDir(entity.GetInputDir());
             }
             else
             {
-                entity.SetAniAction(Constants.ActionDefault);
+                 entity.SetAniAction(Constants.ActionDefault);
+                entity.SetAniBlend(Constants.BlendIdle);
             }
         }
 
     }
 
-    bool IsPlayerAndHaveInput(EntityBase entity)
-    {
-        return entity.GetInputDir()!=Vector2.zero;
-    }
+
 }

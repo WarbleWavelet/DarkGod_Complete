@@ -55,15 +55,10 @@ public class BattleMgr : MonoBehaviour
             return;
         foreach (var item in monsterDic)
         {
-            if(item.Value.curState!=AniState.Hit)
-                item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
+
+            item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
         }
 
-        if (playerEntity != null)
-        { 
-         playerEntity.ctrl.curState = playerEntity.curState;
-        }
-       
     }
 
     #region 实例地图 场景 人物

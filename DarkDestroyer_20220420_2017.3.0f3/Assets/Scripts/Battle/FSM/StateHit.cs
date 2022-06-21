@@ -15,6 +15,10 @@ public class StateHit : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
+        entity.SetSkillMove(false);
+        entity.SetDir(Vector2.zero);
+
+
         if (entity.entityType == EntityType.Monster)
         {
             entity.curState = AniState.Hit;
@@ -30,10 +34,7 @@ public class StateHit : IState
     public void Exit(EntityBase entity, params object[] args)
     {
         PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
-        if (entity.entityType == EntityType.Monster)
-        {
-            entity.runAI = true;
-        }
+
 
         
     }
@@ -68,14 +69,19 @@ public class StateHit : IState
     void ProcessMonster(EntityBase entity)
     {
         if (entity.entityType != EntityType.Monster) return;
-            entity.SetDir(Vector2.zero);
-            entity.SetAniAction(Constants.ActionHit);
+        entity.ctrl.runAI = false;
+        ((EntityMonster) entity).aiMonster.runAI = entity.ctrl.runAI;
+        entity.SetDir(Vector2.zero);
+        entity.SetAniAction(Constants.ActionHit);
+
         //
         int time = (int)(GetHitAniTime(entity) * 1000.0f);
         TimerSvc.Instance.AddTimerTask((int tid) => {
             entity.SetAniAction(Constants.ActionDefault);//动画器
             entity.StateIdle();//状态机
-        }, time);
+            entity.ctrl.runAI = true;
+            ((EntityMonster)entity).aiMonster.runAI = entity.ctrl.runAI;
+        }, time );
     }
         #region 说明
         /// <summary>

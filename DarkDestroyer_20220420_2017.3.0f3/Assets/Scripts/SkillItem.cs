@@ -3,7 +3,7 @@
 	作者：lenovo
     邮箱: 
     日期：2022/6/9 20:12:49
-	功能：
+	功能：只处理按钮的冷却
 *****************************************************/
 
 using UnityEngine;
@@ -30,6 +30,8 @@ public class SkillItem : MonoBehaviour
     int curID = -1;
     /// <summary>技能123分别是123</summary>
     int selfID = -1;
+
+
     void BindUI()
     {
         btn=transform.Find("icon").GetComponent<Button>();
@@ -53,6 +55,7 @@ public class SkillItem : MonoBehaviour
 
     public void ClickBtn()
     {
+        
         deltaSum = 0f;
         timer = 0f;
         delta = 0.1f;

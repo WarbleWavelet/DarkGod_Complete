@@ -35,6 +35,10 @@ public class Combo : MonoBehaviour
     {
         entity.canCtrl = true;
         SkillCfg cfg = entity.curSkillCfg;
+        if (cfg.isBreak)
+        {
+            entity.entityState = EntityState.None;
+        }
         if ( cfg!= null)
         {
             if (cfg.isCombo)

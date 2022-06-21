@@ -216,15 +216,24 @@ public class SkillMgr :MonoBehaviour
         else
         {
             to.HP -= dmgSum;
-            if (to.entityState == EntityState.None)
+            if (to.entityState != EntityState.EndureState)
             {
                 switch (to.entityType)
                 {
-                    case EntityType.Player:  AudioSvc.Instance.PlayEntityAudio(to.GetAudio(), Constants.AssassinHit);break;
+                    case EntityType.Player:
+                        { 
+                            AudioSvc.Instance.PlayEntityAudio(to.GetAudio(), Constants.AssassinHit);
+                         to.StateHit();
+                        } break;
+                    case EntityType.Monster:
+                        {
+                            to.StateHit();
+                        }
+                        break;
                     default:break;
                 }
                 //
-                to.StateHit();
+               
             }
         }
     }
@@ -266,6 +275,7 @@ public class SkillMgr :MonoBehaviour
             from.SetDir(Vector2.zero);
 
             //entityState
+            
             if ( cfg.isBreak==false )
             {
                 from.entityState = EntityState.EndureState;

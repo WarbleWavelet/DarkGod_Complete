@@ -20,6 +20,7 @@ public class AIMonster : AILogic
     public EntityMonster from;
     public EntityPlayer to;
     public bool runAI = false;
+    bool isInit = false;
 
     public void Init(EntityMonster from, EntityPlayer to)
     {
@@ -31,7 +32,7 @@ public class AIMonster : AILogic
         //
         this.from = from;
         this.to = to;
-
+        isInit = true;
     }
 
 
@@ -39,7 +40,10 @@ public class AIMonster : AILogic
     /// 放在Update的AI逻辑
     /// </summary>
     public override void TickAILogic()
-    {
+    {      
+        if (isInit == false) return;
+  
+       
         if (!runAI)  return;
         if (from.curState == AniState.Idle || from.curState == AniState.Move)
         {
@@ -54,7 +58,6 @@ public class AIMonster : AILogic
                 if (toDir == Vector2.zero)
                 {
                     runAI = false;
-                    return;
                 }
                 //
                 to = from.battleMgr.playerEntity;
@@ -71,14 +74,15 @@ public class AIMonster : AILogic
                     {
 
                         from.SetAtkDir(toDir);
-                        from.SkillAttack(from.monsterData.mCfg.skillID);
+                        int skillID=from.monsterData.mCfg.skillID;
+                       
+                        from.SkillAttack(skillID);
                         //
                         atkTimer = 0f;
                     }
                     else
                     {
                         from.SetAniAction(Constants.ActionDefault);
-                        from.SetDir(Vector2.zero);
                         from.StateIdle();
                     }
                 }
