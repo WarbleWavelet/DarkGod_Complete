@@ -733,12 +733,12 @@ public class ResSvc : MonoBehaviour
                             break;
                         case "isCollide":
                             {
-                                c.isCollide = int.Parse(e.InnerText) == 0 ? true : false;
+                                c.isCollide = int.Parse(e.InnerText) == 1 ? true : false;
                             }
                             break;
                         case "isBreak":
                             {
-                                c.isBreak = int.Parse(e.InnerText) == 0 ? true : false;
+                                c.isBreak = int.Parse(e.InnerText) == 1 ? true : false;
                             }
                             break;
                         default:break;

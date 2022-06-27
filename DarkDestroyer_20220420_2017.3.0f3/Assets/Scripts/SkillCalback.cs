@@ -3,7 +3,7 @@
 	作者：lenovo
     邮箱: 
     日期：2022/6/20 14:3:17
-	功能：技能位移伤害中断
+	功能：技能位移、伤害点中断.加在实体上（区别于动作打点）
 *****************************************************/
 
 using System.Collections.Generic;
@@ -13,7 +13,9 @@ public class SkillCalback
 {
 
     [Header("SkillCalback")]
+    /// <summary>中断技能的位移</summary>
     List<int> skillMoveCbLst = new List<int>();
+    /// <summary>中断技能的上海店</summary>
     List<int> skillActionCbLst = new List<int>();
 
     public void AddSkillMoveCb(int id)
@@ -64,7 +66,7 @@ public class SkillCalback
     /// <summary>
     /// 清空被打断的效果,StateHit时调用
     /// </summary>
-    public void DeleteSkillCbLst()
+    public void DeleteTaskBySkillCbLst()
     {
         foreach (var item in skillActionCbLst)
         {

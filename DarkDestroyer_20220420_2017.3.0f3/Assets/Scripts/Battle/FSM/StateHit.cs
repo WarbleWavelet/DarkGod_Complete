@@ -22,13 +22,12 @@ public class StateHit : IState
         if (entity.entityType == EntityType.Monster)
         {
             entity.curState = AniState.Hit;
-            
-            
         }
         else {
             entity.curState = AniState.Hit;
+            entity.skillCalback.DeleteTaskBySkillCbLst();
         }
-        entity.skillCalback.DeleteSkillCbLst();
+        
     }
 
     public void Exit(EntityBase entity, params object[] args)

@@ -72,6 +72,7 @@ public class EntityBase
         set
         {
             name = value;
+            SetName(name);
         }
     }
 
@@ -339,6 +340,11 @@ public class EntityBase
             GameRoot.Instance.dynamicWnd.SetHpVal( GetTrans().name,  oldVal,  newVal);
         }
        
+    }
+
+    public virtual void SetName(string name)
+    {
+
     }
     #endregion
 

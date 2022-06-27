@@ -22931,6 +22931,7 @@ MonoBehaviour:
   curDir: {x: 0, y: 0}
   btnTest: {fileID: 915435295}
   timePara: 5
+  txtName: {fileID: 13928443}
 --- !u!224 &1842509711 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224260288584090732, guid: bc1fbf77f4b6d2545b191027a079df07,

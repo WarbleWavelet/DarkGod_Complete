@@ -205,9 +205,11 @@ public class SkillCfg: BaseData<SkillCfg>
     //
     public DmgType dmgType;
     public float cdTime;
+    /// <summary>可以连招</summary>
     public bool isCombo;
+    /// <summary>穿过敌人</summary>
     public bool isCollide;
-    /// <summary>技能中断，不可中断为霸体</summary>
+    /// <summary>技能中·1  断，不可中断为霸体</summary>
     public bool isBreak;
 
 

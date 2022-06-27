@@ -68,6 +68,10 @@ public class PlayerCtrlWnd : WindowRoot
     [Header("调试技能数据")]
     public Button btnTest;
     public int timePara;
+
+
+    [Header("中间")]
+    public Text txtName;
     #endregion
 
     protected override void InitWnd()
@@ -89,12 +93,14 @@ public class PlayerCtrlWnd : WindowRoot
 
             imgHP = transform.Find("TopLeftPin/prgHP/imgHP").GetComponent<Image>();
             txtHP = transform.Find("TopLeftPin/prgHP/txtHP").GetComponent<Text>();
+            txtName = transform.Find("txtName").GetComponent<Text>();
             isFirst =false;
 
             btnTest.onClick.AddListener(ClickTestBtn);
         }
         //
         InitPrgHP();
+        SetName(GameRoot.Instance.PlayerData.name);
     }
 
 
@@ -110,6 +116,12 @@ public class PlayerCtrlWnd : WindowRoot
 
         imgHP.fillAmount = ( 1.0f * val )/ HPSum;
         txtHP.text = val  +"/" +HPSum;    
+    }
+
+
+    public void SetName(string playerName)
+    {
+        txtName.text = playerName;
     }
     #endregion
 

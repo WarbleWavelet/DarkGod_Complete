@@ -88,4 +88,10 @@ public class EntityPlayer :EntityBase
     {
         GameRoot.Instance.dynamicWnd.SetPlayerDodge();
     }
+
+
+    public override void SetName(string name )
+    {
+        BattleSys.Instance.playerCtrlWnd.SetName(name);
+    }
 }
