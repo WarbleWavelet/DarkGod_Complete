@@ -255,7 +255,11 @@ public class BattleMgr : MonoBehaviour
     {
         return lastAtkTime != 0;
     }
-    void ResetCombo()
+
+    /// <summary>
+    /// Reset Combo 时间和Index
+    /// </summary>
+   public void ResetCombo()
     {
         comboIndex = 0;
         lastAtkTime = 0;
@@ -294,18 +298,22 @@ public class BattleMgr : MonoBehaviour
         if (playerEntity.canCtrl == false) 
             return;
 
+        // 防止技能、连招被打断时，还在移动，尤其这时的速度是技能速度，所以很快
+        if (playerEntity.curState == AniState.Idle || playerEntity.curState == AniState.Move)
+        { 
+            //PECommon.Log(dir.ToString());
+            if (dir == Vector2.zero)
+            {
+                playerEntity.StateIdle();//动画的逻辑和表现
+                playerEntity.SetDir(Vector2.zero);//转向和移动
+            }
+            else
+            {
+                playerEntity.StateMove();
+                playerEntity.SetDir(dir);
+            }
+        }
 
-        //PECommon.Log(dir.ToString());
-        if (dir == Vector2.zero)
-        {
-            playerEntity.StateIdle();//动画的逻辑和表现
-            playerEntity.SetDir(Vector2.zero);//转向和移动
-        }
-        else
-        {
-            playerEntity.StateMove();
-            playerEntity.SetDir(dir);
-        }
     }
 
 
@@ -375,9 +383,10 @@ public class BattleMgr : MonoBehaviour
             Name=ctrl.gameObject.name,
             aiMonster=ctrl.gameObject.AddComponent<AIMonster>(),
             entityType=EntityType.Monster,
-            skillCalback=new SkillCalback()
+            skillCalback=new SkillCalback(),
+             combo = ctrl.gameObject.AddComponent<Combo>(),
 
-        };
+         };
         entityMonster.SetCtrl(ctrl);
         entityMonster.SetBattleProps( data.mCfg.props);
         //entityMonster.aiMonster.Init( entityMonster,playerEntity);//这时playerEntity未赋值，所以到EntityInitPlayer
@@ -464,4 +473,6 @@ public class BattleMgr : MonoBehaviour
     {
         return playerEntity.canRlsSkill;
     }
+
+
 }

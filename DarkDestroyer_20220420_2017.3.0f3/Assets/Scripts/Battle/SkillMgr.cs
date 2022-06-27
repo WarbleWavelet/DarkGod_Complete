@@ -284,8 +284,7 @@ public class SkillMgr :MonoBehaviour
                 from.entityState = EntityState.EndureState;
             }
             //State Ani
-
-            timerSvc.AddTimerTask((tid) => {
+           from.combo.endSkillIDCb = timerSvc.AddTimerTask((tid) => {
                 from.StateIdle();
             }, cfg.skillTime);
 

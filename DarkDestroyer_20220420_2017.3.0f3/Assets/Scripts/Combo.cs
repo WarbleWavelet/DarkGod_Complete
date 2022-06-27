@@ -14,8 +14,12 @@ public class Combo : MonoBehaviour
 {
     // 111 112 113  114 115 0(没有技能)
       Queue<int> comboQue=new Queue<int>();
+
     /// <summary>StateIde.Progress</summary>
     public int nextSkillID=0;
+
+    /// <summary>技能结束时的回调</summary>
+    public int endSkillIDCb=-1;
 
 
     /// <summary>
@@ -35,12 +39,13 @@ public class Combo : MonoBehaviour
     {
         entity.canCtrl = true;
         SkillCfg cfg = entity.curSkillCfg;
-        if (cfg.isBreak)
+
+        if (cfg != null)
         {
-            entity.entityState = EntityState.None;
-        }
-        if ( cfg!= null)
-        {
+            if (cfg.isBreak)
+            {
+                entity.entityState = EntityState.None;
+            }
             if (cfg.isCombo)
             {
                 if (comboQue.Count > 0)
@@ -52,12 +57,20 @@ public class Combo : MonoBehaviour
                     nextSkillID = Constants.SkillIDDefault;
                 }
             }
-           entity.curSkillCfg = null;
+            entity.curSkillCfg = null;
         }
         //
-         
+
         entity.SetAniAction(Constants.ActionDefault);
     }
 
+    public int GetComboQueCount()
+    { 
+    return comboQue.Count;
+    }
 
+    public void ClearComboQue()
+    {
+         comboQue.Clear();
+    }
 }

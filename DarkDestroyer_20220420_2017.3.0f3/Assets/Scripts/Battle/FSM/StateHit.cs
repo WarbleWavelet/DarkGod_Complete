@@ -18,15 +18,45 @@ public class StateHit : IState
         entity.SetSkillMove(false);
         entity.SetDir(Vector2.zero);
 
+        
+            //连招被打断，删除连招的回调
+            if (entity.combo.endSkillIDCb != -1)
+            {
+                TimerSvc.Instance.DelTask(entity.combo.endSkillIDCb );
+                entity.combo.endSkillIDCb = -1;
+            }
 
+
+        //分开写是方便调试
         if (entity.entityType == EntityType.Monster)
         {
             entity.curState = AniState.Hit;
+
+            //清空技能
+            entity.skillCalback.DeleteTaskBySkillCbLst();
+            //清空连招
+            if (entity.combo.nextSkillID != 0 && entity.combo.GetComboQueCount() > 0)
+            {
+                entity.combo.nextSkillID = 0;
+                entity.combo.ClearComboQue();
+            }
+            entity.battleMgr.ResetCombo();
         }
         else {
             entity.curState = AniState.Hit;
+
+           //清空技能
             entity.skillCalback.DeleteTaskBySkillCbLst();
+            //清空连招
+            if (entity.combo.nextSkillID != 0 && entity.combo.GetComboQueCount() > 0)
+            {
+                entity.combo.nextSkillID = 0;
+                entity.combo.ClearComboQue();
+            }
+            entity.battleMgr.ResetCombo();
         }
+
+        
         
     }
 

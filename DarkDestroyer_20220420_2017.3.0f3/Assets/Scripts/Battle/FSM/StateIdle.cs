@@ -14,6 +14,14 @@ public class StateIdle : IState
     {
         entity.curState = AniState.Idle;
         entity.SetDir( Vector2.zero );
+        
+        //清空打断连招后的回调
+        entity.combo.endSkillIDCb = -1;
+        if (entity.entityType == EntityType.Player)
+        { 
+         
+        }
+       
         PECommon.Log(this.GetType().ToString()+" Enter");
     }
 
