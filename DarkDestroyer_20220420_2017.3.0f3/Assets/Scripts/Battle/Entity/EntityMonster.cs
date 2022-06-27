@@ -52,11 +52,11 @@ public class EntityMonster : EntityBase
 
     public override bool GetBreakState()
     {
-        if (monsterData.mCfg.isStop)
+        if (monsterData.mCfg.isStop)//全局中断
         {
             if (curSkillCfg != null)
             {
-                return curSkillCfg.isBreak;
+                return curSkillCfg.isBreak;//局部中断状态
 
             }
             else

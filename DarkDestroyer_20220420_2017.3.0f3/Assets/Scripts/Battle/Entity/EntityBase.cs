@@ -364,9 +364,13 @@ public class EntityBase
      
     }
 
+    /// <summary>
+    /// 处于技能可中断状态？
+    /// </summary>
+    /// <returns></returns>
     public virtual bool GetBreakState()
     {
-        return false;
+        return true;
     }
 }
 

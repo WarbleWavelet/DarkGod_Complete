@@ -996,6 +996,11 @@ public class ResSvc : MonoBehaviour
                                 c.isStop = (e.InnerText).Equals("1");
                             }
                             break;
+                        case "mType":
+                            {
+                                c.mType = (MonsterType)(int.Parse(e.InnerText));
+                            }
+                            break;
                         default: break;
                     }
 

@@ -3,7 +3,7 @@
 	<item ID="1001">
 		<mName>铁甲战士</mName>
 		<mType>1</mType>
-		<isStop>1</isStop>
+		<isStop>0</isStop>
 		<resPath>PrefabNPC/MonsterSoldier_1</resPath>
 		<skillID>201</skillID>
 		<atkDis>2</atkDis>

@@ -1,0 +1,1 @@
+excel2010 "开发工具""导出"到Resources\ResCfgs\guide.xml

@@ -55,8 +55,11 @@ public class BattleMgr : MonoBehaviour
             return;
         foreach (var item in monsterDic)
         {
+            EntityMonster monster = item.Value;
+            monster.GetGameObject().GetComponent<AIMonster>().TickAILogic();
+            monster.ctrl.curState = monster.curState;
+            monster.ctrl.runAI = monster.aiMonster.runAI;
 
-            item.Value.GetGameObject().GetComponent<AIMonster>().TickAILogic();
         }
 
     }

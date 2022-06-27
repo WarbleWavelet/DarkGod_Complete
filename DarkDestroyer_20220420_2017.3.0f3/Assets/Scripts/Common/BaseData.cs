@@ -209,7 +209,7 @@ public class SkillCfg: BaseData<SkillCfg>
     public bool isCombo;
     /// <summary>穿过敌人</summary>
     public bool isCollide;
-    /// <summary>技能中·1  断，不可中断为霸体</summary>
+    /// <summary>技能中断，不可中断为霸体</summary>
     public bool isBreak;
 
 
@@ -273,7 +273,9 @@ public class MonsterCfg:BaseData<MonsterCfg>
     public BattleProps props;
     public int skillID;
     public float atkDis;
+    /// <summary>技能能被打断</summary>
     public bool isStop;
+    public MonsterType mType;
 }
 
 
@@ -346,4 +348,13 @@ public class BattleProps
 
 }
 
+
+
+public enum MonsterType
+{
+    None=0,
+    Solider=1,
+    Boss=2
+
+}
 #endregion

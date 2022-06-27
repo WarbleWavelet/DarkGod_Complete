@@ -199,6 +199,8 @@ public class SkillMgr :MonoBehaviour
         dmgSum -= to.Props.apdef;
         return dmgSum;
     }
+
+
     private void CalcDamage_Result(EntityBase to, int dmgSum)
     {
         if (to.curState == AniState.Die) return;
@@ -216,15 +218,16 @@ public class SkillMgr :MonoBehaviour
         else
         {
             to.HP -= dmgSum;
-            if (to.entityState != EntityState.EndureState)
+            if (to.entityState != EntityState.EndureState  && to.GetBreakState() )//非霸体，可中断
             {
                 switch (to.entityType)
                 {
                     case EntityType.Player:
                         { 
                             AudioSvc.Instance.PlayEntityAudio(to.GetAudio(), Constants.AssassinHit);
-                         to.StateHit();
-                        } break;
+                            to.StateHit();
+                        } 
+                        break;
                     case EntityType.Monster:
                         {
                             to.StateHit();

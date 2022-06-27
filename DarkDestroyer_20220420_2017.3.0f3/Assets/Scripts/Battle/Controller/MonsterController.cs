@@ -17,6 +17,8 @@ public class MonsterController : Controller
             SetDir();
             SetMove();
         }
+      
+      
     }
 
     public override void SetDir()

@@ -1,0 +1,14 @@
+﻿/****************************************************
+    文件：#SCRIPTNAME#.cs
+	作者：#CreateAuthor#
+    邮箱: 
+    日期：#CreateTime#
+	功能：
+*****************************************************/
+
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour 
+{
+
+}
