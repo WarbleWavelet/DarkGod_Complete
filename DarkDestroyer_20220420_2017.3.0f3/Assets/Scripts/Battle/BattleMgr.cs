@@ -42,17 +42,35 @@ public class BattleMgr : MonoBehaviour
     /// <summary>Combo的平A的SkillID</summary>
     public int[] comboArr = new int[] { Constants.AttackID1, Constants.AttackID2, Constants.AttackID3, Constants.AttackID4, Constants.AttackID5 };
     public int comboIndex = 0;
+
+
+    [Header("MapMgr")]
+    public Dictionary< int, TriggerData> monsterWaveDic = new Dictionary< int, TriggerData>();
+    /// <summary>检测下一波敌人</summary>
+    public bool ckeckWave = true;
     #endregion
 
     void Awake()
     {
         InitSvc();
+        ckeckWave = true ;
     }
 
     void Update()
     {
-        if (monsterDic == null || monsterDic.Count == 0)
-            return;
+
+        if (ckeckWave && mapMgr != null && monsterDic.Count == 0)
+        {
+           bool isExist= mapMgr.SetNextMonsterWave();
+            ckeckWave = false;
+
+            if (isExist == false)
+            { 
+            //TODO 通关
+            }
+        }
+            // Monster AI
+        if (monsterDic == null || monsterDic.Count == 0)  return;
         foreach (var item in monsterDic)
         {
             EntityMonster monster = item.Value;
@@ -61,6 +79,8 @@ public class BattleMgr : MonoBehaviour
             monster.ctrl.runAI = monster.aiMonster.runAI;
 
         }
+
+
 
     }
 
@@ -90,6 +110,8 @@ public class BattleMgr : MonoBehaviour
     void InitMgr_ToBattleRoot()
     { 
         mapMgr=gameObject.AddComponent<MapMgr>();
+
+        //
         skillMgr = gameObject.AddComponent<SkillMgr>();
         stateMgr = gameObject.AddComponent<StateMgr>();
         skillMgr.Init();
@@ -119,8 +141,17 @@ public class BattleMgr : MonoBehaviour
 
         //LoadMonsterByWave(0);
         DelayActiveMonster();
-   
-  
+
+        //不同场景节点
+        GameObject[] gos = GameObject.FindGameObjectsWithTag(Tags.Door);
+        foreach (GameObject door in gos)
+        {
+            TriggerData trigger = door.AddComponent<TriggerData>();
+            trigger.mapMgr = mapMgr;
+            trigger.waveIdx = int.Parse( door.name.Substring( door.name.Length-1 , 1 ) )-1;
+            monsterWaveDic.Add(   trigger.waveIdx, trigger);
+            mapMgr.triggerDataLst.Add(trigger);
+        }
     }
  #endregion  
     #endregion
@@ -165,10 +196,7 @@ public class BattleMgr : MonoBehaviour
         };
         playerEntity.SetCtrl(ctrl);
         //
-        foreach (var item in monsterDic)
-        {
-            item.Value.aiMonster.Init(item.Value, playerEntity);
-        }
+
     }
 
     void InitPlayerBattleProps(EntityBase entity)
@@ -341,7 +369,7 @@ public class BattleMgr : MonoBehaviour
                 //物体
                 MonsterCfg cfg = resSvc.GetMonsterCfg(data.ID);
                 GameObject go = resSvc.LoadPrefab(cfg.resPath, true);
-                go.name = cfg.mName + "_" + data.mWave + "_" + data.mIndex;
+                go.name = cfg.mName + "_Wave" + data.mWave + "_Idx" + data.mIndex;
                 go.transform.position = data.mBornPos;
                 go.transform.localEulerAngles = data.mBornRot;
                 go.transform.localScale = Vector3.one;
@@ -358,6 +386,8 @@ public class BattleMgr : MonoBehaviour
                 Transform hpRoot = go.transform.Find("hpRoot");
                 GameRoot.Instance.dynamicWnd.AddHpItemInfo(  go.transform, hpRoot, go.name, entity.Props.hp  );
                 //print( go.name+"   "+go.GetInstanceID() );
+
+
             }
         }
 
@@ -389,8 +419,13 @@ public class BattleMgr : MonoBehaviour
          };
         entityMonster.SetCtrl(ctrl);
         entityMonster.SetBattleProps( data.mCfg.props);
-        //entityMonster.aiMonster.Init( entityMonster,playerEntity);//这时playerEntity未赋值，所以到EntityInitPlayer
-        //
+        entityMonster.aiMonster.Init( entityMonster,playerEntity);//这时playerEntity未赋值，所以到EntityInitPlayer
+        //foreach (var item in monsterDic)
+        //{
+        //    EntityMonster monster = item.Value;
+        //    monster.aiMonster.Init(monster, playerEntity);
+        //}
+
         return entityMonster;
     }
 
@@ -414,7 +449,7 @@ public class BattleMgr : MonoBehaviour
     /// </summary>
     /// <param name="state"></param>
     /// <param name="delay"></param>
-    void DelayActiveMonster(bool state =true)
+   public void DelayActiveMonster(bool state =true)
     {
         
         timer.AddTimerTask((int tid)=> {

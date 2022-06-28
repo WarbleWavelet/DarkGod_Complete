@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapRoot
   - CharShowCam
+  - Door
   layers:
   - Default
   - TransparentFX

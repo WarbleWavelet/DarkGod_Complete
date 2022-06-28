@@ -898,8 +898,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 36
-  m_CollisionDetection: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!95 &95603065126527728
 Animator:
   serializedVersion: 3
@@ -909,7 +909,7 @@ Animator:
   m_GameObject: {fileID: 1259949933360648}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4307fa705c2d53244b27e98c1b9eee0f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 22d5dfb5e32bdbb43a7be7bcf034622e, type: 2}
+  m_Controller: {fileID: 9100000, guid: cb7a9c6012f09ce4eb96bdfbbd691848, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
