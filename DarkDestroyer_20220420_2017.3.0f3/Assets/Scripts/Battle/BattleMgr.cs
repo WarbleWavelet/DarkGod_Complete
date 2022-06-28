@@ -152,6 +152,9 @@ public class BattleMgr : MonoBehaviour
             monsterWaveDic.Add(   trigger.waveIdx, trigger);
             mapMgr.triggerDataLst.Add(trigger);
         }
+
+        // AudioListener让位于 Player
+        GameRoot.Instance.GetComponent<AudioListener>().enabled = false;
     }
  #endregion  
     #endregion
@@ -176,6 +179,24 @@ public class BattleMgr : MonoBehaviour
         //
         InitEntityPlayer(this.stateMgr, playerCtrl);
         InitPlayerBattleProps( playerEntity );
+
+        //设置音效
+        List<AudioSource> audioLst = new List<AudioSource>();
+        audioLst.Add(playerCtrl.gameObject.GetComponent<AudioSource>());
+        Transform t = playerCtrl.transform.Find("Bip_master");
+        for (int i = 0; i < t.childCount; i++)
+        {
+            AudioSource audio=t.GetChild(i).GetComponent<AudioSource>();
+            if (audio != null)
+            { 
+                audioLst.Add( audio);
+            }
+        }
+
+        foreach (var item in audioLst)
+        {
+            item.volume = 0.25f;
+        }
     }
 
     /// <summary>
@@ -195,6 +216,7 @@ public class BattleMgr : MonoBehaviour
             skillCalback = new SkillCalback()
         };
         playerEntity.SetCtrl(ctrl);
+
         //
 
     }
