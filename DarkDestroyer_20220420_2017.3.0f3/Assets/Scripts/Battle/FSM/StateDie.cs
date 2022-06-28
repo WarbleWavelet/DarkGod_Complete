@@ -14,6 +14,7 @@ public class StateDie : IState
     {
         PECommon.Log(this.GetType().ToString() + " Enter");
         entity.curState=AniState.Die;
+        entity.combo.RemoveSkillCB( entity );
     }
 
     public void Exit(EntityBase entity, params object[] args)
