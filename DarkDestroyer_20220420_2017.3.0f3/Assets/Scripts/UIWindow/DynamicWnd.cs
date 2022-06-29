@@ -100,6 +100,8 @@ public class DynamicWnd : WindowRoot
             GameObject go = resSvc.LoadPrefab(PathDefine.ItemEntityHp, true);
             go.transform.SetParent(hpItmRoot);
             go.transform.localPosition = new Vector3(-1000, 0, 0);//看不到
+
+            
             item = go.GetComponent<ItemEntityHp>();
             item.InitItemHpInfo(t, hpRoot, hp);
             hpItemDic.Add(mName, item);

@@ -405,8 +405,29 @@ public class BattleMgr : MonoBehaviour
                 monsterDic.Add(go.name, entity);
 
                 //加血条
-                Transform hpRoot = go.transform.Find("hpRoot");
-                GameRoot.Instance.dynamicWnd.AddHpItemInfo(  go.transform, hpRoot, go.name, entity.Props.hp  );
+
+                switch ( entity.monsterData.mCfg.mType)
+                {
+                    case MonsterType.Solider :
+         
+                        {
+
+                            Transform hpRoot = go.transform.Find("hpRoot");
+                            GameRoot.Instance.dynamicWnd.AddHpItemInfo(go.transform, hpRoot, go.name, entity.Props.hp);
+
+                        }
+                        break;
+                    case MonsterType.Boss:
+                        {
+
+                            Transform t = GameRoot.Instance.transform.Find("PlayerCtrlWnd/RightTopPin");
+                            Transform hpRoot = go.transform.GetChild(0).Find("hpRoot");
+                            BattleSys.Instance.playerCtrlWnd.SetBossHPState(true, entity.Props.hp);
+                        }
+                        break;
+                    default: break;
+                }
+
                 //print( go.name+"   "+go.GetInstanceID() );
 
 
@@ -499,7 +520,22 @@ public class BattleMgr : MonoBehaviour
         if (monsterDic.TryGetValue(key, out entity))
         {
 
-            GameRoot.Instance.dynamicWnd.RemoveHpItemInfo( key);
+            switch ( entity.monsterData.mCfg.mType )
+            {
+                case  MonsterType.Solider:
+                    {
+                        GameRoot.Instance.dynamicWnd.RemoveHpItemInfo( key);
+                    }
+                    break;
+                case MonsterType.Boss:
+                    {
+                        BattleSys.Instance.playerCtrlWnd.SetBossHPState(false);
+                    }
+                    break;
+                default: break;
+            }
+
+            
             monsterDic.Remove(key);
         }
     }

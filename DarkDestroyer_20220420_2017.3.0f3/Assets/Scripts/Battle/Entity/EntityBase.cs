@@ -336,10 +336,16 @@ public class EntityBase
     public virtual void SetUIHpVal(int oldVal, int newVal)
     {
         if (GameRoot.Instance.dynamicWnd != null && GameRoot.Instance != null)
-        { 
+        {
             GameRoot.Instance.dynamicWnd.SetHpVal( GetTrans().name,  oldVal,  newVal);
         }
-       
+
+
+        if (BattleSys.Instance.playerCtrlWnd != null && BattleSys.Instance != null)
+        {
+            BattleSys.Instance.playerCtrlWnd.SetHPVal(oldVal, newVal);
+        }
+
     }
 
     public virtual void SetName(string name)

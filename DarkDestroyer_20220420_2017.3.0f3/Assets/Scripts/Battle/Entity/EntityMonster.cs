@@ -71,4 +71,32 @@ public class EntityMonster : EntityBase
         }
 
     }
+
+    public override void SetUIHpVal(int oldVal, int newVal)
+    {
+
+        switch (monsterData.mCfg.mType)
+        {
+            case MonsterType.Solider:
+                {
+                    if (GameRoot.Instance.dynamicWnd != null && GameRoot.Instance != null)
+                    {
+                        GameRoot.Instance.dynamicWnd.SetHpVal(GetTrans().name, oldVal, newVal);
+                    }
+                }
+                break;
+            case MonsterType.Boss:
+                {
+                    if (BattleSys.Instance.playerCtrlWnd != null && BattleSys.Instance != null)
+                    {
+                        BattleSys.Instance.playerCtrlWnd.SetHPVal(oldVal, newVal);
+                    }
+                }
+                break;
+            default: break;
+        }
+
+
+
+    }
 }

@@ -38,6 +38,12 @@ public class PlayerCtrlWnd : WindowRoot
     public Text txtHP;
     public int HPSum;
 
+
+
+    [Header("右上")]
+    public ItemBossHp itemBossHp;
+    public Transform t;
+    public GameObject go;
     [Header("右下")]
     public Transform normalAtkTrans;
     public Transform skill1Trans;
@@ -85,14 +91,14 @@ public class PlayerCtrlWnd : WindowRoot
 
         //
         if (isFirst)
-        { 
+        {
             InitAtkBtn(normalAtkTrans);
             InitSkillBtn(101,skill1Trans);
             InitSkillBtn(102,skill2Trans);
             InitSkillBtn(103,skill3Trans);
 
-            imgHP = transform.Find("TopLeftPin/prgHP/imgHP").GetComponent<Image>();
-            txtHP = transform.Find("TopLeftPin/prgHP/txtHP").GetComponent<Text>();
+            imgHP = transform.Find("LeftTopPin/prgHP/imgHP").GetComponent<Image>();
+            txtHP = transform.Find("LeftTopPin/prgHP/txtHP").GetComponent<Text>();
             txtName = transform.Find("txtName").GetComponent<Text>();
             isFirst =false;
 
@@ -129,6 +135,8 @@ public class PlayerCtrlWnd : WindowRoot
     void Update()
     {
         TestCode();
+
+
     }
 
     private void TestCode()
@@ -342,6 +350,24 @@ public class PlayerCtrlWnd : WindowRoot
     {
         audioSvc.PlayUIAudio(Constants.UIOpenPage);
         MainCitySys.Instance.OpenInfoWnd();
+    }
+
+
+    #endregion
+
+
+
+    #region 右上
+    internal void SetBossHPState(bool state,int hp=100)    {
+        SetActive(t,state);
+        itemBossHp.SetBossHPState(state,1f,hp);
+        
+
+    }
+
+    public void SetHPVal(int oldVal, int newVal)
+    {
+        itemBossHp.SetHPVal( oldVal,  newVal);
     }
     #endregion
 

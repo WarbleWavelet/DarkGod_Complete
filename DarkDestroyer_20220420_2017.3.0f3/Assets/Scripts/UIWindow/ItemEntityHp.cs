@@ -72,7 +72,6 @@ public class ItemEntityHp : MonoBehaviour
         if (curPrg != tarPrg)
         {
             UpdateMixPrg();
-           
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -127,11 +126,7 @@ public class ItemEntityHp : MonoBehaviour
 
         imgPgLayer2.fillAmount = curPrg;
     }
-   private void SetPrg()
-    {
-        imgPgLayer1.fillAmount = tarPrg;
-        imgPgLayer2.fillAmount = curPrg;
-    }
+
     /// <summary>
     /// 初始化血条
     /// </summary>
@@ -168,13 +163,6 @@ public class ItemEntityHp : MonoBehaviour
         rect.anchoredPosition = screenPos * scaleRate + offsetPos;
     }
     #endregion
-
-
-
-
-
-
-
 
     #region 飘字
     public void SetHurt(int num)

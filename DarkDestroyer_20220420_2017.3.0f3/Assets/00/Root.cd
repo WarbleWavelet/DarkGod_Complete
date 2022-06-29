@@ -210,7 +210,7 @@
   <Class Name="BattleMgr" Collapsed="true">
     <Position X="4" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AA4gCoIpECAASJAAAIAIIgSCAABAAAAAAgAEAC1kGEA=</HashCode>
+      <HashCode>AA4gCoIpECAASJAAAIAIIgSCAABCAAAAAgAEAC1kGEA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -231,14 +231,14 @@
   <Class Name="MapMgr" Collapsed="true">
     <Position X="2.25" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgCAAAAAAA=</HashCode>
+      <HashCode>AAAAAQIAAAAAAAAAAAAAAAAAABAAAgAAAAACAAAAAAQ=</HashCode>
       <FileName>Assets\Scripts\Battle\MapMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PlayerCtrlWnd" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EaQEAAAAgAAgAAAAAAEgRFQhAAEgAISIQisBAQAAFQI=</HashCode>
+      <HashCode>GaQEgABAgAAhBAAAAAEgRFQhAAEgAISIQmsJQQiCFQY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -252,7 +252,7 @@
   <Class Name="EntityPlayer" Collapsed="true">
     <Position X="5.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAIAAAAEAAAAQAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAIAAAAEAAAAQAAAAAAAAAAABAAAAAAAQAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityPlayer.cs</FileName>
       <NewMemberFileName>Assets\Scripts\Battle\Entity\EntityBase.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -326,17 +326,17 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ItemEntityHp" Collapsed="true">
+  <Class Name="ItemBossHp" Collapsed="true">
     <Position X="2.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>HGQQCAEASCABAAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
-      <FileName>Assets\Scripts\UIWindow\ItemEntityHp.cs</FileName>
+      <HashCode>HGQQCAAASCABAAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\ItemBossHp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Combo" Collapsed="true">
     <Position X="4" Y="12.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAABAEAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAABAEAAAAAEAAAAAoAAAEAEAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Combo.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -358,14 +358,14 @@
   <Class Name="EntityBase" Collapsed="true">
     <Position X="5.75" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CQABAUJAAKEcACAARgAAIAwQQDDOFiIYgA5ACIAiUAI=</HashCode>
+      <HashCode>CQABAUJAAKEcACAARgAAIAwQQDDOFiIYgA5ASIAiUAI=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SkillCalback" Collapsed="true">
     <Position X="4" Y="13" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAABEAABEAAAAAAAACgAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAQAABEAABAAAAAAAAACgAAAAAAAAAAAAIAAAAQAAAA=</HashCode>
       <FileName>Assets\Scripts\SkillCalback.cs</FileName>
     </TypeIdentifier>
   </Class>
