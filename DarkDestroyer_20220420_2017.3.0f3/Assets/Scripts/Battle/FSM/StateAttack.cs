@@ -12,7 +12,7 @@ public class StateAttack : IState
 
     public void Enter(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Enter");
+      //  PECommon.Log(this.GetType().ToString() + " Enter");
         //
         entity.curState = AniState.Attack;
         int skillID = (int)args[0];
@@ -22,7 +22,7 @@ public class StateAttack : IState
     public void Exit(EntityBase entity, params object[] args)
     {
 
-        PECommon.Log(this.GetType().ToString() + " Exit");
+      //  PECommon.Log(this.GetType().ToString() + " Exit");
         //
         if (entity.combo != null)
         {
@@ -39,7 +39,7 @@ public class StateAttack : IState
 
     public void Process(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Process");
+      //  PECommon.Log(this.GetType().ToString() + " Process");
         //
         if (entity.entityType == EntityType.Player)
         {

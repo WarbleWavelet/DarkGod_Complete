@@ -26,7 +26,6 @@ public class BuyWnd : WindowRoot
     private BuyType buyType;
     private GoodType goodType;
     bool isFirst = true;
-   
 
     protected override void InitWnd()
     { 

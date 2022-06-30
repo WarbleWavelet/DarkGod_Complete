@@ -10,6 +10,7 @@ using PEProtocol;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleMgr : MonoBehaviour 
 {
@@ -48,6 +49,8 @@ public class BattleMgr : MonoBehaviour
     public Dictionary< int, TriggerData> monsterWaveDic = new Dictionary< int, TriggerData>();
     /// <summary>检测下一波敌人</summary>
     public bool ckeckWave = true;
+
+    public bool isPauseGame = false;
     #endregion
 
     void Awake()
@@ -65,8 +68,8 @@ public class BattleMgr : MonoBehaviour
             ckeckWave = false;
 
             if (isExist == false)
-            { 
-            //TODO 通关
+            {
+                EndBattle( true, playerEntity.HP);
             }
         }
             // Monster AI
@@ -567,5 +570,14 @@ public class BattleMgr : MonoBehaviour
         return playerEntity.canRlsSkill;
     }
 
+
+    /// <summary>
+    /// 敌人打死了；玩家被打死；玩家自行退出战斗；玩家掉线
+    /// </summary>
+    public void EndBattle(bool isWIn, int hp)
+    {
+        audioSvc.StopBGMusic();
+     
+    }
 
 }

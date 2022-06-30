@@ -30,6 +30,7 @@ public class BattleSys : SystemRoot
     [Header("BattleSys")]
    public BattleMgr battleMgr;
     public PlayerCtrlWnd playerCtrlWnd;
+    public EndBattleWnd endBattleWnd;
     public override void InitSys()
     {
         base.InitSys(); 
@@ -56,7 +57,15 @@ public class BattleSys : SystemRoot
         battleMgr.InitMap(mapID);
     }
 
+    /// <summary>
+    /// 敌人打死了；玩家被打死；玩家自行退出战斗；玩家掉线
+    /// </summary>
+    public void EndBattle(bool isWIn, int hp)
+    {
+        playerCtrlWnd.SetWndState(false);
+        GameRoot.Instance.dynamicWnd.ClearHpItemInfo();
 
+    }
 
     #region 控制玩家        
     public void ReqReleaseSkill(int idx)
@@ -77,6 +86,18 @@ public class BattleSys : SystemRoot
 
     public bool CanRlsSkill()
     {
+        if (battleMgr.playerEntity != null)
+        { 
         return battleMgr.playerEntity.canRlsSkill;
+        }
+
+        return false;
+        
+    }
+
+
+    public void SetEndBattleWndState(EndBattleType type, bool state=true)
+    { 
+        endBattleWnd.SetEndBattleWndState(type, state);
     }
 }

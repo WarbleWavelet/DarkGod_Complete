@@ -59,7 +59,7 @@
   <Class Name="DynamicWnd" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BCQgAAAAGAQAAgAAgAEgoAAAAACACAAAAVACAEAAAAA=</HashCode>
+      <HashCode>BCQgAAAAGAQAAgACgAEgoAAAAACACAAAAVACAEAAAAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\DynamicWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -203,7 +203,7 @@
   <Class Name="BattleSys" Collapsed="true">
     <Position X="4" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAJAACAAAAAAAAAIAACAAAAAQgAAQAACAAAEAAA=</HashCode>
+      <HashCode>AAAEAAJAACAAABAAAAAIAACAAAAAQgAAQAACAAAEAAA=</HashCode>
       <FileName>Assets\Scripts\System\BattleSys.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -238,7 +238,7 @@
   <Class Name="PlayerCtrlWnd" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>GaQEgABAgAAhBAAAAAEgRFQhAAEgAISIQmsJQQiCFQY=</HashCode>
+      <HashCode>EaQEQABAgAAgAACAAAEwRFQhAAEgAKSIQi8JQQAANQY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -298,7 +298,7 @@
   <Class Name="EntityMonster" Collapsed="true">
     <Position X="5.75" Y="10.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAEAAAAAAAAAAAAAABAAAAAQBAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAEAAAAAQAAAAAAAABAAAAAQBAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Battle\Entity\EntityMonster.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -329,7 +329,7 @@
   <Class Name="ItemBossHp" Collapsed="true">
     <Position X="2.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>HGQQCAAASCABAAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
+      <HashCode>HGQQCABASCABBAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\ItemBossHp.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -372,8 +372,15 @@
   <Class Name="SkillItem" Collapsed="true">
     <Position X="2.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQBEACQgAAAAAAAAAAAAAEAAAAAACAAECACAEAgACA=</HashCode>
+      <HashCode>AAQBEACQgAAAAAAAAAAAAAEAAAAAACABECACAEAgACA=</HashCode>
       <FileName>Assets\Scripts\SkillItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EndBattleWnd" Collapsed="true">
+    <Position X="2.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\EndBattleWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="IState" Collapsed="true">

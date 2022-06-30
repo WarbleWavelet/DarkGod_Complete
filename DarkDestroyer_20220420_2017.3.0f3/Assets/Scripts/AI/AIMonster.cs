@@ -47,6 +47,13 @@ public class AIMonster : AILogic
         if (!runAI)  return;
         if (from.curState == AniState.Idle || from.curState == AniState.Move)
         {
+            if (from.battleMgr.isPauseGame)//暂停游戏
+            {
+                from.StateIdle();
+                return;
+            }
+
+
             findTimer += Time.deltaTime;
             if (findTimer < findTime)
             {

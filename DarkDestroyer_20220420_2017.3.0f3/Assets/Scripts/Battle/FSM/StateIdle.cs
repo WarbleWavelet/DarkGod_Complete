@@ -22,17 +22,17 @@ public class StateIdle : IState
          
         }
        
-        PECommon.Log(this.GetType().ToString()+" Enter");
+       // PECommon.Log(this.GetType().ToString()+" Enter");
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Exit");
+      //  PECommon.Log(this.GetType().ToString() + " Exit");
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Process");
+      //  PECommon.Log(this.GetType().ToString() + " Process");
         bool isCombo = false;
         if (entity.combo != null)//Monster没Combo
         { 

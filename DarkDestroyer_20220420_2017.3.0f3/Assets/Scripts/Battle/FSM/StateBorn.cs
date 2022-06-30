@@ -12,19 +12,19 @@ public class StateBorn : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Enter");
+        //PECommon.Log(this.GetType().ToString() + " Enter");
         entity.curState = AniState.Born;
 
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Exit");
+       // PECommon.Log(this.GetType().ToString() + " Exit");
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Process");
+      //  PECommon.Log(this.GetType().ToString() + " Process");
         entity.SetAniAction(Constants.ActionBorn);
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {

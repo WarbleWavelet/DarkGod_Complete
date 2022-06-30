@@ -6,6 +6,7 @@
 	功能：声音播放服务
 *****************************************************/
 
+using System;
 using UnityEngine;
 
 public class AudioSvc : MonoBehaviour
@@ -73,5 +74,13 @@ public class AudioSvc : MonoBehaviour
             audio.clip = clip;
             audio.Play();
         
+    }
+
+    internal void StopBGMusic()
+    {
+        if (bgAudio != null)
+        {
+            bgAudio.Stop();
+        }
     }
 }

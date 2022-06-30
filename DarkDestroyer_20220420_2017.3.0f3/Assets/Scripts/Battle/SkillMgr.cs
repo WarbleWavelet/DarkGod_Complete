@@ -96,14 +96,18 @@ public class SkillMgr :MonoBehaviour
                     for (int i = 0; i < entityLst.Count; i++)
                     {
                         to = entityLst[i];
-                        CalcDamageBySkillAction(from, to, skillCfg, action, damage);
+                        if (to != null)
+                        { CalcDamageBySkillAction(from, to, skillCfg, action, damage); }
+
                     }
                 }
                 break;
             case EntityType.Monster:
                 {
                     to = from.battleMgr.playerEntity;
-                    CalcDamageBySkillAction(from, to, skillCfg, action, damage);
+                    if (to != null)//防止多敌攻击时，有的攻击未完成，玩家就已经被打死
+                    { CalcDamageBySkillAction(from, to, skillCfg, action, damage); }
+
                 }
                 break;
             default: break;
@@ -213,7 +217,22 @@ public class SkillMgr :MonoBehaviour
         {
             to.HP = 0;
             to.StateDie();
-            to.battleMgr.RemoveMonsterEntity(to.Name);
+
+            switch (to.entityType)
+            {
+                case EntityType.Player:
+                    {
+                        to.battleMgr.EndBattle(false, 0);
+                        to.battleMgr.playerEntity = null;
+                    }
+                    break;
+                case EntityType.Monster:
+                    {
+                        to.battleMgr.RemoveMonsterEntity(to.Name);
+                    }
+                    break;
+                default: break;
+            }
         }
         else
         {

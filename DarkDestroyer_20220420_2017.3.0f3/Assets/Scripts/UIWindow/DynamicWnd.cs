@@ -120,6 +120,15 @@ public class DynamicWnd : WindowRoot
     
     }
 
+    public void ClearHpItemInfo()
+    {
+        foreach (var item in hpItemDic)
+        {
+            Destroy(item.Value.gameObject);
+        }
+        hpItemDic.Clear();
+    }
+
     public void SetHurt(string mName, int hp)
     {
         ItemEntityHp item = null;

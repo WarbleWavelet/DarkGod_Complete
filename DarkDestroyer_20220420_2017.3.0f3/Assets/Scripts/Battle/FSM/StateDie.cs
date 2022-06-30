@@ -12,29 +12,39 @@ public class StateDie : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Enter");
+        //PECommon.Log(this.GetType().ToString() + " Enter");
         entity.curState=AniState.Die;
         entity.combo.RemoveSkillCB( entity );
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Exit");
+       // PECommon.Log(this.GetType().ToString() + " Exit");
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Process");
+       // PECommon.Log(this.GetType().ToString() + " Process");
         //
         if ( entity.isDead==true )
         { 
             return;
-        } 
+        }
         entity.SetAniAction(Constants.ActionDie);
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {
-           entity.SetActive(false);
+            entity.SetActive(false);
+            if (entity.entityType == EntityType.Monster)
+            {
+                //BattleSys.Instance.playerCtrlWnd.SetAtkBtnInterable(false);
+                BattleSys.Instance.playerCtrlWnd.SetWndState(false);
+                GameRoot.Instance.GetComponent<AudioListener>().enabled = true;
+            }           
+
         }, Constants.DelayDieAniLength);
         entity.isDead = true;
+
+
+
     }
 }

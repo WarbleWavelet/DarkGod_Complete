@@ -31,10 +31,10 @@ public class InstanceWnd : WindowRoot
     #endregion
 
     [Header("副本")]
-    public bool isFirst = true;
     public PlayerData pd;
     /// <summary>显示看的</summary>
     public int instance=0;
+    bool isFirst = true;
     protected override void InitWnd()
     {
         base.InitWnd();

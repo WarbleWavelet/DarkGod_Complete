@@ -23,7 +23,6 @@ public class WindowRoot : MonoBehaviour
     [ReadOnly]public NetSvc netSvc;
     [ReadOnly]public TimerSvc timerSvc;
 
-
     #region Wnd
     public bool GetWndState()
     {
@@ -72,10 +71,15 @@ public class WindowRoot : MonoBehaviour
         netSvc = NetSvc.Instance;
         timerSvc = TimerSvc.Instance;
         timerSvc = TimerSvc.Instance;
+
+
     }
-    #endregion
-   
-    protected T GetOrAddComponent<T>(GameObject go) where T:Component
+
+
+    
+        #endregion
+
+        protected T GetOrAddComponent<T>(GameObject go) where T:Component
     {
         T t = go.GetComponent<T>();
         if (t == null)
@@ -159,6 +163,11 @@ public class WindowRoot : MonoBehaviour
     {
         text.gameObject.SetActive(state);
     }
+    protected void SetActive(Button button, bool state = true)
+    {
+        button.gameObject.SetActive(state);
+    }
+
     protected void SetActive(Image image, bool state = true)
     {
         image.gameObject.SetActive(state);

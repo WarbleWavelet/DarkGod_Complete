@@ -203,15 +203,19 @@ public class MainCitySys : SystemRoot
             charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
         }
 
-
+        //playerCtrl = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<PlayerController>();
         Transform player = playerCtrl.transform;
 
-        charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//人物前上方
-        charCamTrans.localEulerAngles = new Vector3(0f, 180f + player.localEulerAngles.y, 0f);//相机对着人物
-        charCamTrans.localScale = Vector3.one;
+        if (charCamTrans != null)
+        {
+            charCamTrans.localPosition = player.position + player.forward * 2.8f + new Vector3(0f, 1.2f, 0f);//人物前上方
+            charCamTrans.localEulerAngles = new Vector3(0f, 180f + player.localEulerAngles.y, 0f);//相机对着人物
+            charCamTrans.localScale = Vector3.one;
 
 
-        charCamTrans.gameObject.SetActive(state);
+            charCamTrans.gameObject.SetActive(state);
+        }
+
 
 
     }

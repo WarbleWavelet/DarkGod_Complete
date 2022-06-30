@@ -30,7 +30,7 @@ public class SkillItem : MonoBehaviour
     int curID = -1;
     /// <summary>技能123分别是123</summary>
     int selfID = -1;
-
+    public EntityPlayer player;
 
     void BindUI()
     {
@@ -44,12 +44,13 @@ public class SkillItem : MonoBehaviour
 
     }
 
-  public  void Init(float sec=5f)
+  public  void Init(EntityPlayer player,float sec=5f )
     {
         time = sec;
         isCooled = true;
         curID = -1;
         selfID = GetSelfIDByName();
+        this.player = player;
         BindUI();
     }
 
@@ -65,7 +66,11 @@ public class SkillItem : MonoBehaviour
 
     void Update()
     {
-        if (isCooled == false || PlayerCtrlWnd.Instance.GetCanRlsSkill()==false)
+        if (player.isDead)
+        {
+            btn.interactable = false;
+        }
+        if (isCooled == false || PlayerCtrlWnd.Instance.GetCanRlsSkill()==false )
         {
             btn.interactable = false;
             //

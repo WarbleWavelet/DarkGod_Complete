@@ -14,14 +14,14 @@ public class StateHit : IState
 {
     public void Enter(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
+      //  PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
         entity.curState = AniState.Hit;
         entity.combo.RemoveSkillCB(entity);
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
+      //  PECommon.Log(this.GetType().ToString() + MethodBase.GetCurrentMethod().Name);
 
 
         
@@ -29,7 +29,7 @@ public class StateHit : IState
 
     public void Process(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() +"_"+MethodBase.GetCurrentMethod().Name);
+       // PECommon.Log(this.GetType().ToString() +"_"+MethodBase.GetCurrentMethod().Name);
         //
         if (entity.entityType == EntityType.Player)
         {

@@ -37,6 +37,7 @@ public class PlayerCtrlWnd : WindowRoot
     public Image imgHP;
     public Text txtHP;
     public int HPSum;
+    public Button btnHead;
 
 
 
@@ -59,14 +60,14 @@ public class PlayerCtrlWnd : WindowRoot
     public Vector2 defaultPos = Vector2.zero;
     /// <summary>摇杆点的运动半径</summary>
     float pointDis;
+    Button btnAtk;
 
     [Header("下")]
     public Text txtExpPrg;
     public Transform expPrgTrans;
 
     [Header("总")]
-    public bool isFirst=true;
-    public bool canMove = true;
+    public new bool canMove = true;
     /// <summary>解决技能后需要动下摇杆才能移动</summary> 
     public Vector2 curDir;
 
@@ -78,6 +79,8 @@ public class PlayerCtrlWnd : WindowRoot
 
     [Header("中间")]
     public Text txtName;
+
+    bool isFirst = true;
     #endregion
 
     protected override void InitWnd()
@@ -97,12 +100,17 @@ public class PlayerCtrlWnd : WindowRoot
             InitSkillBtn(102,skill2Trans);
             InitSkillBtn(103,skill3Trans);
 
+           
             imgHP = transform.Find("LeftTopPin/prgHP/imgHP").GetComponent<Image>();
             txtHP = transform.Find("LeftTopPin/prgHP/txtHP").GetComponent<Text>();
             txtName = transform.Find("txtName").GetComponent<Text>();
+            //
+            btnHead = transform.Find("LeftTopPin/btnHead").GetComponent<Button>();
+            btnHead.onClick.AddListener(ClickHeadBtn);
+            //
             isFirst =false;
 
-            btnTest.onClick.AddListener(ClickTestBtn);
+           // btnTest.onClick.AddListener(ClickTestBtn);
         }
         //
         InitPrgHP();
@@ -246,17 +254,20 @@ public class PlayerCtrlWnd : WindowRoot
     #region 技能
     private void InitAtkBtn(Transform t)
     {
-        Button btn = t.Find("icon").GetComponent<Button>();
-        btn.onClick.AddListener(ClickNormalAtkBtn);
+        btnAtk = t.Find("icon").GetComponent<Button>();
+        btnAtk.onClick.AddListener(ClickNormalAtkBtn);
     }
-
+    public void SetAtkBtnInterable(bool state)
+    {
+        btnAtk.interactable = state;
+    }
 
     private void InitSkillBtn(int skillID, Transform t)
     {
 
         SkillItem skill = GetOrAddSkillItem(t);
         SkillCfg cfg = resSvc.GetSkillCfg(skillID);
-        skill.Init(cfg.cdTime / 1000);
+        skill.Init(BattleSys.Instance.battleMgr.playerEntity, cfg.cdTime / 1000);
 
         Button btn = t.Find("icon").GetComponent<Button>();
         switch (t.gameObject.name)
@@ -349,7 +360,9 @@ public class PlayerCtrlWnd : WindowRoot
     public void ClickHeadBtn()
     {
         audioSvc.PlayUIAudio(Constants.UIOpenPage);
-        MainCitySys.Instance.OpenInfoWnd();
+        //MainCitySys.Instance.OpenInfoWnd();
+        BattleSys.Instance.battleMgr.isPauseGame = true;//访问BattleSys下的EndBattleWnd
+        BattleSys.Instance.SetEndBattleWndState(EndBattleType.Pause);
     }
 
 
@@ -370,8 +383,6 @@ public class PlayerCtrlWnd : WindowRoot
         itemBossHp.SetHPVal( oldVal,  newVal);
     }
     #endregion
-
-
 }
 
 enum SkillType

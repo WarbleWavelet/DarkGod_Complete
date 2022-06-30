@@ -48,7 +48,7 @@ public class LoadingWnd : WindowRoot
         //ForTooFastToSee(prg);
         //
         //textPrg.text = (int)prg*100+"%";//原来这样写，但是应该90%时显示为0%
-        SetText(textPrg, prg*100+"%");
+        SetText(textPrg, (prg*100).ToString("0.00")+"%");
         imageFG.fillAmount = prg;
         imagePoint.transform.localPosition = new Vector3(-607.488f + prg*(607.488f*2), 0, 0);//value=0时
     }

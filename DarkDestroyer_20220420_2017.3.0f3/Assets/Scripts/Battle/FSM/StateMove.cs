@@ -13,19 +13,19 @@ public class StateMove : IState
     public void Enter(EntityBase entity, params object[] args)
     {
         entity.curState = AniState.Move;
-        PECommon.Log(this.GetType().ToString() + " Enter");
+       // PECommon.Log(this.GetType().ToString() + " Enter");
     }
 
     public void Exit(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Exit");
+       // PECommon.Log(this.GetType().ToString() + " Exit");
         entity.SetAniAction(Constants.ActionDefault);
         entity.SetAniBlend(Constants.BlendIdle);
     }
 
     public void Process(EntityBase entity, params object[] args)
     {
-        PECommon.Log(this.GetType().ToString() + " Process");
+        //PECommon.Log(this.GetType().ToString() + " Process");
         entity.SetAniAction(Constants.ActionDefault);
         entity.SetAniBlend(Constants.BlendWalk);
     }
