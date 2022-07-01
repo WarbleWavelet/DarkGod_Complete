@@ -577,6 +577,7 @@ public class BattleMgr : MonoBehaviour
     public void EndBattle(bool isWIn, int hp)
     {
         audioSvc.StopBGMusic();
+        BattleSys.Instance.SetEndBattleWndState(EndBattleType.Lose );
      
     }
 

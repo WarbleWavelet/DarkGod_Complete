@@ -121,9 +121,13 @@ public class MainCitySys : SystemRoot
                 nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
             }
             strongWnd.RefreshItem(0);
+            //
+            GameRoot.Instance.GetComponent<AudioListener>().enabled = true;
 
         });
     }
+
+
 
 
 

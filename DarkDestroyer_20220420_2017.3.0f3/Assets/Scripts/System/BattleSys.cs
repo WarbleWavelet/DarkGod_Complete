@@ -6,6 +6,7 @@
 	功能：战斗系统(Sys=>各种Mgr)
 *****************************************************/
 
+using System;
 using UnityEngine;
 
 public class BattleSys : SystemRoot 
@@ -28,7 +29,10 @@ public class BattleSys : SystemRoot
     #endregion
 
     [Header("BattleSys")]
-   public BattleMgr battleMgr;
+    public MainCitySys mainCitySys;
+    public DynamicWnd dynamicWnd;
+
+    public BattleMgr battleMgr;
     public PlayerCtrlWnd playerCtrlWnd;
     public EndBattleWnd endBattleWnd;
     public override void InitSys()
@@ -53,6 +57,8 @@ public class BattleSys : SystemRoot
         go.transform.SetParent(GameRoot.Instance.transform);
         //
         battleMgr=go.AddComponent<BattleMgr>();
+        mainCitySys=GameRoot.Instance.GetComponent<MainCitySys>();
+        dynamicWnd = GameRoot.Instance.dynamicWnd;
         //TODO
         battleMgr.InitMap(mapID);
     }
@@ -95,6 +101,14 @@ public class BattleSys : SystemRoot
         
     }
 
+    internal void DestroySelf()
+    {
+        BattleSys.Instance.playerCtrlWnd.SetWndState(false);
+        BattleSys.Instance.endBattleWnd.SetWndState(false);
+
+        BattleSys.Instance.dynamicWnd.ClearHpItemInfo();
+        Destroy( battleMgr.gameObject );
+    }
 
     public void SetEndBattleWndState(EndBattleType type, bool state=true)
     { 

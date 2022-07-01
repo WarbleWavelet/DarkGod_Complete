@@ -16,15 +16,22 @@ public class EndBattleWnd : WindowRoot
 
     [Header("EndBattleWnd")]
     public EndBattleType endBattleType= EndBattleType.None;
+    public Button btnClose;    
     public Button btnExit;
+
+    [Header("战斗结算")]    
+    /// <summary>战斗结算</summary>
+    public Transform transEvaluation;    
     public Text txtTime;
+    /// <summary>用时</summary>
     public Text txtHp;
     public Text txtReward;
     public Image imgEvaluation;
-    public Transform transEvaluation;
-    //
-    public Button btnClose;
+
     public Button btnEnter;
+    //
+
+
 
     bool isFirst = true;
     protected override void InitWnd()
@@ -66,6 +73,10 @@ public class EndBattleWnd : WindowRoot
     private void CliclBtnExit()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
+        
+
+        BattleSys.Instance.mainCitySys.EnterMainCity();
+        BattleSys.Instance.DestroySelf();
     }
 
     private void CliclBtnEnter()
@@ -101,12 +112,15 @@ public class EndBattleWnd : WindowRoot
         {
             case EndBattleType.Win:
                 {
-
+                    SetActive(transEvaluation, true);
                 }
                 break;
             case EndBattleType.Lose:
                 {
-
+                    SetActive( btnExit);
+                    SetActive(btnClose,false);
+                    BattleSys.Instance.battleMgr.isPauseGame = true;
+                    SetActive(transEvaluation, false);
                 }
                 break;
             case EndBattleType.Pause:

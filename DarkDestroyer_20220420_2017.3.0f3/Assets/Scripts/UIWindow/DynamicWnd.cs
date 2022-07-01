@@ -120,6 +120,10 @@ public class DynamicWnd : WindowRoot
     
     }
 
+
+    /// <summary>
+    /// 清空数据，销毁go
+    /// </summary>
     public void ClearHpItemInfo()
     {
         foreach (var item in hpItemDic)
