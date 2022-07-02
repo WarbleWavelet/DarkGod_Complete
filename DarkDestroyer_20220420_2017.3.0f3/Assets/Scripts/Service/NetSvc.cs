@@ -234,6 +234,11 @@ public class NetSvc : MonoBehaviour
                     InstanceSys.Instance.RspInstanceFight(msg);
                 }
                 break;
+            case CMD.RspInstanceFightEnd:
+                {
+                    BattleSys.Instance.RspInstanceFightEnd(msg);
+                }
+                break;
         }
     }
     #endregion

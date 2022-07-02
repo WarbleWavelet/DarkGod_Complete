@@ -231,6 +231,16 @@ public class GameRoot : MonoBehaviour
     {
         PlayerData.power = data.power;
     }
+
+    internal void SetPlayerDataByInstanceEnd(RspInstanceFightEnd data)
+    {
+        PlayerData.coin=data.coin;
+        PlayerData.crystal=data.crystal;
+        PlayerData.instance=data.instance;
+        PlayerData.exp=data.exp;
+        PlayerData.lv=data.lv;
+
+    }
     #endregion
 
 

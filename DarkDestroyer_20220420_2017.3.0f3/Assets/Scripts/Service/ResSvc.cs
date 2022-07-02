@@ -334,6 +334,21 @@ public class ResSvc : MonoBehaviour
                                 c.monsterLst = String_ToMonsterDataLst(e.InnerText) ;
                             }
                             break;
+                        case "exp":
+                            {
+                                c.exp = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "coin":
+                            {
+                                c.coin = int.Parse(e.InnerText);
+                            }
+                            break;
+                        case "crystal":
+                            {
+                                c.crystal = int.Parse(e.InnerText);
+                            }
+                            break;
                         default:break;
                     }
                     
@@ -886,7 +901,6 @@ public class ResSvc : MonoBehaviour
                 skillActionDic.Add(ID, c);
                 
             }
-            int a = 1;
         }
     }
     public SkillActionCfg GetSkillActionCfg(int ID)

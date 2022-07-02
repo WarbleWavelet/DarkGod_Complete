@@ -49,7 +49,7 @@ class InstanceSys
     {
         PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);
         ReqInstanceFight data = pack.msg.reqInstanceFight;
-       InstanceCfg cfg= cfgSvc.GetInstanceCfg(data.instanceID);
+       MapCfg cfg= cfgSvc.GetMapCfg(data.instance);
         GameMsg msg = new GameMsg
         {
             cmd = (int)CMD.RspInstanceFight
@@ -63,13 +63,69 @@ class InstanceSys
                 msg.rspInstanceFight = new RspInstanceFight
                 {
                     power = pd.power,
-                    instanceID = data.instanceID
+                    instance = data.instance
                 };
             }
         }
         else
         {
             msg.err = (int)ErrorCode.LackPower;
+        }
+
+        pack.session.SendMsg(msg);
+    }
+
+    internal void ReqInstanceFightEnd(MsgPack pack)
+    {
+        ReqInstanceFightEnd data = pack.msg.reqInstanceFightEnd;
+        GameMsg msg = new GameMsg
+        {
+            cmd = (int)CMD.RspInstanceFightEnd
+        };
+
+        if (data.isWin)
+        {
+            //检验
+            if (data.costTime > PECommon.EndBattleMinTime && data.remainHP > 0)
+            {
+                PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);                
+                MapCfg cfg = cfgSvc.GetMapCfg(data.instance);
+                //
+                pd.coin += cfg.coin;
+                pd.crystal += cfg.crystal;
+                PECommon.CalcExp(pd, cfg.exp);
+                //
+                if (data.instance == pd.instance)
+                {
+                    pd.instance++;
+                }
+                //
+                if (cacheSvc.UpdatePlayerData(pd.id, pd))
+                {
+                    msg.rspInstanceFightEnd = new RspInstanceFightEnd
+                    {
+                        instance = data.instance,
+                        remainHP=data.remainHP,
+                        costTime=data.costTime,
+                        isWin=data.isWin,
+                        //
+                        coin = pd.coin,
+                        crystal = pd.crystal,
+                        exp = pd.exp,
+                        lv=pd.lv,
+                        instanceIdx=pd.instance
+                    };
+                }
+                else
+                {
+                    msg.err = (int)ErrorCode.UpdateDBError;
+                }
+            }
+
+        }
+        else
+        {
+            msg.err = (int)ErrorCode.ClientDataError;
         }
 
         pack.session.SendMsg(msg);

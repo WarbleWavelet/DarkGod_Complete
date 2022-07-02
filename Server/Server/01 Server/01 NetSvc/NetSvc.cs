@@ -105,6 +105,11 @@ class NetSvc
                     InstanceSys.Instance.ReqInstanceFight(pack);
                 }
                 break;
+            case CMD.ReqInstanceFightEnd:
+                {
+                    InstanceSys.Instance.ReqInstanceFightEnd(pack);
+                }
+                break;
             default: break;
         }
 

@@ -24,6 +24,8 @@ namespace PEProtocol
     public class PlayerData
     {
         //含义看数据库
+        //当前副本进度 
+        // ID | 已经完成次数 | 是否已经领取奖励   
         public int id;
         public string name;
         public int exp;
@@ -43,8 +45,8 @@ namespace PEProtocol
         public int guideid;
         public int[] strongArr;
         public long time;
-        public string[] taskRewardArr;   // ID | 已经完成次数 | 是否已经领取奖励
-        public int instance;
+        public string[] taskRewardArr;    
+        public int instance; 
     }
     #endregion
 
@@ -78,8 +80,11 @@ namespace PEProtocol
         public ReqTakeTaskReward reqTakeTaskReward;
         public RspTakeTaskReward rspTakeTaskReward;
         public PshTaskPrgs pshTaskPrgs;
+        //副本
         public ReqInstanceFight reqInstanceFight;
         public RspInstanceFight rspInstanceFight;
+        public ReqInstanceFightEnd reqInstanceFightEnd;
+        public RspInstanceFightEnd rspInstanceFightEnd;
 
 
 
@@ -112,7 +117,9 @@ namespace PEProtocol
         PshTaskPrgs = 212,
         //副本
         ReqInstanceFight=301,
-        RspInstanceFight=302
+        RspInstanceFight=302,
+        ReqInstanceFightEnd = 303,
+        RspInstanceFightEnd = 304
     }
 
     /// <summary>
@@ -274,14 +281,42 @@ namespace PEProtocol
     [Serializable]
     public class ReqInstanceFight
     {
-        public int instanceID;
+        public int instance;
     }
 
     [Serializable]
     public class RspInstanceFight
     {
-        public int instanceID;
+        public int instance;
         public int power;
+    }
+
+    [Serializable]
+    public class ReqInstanceFightEnd
+    {
+        public int instance;
+        public bool isWin;
+        /// <summary>耗HP</summary>
+        public int remainHP;
+        /// <summary>耗时</summary>
+        public int costTime;
+    }
+
+    [Serializable]
+    public class RspInstanceFightEnd
+    {
+        public int instance;
+        public bool isWin;
+        /// <summary>耗HP</summary>
+        public int remainHP;
+        /// <summary>耗时</summary>
+        public int costTime;
+
+        public int coin;
+        public int crystal;
+        public int lv;
+        public int exp;
+        public int instanceIdx;
     }
     #endregion
     #endregion

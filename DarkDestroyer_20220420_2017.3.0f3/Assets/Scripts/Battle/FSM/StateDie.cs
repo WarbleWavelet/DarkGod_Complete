@@ -34,14 +34,12 @@ public class StateDie : IState
         TimerSvc.Instance.AddTimerTask((int tid) =>
         {
             entity.SetActive(false);
-            GameRoot.Instance.GetComponent<AudioListener>().enabled = true;
-            //
-            if (entity.entityType == EntityType.Monster)
-            {
-                //BattleSys.Instance.playerCtrlWnd.SetAtkBtnInterable(false);
-                BattleSys.Instance.playerCtrlWnd.SetWndState(false);
+            if (entity.entityType == EntityType.Player)
+            { 
+                GameRoot.Instance.GetComponent<AudioListener>().enabled = true;        
+            }
 
-            }           
+          
 
         }, Constants.DelayDieAniLength);
         entity.isDead = true;

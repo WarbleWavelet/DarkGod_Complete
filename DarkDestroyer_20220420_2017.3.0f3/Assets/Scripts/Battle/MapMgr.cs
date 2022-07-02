@@ -24,7 +24,7 @@ public class MapMgr : MonoBehaviour
     /// 开局第一波
     /// </summary>
     /// <param name="battleMgr"></param>
-    public void Init(BattleMgr battleMgr)
+    public void Init(BattleMgr battleMgr, Action cb = null)
     {
 
         this.battleMgr = battleMgr;

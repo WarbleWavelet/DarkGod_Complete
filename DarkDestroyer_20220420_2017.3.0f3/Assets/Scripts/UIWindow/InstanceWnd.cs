@@ -96,9 +96,9 @@ public class InstanceWnd : WindowRoot
     private void ClickInstanceItem(int childIndex)
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
-        instance = childIndex;
-        int instanceID = ChildIndexToInstanceID(childIndex);
-        int power=resSvc.GetMapCfg(instanceID).power;
+        this.instance = childIndex;
+        int instance = ChildIndexToInstanceID(childIndex);
+        int power=resSvc.GetMapCfg(instance).power;
         if (pd.power >= power)
         {
             GameMsg msg = new GameMsg
@@ -106,7 +106,7 @@ public class InstanceWnd : WindowRoot
                 cmd = (int)CMD.ReqInstanceFight,
                 reqInstanceFight = new ReqInstanceFight
                 {
-                    instanceID = instanceID,
+                    instance = instance,
                 }
             };
 

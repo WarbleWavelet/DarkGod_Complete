@@ -35,7 +35,7 @@ class CfgSvc
         InitGuideCfg(PathDefine.Guide);
         InitStrongCfg(PathDefine.Strong);
         InitTaskRewardCfg(PathDefine.TaskReward);
-        InitInstanceCfg(PathDefine.Instance);
+        InitMapCfg(PathDefine.Map);
 
         PECommon.Log("CfgSvc Init");
 
@@ -282,10 +282,76 @@ class CfgSvc
 
     #region 副本
 
-    public List<string> instanceLst = new List<string>();
-    Dictionary<int, InstanceCfg> instanceDic = new Dictionary<int, InstanceCfg>();
+    //public List<string> instanceLst = new List<string>();
+    //Dictionary<int, InstanceCfg> instanceDic = new Dictionary<int, InstanceCfg>();
 
-    private void InitInstanceCfg(string path)
+    //private void InitInstanceCfg(string path)
+    //{
+    //    XmlDocument doc = new XmlDocument();
+    //    doc.Load(path);
+    //    XmlNodeList nodLst = doc.SelectSingleNode("root").ChildNodes;
+    //    //
+    //    for (int i = 0; i < nodLst.Count; i++)
+    //    {
+    //        XmlElement ele = nodLst[i] as XmlElement;
+    //        if (ele.GetAttributeNode("ID") == null)
+    //            continue;
+    //        int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
+    //        //nodLst，ID
+    //        InstanceCfg c = new InstanceCfg
+    //        {
+    //            ID = ID
+    //        };
+    //        foreach (XmlElement e in nodLst[i].ChildNodes)
+    //        {
+    //            switch (e.Name)
+    //            {
+    //                case "power":
+    //                    {
+    //                        c.power = int.Parse(e.InnerText);
+    //                    }
+    //                    break;
+    //                case "exp":
+    //                    {
+    //                        c.exp = int.Parse(e.InnerText);
+    //                    }
+    //                    break;
+    //                case "coin":
+    //                    {
+    //                        c.coin = int.Parse(e.InnerText);
+    //                    }
+    //                    break;
+    //                case "crystal":
+    //                    {
+    //                        c.crystal = int.Parse(e.InnerText);
+    //                    }
+    //                    break;
+    //                default: break;
+    //            }
+
+    //        }
+    //        //
+    //        instanceDic.Add(ID, c);
+    //    }
+
+
+    //}
+    //public InstanceCfg GetInstanceCfg(int ID)
+    //{
+    //    InstanceCfg c = null;
+    //    if (instanceDic.TryGetValue(ID, out c))
+    //    {
+    //        return c;
+    //    }
+    //    else
+    //    {
+    //        return null;
+    //    }
+    //}
+    public List<string> mapLst = new List<string>();
+    Dictionary<int, MapCfg> mapDic = new Dictionary<int, MapCfg>();
+
+    private void InitMapCfg(string path)
     {
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
@@ -298,7 +364,7 @@ class CfgSvc
                 continue;
             int ID = Convert.ToInt32(ele.GetAttributeNode("ID").InnerText);
             //nodLst，ID
-            InstanceCfg c = new InstanceCfg
+            MapCfg c = new MapCfg
             {
                 ID = ID
             };
@@ -311,21 +377,35 @@ class CfgSvc
                             c.power = int.Parse(e.InnerText);
                         }
                         break;
-
+                    case "exp":
+                        {
+                            c.exp = int.Parse(e.InnerText);
+                        }
+                        break;
+                    case "coin":
+                        {
+                            c.coin = int.Parse(e.InnerText);
+                        }
+                        break;
+                    case "crystal":
+                        {
+                            c.crystal = int.Parse(e.InnerText);
+                        }
+                        break;
                     default: break;
                 }
 
             }
             //
-            instanceDic.Add(ID, c);
+            mapDic.Add(ID, c);
         }
 
 
     }
-    public InstanceCfg GetInstanceCfg(int ID)
+    public MapCfg GetMapCfg(int ID)
     {
-        InstanceCfg c = null;
-        if (instanceDic.TryGetValue(ID, out c))
+        MapCfg c = null;
+        if (mapDic.TryGetValue(ID, out c))
         {
             return c;
         }
@@ -334,7 +414,6 @@ class CfgSvc
             return null;
         }
     }
-
     #endregion
 }
 
@@ -443,8 +522,18 @@ public class InstanceCfg : BaseData<InstanceCfg>
     public float[] mainCamRote;
     public float[] playerBornPos;
     public float[] playerBornRote;
+
 }
 
+
+public class MapCfg : BaseData<MapCfg>
+{
+    //通关奖励
+    public int power;
+    public int exp;
+    public int coin;
+    public int crystal;
+}
 
 #endregion
 #endregion

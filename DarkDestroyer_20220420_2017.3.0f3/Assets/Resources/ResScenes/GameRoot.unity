@@ -983,7 +983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 559.38995, y: -4.45}
+  m_AnchoredPosition: {x: 559.3906, y: -4.45}
   m_SizeDelta: {x: 120.9, y: 8.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &81138021
@@ -1129,7 +1129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60.589954, y: -4.45}
+  m_AnchoredPosition: {x: 60.589844, y: -4.45}
   m_SizeDelta: {x: 120.9, y: 8.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92426281
@@ -4144,7 +4144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 434.68997, y: -4.45}
+  m_AnchoredPosition: {x: 434.68945, y: -4.45}
   m_SizeDelta: {x: 120.9, y: 8.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &253679899
@@ -4216,7 +4216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 808.79, y: -4.45}
+  m_AnchoredPosition: {x: 808.78906, y: -4.45}
   m_SizeDelta: {x: 120.9, y: 8.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255681811
@@ -6762,27 +6762,27 @@ Prefab:
     - target: {fileID: 224144628598236896, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 60.589954
+      value: 60.589844
       objectReference: {fileID: 0}
     - target: {fileID: 224617011550209374, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 434.68997
+      value: 434.68945
       objectReference: {fileID: 0}
     - target: {fileID: 224234161840189202, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 808.79
+      value: 808.78906
       objectReference: {fileID: 0}
     - target: {fileID: 224968335547304416, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 185.28996
+      value: 185.28906
       objectReference: {fileID: 0}
     - target: {fileID: 224577004989912878, guid: bd55612b253521d45af953ba53b72934,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 559.38995
+      value: 559.3906
       objectReference: {fileID: 0}
     - target: {fileID: 1539655166400954, guid: bd55612b253521d45af953ba53b72934, type: 2}
       propertyPath: m_IsActive
@@ -11953,7 +11953,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 185.28996, y: -4.45}
+  m_AnchoredPosition: {x: 185.28906, y: -4.45}
   m_SizeDelta: {x: 120.9, y: 8.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &829096546
@@ -13172,11 +13172,11 @@ Animation:
   m_GameObject: {fileID: 902403163}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: fa1df35f1c3de6a42b237f09557ef42e, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: fa1df35f1c3de6a42b237f09557ef42e, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &905013086
@@ -18697,6 +18697,7 @@ MonoBehaviour:
   audioSvc: {fileID: 0}
   netSvc: {fileID: 0}
   mainCitySys: {fileID: 0}
+  dynamicWnd: {fileID: 0}
   battleMgr: {fileID: 0}
   playerCtrlWnd: {fileID: 1842444395}
   endBattleWnd: {fileID: 637790886}

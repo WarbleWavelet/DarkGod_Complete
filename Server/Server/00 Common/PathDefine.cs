@@ -15,10 +15,9 @@ using System.Threading.Tasks;
 
 public class PathDefine
 {
-
-    public const string Guide = @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\guide.xml";
-    public const string Strong = @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\strong.xml";
-    public const string TaskReward=@"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\taskreward.xml";
-    public const string Instance = @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\map_v1.xml";
+    public const string Guide =     @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\guide.xml";
+    public const string Strong =    @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\strong.xml";
+    public const string TaskReward= @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\taskreward.xml";
+    public const string Map =       @"D:\Data\Projects\Unity\PESocketExample\DarkDestroyer_20220420_2017.3.0f3\Assets\Resources\ResCfgs\map.xml";
 }
 

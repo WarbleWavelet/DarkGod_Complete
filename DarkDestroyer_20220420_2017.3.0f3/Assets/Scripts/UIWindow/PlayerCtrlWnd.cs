@@ -67,7 +67,7 @@ public class PlayerCtrlWnd : WindowRoot
     public Transform expPrgTrans;
 
     [Header("总")]
-    public new bool canMove = true;
+    public  bool canMove = true;
     /// <summary>解决技能后需要动下摇杆才能移动</summary> 
     public Vector2 curDir;
 

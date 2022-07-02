@@ -90,7 +90,7 @@ public class BattleMgr : MonoBehaviour
     #region 实例地图 场景 人物
 
 
-    public void InitMap(int mapID)
+    public void InitMap(int mapID, Action cb=null)
     {
 
         CtrlInit(mapID);
@@ -103,14 +103,14 @@ public class BattleMgr : MonoBehaviour
   /// <summary>
     /// 控制顺序
     /// </summary>
-    void CtrlInit(int mapID)
+    void CtrlInit(int mapID, Action cb = null)
     {
         InitSvc();
         mapCfg = resSvc.GetMapCfg(mapID);
         InitMgr_ToBattleRoot(); 
     }
 
-    void InitMgr_ToBattleRoot()
+    void InitMgr_ToBattleRoot( Action cb = null)
     { 
         mapMgr=gameObject.AddComponent<MapMgr>();
 
@@ -348,7 +348,7 @@ public class BattleMgr : MonoBehaviour
     #region Player 移动
     public void SetPlayerMoveDir( Vector2 dir)
     {
-        if (playerEntity.canCtrl == false) 
+        if (playerEntity ==null || playerEntity.canCtrl == false) 
             return;
 
         // 防止技能、连招被打断时，还在移动，尤其这时的速度是技能速度，所以很快
@@ -577,7 +577,15 @@ public class BattleMgr : MonoBehaviour
     public void EndBattle(bool isWIn, int hp)
     {
         audioSvc.StopBGMusic();
-        BattleSys.Instance.SetEndBattleWndState(EndBattleType.Lose );
+        if (isWIn)
+        {
+            BattleSys.Instance.SetEndBattleWndState(EndBattleType.Win);
+        }
+        else
+        {
+            BattleSys.Instance.SetEndBattleWndState(EndBattleType.Lose);
+        }
+        
      
     }
 

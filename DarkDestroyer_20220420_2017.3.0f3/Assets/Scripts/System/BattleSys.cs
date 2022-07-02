@@ -6,6 +6,7 @@
 	功能：战斗系统(Sys=>各种Mgr)
 *****************************************************/
 
+using PEProtocol;
 using System;
 using UnityEngine;
 
@@ -13,8 +14,10 @@ public class BattleSys : SystemRoot
 {
 
     #region 单例
-    private static BattleSys _instance;      
 
+    [Header("BattleSys")]
+    private static BattleSys _instance;
+    double startTime;
     public static BattleSys Instance
     {
         get
@@ -35,20 +38,21 @@ public class BattleSys : SystemRoot
     public BattleMgr battleMgr;
     public PlayerCtrlWnd playerCtrlWnd;
     public EndBattleWnd endBattleWnd;
+
+   public int instanceID = -1;
     public override void InitSys()
     {
         base.InitSys(); 
         _instance= this;
     }
 
-    public void EnterMap(int mapID)
-    {
 
-        InstantiateBattleRoot( mapID);
+
+    #region Start End Battle
+ public void StartBattle(int mapID)
+    {
+        instanceID = mapID;
         //
-    }
-    void InstantiateBattleRoot(int mapID)
-    { 
         GameObject go = new GameObject
         { 
             name="BattleRoot",     
@@ -60,18 +64,40 @@ public class BattleSys : SystemRoot
         mainCitySys=GameRoot.Instance.GetComponent<MainCitySys>();
         dynamicWnd = GameRoot.Instance.dynamicWnd;
         //TODO
-        battleMgr.InitMap(mapID);
+        battleMgr.InitMap(mapID, () => {
+            startTime = TimerSvc.Instance.GetNowTime();
+        });
     }
-
     /// <summary>
     /// 敌人打死了；玩家被打死；玩家自行退出战斗；玩家掉线
     /// </summary>
-    public void EndBattle(bool isWIn, int hp)
+    public void EndBattle(bool isWin, int hp)
     {
         playerCtrlWnd.SetWndState(false);
         GameRoot.Instance.dynamicWnd.ClearHpItemInfo();
 
+        if (isWin)
+        {
+            double endTime=TimerSvc.Instance.GetNowTime();
+            GameMsg msg = new GameMsg
+            {
+                cmd = (int)CMD.ReqInstanceFightEnd,
+                reqInstanceFightEnd = new ReqInstanceFightEnd
+                {
+                    instance = instanceID,
+                    isWin = isWin,
+                    remainHP = battleMgr.playerEntity.HP,
+                    costTime = (int)((endTime-startTime)/1000)
+                }
+
+            };
+            netSvc.SendMsg(msg);
+        }
+
     }
+    #endregion
+   
+
 
     #region 控制玩家        
     public void ReqReleaseSkill(int idx)
@@ -113,5 +139,14 @@ public class BattleSys : SystemRoot
     public void SetEndBattleWndState(EndBattleType type, bool state=true)
     { 
         endBattleWnd.SetEndBattleWndState(type, state);
+    }
+
+    internal void RspInstanceFightEnd(GameMsg msg)
+    {
+        RspInstanceFightEnd data = msg.rspInstanceFightEnd;
+        GameRoot.Instance.SetPlayerDataByInstanceEnd(data);
+        //顺序
+        endBattleWnd.SetEndBattleData(data.instance, data.costTime, data.remainHP);
+        SetEndBattleWndState(EndBattleType.Win);
     }
 }

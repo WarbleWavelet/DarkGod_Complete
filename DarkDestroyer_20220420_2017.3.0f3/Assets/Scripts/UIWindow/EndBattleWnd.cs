@@ -30,7 +30,9 @@ public class EndBattleWnd : WindowRoot
 
     public Button btnEnter;
     //
-
+    int instanceID;
+    int costTime;
+    int remainHP;
 
 
     bool isFirst = true;
@@ -82,6 +84,10 @@ public class EndBattleWnd : WindowRoot
     private void CliclBtnEnter()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
+
+
+        BattleSys.Instance.mainCitySys.EnterMainCity();
+        BattleSys.Instance.DestroySelf();
     }
 
     private void CliclBtnClose()
@@ -112,7 +118,27 @@ public class EndBattleWnd : WindowRoot
         {
             case EndBattleType.Win:
                 {
-                    SetActive(transEvaluation, true);
+
+                    SetActive(btnClose,false);
+                    SetActive(btnExit,false);
+                    //
+                    MapCfg cfg = resSvc.GetMapCfg(BattleSys.Instance.instanceID);
+                    int min = costTime / 60;
+                    int sec = costTime % 60;
+                    SetText( txtTime, "通关时间" + min+":"+sec);
+                    SetText(txtHp, "剩余体力:"+remainHP);
+                    string str = "";
+                    str += Constants.Color(" 金币"+ cfg.coin, TxtColor.Yellow);
+                    str += Constants.Color(" 水晶"+ cfg.crystal, TxtColor.Blue);
+                    str += Constants.Color(" 经验"+ cfg.exp, TxtColor.Green);
+                    SetText(txtReward, str);
+
+                    //
+                    timerSvc.AddTimerTask((int tid) => { 
+                        SetActive(transEvaluation, true);
+                        transEvaluation.GetComponent<Animation>().Play();
+                    },1f);
+
                 }
                 break;
             case EndBattleType.Lose:
@@ -135,6 +161,15 @@ public class EndBattleWnd : WindowRoot
             default:break;
         }
 
+    }
+
+
+    public void SetEndBattleData( int instanceID, int costTime, int remainHP)
+    { 
+        MapCfg cfg = resSvc.GetMapCfg(instanceID);
+
+
+       
     }
 }
 

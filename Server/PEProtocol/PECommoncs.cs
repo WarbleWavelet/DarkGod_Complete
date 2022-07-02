@@ -79,7 +79,8 @@ public class PECommon
     /// <summary>每次加2点体力</summary> 
     public const int PowerAddCount = 2;
 
-
+    /// <summary>结束异常战斗的最小时间，数据测试，用作检验合法</summary>
+    public const double EndBattleMinTime = 0d;
 
 
 }

@@ -46,7 +46,7 @@ public class InstanceSys : SystemRoot
         MainCitySys.Instance.maincityWnd.SetWndState(false);
         MainCitySys.Instance.instanceWnd.SetWndState(false);
 
-        BattleSys.Instance.EnterMap(data.instanceID);
+        BattleSys.Instance.StartBattle(data.instance);
     }
 
     void SetInstanceState(bool state=true)
@@ -54,7 +54,6 @@ public class InstanceSys : SystemRoot
         instanceWnd.SetWndState(state);
        
     }
-
 
 
 }
