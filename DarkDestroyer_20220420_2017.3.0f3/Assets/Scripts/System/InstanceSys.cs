@@ -49,7 +49,7 @@ public class InstanceSys : SystemRoot
         BattleSys.Instance.StartBattle(data.instance);
     }
 
-    void SetInstanceState(bool state=true)
+public    void SetInstanceState(bool state=true)
     {
         instanceWnd.SetWndState(state);
        

@@ -86,7 +86,7 @@ public class BattleSys : SystemRoot
                 {
                     instance = instanceID,
                     isWin = isWin,
-                    remainHP = battleMgr.playerEntity.HP,
+                    remainHP = hp,
                     costTime = (int)((endTime-startTime)/1000)
                 }
 
@@ -95,8 +95,10 @@ public class BattleSys : SystemRoot
         }
 
     }
+
+
     #endregion
-   
+
 
 
     #region 控制玩家        

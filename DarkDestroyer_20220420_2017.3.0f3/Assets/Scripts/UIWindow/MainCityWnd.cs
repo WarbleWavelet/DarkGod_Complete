@@ -180,7 +180,7 @@ public class MainCityWnd : WindowRoot
         MainCitySys.Instance.OpenTaskRewardWnd();
     }
 
-    private void ClickBtnInstance()
+    public void ClickBtnInstance()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         MainCitySys.Instance.OpenInstanceWnd();

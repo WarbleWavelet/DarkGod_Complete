@@ -61,7 +61,10 @@ public class BattleMgr : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            EndBattle(true, playerEntity.HP);
+        }
         if (ckeckWave && mapMgr != null && monsterDic.Count == 0)
         {
            bool isExist= mapMgr.SetNextMonsterWave();
@@ -138,7 +141,7 @@ public class BattleMgr : MonoBehaviour
         transform.localScale = Vector3.one;
         //
         LoadPlayerByMapCfg(cfg);
-        audioSvc.PlayBgMusic(Constants.BGHuangYe);
+        audioSvc.PlayBgMusic(Constants.InstanceHuangYe);
         //
         InstanceSys.Instance.playerCtrlWnd.SetWndState();
 
@@ -574,17 +577,13 @@ public class BattleMgr : MonoBehaviour
     /// <summary>
     /// 敌人打死了；玩家被打死；玩家自行退出战斗；玩家掉线
     /// </summary>
-    public void EndBattle(bool isWIn, int hp)
+    public void EndBattle(bool isWin, int hp)
     {
         audioSvc.StopBGMusic();
-        if (isWIn)
-        {
-            BattleSys.Instance.SetEndBattleWndState(EndBattleType.Win);
-        }
-        else
-        {
-            BattleSys.Instance.SetEndBattleWndState(EndBattleType.Lose);
-        }
+
+        BattleSys.Instance.EndBattle(isWin,hp);
+
+        
         
      
     }

@@ -8,6 +8,7 @@
 
 using PEProtocol;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,12 +42,13 @@ public class InstanceWnd : WindowRoot
         if (isFirst)
         {
             InitWndOnce();
-            isFirst = false;
-            pointOffset = new Vector3(22, 106, 0);
             InitInstanceData();
+            isFirst = false;
+            
+           
         }
         pd = GameRoot.Instance.PlayerData;
-      
+        
         RefreshUI();
     }
 
@@ -58,6 +60,7 @@ public class InstanceWnd : WindowRoot
     void InitWndOnce()
     {
         btnClose.onClick.AddListener(ClickBtnClose);
+        pointOffset = new Vector3(22, 106, 0);
     }
 
 
@@ -120,7 +123,8 @@ public class InstanceWnd : WindowRoot
 
     void RefreshUI()
     {
-         instance =  InstanceIDToChildIndex( pd.instance) ;
+        
+        instance = InstanceIDToChildIndex(pd.instance);
         if (instance > instanceTransArr.Length) return;
         for (int i = 0; i < instanceTransArr.Length; i++)
         {
@@ -142,6 +146,8 @@ public class InstanceWnd : WindowRoot
     }
 
     #region 数据转换
+    //0,10001
+    //6,10007
     int InstanceIDToChildIndex(int itemID)
     {
         return itemID % 1000 - 1;
@@ -151,6 +157,8 @@ public class InstanceWnd : WindowRoot
     { 
         return childIndex +10001;
     }
+
+
     #endregion
 
 

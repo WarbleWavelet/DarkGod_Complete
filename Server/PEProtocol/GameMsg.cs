@@ -316,7 +316,6 @@ namespace PEProtocol
         public int crystal;
         public int lv;
         public int exp;
-        public int instanceIdx;
     }
     #endregion
     #endregion

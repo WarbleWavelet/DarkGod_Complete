@@ -50,7 +50,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GuideSys" Collapsed="true">
-    <Position X="6" Y="2.75" Width="1.5" />
+    <Position X="0.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEEAAAAAAAAAAAAAAAAAAAAAAEAABAQAACAAAAAAA=</HashCode>
       <FileName>02 System\02 GuideSys\GuideSys.cs</FileName>
@@ -59,7 +59,7 @@
   <Class Name="CfgSvc" Collapsed="true">
     <Position X="0.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEgEAAAAAEQAAAAUAAIAAAAAgAAAAAABQEACAACAAAA=</HashCode>
+      <HashCode>AEgEAQAAAEQAAAAUAAIAAAAAgAAAAAgBQEICAACAAAA=</HashCode>
       <FileName>01 Server\02 CfgSvc\CfgSvc.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +94,7 @@
   <Class Name="TaskSys" Collapsed="true">
     <Position X="6" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEIABgQAADQAIAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEIABkQAADQAIAAAA=</HashCode>
       <FileName>02 System\07 TaskSys\TaskSys.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -103,6 +103,13 @@
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEAABEQAACAAAAAEA=</HashCode>
       <FileName>02 System\05 BuySys\BuySys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstanceSys" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEEAAAAAAAAAAAAAAAgAAAAAAAEAABEQAACAAAAAAA=</HashCode>
+      <FileName>02 System\08 InstanceSys\InstanceSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Microsoft YaHei UI" Size="9" />

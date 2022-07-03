@@ -343,7 +343,7 @@ public class EntityBase
 
         if (BattleSys.Instance.playerCtrlWnd != null && BattleSys.Instance != null)
         {
-            BattleSys.Instance.playerCtrlWnd.SetHPVal(oldVal, newVal);
+            BattleSys.Instance.playerCtrlWnd.SetBossHPVal(oldVal, newVal);
         }
 
     }

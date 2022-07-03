@@ -38,7 +38,7 @@
   <Class Name="Constants" Collapsed="true">
     <Position X="7.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>RUgIBQoBkEAEZCoAICURFKAAIAFYxgkMKAII4AgAAoA=</HashCode>
+      <HashCode>RUgIBQsBkEAEZCoAICURFKAAIAFYxgkcKAII4AgAAoA=</HashCode>
       <FileName>Assets\Scripts\Common\Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -146,7 +146,7 @@
   <Class Name="MainCitySys" Collapsed="true">
     <Position X="7.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CERAiBIhACEkQEAggIAgAAECACAIARQQyCEIHkCBIBA=</HashCode>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAABAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>Assets\Scripts\System\MainCitySys.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -203,14 +203,14 @@
   <Class Name="BattleSys" Collapsed="true">
     <Position X="4" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAJAACAAABAAAAAIAACAAAAAQgAAQAACAAAEAAA=</HashCode>
+      <HashCode>AAAUAAJAACAAABAAQAAoCACAACAAAkAAQgAAAAAEgAA=</HashCode>
       <FileName>Assets\Scripts\System\BattleSys.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BattleMgr" Collapsed="true">
     <Position X="4" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AA4gCoIpECAASJAAAIAIIgSCAABCAAAAAgAEAC1kGEA=</HashCode>
+      <HashCode>AA4gCoIpECAASJAAAIBIIgSCAABCAAAAAgAEAC1kGEA=</HashCode>
       <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -238,7 +238,7 @@
   <Class Name="PlayerCtrlWnd" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EaQEQABAgAAgAACAAAEwRFQhAAEgAKSIQi8JQQAANQY=</HashCode>
+      <HashCode>EaQEQABAggAgAACAAAEwRFQhAAEgAISIQi8JQQAANwY=</HashCode>
       <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -379,7 +379,7 @@
   <Class Name="EndBattleWnd" Collapsed="true">
     <Position X="2.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAgAAAAAAAFAIAEAACEgAlABApAIBEAEAFA=</HashCode>
       <FileName>Assets\Scripts\UIWindow\EndBattleWnd.cs</FileName>
     </TypeIdentifier>
   </Class>

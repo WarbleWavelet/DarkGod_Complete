@@ -61,6 +61,10 @@ public class MainCitySys : SystemRoot
 
     [Header("副本")]
     public InstanceWnd instanceWnd;
+
+
+    MapCfg cfg;
+
     #endregion
 
 
@@ -91,46 +95,65 @@ public class MainCitySys : SystemRoot
 
 
     #region Scene
-    public void EnterMainCity()
+    public void EnterMainCity(EnterMainCityType _type = EnterMainCityType.None)
     {
-        MapCfg cfg = ResSvc.Instance.GetMapCfg(Constants.MainCityMapID);
-        resSvc.AsyncLoadScene(cfg.sceneName, () => {
-            PECommon.Log("进入主城");
-            //
-            if (resSvc != null)
-            {
-                LoadPlayer(cfg);
-            }
-            else
-            {
-                throw new System.Exception("异常");
-            }
-            GameRoot.Instance.ClearUIRoot();
-            maincityWnd.SetWndState();
-            audioSvc.PlayBgMusic(Constants.BGMainCity);
-            //
-            charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
-            //
-            GetNpcPosTrans();
-            if (playerCtrl.transform.GetComponent<NavMeshAgent>() == null)
-            {
-                nav  = playerCtrl.transform.gameObject.AddComponent<NavMeshAgent>();
-            }
-            else
-            {
-                nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
-            }
-            strongWnd.RefreshItem(0);
-            //
-            GameRoot.Instance.GetComponent<AudioListener>().enabled = true;
+        Action action = EventHandler_EnterMainCity;
 
+        switch (_type)
+        {
+            case  EnterMainCityType.None:break;
+            case EnterMainCityType.InstanceSys:
+                {
+                    action+= ()=>{ InstanceSys.Instance.SetInstanceState(); };
+                } 
+                break;
+            default:break;
+        }
+            
+        cfg = ResSvc.Instance.GetMapCfg(Constants.MainCityMapID);
+
+        resSvc.AsyncLoadScene(cfg.sceneName, () => {
+
+            if (action != null)
+            {
+                action();
+            }
         });
     }
 
+    void EventHandler_EnterMainCity()
+    {
+        PECommon.Log("进入主城");
+        //
+        if (resSvc != null)
+        {
+            LoadPlayer(cfg);
+        }
+        else
+        {
+            throw new Exception("异常");
+        }
+        GameRoot.Instance.ClearUIRoot();
+        maincityWnd.SetWndState();
+        audioSvc.PlayBgMusic(Constants.BGMainCity);
+        //
+        charCamTrans = GameObject.FindGameObjectWithTag(Tags.CharShowCam).transform;
+        //
+        GetNpcPosTrans();
+        if (playerCtrl.transform.GetComponent<NavMeshAgent>() == null)
+        {
+            nav = playerCtrl.transform.gameObject.AddComponent<NavMeshAgent>();
+        }
+        else
+        {
+            nav = playerCtrl.transform.GetComponent<NavMeshAgent>();
+        }
+        strongWnd.RefreshItem(0);
+        //
+        GameRoot.Instance.GetComponent<AudioListener>().enabled = true;
+    }
 
-
-
-
+           
 
 
 
@@ -542,5 +565,14 @@ public class MainCitySys : SystemRoot
     }
     #endregion
 
+}
 
+/// <summary>
+/// 回到主城后的操作
+/// </summary>
+public enum EnterMainCityType
+{
+    None,
+    /// <summary> 副本地图</summary>
+    InstanceSys
 }

@@ -38,7 +38,7 @@ public class PlayerCtrlWnd : WindowRoot
     public Text txtHP;
     public int HPSum;
     public Button btnHead;
-
+     
 
 
     [Header("右上")]
@@ -108,6 +108,8 @@ public class PlayerCtrlWnd : WindowRoot
             btnHead = transform.Find("LeftTopPin/btnHead").GetComponent<Button>();
             btnHead.onClick.AddListener(ClickHeadBtn);
             //
+            SetBossHPState(false);
+                //
             isFirst =false;
 
            // btnTest.onClick.AddListener(ClickTestBtn);
@@ -371,14 +373,14 @@ public class PlayerCtrlWnd : WindowRoot
 
 
     #region 右上
-    internal void SetBossHPState(bool state,int hp=100)    {
+    internal void SetBossHPState(bool state=false,int hp=100)    {
         SetActive(t,state);
         itemBossHp.SetBossHPState(state,1f,hp);
         
 
     }
 
-    public void SetHPVal(int oldVal, int newVal)
+    public void SetBossHPVal(int oldVal, int newVal)
     {
         itemBossHp.SetHPVal( oldVal,  newVal);
     }

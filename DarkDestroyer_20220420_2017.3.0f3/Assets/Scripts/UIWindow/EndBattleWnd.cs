@@ -84,13 +84,15 @@ public class EndBattleWnd : WindowRoot
     private void CliclBtnEnter()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
-
-
-        BattleSys.Instance.mainCitySys.EnterMainCity();
         BattleSys.Instance.DestroySelf();
+        BattleSys.Instance.mainCitySys.EnterMainCity(EnterMainCityType.InstanceSys);
+
+
+        
     }
 
-    private void CliclBtnClose()
+
+        private void CliclBtnClose()
     {
         audioSvc.PlayUIAudio(Constants.UIClickBtn);
         SetWndState(false);
@@ -122,27 +124,49 @@ public class EndBattleWnd : WindowRoot
                     SetActive(btnClose,false);
                     SetActive(btnExit,false);
                     //
-                    MapCfg cfg = resSvc.GetMapCfg(BattleSys.Instance.instanceID);
-                    int min = costTime / 60;
-                    int sec = costTime % 60;
-                    SetText( txtTime, "通关时间" + min+":"+sec);
-                    SetText(txtHp, "剩余体力:"+remainHP);
+                    MapCfg cfg = resSvc.GetMapCfg(this.instanceID);
+                    int min = costTime / (24*60);
+                    int sec = costTime % (24 * 60);
+
                     string str = "";
                     str += Constants.Color(" 金币"+ cfg.coin, TxtColor.Yellow);
                     str += Constants.Color(" 水晶"+ cfg.crystal, TxtColor.Blue);
-                    str += Constants.Color(" 经验"+ cfg.exp, TxtColor.Green);
+                    str += Constants.Color(" 经验"+ cfg.exp, TxtColor.Green); 
+                    SetText( txtTime, "通关时间" + min + ":" + sec);
+                    SetText(txtHp, "剩余体力:"+remainHP);
                     SetText(txtReward, str);
 
                     //
-                    timerSvc.AddTimerTask((int tid) => { 
-                        SetActive(transEvaluation, true);
+                    timerSvc.AddTimerTask((int tid) =>
+                    {
+                        audioSvc.PlayUIAudio(Constants.InstanceWin);
+                        //
+                        SetActive(transEvaluation, true);                     
                         transEvaluation.GetComponent<Animation>().Play();
-                    },1f);
+                        //
 
+                        timerSvc.AddTimerTask((int tid1) =>
+                        {
+                            audioSvc.PlayUIAudio(Constants.FBItemEnter);
+                            timerSvc.AddTimerTask((int tid2) =>
+                            {
+                                audioSvc.PlayUIAudio(Constants.FBItemEnter);
+                                timerSvc.AddTimerTask((int tid3) =>
+                                {
+                                    audioSvc.PlayUIAudio(Constants.FBItemEnter);
+                                    timerSvc.AddTimerTask((int tid4) =>
+                                    {
+                                        audioSvc.PlayUIAudio(Constants.InstanceWin);
+                                    }, 300);
+                                }, 270);
+                            }, 270);
+                        }, 325);
+                    }, 1000);
                 }
                 break;
             case EndBattleType.Lose:
                 {
+                    audioSvc.PlayBgMusic(Constants.InstanceLose,false);
                     SetActive( btnExit);
                     SetActive(btnClose,false);
                     BattleSys.Instance.battleMgr.isPauseGame = true;
@@ -166,9 +190,9 @@ public class EndBattleWnd : WindowRoot
 
     public void SetEndBattleData( int instanceID, int costTime, int remainHP)
     { 
-        MapCfg cfg = resSvc.GetMapCfg(instanceID);
-
-
+        this.instanceID = instanceID;
+        this.remainHP = remainHP;
+        this.costTime = costTime;
        
     }
 }

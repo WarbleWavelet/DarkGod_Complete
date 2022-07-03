@@ -90,7 +90,10 @@ public class Constants
     /// <summary>进入主城的Bgm</summary>
     public const string BGMainCity = "bgMainCity";
     /// <summary>副本</summary>
-    public const string BGHuangYe = "bgHuangYe";
+    public const string InstanceHuangYe = "bgHuangYe";
+    public const string InstanceWin = "fbwin";
+    public const string InstanceLose = "fblose";
+    //
     public const string UILoginBtn = "uiLoginBtn";
     public const string UIClickBtn = "uiClickBtn";
     public const string UIOpenPage = "uiOpenPage"; 

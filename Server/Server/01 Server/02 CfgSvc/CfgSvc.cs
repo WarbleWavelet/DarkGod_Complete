@@ -414,6 +414,19 @@ class CfgSvc
             return null;
         }
     }
+
+    public int Get_MaxID_MapCfg()
+    {
+        int max = 10002;
+        foreach (int key in mapDic.Keys)
+        {
+            if (max < key)
+            {
+                max = key;
+            }
+        }
+        return max;
+    }
     #endregion
 }
 
