@@ -51,6 +51,7 @@ public class TaskWnd : WindowRoot
     }
     public void RefreshUI()
     {
+        
         UpdateTaskDataList();
         InitTaskItemGoArr();
         //

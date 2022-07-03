@@ -87,15 +87,16 @@ class InstanceSys
         {
             
             if (data.costTime > PECommon.EndBattleMinTime && data.remainHP > 0)//检验
-    {
+            {
                 PlayerData pd = cacheSvc.GetPlayerDataBySession(pack.session);                
                 MapCfg cfg = cfgSvc.GetMapCfg(data.instance);
                 //
+                TaskSys.Instance.CalcTaskPrgs(pd, TaskID.InstanceZones);
                 pd.coin += cfg.coin;
                 pd.crystal += cfg.crystal;
                 PECommon.CalcExp(pd, cfg.exp);
                 //        
-                TaskSys.Instance.CalcTaskPrgs(pd, TaskID.InstanceZones);
+                
                 if (data.instance == pd.instance)
                 {
                     int after= pd.instance +1;
@@ -106,6 +107,7 @@ class InstanceSys
                   
                     
                 }
+                
                 //
                 if (cacheSvc.UpdatePlayerData(pd.id, pd))
                 {
@@ -115,11 +117,10 @@ class InstanceSys
                         remainHP=data.remainHP,
                         costTime=data.costTime,
                         isWin=data.isWin,
-                        //
                         coin = pd.coin,
                         crystal = pd.crystal,
                         exp = pd.exp,
-                        lv=pd.lv,
+                        lv=pd.lv
                     };
             
                 }  
@@ -130,7 +131,10 @@ class InstanceSys
                     msg.err = (int)ErrorCode.UpdateDBError;
                 }
             }
-
+            else
+            {
+                msg.err = (int)ErrorCode.ClientDataError;
+            }
         }
         else
         {

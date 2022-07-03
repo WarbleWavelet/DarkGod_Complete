@@ -68,7 +68,7 @@ class TaskSys
         {
             case TaskState.Accept:
                 {
-                    CalcTaskPrgs(pd, (TaskID)reqData.id);
+                    GetTaskPrgs(pd, (TaskID)reqData.id);
 
                 }break;
             case TaskState.Done:
@@ -111,9 +111,42 @@ class TaskSys
     /// </summary>
     /// <param name="pd"></param>
     /// <param name="taskid"></param>
-    internal PshTaskPrgs CalcTaskPrgs(PlayerData pd, TaskID taskid)
+    internal void CalcTaskPrgs(PlayerData pd, TaskID taskid)
     {
       TaskRewardCfg cfg=  cfgSvc.GetTaskRewardCfg((int)taskid);
+        TaskRewardData data = CalcTaskRewardData_ToClass(pd, (int)taskid);
+
+        if (data.prgs < cfg.count)
+        {
+            data.state = TaskState.Accept;
+            data.prgs++;
+            if (data.prgs == cfg.count)
+            {
+                data.state = TaskState.Done;
+            }
+            CalcTaskRewardData_ToString(pd, data);
+
+            ServerSession session = cacheSvc.GetOnlineServerSession(pd.id);
+            if (session != null)
+            {
+                GameMsg msg = new GameMsg
+                {
+                    cmd = (int)CMD.PshTaskPrgs,
+                    pshTaskPrgs = new PshTaskPrgs
+                    {
+                        taskArr = pd.taskRewardArr
+                    }
+                };
+                session.SendMsg(msg);
+            }
+
+        }
+
+           
+    }
+    internal PshTaskPrgs GetTaskPrgs(PlayerData pd, TaskID taskid)
+    {
+        TaskRewardCfg cfg = cfgSvc.GetTaskRewardCfg((int)taskid);
         TaskRewardData data = CalcTaskRewardData_ToClass(pd, (int)taskid);
 
         if (data.prgs < cfg.count)
@@ -135,9 +168,8 @@ class TaskSys
         {
             return null;
         }
-           
-    }
 
+    }
 
     /// <summary>
     /// 返回TaskRewardData的类形式（根据taskId到pd.taskRewardArr里面找）

@@ -461,8 +461,17 @@ public class MainCitySys : SystemRoot
     public void OpenTaskRewardWnd()
     {
         Common_BeforeOpenWnd();
-        taskWnd.SetWndState();
-        taskWnd.RefreshUI();
+        if (taskWnd.GetWndState())
+        {
+            
+        }
+        else
+        { 
+           taskWnd.SetWndState();
+            taskWnd.RefreshUI();
+        }
+     
+
     }
 
     internal void PshTaskPrgs(GameMsg msg)
@@ -481,7 +490,7 @@ public class MainCitySys : SystemRoot
     internal void RspTakeTaskReward(GameMsg msg)
     {
         RspTakeTaskReward data = msg.rspTakeTaskReward;
-        GameRoot.Instance.SetPlayerDataByTask(data);
+        GameRoot.Instance.SetPlayerDataByTaskReward(data);
 
         maincityWnd.RefreshUI();
         taskWnd.RefreshUI();

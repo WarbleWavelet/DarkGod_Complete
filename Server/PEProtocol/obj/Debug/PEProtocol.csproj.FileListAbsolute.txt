@@ -7,3 +7,4 @@ D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.cs
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csproj.CopyComplete
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.dll
 D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.pdb
+D:\Data\Projects\Unity\PESocketExample\Server\PEProtocol\obj\Debug\PEProtocol.csprojAssemblyReference.cache

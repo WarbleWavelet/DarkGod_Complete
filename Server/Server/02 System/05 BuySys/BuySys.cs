@@ -118,7 +118,7 @@ class BuySys
             {
                 case GoodType.POWER:
                     {
-                        msg.pshTaskPrgs= TaskSys.Instance.CalcTaskPrgs(pd, TaskID.BuyPower);
+                        msg.pshTaskPrgs= TaskSys.Instance.GetTaskPrgs(pd, TaskID.BuyPower);
                         msg.rspBuy = new RspBuy
                         {
                             goodType = GoodType.POWER,
@@ -128,7 +128,7 @@ class BuySys
                     break;
                 case GoodType.COIN:
                     {
-                        msg.pshTaskPrgs = TaskSys.Instance.CalcTaskPrgs(pd, TaskID.MKCoin);
+                        msg.pshTaskPrgs = TaskSys.Instance.GetTaskPrgs(pd, TaskID.MKCoin);
                         msg.rspBuy = new RspBuy
                         {
                             goodType = GoodType.COIN,

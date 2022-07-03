@@ -215,7 +215,7 @@ public class GameRoot : MonoBehaviour
         //PECommon.Log("玩家体力："+data.power);
     }
 
-    internal void SetPlayerDataByTask(RspTakeTaskReward data)
+    internal void SetPlayerDataByTaskReward(RspTakeTaskReward data)
     {
         PlayerData.coin = data.coin;
         PlayerData.lv = data.lv;

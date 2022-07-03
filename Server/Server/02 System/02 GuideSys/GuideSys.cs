@@ -58,7 +58,7 @@ using System.Threading.Tasks;
         }
         else
         {
-            msg.pshTaskPrgs =TaskSys.Instance.CalcTaskPrgs(pd, TaskID.WiseMan);
+            msg.pshTaskPrgs =TaskSys.Instance.GetTaskPrgs(pd, TaskID.WiseMan);
             //
             pd.guideid += 1;
             pd.coin += cfg.coin;

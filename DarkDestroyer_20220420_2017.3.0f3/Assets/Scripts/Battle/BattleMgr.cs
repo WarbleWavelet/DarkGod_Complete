@@ -61,10 +61,10 @@ public class BattleMgr : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            EndBattle(true, playerEntity.HP);
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    EndBattle(true, playerEntity.HP);
+        //}
         if (ckeckWave && mapMgr != null && monsterDic.Count == 0)
         {
            bool isExist= mapMgr.SetNextMonsterWave();

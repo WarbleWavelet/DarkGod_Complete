@@ -79,7 +79,7 @@ class StrongSys
         }
         else
         {
-           msg.pshTaskPrgs= TaskSys.Instance.CalcTaskPrgs(pd, TaskID.Strong);
+           msg.pshTaskPrgs= TaskSys.Instance.GetTaskPrgs(pd, TaskID.Strong);
             //
             pd.coin -= nextCfg.coin;
             pd.crystal -= nextCfg.crystal;

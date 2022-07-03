@@ -58,7 +58,7 @@ class ChatSys
             }
            
         };
-        msg.pshTaskPrgs = TaskSys.Instance.CalcTaskPrgs(pd, TaskID.Speak);
+        msg.pshTaskPrgs = TaskSys.Instance.GetTaskPrgs(pd, TaskID.Speak);
         List<ServerSession> lst = cacheSvc.GetOnlineServerSession();
 
         byte[] bytes= PENet.PETool.PackNetMsg(msg);//不用多次序列化

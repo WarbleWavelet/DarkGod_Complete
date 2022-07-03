@@ -226,7 +226,7 @@ public class NetSvc : MonoBehaviour
                 break;
             case CMD.PshTaskPrgs://包合并，节省流量
                 {
-                   //MainCitySys.Instance.PshTaskPrgs(msg);
+                   MainCitySys.Instance.PshTaskPrgs(msg);
                 }
                 break;
             case CMD.RspInstanceFight:
