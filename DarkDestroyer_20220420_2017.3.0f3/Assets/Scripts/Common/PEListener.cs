@@ -37,6 +37,7 @@ public class PEListener : MonoBehaviour,
         }
     }
 
+
     public void OnDrag(PointerEventData eventData)
     {
         if (onDrag != null)
@@ -44,10 +45,6 @@ public class PEListener : MonoBehaviour,
             onDrag(eventData);
         }
     }
-
-
-
-
 
 
     public void OnPointerUp(PointerEventData eventData)
