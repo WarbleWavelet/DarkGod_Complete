@@ -22,7 +22,7 @@ public class LoopDragonAnimation : MonoBehaviour
     {
         if (ani != null)
         { 
-        ani.Play();
+            ani.Play();
         }
     }
 }
