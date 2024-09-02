@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ServerRoot" Collapsed="true">
+    <Position X="1.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAIAAAAAAAIAAAEAAAAQAACAAAAAAA=</HashCode>
+      <FileName>00 Common\ServerRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ServerStart" Collapsed="true">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>00 Common\ServerStart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetSvc" Collapsed="true">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAQEAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAACAAAQAAA=</HashCode>
+      <FileName>01 Server\01 NetSvc\NetSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ServerSession" Collapsed="true">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAgAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
+      <FileName>01 Server\01 NetSvc\ServerSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginSys" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBAEAAAAAAAAAIAAAAAAAAAAAAEAIABAQAACAAAAAAA=</HashCode>
+      <FileName>02 System\01 LoginSys\LoginSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DBMgr" Collapsed="true">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEgAAAAAAEAACEAAAAACAQAAQAAAAAQAQCAEAAAAA=</HashCode>
+      <FileName>04 DB\DBMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CacheSvc" Collapsed="true">
+    <Position X="0.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAGAAIAAAAAAAAAAAAAAAAAAAEABAQAQAQCAIAIBAA=</HashCode>
+      <FileName>03 Cache\CacheSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuideSys" Collapsed="true">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEEAAAAAAAAAAAAAAAAAAAAAAEAABAQAACAAAAAAA=</HashCode>
+      <FileName>02 System\02 GuideSys\GuideSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CfgSvc" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgEAQAAAEQAAAAUAAIAAAAAgAAAAAgBQEICAACAAAA=</HashCode>
+      <FileName>01 Server\02 CfgSvc\CfgSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StrongSys" Collapsed="true">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEAABAQAACAAAgAAA=</HashCode>
+      <FileName>02 System\03 Strong\StrongSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatSys" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAEAAAAAAAAAAAAEAABEQAACAAAAAAA=</HashCode>
+      <FileName>02 System\04 Chat\ChatSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerSys" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAIABAUAACAAAAAAA=</HashCode>
+      <FileName>02 System\06 PowerSys\PowerSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimerSvc" Collapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAAAAAAAAAAAAAIgAAEAAQAQSAAAAAAA=</HashCode>
+      <FileName>01 Server\03 TimerSvc\TimerSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TaskSys" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEIABkQAADQAIAAAA=</HashCode>
+      <FileName>02 System\07 TaskSys\TaskSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuySys" Collapsed="true">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEAABEQAACAAAAAEA=</HashCode>
+      <FileName>02 System\05 BuySys\BuySys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstanceSys" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEEAAAAAAAAAAAAAAAgAAAAAAAEAABEQAACAAAAAAA=</HashCode>
+      <FileName>02 System\08 InstanceSys\InstanceSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

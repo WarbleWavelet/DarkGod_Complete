@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LoadingWnd" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAAACAAAAAAAAECAAAAAAAAAAAQAAAAAABACAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\LoadingWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginWnd" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAgAAAAAAQAAAECAIAAABEAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\LoginWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowRoot" Collapsed="true">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAKABUAAAAIFAABACAAAAIAgEAAAAAIAAAEA=</HashCode>
+      <FileName>Assets\Scripts\WindowRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginSys" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACBAAAAAAEQAACAAAAAAgAAEQAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\System\LoginSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResSvc" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QE0BAQIkAUYAFAAUQiJEACQGgQhAKABBQGIkEQCECAE=</HashCode>
+      <FileName>Assets\Scripts\Service\ResSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constants" Collapsed="true">
+    <Position X="7.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RUgIBQsBkEAEZCoAICURFKAAIAFYxgkcKAII4AgAAoA=</HashCode>
+      <FileName>Assets\Scripts\Common\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameRoot" Collapsed="true">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgCAAgQDAABAAAEAAASAAAQEAERAAAQAACAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\GameRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemRoot" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAQAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SystemRoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicWnd" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCQgAAAAGAQAAgACgAEgoAAAAACACAAAAVACAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\DynamicWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreateWnd" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAEAAAQAAAEAACAAAgAAACAAIAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\CreateWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PathDefine" Collapsed="true">
+    <Position X="7.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIBIAiAAiAAAAAAAARAAAQiyqAACBCIAYCEQOKJCA=</HashCode>
+      <FileName>Assets\Scripts\Common\PathDefine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetSvc" Collapsed="true">
+    <Position X="9.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAIAAAAAAAAAAAAAAAACAAQAAABYAEAAg=</HashCode>
+      <FileName>Assets\Scripts\Service\NetSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="4" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABACAAAAAAgECAhAAAAAAAAiIAAAYhAcCAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Battle\Controller\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainCityWnd" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQUAAAQAgCFQABCIAAEAIAIhCSEEAAQRQQsABSKCERY=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\MainCityWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InfoWnd" Collapsed="true">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QGigAAAAAAAKACCBIAFQYAQEMAiAAAAEAIAAACgAAEI=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\InfoWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseData&lt;T&gt;">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoGuideCfg" Collapsed="true">
+    <Position X="9.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAgAQAAIAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Common\BaseData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuideWnd" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAQAAAAAEAAwIAAAAAAABASAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\GuideWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClientSession" Collapsed="true">
+    <Position X="9.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Net\ClientSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuideSys" Collapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\System\GuideSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainCitySys" Collapsed="true">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAABAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\System\MainCitySys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PEListener" Collapsed="true">
+    <Position X="5.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAEAAgAIAEAAAABAAAAAAAAAAgAAAAAAQQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Common\PEListener.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StrongWnd" Collapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IoAQAQAqAQgEIEEAAAEAAkABSBAAAEQAAYAABV8gAIQ=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\StrongWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuyWnd" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAAAAAAEAAEAIAAAAAAgAAAAAIAAZAIAAAI=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\BuyWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatWnd" Collapsed="true">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAIAAAAAAFACEBMAQQAAAEAgQAQIAAAgAEEAI=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\ChatWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimerSvc" Collapsed="true">
+    <Position X="9.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAACAAAAAAAAAAAAAAAIgAAEAAQAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\System\TimerSvc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TaskWnd" Collapsed="true">
+    <Position X="2.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIGAAAgAAAAAAAAAAEAIAYAAAAAAAAAQIAAAEAAAIY=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\TaskWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstanceWnd" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAEAAAoAAAAAAAAAAECOCAAAABgAAAAQLAAAAAAAAY=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\InstanceWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleSys" Collapsed="true">
+    <Position X="4" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAUAAJAACAAABAAQAAoCACAACAAAkAAQgAAAAAEgAA=</HashCode>
+      <FileName>Assets\Scripts\System\BattleSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleMgr" Collapsed="true">
+    <Position X="4" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AA4gCoIpECAASJAAAIBIIgSCAABCAAAAAgAEAC1kGEA=</HashCode>
+      <FileName>Assets\Scripts\Battle\BattleMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillMgr" Collapsed="true">
+    <Position X="2.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAABAAACQAAABAICAAAAEAAAIAQAAAAC4QAACAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\SkillMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateMgr" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapMgr" Collapsed="true">
+    <Position X="2.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQIAAAAAAAAAAAAAAAAAABAAAgAAAAACAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Battle\MapMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerCtrlWnd" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EaQEQABAggAgAACAAAEwRFQhAAEgAISIQi8JQQAANwY=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\PlayerCtrlWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstanceSys" Collapsed="true">
+    <Position X="7.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAABAACAAAAAAAAAACAAAAQAAABAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\System\InstanceSys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityPlayer" Collapsed="true">
+    <Position X="5.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAIAAAAEAAAAQAAAAAAAAAAABAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\Entity\EntityPlayer.cs</FileName>
+      <NewMemberFileName>Assets\Scripts\Battle\Entity\EntityBase.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateIdle" Collapsed="true">
+    <Position X="0.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateIdle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StateMove" Collapsed="true">
+    <Position X="0.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateMove.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MonsterController" Collapsed="true">
+    <Position X="4" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\Controller\MonsterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Controller" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAACAAACBIAgAgAgEAIACAAADCIQAIAAICAAAAIQA=</HashCode>
+      <FileName>Assets\Scripts\Battle\Controller\Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateAttack" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateAttack.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EntityMonster" Collapsed="true">
+    <Position X="5.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAEAAAAAQAAAAAAAABAAAAAQBAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\Entity\EntityMonster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateBorn" Collapsed="true">
+    <Position X="0.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateBorn.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StateDie" Collapsed="true">
+    <Position X="0.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateDie.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StateHit" Collapsed="true">
+    <Position X="0.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAAAAAAAAgAAAAEAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\StateHit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ItemBossHp" Collapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>HGQQCABASCABBAAAAAAEIAUAAACAACATAEAABACCDAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\ItemBossHp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Combo" Collapsed="true">
+    <Position X="4" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAABAEAAAAAEAAAAAoAAAEAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Combo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AILogic" Collapsed="true">
+    <Position X="2.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\AI\AILogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AIMonster" Collapsed="true">
+    <Position X="2.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAYAAAAAAAAAICAAAAgAAAAAIAAggAACEAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\AI\AIMonster.cs</FileName>
+      <NewMemberFileName>Assets\Scripts\AI\AiMonster.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityBase" Collapsed="true">
+    <Position X="5.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQABAUJAAKEcACAARgAAIAwQQDDOFiIYgA5ASIAiUAI=</HashCode>
+      <FileName>Assets\Scripts\Battle\Entity\EntityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillCalback" Collapsed="true">
+    <Position X="4" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABEAABAAAAAAAAACgAAAAAAAAAAAAIAAAAQAAAA=</HashCode>
+      <FileName>Assets\Scripts\SkillCalback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillItem" Collapsed="true">
+    <Position X="2.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBEACQgAAAAAAAAAAAAAEAAAAAACABECACAEAgACA=</HashCode>
+      <FileName>Assets\Scripts\SkillItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EndBattleWnd" Collapsed="true">
+    <Position X="2.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAgAAAAAAAFAIAEAACEgAlABApAIBEAEAFA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\EndBattleWnd.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IState" Collapsed="true">
+    <Position X="7.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAEAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\IState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ChatType" Collapsed="true">
+    <Position X="7.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAABAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIWindow\ChatWnd.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AniState" Collapsed="true">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAIAAAAAoAAIAAAAAAIAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Battle\FSM\IState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
