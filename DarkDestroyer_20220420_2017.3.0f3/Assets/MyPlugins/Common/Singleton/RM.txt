@@ -1,0 +1,7 @@
+麻烦的是，里面的属性有的人喜欢用Single，有的喜欢用Instance，当你切换时改得累。
+个人喜欢用Instance，I顶天立地，权柄在手的感觉。虽然Single字母少.
+
+设计模式的单例模式,类名用Singleton
+实例后用Instance,_instance
+
+Singleton放在DesignPattern

@@ -208,7 +208,7 @@ public class Test_Controller : MonoBehaviour
     #region 移动
     private void SetMove()
     {
-        ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerMoveSpeed);
+        ctrl.Move(transform.forward * Time.deltaTime * Constants.PlayerRunSpeed);
     }
     #endregion
 
@@ -241,7 +241,7 @@ public class Test_Controller : MonoBehaviour
         if (_dir != Vector2.zero)
         {
             Dir = _dir;
-            SetBlend((float)Constants.BlendWalk);
+            SetBlend((float)Constants.BlendRun);
         }
         else
         {
